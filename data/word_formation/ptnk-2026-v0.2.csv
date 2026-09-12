@@ -1,0 +1,11 @@
+id,base_form,answer_form,answer_type,meaning_vi,pattern,ptnk_year,section,question,role,priority,study_mode,source_quality,source_note
+wf001,culture,counterculture,prefix+noun,phản văn hóa,culture -> counterculture,2026,Writing,106,correct_answer,P1,learn,transcription,"PTNK 2026 Q106"
+wf002,number,outnumbering,prefix+verb+ing,đông hơn/vượt số lượng,number -> outnumber -> outnumbering,2026,Writing,107,correct_answer,P1,learn,transcription,"PTNK 2026 Q107"
+wf003,meat,meatless,suffix adjective,không có thịt,meat -> meatless,2026,Writing,108,correct_answer,P1,learn,transcription,"PTNK 2026 Q108"
+wf004,ail,ailments,suffix noun,bệnh tật,ail -> ailment(s),2026,Writing,109,correct_answer,P1,learn,transcription,"PTNK 2026 Q109"
+wf005,just,justifiably,suffix adverb,một cách chính đáng,just -> justifiable -> justifiably,2026,Writing,110,correct_answer,P1,learn,transcription,"PTNK 2026 Q110"
+wf006,profit,profitable,suffix adjective,sinh lời/có lợi nhuận,profit -> profitable,2026,Writing,111,correct_answer,P1,learn,transcription,"PTNK 2026 Q111"
+wf007,balance,imbalances,prefix+suffix noun,sự mất cân bằng,balance -> imbalance(s),2026,Writing,112,correct_answer,P1,learn,transcription,"PTNK 2026 Q112"
+wf008,high,heightened,irregular derivation,được nâng cao/tăng lên,high -> heighten -> heightened,2026,Writing,113,correct_answer,P1,learn,transcription,"PTNK 2026 Q113"
+wf009,live,livestock,compound noun,gia súc,live + stock -> livestock,2026,Writing,114,correct_answer,P1,learn,transcription,"PTNK 2026 Q114"
+wf010,confine,confinement,suffix noun,sự giam giữ/hạn chế,confine -> confinement,2026,Writing,115,correct_answer,P1,learn,transcription,"PTNK 2026 Q115"
