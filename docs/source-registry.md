@@ -4,13 +4,13 @@
 
 The Source Registry is the metadata layer for external evidence used by the PTNK Adaptive Preparation System.
 
-It separates **source provenance** from **curated learning data** so that aggregation, filtering, prioritization, and curriculum strategy can change without having to rediscover or redownload the underlying sources.
+It separates **source provenance** from **curated learning data** so that extraction, filtering, prioritization, and curriculum strategy can change without having to rediscover the underlying sources.
 
 Core principle:
 
 > Source data should be as immutable and reproducible as practical; curriculum decisions remain mutable.
 
-The registry is **not** the learner-facing lexicon and is **not** a priority list.
+The registry is **not** the learner-facing lexicon and is **not** a study checklist.
 
 ## Architecture
 
@@ -30,79 +30,76 @@ PTNK RELEVANCE + LEARNER STATE + COVERAGE FILTERS
 OFFICIAL LEARNING DATA
 ```
 
+## Source roles
+
+`source_role` is mandatory because CEFR level alone does not determine how a source should be used.
+
+| Role | Meaning |
+|---|---|
+| `ptnk_evidence` | Direct evidence from PTNK exams and official materials. Highest priority for PTNK claims. |
+| `c1_candidate_lexicon` | Candidate-generation source for C1/C1-C2 lexical material. Never automatically becomes curriculum. |
+| `grammar_reference` | Grammar reference/practice source used to model competencies. |
+| `competency_practice` | Practice source used to extract or reinforce testable competencies. |
+| `exam_coursebook` | C1 exam-preparation coursebook covering multiple skills. |
+| `assessment` | Diagnostic, transfer, and mock-test evidence. Not a curriculum source. |
+
 ## Registry fields
 
 | Field | Required | Meaning |
 |---|---|---|
-| `source_id` | yes | Stable internal identifier, e.g. `oxford-phrase-list` |
+| `source_id` | yes | Stable internal identifier |
 | `source_name` | yes | Human-readable source name |
-| `source_type` | yes | `exam`, `lexicon`, `phrase_list`, `frequency`, `corpus`, `dictionary`, `grammar`, `research`, etc. |
+| `source_type` | yes | `exam`, `book`, `lexicon`, `phrase_list`, `frequency`, etc. |
+| `source_role` | yes | Operational role in the PTNK evidence pipeline |
 | `publisher` | yes | Organization responsible for the source |
 | `url` | yes | Canonical landing/resource URL |
-| `version` | recommended | Version, edition, or release identifier when available |
-| `published_at` | recommended | Publication/release date when known |
-| `retrieved_at` | recommended | Date the project obtained/checked the source |
-| `checksum` | recommended | SHA-256 of cached raw artifact when available |
-| `license_usage` | yes | Copyright/license/usage constraints relevant to storage and redistribution |
-| `cefr_coverage` | recommended | CEFR levels represented, e.g. `A1-C1`, `C1-C2` |
-| `data_types` | yes | Words, phrases, idioms, phrasal verbs, exam questions, frequency, etc. |
+| `version` | recommended | Edition, release, or version when known |
+| `cefr_coverage` | recommended | Actual CEFR scope represented by the source |
+| `data_types` | yes | Words, collocations, idioms, grammar, exam tasks, etc. |
 | `frequency_available` | yes | `yes`, `no`, or `partial` |
-| `acquisition_method` | yes | How the source is obtained: `manual`, `download`, `script`, `api`, etc. |
-| `raw_cache_path` | recommended | Repository path for a permitted cached artifact or acquisition metadata |
-| `status` | yes | `active`, `candidate`, `deprecated`, `blocked`, `superseded` |
+| `acquisition_method` | yes | How the source is obtained |
+| `raw_cache_path` | recommended | Repository path for permitted raw material or acquisition metadata |
+| `status` | yes | `active`, `candidate`, `deprecated`, `blocked`, or `superseded` |
 | `notes` | recommended | Interpretation, limitations, and provenance notes |
 
-## Status semantics
+## What was removed from the initial registry
 
-- **active** — approved for current evidence/candidate generation.
-- **candidate** — potentially useful but not yet validated for production use.
-- **deprecated** — retained for historical reproducibility but should not drive new extraction.
-- **blocked** — known access, licensing, reliability, or methodological issue prevents current use.
-- **superseded** — replaced by a newer/stronger source; retain metadata for traceability.
+The following broad resources were removed from the active registry because they are useful evidence sources in general but do **not** belong in the focused C1 book/source library:
 
-## Source vs. curriculum rules
+- Oxford 3000/5000 — broad A1-C1 resource, not a C1-specific source.
+- OPAL — academic vocabulary/phrases resource, not a C1-specific general candidate list.
+- Cambridge English Vocabulary Profile / English Profile — broad A1-C2 research resource, not a C1-only syllabus.
+- EFLLex / CEFRLex — broad A1-C2 frequency/CEFR resource; frequency metadata should be a separate future layer rather than being mistaken for a C1 curriculum source.
+- Oxford Phrase List — useful A1-C1 multiword source, but not sufficiently C1-specific for the current focused bibliography. It can be reintroduced later as a supplementary multiword evidence source if needed.
 
-A source may contribute evidence without becoming curriculum.
+These removals do **not** mean the resources are bad. They mean their role is different from a focused C1 candidate bibliography.
 
-Examples:
+## Current source-selection rule
 
-- A C1 vocabulary list expands the candidate universe.
-- Corpus frequency describes commonness.
-- PTNK past papers provide exam evidence.
-- Diagnostic results determine whether the learner needs an item.
-- Coverage rules prevent the system from over-investing in one semantic neighborhood.
+The current bibliography is deliberately centered on sources that can contribute to one of four things:
 
-Therefore:
+1. C1/C1-C2 lexical candidate generation;
+2. advanced grammar and competency modeling;
+3. C1 exam-skill practice;
+4. diagnostic and transfer assessment.
 
-> **CEFR opens the map. Frequency describes commonness. PTNK evidence identifies exam relevance. Diagnostic identifies learner need. Coverage determines where to expand next.**
+A book being labeled C1 does **not** make every item inside it mandatory.
 
-## Raw-data policy
+The pipeline remains:
 
-When legally and technically appropriate, preserve the raw artifact so future aggregation strategies can be rerun without repeated external acquisition.
-
-When redistribution of the raw artifact is restricted, preserve instead:
-
-1. canonical source URL;
-2. acquisition procedure/script;
-3. retrieval timestamp;
-4. checksum when the artifact was locally obtained;
-5. license/usage notes;
-6. transformation/extraction notes.
-
-Do **not** treat a generated CSV as a substitute for provenance. Curated data must retain a `source_id` back to this registry.
-
-## Initial registry scope
-
-The first registry should cover:
-
-1. PTNK official specialized-English papers, 2022–2026;
-2. Oxford Phrase List;
-3. Oxford 3000/5000;
-4. Oxford Phrasal Verbs / related official lexical resources where usable;
-5. OPAL (Oxford Phrases / Academic Lexicon resources as applicable);
-6. Cambridge English Vocabulary Profile / English Profile resources where access and reuse permit;
-7. EFLLex / CEFRLex frequency resources;
-8. other validated C1 candidate lists used only as candidate-generation inputs.
+```text
+C1/C1-C2 source
+      ↓
+candidate universe
+      ↓
+PTNK evidence
+      ↓
+learner diagnostic
+      ↓
+coverage / marginal-value gate
+      ↓
+official learning data
+```
 
 ## Evidence hierarchy
 
@@ -114,17 +111,48 @@ For PTNK-specific claims, prefer:
 4. reputable secondary analysis;
 5. third-party lists only for candidate discovery.
 
-A third-party list must not override direct PTNK evidence or independently verified lexical information.
+A C1 book is therefore a **candidate source**, not evidence that PTNK requires every item in that book.
+
+## Raw-data policy
+
+When legally and technically appropriate, preserve the raw artifact so future aggregation strategies can be rerun without repeated external acquisition.
+
+When redistribution is restricted, preserve instead:
+
+1. canonical source URL;
+2. acquisition procedure/script;
+3. retrieval timestamp;
+4. checksum when the artifact was locally obtained;
+5. license/usage notes;
+6. transformation/extraction notes.
+
+Do not treat a generated CSV as a substitute for provenance.
+
+## Current registry scope
+
+The registry currently covers:
+
+- PTNK specialized-English entrance papers, 2022-2026;
+- C1/C1-C2 vocabulary;
+- C1/C1-C2 collocations;
+- C1/C1-C2 idioms;
+- C1/C1-C2 phrasal verbs;
+- advanced grammar;
+- advanced grammar/vocabulary practice;
+- C1 exam-preparation coursebooks;
+- C1 Advanced mock/assessment sources.
+
+The registry intentionally does **not** attempt to be an exhaustive catalogue of every C1 book.
 
 ## Future extensions
 
-The registry can later add:
+Potential future source roles include:
 
-- `source_relation` for source supersession/derivation;
-- `access_date` and `etag` where reproducible retrieval needs it;
-- `extraction_version` for parser/version tracking;
-- `content_language`;
-- `quality_score` as source-level metadata only;
-- `evidence_scope` to distinguish lexical, grammatical, reading, writing, or exam-structure evidence.
+- `frequency_metadata` — only when a frequency layer is actually needed;
+- `academic_enrichment` — if academic vocabulary becomes a deliberate subsystem;
+- `reading_corpus` — for reading-level and discourse evidence;
+- `writing_corpus` — for writing-language evidence;
+- `source_relation` — supersession/derivation tracking;
+- `extraction_version` — parser/version tracking.
 
-These fields should be added only when they solve a real reproducibility or provenance problem.
+Add these only when they solve a concrete reproducibility or modeling problem.
