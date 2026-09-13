@@ -262,7 +262,6 @@ def main():
     print_plan(plan, warnings)
     print()
     print("PLAN VALIDATION: PASS")
-    print("No files have been written yet.")
     print()
     commit_plan(plan, lines)
     print("RESULT: SUCCESS")
