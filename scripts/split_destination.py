@@ -13,8 +13,6 @@ CONTENT_START_LINE = 300
 UNIT_PATTERN = re.compile(r"^\s*Unit\s+(\d+)\s+(Grammar|Vocabulary)\b.*$", re.IGNORECASE)
 UNIT_11_ARTIFACT_PATTERN = re.compile(r"^\s*Unit\s+1\s+1\s+Grammar\b.*$", re.IGNORECASE)
 
-# In this PDF, the lexical reference layer is not labelled "Appendix".
-# It begins with these database headings after Unit 26.
 LEXICAL_DATABASE_PATTERNS = [
     ("topic-vocabulary-database", re.compile(r"^\s*Topic vocabulary database\s*$", re.IGNORECASE)),
     ("phrasal-verbs-database", re.compile(r"^\s*Phrasal verbs database\s*$", re.IGNORECASE)),
@@ -23,12 +21,22 @@ LEXICAL_DATABASE_PATTERNS = [
 ]
 
 APPENDIX_PATTERN = re.compile(r"^\s*Appendix(?:\s+.*)?$", re.IGNORECASE)
+
+# IMPORTANT: do not treat a bare "reference" / "references" line as a
+# structural heading. In this PDF it can be ordinary lexical content, e.g.
+# the word "reference" in word-formation material.
 BACK_MATTER_PATTERNS = [
-    re.compile(r"^\s*Answer\s+Keys?(?:\s+.*)?$", re.IGNORECASE),
-    re.compile(r"^\s*Audioscript(?:s)?(?:\s+.*)?$", re.IGNORECASE),
-    re.compile(r"^\s*Audio\s+Scripts?(?:\s+.*)?$", re.IGNORECASE),
-    re.compile(r"^\s*References?(?:\s+.*)?$", re.IGNORECASE),
-    re.compile(r"^\s*Word\s+List(?:s)?(?:\s+.*)?$", re.IGNORECASE),
+    ("answer-key", re.compile(r"^\s*Answer\s+Keys?(?:\s+.*)?$", re.IGNORECASE)),
+    ("audioscript", re.compile(r"^\s*Audioscript(?:s)?(?:\s+.*)?$", re.IGNORECASE)),
+    ("audioscript", re.compile(r"^\s*Audio\s+Scripts?(?:\s+.*)?$", re.IGNORECASE)),
+    ("word-list", re.compile(r"^\s*Word\s+List(?:s)?(?:\s+.*)?$", re.IGNORECASE)),
+]
+
+# The extracted copy contains publisher/front-matter material after the
+# answer key. Keep that material separate only when an exact document-title
+# marker is encountered; never infer a section from a bare lexical word.
+DOCUMENT_END_PATTERNS = [
+    ("document-end", re.compile(r"^\s*Desti[n\s]*ation\s+c1\s*&\s*c2\s*$", re.IGNORECASE)),
 ]
 
 
@@ -38,9 +46,12 @@ def classify_structural_heading(line):
             return "appendix", name
     if APPENDIX_PATTERN.match(line):
         return "appendix", "appendix"
-    for pattern in BACK_MATTER_PATTERNS:
+    for name, pattern in BACK_MATTER_PATTERNS:
         if pattern.match(line):
-            return "back_matter", line.strip().lower().replace(" ", "-")
+            return "back_matter", name
+    for name, pattern in DOCUMENT_END_PATTERNS:
+        if pattern.match(line):
+            return "document_end", name
     return None
 
 
@@ -69,11 +80,11 @@ def discover_post_unit_sections(lines, last_unit_start):
             kind, name = classified
             sections.append({"line_index": index, "heading": line, "kind": kind, "name": name})
 
-    # Page headers repeat. Keep the first occurrence of each structural heading.
+    # Page headers repeat. Keep the first occurrence of each structural kind/name.
     selected = []
     seen = set()
     for section in sections:
-        key = section["name"].casefold()
+        key = (section["kind"], section["name"].casefold())
         if key in seen:
             continue
         seen.add(key)
@@ -130,7 +141,6 @@ def build_section_plan(lines, selected_units):
         )
         return None, errors, warnings
 
-    # The first validated post-unit section terminates Unit 26.
     unit_plan = []
     for i, unit in enumerate(selected_units):
         start = unit["line_index"]
@@ -152,7 +162,12 @@ def build_section_plan(lines, selected_units):
             errors.append(f"Structural section {section['heading']!r} is empty or nearly empty.")
 
     lexical_names = [s["name"] for s in section_plan if s["kind"] == "appendix" and s["name"] != "appendix"]
-    expected_lexical = ["topic-vocabulary-database", "phrasal-verbs-database", "phrases-patterns-collocations-database", "idioms-database"]
+    expected_lexical = [
+        "topic-vocabulary-database",
+        "phrasal-verbs-database",
+        "phrases-patterns-collocations-database",
+        "idioms-database",
+    ]
     if lexical_names != expected_lexical:
         errors.append(f"Lexical database sequence is not the expected order: {lexical_names}")
 
@@ -161,6 +176,16 @@ def build_section_plan(lines, selected_units):
             f"Unit 26 is suspiciously large: {unit_plan[-1]['line_count']} lines. "
             "Expected the lexical/reference layer to begin earlier."
         )
+
+    raw_line_count = len(lines)
+    for item_type, items in (("Unit", unit_plan), ("section", section_plan)):
+        for item in items:
+            if not (0 <= item["start_line"] < item["end_line"] <= raw_line_count):
+                label = item.get("unit_number", item.get("name"))
+                errors.append(
+                    f"Invalid {item_type} boundary for {label!r}: "
+                    f"lines {item['start_line'] + 1}-{item['end_line']} exceed RAW line count {raw_line_count}."
+                )
 
     return {"units": unit_plan, "sections": section_plan}, errors, warnings
 
@@ -213,30 +238,37 @@ def commit_plan(plan, lines):
     unit_paths = [OUTPUT / f"unit-{u['unit_number']:02d}.txt" for u in plan["units"]]
     appendix_paths = []
     back_matter_paths = []
-    a = b = 0
+    document_end_paths = []
+    a = b = d = 0
     for section in plan["sections"]:
         if section["kind"] == "appendix":
             a += 1
             appendix_paths.append(APPENDIX_OUTPUT / f"appendix-{a:02d}-{section['name']}.txt")
-        else:
+        elif section["kind"] == "back_matter":
             b += 1
             back_matter_paths.append(BACK_MATTER_OUTPUT / f"section-{b:02d}-{section['name']}.txt")
+        else:
+            d += 1
+            document_end_paths.append(BACK_MATTER_OUTPUT / f"document-end-{d:02d}-{section['name']}.txt")
 
-    ensure_no_existing(unit_paths + appendix_paths + back_matter_paths)
+    ensure_no_existing(unit_paths + appendix_paths + back_matter_paths + document_end_paths)
 
     for unit in plan["units"]:
         output_file = OUTPUT / f"unit-{unit['unit_number']:02d}.txt"
         output_file.write_text("\n".join(lines[unit["start_line"]:unit["end_line"]]) + "\n", encoding="utf-8")
 
-    a = b = 0
+    a = b = d = 0
     for section in plan["sections"]:
         content = "\n".join(lines[section["start_line"]:section["end_line"]]) + "\n"
         if section["kind"] == "appendix":
             a += 1
             output_file = APPENDIX_OUTPUT / f"appendix-{a:02d}-{section['name']}.txt"
-        else:
+        elif section["kind"] == "back_matter":
             b += 1
             output_file = BACK_MATTER_OUTPUT / f"section-{b:02d}-{section['name']}.txt"
+        else:
+            d += 1
+            output_file = BACK_MATTER_OUTPUT / f"document-end-{d:02d}-{section['name']}.txt"
         output_file.write_text(content, encoding="utf-8")
 
 
@@ -267,9 +299,12 @@ def main():
     print("RESULT: SUCCESS")
     print(f"Created {len(plan['units'])} unit files in: {OUTPUT}")
     appendix_count = sum(1 for s in plan["sections"] if s["kind"] == "appendix")
-    back_matter_count = len(plan["sections"]) - appendix_count
+    back_matter_count = sum(1 for s in plan["sections"] if s["kind"] == "back_matter")
+    document_end_count = sum(1 for s in plan["sections"] if s["kind"] == "document_end")
     print(f"Created {appendix_count} appendix files in: {APPENDIX_OUTPUT}")
     print(f"Created {back_matter_count} back-matter files in: {BACK_MATTER_OUTPUT}")
+    if document_end_count:
+        print(f"Created {document_end_count} document-end files in: {BACK_MATTER_OUTPUT}")
 
 
 if __name__ == "__main__":
