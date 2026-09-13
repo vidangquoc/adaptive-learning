@@ -1,9 +1,33 @@
 # PTNK Advanced English Dataset — Data Collection Rules
 
-> Version: v0.4
+> Version: v0.5
 > Status: Working specification / source of truth
 > Project: PTNK
 > Purpose: Define how lexical data is collected, evidenced, normalized, curated, and promoted into the official PTNK learning dataset.
+
+---
+
+# 0. Accuracy over completeness
+
+**Accuracy is more important than completeness.**
+
+The project must never fill a field merely because the schema expects a value. If a claim cannot be verified confidently from an appropriate reliable source, leave it blank, mark it as unverified/pending, or omit it where the schema permits.
+
+This rule applies especially to:
+
+- definitions and meanings
+- Vietnamese meanings
+- pronunciation / IPA
+- examples
+- collocations and patterns
+- CEFR
+- domain
+- priority
+- provenance and source quality
+
+A smaller dataset with trustworthy information is preferable to a larger dataset containing guesses, fabricated metadata, forced examples, or unsupported claims.
+
+> **Do not optimize for filled rows. Optimize for trustworthy rows.**
 
 ---
 
@@ -77,9 +101,9 @@ Typical transformations include:
 - choosing a canonical lexical form
 - assigning `word_type`
 - selecting the relevant sense
-- writing concise English/Vietnamese meanings
-- adding US IPA when verified
-- creating learner examples
+- writing concise English/Vietnamese meanings **only from reliable lexical evidence**
+- adding US IPA **only when verified**
+- adding learner examples when reliable evidence is sufficient
 - recording genuine patterns
 - assigning `domain`
 - evaluating PTNK priority
@@ -230,13 +254,13 @@ cefr_source
 - `id` — stable unique identifier.
 - `word` — canonical lexical item.
 - `word_type` — lexical category using the standard codes.
-- `pronunciation` — US IPA when verified.
-- `meaning_en` — concise learner-friendly English definition.
-- `meaning_vi` — concise Vietnamese meaning for the intended sense.
-- `examples` — 3–5 short natural examples where possible, separated by `|`.
+- `pronunciation` — US IPA **only when independently verified**.
+- `meaning_en` — concise learner-friendly English definition grounded in a reliable lexical source.
+- `meaning_vi` — concise Vietnamese meaning for the intended sense, grounded in reliable lexical evidence.
+- `examples` — short natural examples when sufficient reliable evidence exists; 3–5 is preferred, but 3 is **not** a hard requirement.
 - `patterns` — genuine useful collocations/grammatical or lexical patterns only.
 - `usage_note` — optional usage/register/grammar warning.
-- `domain` — subject/topic context; use `general` when broadly transferable.
+- `domain` — subject/topic context; use `general` when broadly transferable and justified.
 - `priority` — PTNK learning value: P1/P2/P3/P4.
 - `word_formation` — derivational/family relationship when relevant.
 - `ptnk_evidence` — specific PTNK evidence and role/context.
@@ -284,11 +308,11 @@ Normalization may include:
 - canonicalizing the lexical item
 - choosing the relevant sense
 - standardizing word type
-- translating the intended sense
+- translating the intended sense **from reliable lexical evidence**
 - adding verified pronunciation
-- writing learner examples
+- adding learner examples only when evidence is sufficient
 - identifying genuine patterns
-- assigning domain and priority
+- assigning domain and priority only when defensible
 
 Every curated record must retain `source_id` and provenance.
 
@@ -315,26 +339,61 @@ A source can be official while a derived record is still curated; conversely, a 
 
 Use American English (US) IPA.
 
-Do not invent pronunciation. If unverified, leave it blank or explicitly mark it as unverified in the relevant workflow.
+**Pronunciation/transcription must never be invented, guessed, reconstructed from spelling, inferred from context, or generated from intuition.**
+
+The pronunciation must come from a reliable source that documents the actual lexical item and relevant pronunciation variant.
+
+If no reliable pronunciation source is available, leave `pronunciation` blank or explicitly unverified/pending. Do not block a trustworthy record merely to force a pronunciation value into the row.
+
+If multiple valid pronunciations exist, preserve the relevant variant and its source rather than silently choosing one without evidence.
+
+Formatting/normalization of verified IPA is allowed only when it preserves the source-supported phonetic content and follows the project's US-IPA convention.
 
 ---
 
 # 13. Meanings
 
-Every normal lexical item should have:
+Every normal lexical item should have, when evidence is sufficient:
 
 - a concise English definition
 - a concise Vietnamese meaning
 
-Both must match the intended sense and PTNK context where relevant.
+Definitions must come from reliable lexical sources. The PTNK passage/question may determine **which documented sense is intended**, but context alone is not an authority for inventing a definition.
 
-Do not merge unrelated senses into one vague translation.
+Do not:
+
+- read the PTNK sentence and invent a new definition from context
+- turn a contextual implication into a dictionary definition
+- merge unrelated senses into one vague translation
+- present an AI-generated definition as source-verified
+
+Paraphrasing is allowed only when the source meaning is preserved accurately.
+
+If a reliable lexical source for the intended sense cannot be found, leave the curated/official meaning pending rather than fabricating it.
 
 ---
 
 # 14. Examples
 
-Every normal lexical item should have at least 3 examples; 3–5 is preferred.
+Examples are important, but **accuracy takes priority over completeness**.
+
+3–5 examples are preferred when sufficient reliable, natural evidence exists. However, **3 examples is not a hard minimum**.
+
+It is explicitly acceptable to have fewer than 3 examples when adding more would require:
+
+- guessing
+- awkward or unnatural construction
+- unsupported usage
+- forced repetition
+- demonstrating a different or uncertain sense
+
+Preferred evidence order:
+
+1. reliable dictionary / lexical-source examples
+2. reliable corpus or otherwise documented natural usage
+3. carefully constructed learner examples based on a verified sense and verified pattern
+
+Never create additional examples solely to satisfy a numeric quota.
 
 Examples should be:
 
@@ -344,6 +403,7 @@ Examples should be:
 - meaningful
 - easy to understand
 - approximately 5–10 words when possible
+- clearly compatible with the verified intended sense
 
 Use `|` to separate examples in the Google Sheet.
 
@@ -371,7 +431,11 @@ Do **not** use `patterns` for:
 - semantic explanations
 - arbitrary combinations
 
-Include a pattern only when it is natural, semantically appropriate, useful for learning, and supported by evidence where verification is necessary. When uncertain, leave it out.
+Include a pattern only when it is natural, semantically appropriate, useful for learning, and supported by reliable evidence where verification is necessary.
+
+A short list of verified patterns is better than a long list of guessed combinations.
+
+When uncertain, leave the pattern out.
 
 ---
 
@@ -415,11 +479,15 @@ Examples:
 - `social_science`
 - `general`
 
+Assign a domain only when there is a clear basis in the source/context and the classification adds useful information.
+
 Do not force a specialized domain when the word is broadly transferable.
 
 `domain` does not determine priority or CEFR.
 
 A word may appear in a specialist PTNK passage while still being `general` because its learning value transfers broadly.
+
+If domain assignment is uncertain, leave it blank or mark it pending rather than guessing.
 
 ---
 
@@ -488,7 +556,7 @@ CEFR information should be recorded only when independently verified from a reli
 
 > **Where was this CEFR information verified?**
 
-It is not the source of the lexical item itself and is not a substitute for PTNK provenance.
+It is not the source of the lexical item itself and is not a substitute for PTNK provenance, definition source, or pronunciation source.
 
 If CEFR is not verified:
 
@@ -504,6 +572,8 @@ CEFR information should be treated carefully because lexical levels may apply to
 # 22. Priority System
 
 Priority measures **PTNK learning value**, not linguistic difficulty.
+
+Priority must be evidence-based and defensible. If the evidence is insufficient to distinguish levels confidently, do not manufacture precision merely to fill the field.
 
 ## P1 — Core
 
@@ -585,13 +655,14 @@ Before an item becomes official, verify:
 - lexical form is correct
 - word type is correct
 - intended sense is correct
-- English meaning is accurate
-- Vietnamese meaning is accurate
-- pronunciation is verified or left unverified
+- English meaning is accurate and source-backed
+- Vietnamese meaning is accurate and source-backed
+- pronunciation is independently verified or explicitly left unverified
 - examples are grammatical and natural
-- patterns are genuine and useful
-- domain is justified
-- priority reflects PTNK value
+- no example was added solely to satisfy a numeric quota
+- patterns are genuine, useful, and evidence-supported where necessary
+- domain is justified or left unverified
+- priority reflects defensible PTNK value
 - provenance is preserved
 - source quality is honest
 - CEFR is not invented
@@ -608,11 +679,15 @@ A record may be promoted to `official` only when:
 1. its source/evidence is recorded;
 2. its provenance is preserved;
 3. the lexical form and intended sense are reviewed;
-4. required learner-facing fields are complete enough for the item's type;
-5. patterns/examples pass quality control;
-6. priority/domain decisions are defensible;
-7. unsupported CEFR claims have been removed;
-8. the record is not merely a raw transcription copied into the learning dataset.
+4. required learner-facing fields are complete **to the extent justified by available evidence**;
+5. definitions and meanings are source-backed;
+6. pronunciation is source-backed or explicitly left unverified;
+7. examples and patterns pass quality control without fabricated completeness;
+8. priority/domain decisions are defensible, or are left pending where the schema permits;
+9. unsupported CEFR claims have been removed;
+10. the record is not merely a raw transcription copied into the learning dataset.
+
+**Optional or evidence-limited fields must not be fabricated merely to satisfy a preferred schema shape.**
 
 Official promotion is an editorial decision by the project, not a claim that the source itself is official.
 
@@ -652,7 +727,7 @@ curation         = normalization + enrichment + review
 official lexicon = approved learning content
 CEFR source      = independent evidence for CEFR only
 priority         = PTNK learning value
-domain           = topic/subject context
+domain            = topic/subject context
 ```
 
 Do not use one field as a substitute for another.
@@ -681,7 +756,9 @@ When migrating them:
 4. add `source_id`, `source_type`, and `official_status` where applicable;
 5. do not silently upgrade `transcription` to `official_exam`;
 6. do not invent CEFR;
-7. promote records to `official` only after review.
+7. do not invent definitions or pronunciation;
+8. do not manufacture examples or patterns to fill preferred quotas;
+9. promote records to `official` only after review.
 
 ---
 
@@ -695,9 +772,17 @@ not:
 
 > **maximum number of words → maximum metadata → artificial completeness**
 
-Accuracy is more important than completeness.
+**Accuracy is more important than completeness.**
 
-Useful patterns are more important than long lists.
+A missing field is acceptable when the evidence is missing.
+
+A short verified example list is better than three invented examples.
+
+A blank pronunciation is better than guessed IPA.
+
+A pending definition is better than a fabricated definition.
+
+A short verified pattern list is better than a long guessed list.
 
 PTNK relevance is more important than generic difficulty.
 
