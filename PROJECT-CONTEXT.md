@@ -29,7 +29,44 @@ If the learner learns quickly, accelerate.
 If one dimension is weak, target that dimension rather than reteaching everything.
 If the target competency is mastered, stop or extend.
 
-## 3. Curriculum backbone: Destination C1 & C2
+## 3. Challenge-first learning principle
+
+The learner should encounter **challenging tasks before routine instruction whenever prior knowledge is plausible**.
+
+The system should use challenge as the primary learner-facing interface and instruction as a response to demonstrated need.
+
+Core loop:
+
+```text
+Destination knowledge base
+        ↓
+   Challenge first
+        ↓
+ ┌──────┴────────┐
+ ↓               ↓
+Correct       Wrong / uncertain
+ ↓               ↓
+Skip / extend   Trace the gap
+                 ↓
+          Learn what is needed
+                 ↓
+               Retest
+```
+
+Principles:
+
+- **Test → fail → discover → learn → beat the challenge.**
+- Do not force the learner to read through a textbook in page order when a challenge can reveal what is actually needed.
+- If the learner succeeds reliably, compress or skip instruction and increase difficulty, discrimination, or transfer demand.
+- If the learner fails, trace the failure to the smallest useful knowledge/competency gap and teach that gap rather than restarting the whole chapter.
+- After targeted learning, retest the same competency in a sufficiently different context to verify transfer rather than memorization.
+- Challenge difficulty should be high enough to expose gaps, but not so high that failure becomes uninformative noise.
+
+**Destination C1 & C2 is therefore primarily a backend knowledge base and competency source, not a mandatory textbook sequence. Challenges are the frontend learning experience.**
+
+This principle does not eliminate deliberate instruction. It changes its trigger: instruction should be **evidence-driven**, not page-driven.
+
+## 4. Curriculum backbone: Destination C1 & C2
 
 **Destination C1 & C2 is the initial curriculum backbone.** It is the primary map from which the first competency/knowledge universe is constructed.
 
@@ -68,7 +105,7 @@ Suggested expansion roles:
 
 A new source should normally be opened because the learner has reached an evidence-based frontier, not merely because the book exists.
 
-## 4. Role of PTNK papers
+## 5. Role of PTNK papers
 
 PTNK papers are **calibration and validation evidence, not the primary vocabulary curriculum**.
 
@@ -88,7 +125,7 @@ PTNK papers are used primarily to study:
 
 PTNK evidence may inform learning design and assessment, but **does not determine which individual vocabulary items are intrinsically more important**.
 
-## 5. Current view of PTNK specialized English
+## 6. Current view of PTNK specialized English
 
 Based on research of PTNK specialized English exams from 2022–2026:
 
@@ -98,7 +135,7 @@ Based on research of PTNK specialized English exams from 2022–2026:
 - 2024–2026 especially place substantial weight on Language Use and Writing.
 - Therefore preparation must be competency-based, not vocabulary-only.
 
-## 6. Data architecture
+## 7. Data architecture
 
 ```text
 External sources
@@ -133,7 +170,7 @@ id | word | word_type | pronunciation | meaning_en | meaning_vi | examples | pat
 Accuracy > completeness.
 Never fabricate definitions, IPA, examples, patterns, CEFR, domain, or provenance.
 
-## 7. Learning state
+## 8. Learning state
 
 See `docs/learning-state-specification.md`.
 
@@ -162,7 +199,7 @@ Important mastery dimensions:
 
 A single high score is not enough to declare mastery if a required dimension is weak.
 
-## 8. Adaptive curriculum
+## 9. Adaptive curriculum
 
 Default module lifecycle:
 
@@ -188,7 +225,7 @@ Diagnostic-first rule:
 
 These thresholds are starting heuristics, not sacred constants.
 
-## 9. Expansion gate
+## 10. Expansion gate
 
 The system should expand beyond Destination when all of the following are sufficiently satisfied:
 
@@ -206,7 +243,7 @@ The default rule is:
 
 Do not indefinitely deepen a semantic neighborhood merely because the learner is good at it.
 
-## 10. 700-hour framework
+## 11. 700-hour framework
 
 The 700 hours are a **ceiling / available learning budget**, not a requirement.
 
@@ -225,7 +262,7 @@ A module planned for 8h may take 2h if already mastered, or longer if a critical
 
 Do not force the learner to consume all 700h.
 
-## 11. Strategic priorities
+## 12. Strategic priorities
 
 Near-term objective:
 
@@ -235,7 +272,7 @@ The learner has strong demonstrated English ability and unusually good vocabular
 
 Robotics is currently treated as a lower-priority activity during the fixed PTNK preparation window, with the understanding that this is a temporary allocation decision rather than abandonment of the longer-term STEM trajectory. Do not make absolute claims that Robotics has no relevance to future admissions.
 
-## 12. Repository artifacts already established
+## 13. Repository artifacts already established
 
 Important files:
 
@@ -257,7 +294,7 @@ Important files:
 
 The current lexicon is an **end-to-end pilot**, not an exhaustive extraction of every lexical item from every exam.
 
-## 13. Source-library policy
+## 14. Source-library policy
 
 The current book library is considered **sufficient**. Do not continue expanding the bibliography merely to find more C1/C2 books.
 
@@ -267,25 +304,26 @@ Source discovery is therefore effectively frozen unless a genuinely new source d
 
 Do not scrape or redistribute copyrighted books wholesale. Preserve provenance, acquisition procedure, checksums, extraction notes, and licensing/usage constraints where applicable.
 
-## 14. What to build next
+## 15. What to build next
 
 The next implementation step is **not simply adding more vocabulary**.
 
 Priority order:
 
 1. Formalize Destination C1 & C2 as the backbone knowledge/competency source.
-2. Create concrete learning-state CSV schemas.
-3. Create attempt-history structure.
-4. Create competency/module definitions.
-5. Create review-queue generation rules.
-6. Map competencies to PTNK skills and task formats.
-7. Create a small end-to-end pilot with real learner attempts.
-8. Add expansion-source mappings only where the pilot reveals a concrete need.
+2. Define a challenge-bank schema and original challenge-generation workflow.
+3. Create concrete learning-state CSV schemas.
+4. Create attempt-history structure.
+5. Create competency/module definitions.
+6. Create review-queue generation rules.
+7. Map competencies to PTNK skills and task formats.
+8. Create a small end-to-end pilot with real learner attempts.
+9. Add expansion-source mappings only where the pilot reveals a concrete need.
 
 Desired eventual system:
 
 ```text
-Question / exercise result
+Challenge / exercise result
         ↓
 Attempt history
         ↓
@@ -298,7 +336,7 @@ Review queue
 Next-best activity
 ```
 
-## 15. Recovery instructions
+## 16. Recovery instructions
 
 If this conversation is lost, start by reading:
 
@@ -316,4 +354,4 @@ Do **not** restart the project as a vocabulary-list project or a PTNK-paper reve
 
 The correct mental model is:
 
-> **Destination-backed adaptive PTNK preparation system; the broader C1/C2 library is an expansion layer, and PTNK papers are calibration/validation evidence.**
+> **Destination-backed, challenge-first adaptive PTNK preparation system; Destination is the backend knowledge base, challenges are the primary learning interface, the broader C1/C2 library is an expansion layer, and PTNK papers are calibration/validation evidence.**
