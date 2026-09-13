@@ -6,9 +6,9 @@ UNITS = ROOT / "sources" / "destination-c1-c2" / "units"
 
 EXPECTED_UNITS = 26
 
-# These are deliberately conservative structural headings observed in the
-# extracted Destination C1-C2 units. This script discovers boundaries only;
-# it does not create section files yet.
+# Conservative structural headings observed in the extracted Destination C1-C2
+# units. This script discovers/validates boundaries only; it never writes section
+# files. Ambiguity must fail closed rather than being silently repaired.
 EXACT_HEADINGS = {
     "grammar": ("main", "grammar"),
     "vocabulary": ("main", "vocabulary"),
@@ -30,18 +30,24 @@ PAGE_HEADER_PATTERNS = [
     re.compile(r"^\s*\d+\s*$"),
 ]
 
+# Only strip decorative extraction characters when they are immediately before a
+# known heading. Do NOT strip arbitrary leading non-letters: doing so turns text
+# such as "§ Grammar" inside a comparison note into a false section heading.
+HEADING_PREFIX_PATTERN = re.compile(
+    r"^[^A-Za-z]*(?=(?:Grammar|Vocabulary|Phrasal\s+verbs|Phrases,\s*patterns\s+and\s+collocations|Idioms|Word\s+formation|Review|Topic\s+vocabulary\s*:|Progress\s+test\b))",
+    re.IGNORECASE,
+)
+
 
 def normalize_heading(line):
     text = line.strip()
-    # Remove extraction artefacts around otherwise clean headings, e.g.
-    # ". Idioms" -> "Idioms".
-    text = re.sub(r"^[^A-Za-z]+", "", text)
+    text = HEADING_PREFIX_PATTERN.sub("", text)
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
 
 def is_page_header(text):
-    return any(pattern.match(text) for pattern in PAGE_HEADER_PATTERNS)
+    return any(pattern.fullmatch(text) for pattern in PAGE_HEADER_PATTERNS)
 
 
 def classify(line):
@@ -49,12 +55,12 @@ def classify(line):
     if not text or is_page_header(text):
         return None
 
-    topic = TOPIC_PATTERN.match(text)
+    topic = TOPIC_PATTERN.fullmatch(text)
     if topic:
         topic_name = topic.group(1).strip()
         return "lexical", f"topic-vocabulary:{topic_name}"
 
-    if PROGRESS_TEST_PATTERN.match(text):
+    if PROGRESS_TEST_PATTERN.fullmatch(text):
         return "assessment", "progress-test"
 
     exact = EXACT_HEADINGS.get(text.casefold())
@@ -67,6 +73,7 @@ def classify(line):
 def discover_unit_sections(unit_path):
     lines = unit_path.read_text(encoding="utf-8", errors="replace").splitlines()
     candidates = []
+    ignored_repeats = []
 
     for index, raw_line in enumerate(lines):
         classified = classify(raw_line)
@@ -74,19 +81,29 @@ def discover_unit_sections(unit_path):
             continue
 
         kind, name = classified
-        candidates.append({
+        candidate = {
             "line_index": index,
             "line_number": index + 1,
             "raw_heading": raw_line.strip(),
             "heading": normalize_heading(raw_line),
             "kind": kind,
             "name": name,
-        })
+        }
 
-    return lines, candidates
+        # Destination repeats the same section heading at page breaks. The second
+        # occurrence is a continuation marker, not a new section boundary. Keep
+        # the evidence so validation/reporting remains auditable, but do not let it
+        # split the section.
+        if candidates and candidate["name"] == candidates[-1]["name"]:
+            ignored_repeats.append(candidate)
+            continue
+
+        candidates.append(candidate)
+
+    return lines, candidates, ignored_repeats
 
 
-def validate_unit_plan(unit_number, lines, candidates):
+def validate_unit_plan(unit_number, lines, candidates, ignored_repeats):
     errors = []
     warnings = []
 
@@ -115,17 +132,24 @@ def validate_unit_plan(unit_number, lines, candidates):
                 f"section {candidate['heading']!r} is empty or nearly empty "
                 f"(lines {candidate['line_number']}-{end})"
             )
-        elif line_count < 8:
-            warnings.append(
-                f"section {candidate['heading']!r} is unusually short ({line_count} lines)"
-            )
 
-    # A unit should normally begin with Grammar or Vocabulary. If not, keep the
-    # candidate but flag it for manual inspection rather than guessing.
+    # Repeated exact headings are expected page-break continuations in this source,
+    # but report them explicitly so the discovery plan remains auditable.
+    for repeat in ignored_repeats:
+        warnings.append(
+            f"repeated heading treated as continuation: {repeat['heading']!r} "
+            f"at line {repeat['line_number']}"
+        )
+
+    # Unit files are physical extraction slices, not guaranteed to start at the
+    # semantic beginning of a unit. Therefore a lexical/assessment first section
+    # is not itself an error; it can be evidence that the preceding page belongs to
+    # the same unit. Do not guess or rewrite the unit boundary here.
     first = candidates[0]
     if first["name"] not in {"grammar", "vocabulary"}:
         warnings.append(
-            f"first detected section is {first['heading']!r}, not Grammar/Vocabulary"
+            f"first detected section is {first['heading']!r}, not Grammar/Vocabulary; "
+            "preserved for structural review"
         )
 
     return errors, warnings
@@ -156,8 +180,10 @@ def main():
                 f"unit sequence mismatch: expected {expected_number:02d}, got {unit_number:02d}"
             )
 
-        lines, candidates = discover_unit_sections(unit_path)
-        errors, warnings = validate_unit_plan(unit_number, lines, candidates)
+        lines, candidates, ignored_repeats = discover_unit_sections(unit_path)
+        errors, warnings = validate_unit_plan(
+            unit_number, lines, candidates, ignored_repeats
+        )
 
         for error in errors:
             all_errors.append(f"Unit {unit_number:02d}: {error}")
@@ -177,6 +203,7 @@ def main():
             "path": str(unit_path.relative_to(ROOT)),
             "line_count": len(lines),
             "sections": candidates,
+            "ignored_repeats": ignored_repeats,
         })
         print()
 
@@ -195,7 +222,7 @@ def main():
     total = sum(len(item["sections"]) for item in global_plan)
     print("RESULT: PASS")
     print(f"Discovered {total} structural section candidates across {EXPECTED_UNITS} units.")
-    print("This is a discovery/validation pass only; no section files were created.")
+    print("Repeated headings were excluded only as exact continuation markers; no files were written.")
 
 
 if __name__ == "__main__":
