@@ -2,7 +2,7 @@
 
 > **Canonical source of truth for constructing structured learning material in the PTNK Adaptive Preparation System.**
 >
-> This document governs how source material is extracted, evidenced, normalized, modeled, linked, and transformed into learner-facing material. Other documents may describe data schemas, source acquisition, or implementation mechanics, but they must not introduce competing learning-material rules.
+> This is the project's **single, ultimate rulebook for learning-material construction and its supporting pipeline**. Other documents may describe source acquisition, learner state, competency models, or implementation mechanics, but they must not introduce competing learning-material rules.
 
 ---
 
@@ -125,15 +125,13 @@ word-formation relation
 
 A surface form may participate in multiple relationships. Preserve those relationships rather than forcing an artificial single category.
 
-For legacy learner-facing lexicon views, a simple type taxonomy may still be used for display/storage, but it must not erase the underlying distinctions.
-
 ---
 
 ## 6. Knowledge atoms
 
 The canonical unit of structured knowledge is the **knowledge atom**: the smallest useful, independently referenceable piece of knowledge that can be linked to evidence, competencies, and questions.
 
-A knowledge atom may represent, for example:
+A knowledge atom may represent:
 
 - a lexical item and a verified sense;
 - an idiom and its meaning/usage;
@@ -216,6 +214,17 @@ Preserve, where applicable:
 
 Never remove provenance during cleaning, deduplication, normalization, or restructuring.
 
+Keep provenance dimensions separate:
+
+```text
+lexical/source evidence → source_id / source_type / source_quality
+PTNK relevance          → ptnk_evidence
+CEFR evidence           → cefr_status / cefr_source
+project lifecycle       → official_status
+```
+
+No one field should silently substitute for another.
+
 Source authority and dataset approval are different concepts. A record may be approved for the project's learning system even when its underlying evidence is a verified transcription rather than an official document, provided provenance and uncertainty remain explicit.
 
 ---
@@ -232,17 +241,7 @@ If a claim cannot be verified confidently from an appropriate reliable source:
 
 Prefer a smaller trustworthy dataset to a larger dataset containing guesses, fabricated metadata, forced examples, or unsupported claims.
 
-This rule applies especially to:
-
-- definitions and meanings;
-- Vietnamese meanings;
-- pronunciation/IPA;
-- examples;
-- collocations and patterns;
-- CEFR;
-- domain;
-- provenance;
-- source quality.
+This rule applies especially to definitions, Vietnamese meanings, pronunciation/IPA, examples, collocations, patterns, CEFR, domain, provenance, and source quality.
 
 > **Do not optimize for filled rows. Optimize for trustworthy rows.**
 
@@ -261,18 +260,9 @@ Correct workflow:
 3. use or carefully paraphrase the source definition without changing its meaning;
 4. retain definition provenance.
 
-Do not:
+Do not infer a new dictionary definition from a sentence, merge unrelated senses, or present an AI-generated definition as source-verified.
 
-- infer a new dictionary definition from a sentence;
-- turn a contextual implication into an authoritative definition;
-- merge unrelated senses into one vague definition;
-- present an AI-generated definition as source-verified.
-
-Paraphrasing is allowed only when the source meaning is preserved accurately.
-
-### Vietnamese meanings
-
-A Vietnamese learner meaning must also represent the verified intended sense accurately. A literal translation is not automatically correct. Use reliable bilingual evidence where appropriate or derive concise Vietnamese wording from a verified English sense without adding unsupported meaning.
+Vietnamese learner meanings must represent the verified intended sense accurately. A literal translation is not automatically correct. Use reliable bilingual evidence where appropriate or derive concise Vietnamese wording from a verified English sense without adding unsupported meaning.
 
 If no suitable lexical evidence exists, keep the field pending rather than fabricating it.
 
@@ -355,19 +345,9 @@ Do not assume that being a word-formation answer automatically makes an item int
 
 Domain describes a meaningful subject/topic context when that context adds useful information.
 
-Examples include:
+Examples include academic, agriculture, linguistics, social science, and general.
 
-- academic;
-- agriculture;
-- linguistics;
-- social science;
-- general.
-
-Do not force a specialized domain when the item is broadly transferable.
-
-A word appearing in a specialist passage may still be classified as general if its learning value transfers broadly.
-
-If domain assignment is uncertain, leave it pending rather than guessing.
+Do not force a specialized domain when the item is broadly transferable. If domain assignment is uncertain, leave it pending rather than guessing.
 
 Domain does not determine CEFR or learner priority.
 
@@ -397,7 +377,7 @@ The working principle is:
 
 Adaptive urgency belongs to the learner's current state and task-selection system, not to the lexical item itself.
 
-Therefore the material-construction layer should not encode a `priority` field as an intrinsic property of a word.
+Therefore the material-construction layer must not encode a `priority` field as an intrinsic property of a word.
 
 ---
 
@@ -423,16 +403,9 @@ PTNK evidence may be attached to a knowledge atom or question when available, bu
 
 Exercises already contained in Destination are the initial **canonical seed questions**.
 
-They should be extracted faithfully and retain provenance such as:
+They should be extracted faithfully and retain provenance such as source, unit, section/exercise, source location, question number/identifier, and original task type.
 
-- source;
-- unit;
-- section/exercise;
-- source location;
-- question number/identifier;
-- original task type.
-
-Do not replace the source exercises with automatically generated questions.
+Do not replace source exercises with automatically generated questions.
 
 Generated questions are a second layer for targeted practice, discrimination, transfer, delayed retention, and retesting.
 
@@ -501,7 +474,7 @@ Where applicable, learning material should support:
 - transfer;
 - delayed retention.
 
-A definition-only representation is therefore useful knowledge data, but it is not sufficient evidence of mastery.
+A definition-only representation is useful knowledge data, but it is not sufficient evidence of mastery.
 
 ---
 
@@ -513,9 +486,9 @@ The mapping should answer:
 
 > **What capability does this knowledge or question help assess?**
 
-Examples of competency dimensions include lexical precision, collocation, idiom use, phrasal-verb control, advanced grammar, word formation, reading inference, discourse, error identification, and sentence transformation.
+Examples include lexical precision, collocation, idiom use, phrasal-verb control, advanced grammar, word formation, reading inference, discourse, error identification, and sentence transformation.
 
-Do not force a competency label when the evidence is insufficient. It is better to leave a mapping pending than to create a false diagnosis.
+Do not force a competency label when the evidence is insufficient. A pending mapping is better than a false diagnosis.
 
 ---
 
@@ -523,12 +496,7 @@ Do not force a competency label when the evidence is insufficient. It is better 
 
 Deduplicate only when two records represent the same underlying knowledge item and sense.
 
-Do not collapse items merely because:
-
-- their spellings are similar;
-- one is a component of another expression;
-- their meanings overlap;
-- they belong to the same word family.
+Do not collapse items merely because their spellings are similar, one is a component of another expression, their meanings overlap, or they belong to the same word family.
 
 Preserve meaningful relationships such as:
 
@@ -571,87 +539,273 @@ Copyrighted books may be used as source material for the private learning system
 
 Prefer preserving:
 
-- source metadata;
-- provenance;
-- acquisition procedures;
-- checksums;
-- extraction scripts;
-- structured mappings;
-- permitted answers/analysis;
-- generated original practice;
-- licensing/usage notes.
+- canonical source URL/reference;
+- acquisition script where appropriate;
+- retrieval timestamp;
+- checksum;
+- license/usage notes;
+- extraction notes;
+- provenance metadata.
 
-Source-derived material should remain traceable even when it is normalized or transformed.
+Generated original material should be clearly distinguished from source-derived material.
 
 ---
 
-## 27. Implementation order
+# Pipeline and Data-Governance Rules
 
-For Destination C1 & C2, build in this order:
+## 27. Canonical pipeline
 
-1. establish source structure and provenance;
-2. extract the taught knowledge universe;
-3. normalize and curate knowledge atoms;
-4. extract source exercises/questions;
-5. link questions to knowledge atoms;
-6. map knowledge/questions to competencies and PTNK skills where justified;
-7. generate original follow-up challenges only where they add value;
-8. integrate learning-state and review logic;
-9. validate the end-to-end system with real learner attempts.
-
-Do not skip directly from PDF text to a learner-facing question bank while ignoring the underlying knowledge model.
-
----
-
-## 28. Canonical architecture
-
-The intended architecture is:
+All learning-material construction should follow this conceptual pipeline:
 
 ```text
-External source
+External sources
       ↓
 RAW / EVIDENCE
       ↓
 CLEAN / NORMALIZED
       ↓
+CURATED KNOWLEDGE
+      ↓
 KNOWLEDGE BASE
- ┌────┴──────────────┐
- ↓                   ↓
-Knowledge atoms   Source exercises
- ↓                   ↓
- └───────┬───────────┘
-         ↓
+ ├── knowledge atoms
+ └── source exercises / questions
+       ↓
 Question ↔ Knowledge
-         ↓
-Competency / PTNK skill
-         ↓
-Challenge
-         ↓
-Attempt
-         ↓
-Learning state
-         ↓
-Review / Next-best activity
+       ↓
+Competency / Challenge
 ```
 
-The material-construction layer ends with **trustworthy, linked knowledge and assessment evidence**. Adaptive scheduling and learner-state decisions belong to downstream learning-system layers.
+A more detailed implementation pipeline is:
+
+```text
+SOURCE
+  ↓
+RAW / EVIDENCE
+  ↓
+CLEAN / NORMALIZED
+  ↓
+CURATED KNOWLEDGE
+  ↓
+KNOWLEDGE ATOMS
+  ↓
+QUESTIONS / EXERCISES
+  ↓
+COMPETENCY MAPPING
+  ↓
+CHALLENGES / LEARNING ACTIVITIES
+```
+
+The layers are conceptually distinct even when implementation combines some processing steps.
 
 ---
 
-## 29. Non-negotiable rules
+## 28. Raw / Evidence layer
+
+Raw records represent what was obtained from a source with minimal transformation.
+
+Examples include:
+
+- instructional book material;
+- PTNK exam documents;
+- verified transcriptions;
+- answer keys;
+- dictionary evidence;
+- corpus evidence;
+- English Profile / EVP evidence.
+
+Raw data should preserve source identity, location, original text where applicable, context, source quality, and uncertainty.
+
+Raw records must not be rewritten merely to fit a final learner-facing schema.
+
+For extracted PDFs and similar sources:
+
+- preserve the original source file when legally and operationally appropriate;
+- preserve raw text extraction separately;
+- treat raw extraction as immutable evidence;
+- perform encoding cleanup, structural normalization, and parsing in later layers;
+- never manually edit raw text just to make it look nicer.
+
+---
+
+## 29. Clean / Normalized layer
+
+Cleaning and normalization are separate from raw evidence.
+
+Typical implementation work includes:
+
+- encoding cleanup;
+- structural normalization;
+- whitespace and line normalization;
+- canonicalization;
+- controlled deduplication;
+- segmentation into units/sections/exercises;
+- normalization of machine-readable representations.
+
+The raw layer remains the evidence baseline and must remain recoverable.
+
+Normalization must not destroy information needed to reconstruct or audit the source.
+
+---
+
+## 30. Curated Knowledge and Knowledge Base
+
+Curated knowledge is derived from raw/evidence only after the evidence requirements in this document have been satisfied.
+
+The knowledge base may contain lexical, grammatical, word-formation, usage, and other knowledge atoms, together with provenance and relationships.
+
+Destination exercises are retained as canonical seed questions and linked to the knowledge atoms they test.
+
+A curated record is not merely a cleaned record: it is an evidence-backed interpretation suitable for the learning system.
+
+---
+
+## 31. Source extraction, acquisition, and caching
+
+When external source material is acquired for the project, preserve enough information to make the acquisition reproducible and auditable.
+
+Where legally permissible, cache raw source data so future aggregation or modeling changes do not require unnecessary re-downloading.
+
+For copyrighted or restricted sources, preserve metadata such as:
+
+- canonical URL;
+- acquisition/retrieval timestamp;
+- checksum;
+- license or usage status;
+- acquisition script or method;
+- extraction notes;
+- local/repository handling restrictions.
+
+Do not treat a generated CSV or normalized dataset as a substitute for source provenance.
+
+---
+
+## 32. Structural extraction rules
+
+When parsing instructional books or similar structured sources:
+
+1. extract the source to an immutable raw layer first;
+2. validate major structural boundaries before mass parsing;
+3. distinguish real section boundaries from repeated page headers/footers;
+4. preserve unit, section, exercise, and question locations;
+5. parse exercises independently from knowledge extraction where possible;
+6. retain source identifiers throughout every downstream layer.
+
+For example, a PDF-to-text workflow may be:
+
+```text
+PDF
+ ↓
+pdftotext -layout
+ ↓
+RAW TXT (immutable)
+ ↓
+cleaning / normalization
+ ↓
+Unit / Section parser
+ ↓
+Exercise parser
+ ↓
+Knowledge atoms
+ ↓
+Question bank
+```
+
+Parser safety requirements:
+
+- fail rather than silently overwrite existing parsed outputs;
+- validate expected unit counts and boundaries;
+- preserve the raw source as the recovery point;
+- make parsing deterministic where practical.
+
+---
+
+## 33. Canonical data shapes
+
+The exact database schema may evolve, but the following concepts should remain stable.
+
+### Knowledge atom
+
+```text
+knowledge_atom_id
+source_id
+source_location
+source_section
+atom_type
+canonical_form
+content
+meaning/function
+pronunciation
+register
+grammar_behavior
+patterns
+collocations
+usage_note
+examples
+word_formation
+domain
+provenance
+```
+
+Not every field is mandatory for every atom. Evidence rules determine whether a field is populated.
+
+### Source-derived question
+
+```text
+question_id
+source_id
+source_location
+exercise_id
+question_type
+prompt
+options
+answer
+knowledge_atom_ids
+competency_id
+skill
+difficulty
+provenance
+license_note
+```
+
+Questions must remain distinguishable as source-derived versus generated.
+
+---
+
+## 34. What this file does not control
+
+This file is the single source of truth for **learning-material construction** and the pipeline rules that directly support it.
+
+It does not replace specialized specifications for:
+
+- learner learning state;
+- review scheduling algorithms;
+- competency definitions;
+- application/runtime behavior;
+- source-specific acquisition instructions.
+
+Those documents may define implementation details, but if they make a claim about how learning material itself should be constructed, classified, evidenced, linked, or promoted, this document takes precedence.
+
+---
+
+## 35. Non-negotiable rules
 
 1. **Build a knowledge system, not a vocabulary list.**
-2. **Extract the whole taught knowledge universe, not only exercise answers.**
-3. **Keep raw evidence separate from normalization and learning design.**
-4. **Preserve provenance.**
-5. **Accuracy beats completeness.**
-6. **Never invent definitions, pronunciation, examples, patterns, CEFR, or provenance.**
-7. **Preserve distinctions among words, expressions, idioms, phrasal verbs, collocations, fixed expressions, grammar, and word formation.**
-8. **Do not assign intrinsic priority to individual vocabulary items.**
-9. **Use Destination exercises as canonical seed questions.**
-10. **Link questions to the knowledge they actually test.**
-11. **Generate new material only when it adds measurable instructional value.**
-12. **Use challenge-first learning to determine what instruction is needed.**
-13. **Do not confuse source authority, PTNK relevance, CEFR evidence, and project approval status.**
-14. **Preserve uncertainty instead of silently upgrading weak evidence.**
-15. **Do not let adaptive task priority leak into the intrinsic definition of a lexical item.**
+2. **Destination C1 & C2 is the initial backbone.**
+3. **Challenge first when prior knowledge is plausible.**
+4. **Extract the whole taught knowledge universe, not only exercise answers.**
+5. **Keep raw evidence separate from normalization and learning design.**
+6. **Preserve provenance.**
+7. **Accuracy beats completeness.**
+8. **Never invent definitions, pronunciation, examples, patterns, CEFR, provenance, or source quality.**
+9. **Preserve distinctions among words, expressions, idioms, phrasal verbs, collocations, grammar, and word formation.**
+10. **Do not assign intrinsic vocabulary priority.**
+11. **Use PTNK papers for calibration and validation, not for constructing a frequency-based vocabulary curriculum.**
+12. **Use Destination exercises as canonical seed questions.**
+13. **Link questions to the knowledge they actually test.**
+14. **Generate new material only when it adds measurable instructional value.**
+15. **Do not confuse source authority, PTNK relevance, CEFR evidence, and project approval status.**
+16. **Preserve uncertainty instead of silently upgrading weak evidence.**
+17. **Keep generated content distinguishable from source-derived content.**
+18. **Adaptive task urgency belongs to learner state/task selection, not to intrinsic lexical value.**
+19. **Never allow pipeline implementation documents to silently create competing learning-material rules.**
+20. **When in doubt, prefer a smaller trustworthy representation over a larger speculative one.**
