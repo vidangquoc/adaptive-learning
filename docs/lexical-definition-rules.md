@@ -1,8 +1,8 @@
-# PTNK Lexical Definition Rules
+# PTNK Lexical Definition & Pronunciation Rules
 
 > Status: Active project rule
 > Scope: Lexicon / curated / official lexical data
-> Applies to: `meaning_en`, `meaning_vi`, and any source-backed sense description
+> Applies to: `meaning_en`, `meaning_vi`, `pronunciation`, and any source-backed lexical metadata
 
 ## 1. No invented definitions
 
@@ -12,7 +12,23 @@ A word appearing in a PTNK passage or question does not, by itself, authorize th
 
 The definition must come from a **reliable lexical source**.
 
-## 2. Context determines the intended sense, not the definition source
+## 2. No invented pronunciation / transcription
+
+The assistant must **not invent, guess, or reconstruct a pronunciation transcription** merely from spelling, context, phonological intuition, or a generated pronunciation attempt.
+
+`pronunciation` must be grounded in a **reliable pronunciation source**.
+
+In particular, do not:
+
+- guess IPA from the written spelling
+- infer pronunciation from a similar-looking word
+- copy an unverified pronunciation from an AI-generated source
+- silently choose a pronunciation variant without evidence when the lexical item has multiple established readings
+- present a generated phonetic respelling as if it were source-verified transcription
+
+If the project specifies US IPA, the US IPA must still be **source-backed**; the formatting convention does not authorize guessing.
+
+## 3. Context determines the intended sense, not the definition source
 
 Context may be used to determine **which sense of an independently sourced definition is relevant**.
 
@@ -29,7 +45,25 @@ Incorrect workflow:
 2. Infer what the word seems to mean.
 3. Write a new definition and present it as authoritative.
 
-## 3. Acceptable definition sources
+## 4. Pronunciation workflow
+
+Correct workflow:
+
+1. Identify the exact lexical item and, where relevant, the intended pronunciation variant.
+2. Find a reliable source documenting the pronunciation.
+3. Record the pronunciation exactly or normalize it only according to the project's declared transcription convention without changing the underlying pronunciation.
+4. Record the pronunciation source in provenance.
+
+Incorrect workflow:
+
+1. Read the spelling.
+2. Guess how it sounds.
+3. Generate IPA/phonetic spelling from intuition.
+4. Present it as verified data.
+
+If no reliable pronunciation source is available, leave the pronunciation **unverified / pending** rather than fabricating it.
+
+## 5. Acceptable definition sources
 
 Preferred sources include, where appropriate:
 
@@ -42,22 +76,36 @@ Preferred sources include, where appropriate:
 
 The source must be appropriate for the lexical item and intended sense.
 
-## 4. Source traceability
+## 6. Acceptable pronunciation sources
+
+Preferred pronunciation sources include, where appropriate:
+
+- reputable learner dictionaries that provide IPA/audio or documented pronunciation
+- major general dictionaries with pronunciation entries
+- authoritative specialized dictionaries when pronunciation is documented
+- reliable lexical resources with documented pronunciation variants
+- a directly verified pronunciation source appropriate to the target accent/dialect
+
+A source should support the **actual lexical item and reading**, not merely a related word or spelling pattern.
+
+## 7. Source traceability
 
 For curated and official entries, the project should preserve enough provenance to answer:
 
 > Where did this definition come from?
+>
+> Where did this pronunciation come from?
 
-A definition source is distinct from:
+Definition source and pronunciation source are distinct from:
 
 - the PTNK exam source
 - the raw transcription source
 - the source used to verify CEFR
-- the source used to verify pronunciation
+- the source used to verify other metadata
 
-Therefore `cefr_source` must never be treated as the general definition source.
+Therefore `cefr_source` must never be treated as the general definition or pronunciation source.
 
-## 5. Paraphrasing is allowed; semantic invention is not
+## 8. Paraphrasing is allowed; semantic invention is not
 
 Definitions may be shortened or rewritten into learner-friendly language **only when the resulting wording preserves the source meaning accurately**.
 
@@ -69,7 +117,9 @@ Do not:
 - infer a specialized meaning solely from the passage
 - turn a contextual implication into a dictionary definition
 
-## 6. Vietnamese meanings
+For pronunciation, normalization is allowed only when it preserves the source-supported pronunciation and follows the project's declared transcription standard. Normalization must not become an excuse to guess missing phonetic information.
+
+## 9. Vietnamese meanings
 
 `meaning_vi` must also be grounded in a reliable lexical source and the verified intended sense.
 
@@ -77,16 +127,17 @@ The Vietnamese meaning may be concise and learner-friendly, but it must not intr
 
 A literal translation is not automatically correct. When necessary, use a reliable bilingual dictionary or derive the Vietnamese wording from a verified English sense while preserving the documented meaning.
 
-## 7. Missing source = do not fabricate
+## 10. Missing source = do not fabricate
 
-If a reliable source cannot be found for the intended sense:
+If a reliable source cannot be found for the intended sense or pronunciation:
 
 - do not invent the definition
-- do not mark the definition as verified
+- do not invent the pronunciation/transcription
+- do not mark the field as verified
 - preserve the lexical item as raw evidence if appropriate
-- leave the curated/official definition pending until a suitable source is found
+- leave the curated/official field pending until a suitable source is found
 
-## 8. Evidence hierarchy
+## 11. Evidence hierarchy
 
 For lexical meaning, prefer:
 
@@ -95,8 +146,15 @@ For lexical meaning, prefer:
 3. established corpus-backed lexical resource with documented sense information
 4. PTNK context as evidence for the **intended sense**, but not as the sole authority for defining the word
 
-## 9. Examples and patterns are separate
+For pronunciation, prefer:
 
-Examples and patterns may be derived or constructed for learning purposes, but they must not be used as a substitute for a reliable lexical definition.
+1. authoritative dictionary / lexical resource documenting the exact pronunciation
+2. reliable specialized lexical resource documenting the relevant pronunciation
+3. directly verified pronunciation evidence appropriate to the target accent/dialect
+4. PTNK context only as evidence for which lexical item/variant is intended, **never as the sole basis for constructing a pronunciation**
 
-A natural example demonstrates usage; it does not establish the authoritative meaning of the word.
+## 12. Examples and patterns are separate
+
+Examples and patterns may be derived or constructed for learning purposes, but they must not be used as a substitute for a reliable lexical definition or pronunciation source.
+
+A natural example demonstrates usage; it does not establish the authoritative meaning or pronunciation of the word.
