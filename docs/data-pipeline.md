@@ -1,6 +1,8 @@
 # PTNK Data Pipeline
 
-This document explains how PTNK lexical data moves from external evidence to the official learning dataset.
+> **Canonical learning-material construction principles:** `docs/learning-material-principles.md`
+>
+> This document describes the implementation layers of the data pipeline. It does not define a separate learning-material policy.
 
 ## 1. Pipeline
 
@@ -11,15 +13,22 @@ External sources
 RAW / EVIDENCE
     │  preserve original wording + provenance
     ▼
-CURATED / NORMALIZED
-    │  normalize + enrich + review
+CLEAN / NORMALIZED
+    │  normalize without destroying evidence
     ▼
-OFFICIAL LEXICON
+CURATED KNOWLEDGE
+    │  evidence-backed review
+    ▼
+KNOWLEDGE BASE
     │
-    ├── P1
-    ├── P2
-    ├── P3
-    └── P4
+    ├── knowledge atoms
+    └── source exercises / questions
+             │
+             ▼
+      Question ↔ Knowledge
+             │
+             ▼
+      Competency / Challenge
 ```
 
 ## 2. Raw / Evidence
@@ -28,111 +37,65 @@ Raw records represent what was obtained from a source with minimal transformatio
 
 Examples:
 
-- PTNK exam document
-- verified transcription
-- answer key
-- dictionary evidence
-- corpus evidence
-- English Profile / EVP evidence
+- instructional book material;
+- PTNK exam document;
+- verified transcription;
+- answer key;
+- dictionary evidence;
+- corpus evidence;
+- English Profile / EVP evidence.
 
-Raw data should preserve:
+Raw data should preserve source identity, location, original text where applicable, context, source quality, and uncertainty.
 
-- `source_id`
-- source type
-- source reference/location
-- original text where applicable
-- year/section/question when applicable
-- role/context
-- source quality
-- uncertainty
+Raw records should not be rewritten merely to fit a final learner-facing schema.
 
-Raw records should not be rewritten merely to fit the final Lexicon schema.
+## 3. Clean / Normalized
 
-## 3. Curated / Normalized
+Cleaning and normalization are separate from raw evidence. Typical implementation work includes encoding cleanup, structural normalization, canonicalization, and controlled deduplication.
 
-Curated records are derived from raw evidence.
+The raw layer remains the evidence baseline and must remain recoverable.
 
-Typical work:
+## 4. Curated Knowledge and Knowledge Base
 
-- canonical lexical form
-- word type
-- intended sense
-- US IPA
-- English/Vietnamese meanings
-- examples
-- genuine patterns
-- domain
-- PTNK priority
-- word-formation relationship
+Curated knowledge is derived from raw/evidence after the evidence requirements in `docs/learning-material-principles.md` have been satisfied.
 
-Every curated record must point back to its source evidence.
+The knowledge base may contain lexical, grammatical, word-formation, usage, and other knowledge atoms, together with provenance and relationships.
 
-## 4. Official Lexicon
+Destination exercises are retained as canonical seed questions and linked to the knowledge atoms they test.
 
-`official` means the project has reviewed and approved the record for learner-facing use.
+## 5. Provenance dimensions
 
-It does **not** mean every field came from an official PTNK document.
-
-For example:
+Keep provenance dimensions separate:
 
 ```text
-Source:
-  PTNK 2026 transcription
-  source_quality = transcription
-
-Curated Lexicon item:
-  official_status = official
+lexical/source evidence → source_id / source_type / source_quality
+PTNK relevance          → ptnk_evidence
+CEFR evidence           → cefr_status / cefr_source
+project lifecycle       → official_status
 ```
 
-This is valid because the provenance remains explicit.
+No one field should silently substitute for another.
 
-## 5. CEFR Is Independent
+## 6. Canonical rules
 
-CEFR evidence is a separate provenance dimension.
+For all questions about how learning material should be constructed, classified, evidenced, normalized, linked, or promoted, use:
 
-```text
-lexical source → source_id/source_type/source_quality
-PTNK relevance → ptnk_evidence
-CEFR evidence  → cefr_status/cefr_source
-```
+`docs/learning-material-principles.md`
 
-`cefr_source` must never replace `source_id` or `ptnk_evidence`.
+That document is the single source of truth for:
 
-If CEFR is not independently verified:
+- knowledge extraction;
+- lexical and grammatical classification;
+- meanings and pronunciation;
+- examples and patterns;
+- provenance;
+- CEFR and external metadata;
+- intrinsic-priority policy;
+- question extraction;
+- question-to-knowledge linkage;
+- generated material;
+- competency mapping;
+- quality gates;
+- copyright boundaries.
 
-```text
-cefr_status = not_verified
-cefr_source =
-```
-
-## 6. Official Promotion Checklist
-
-Before promotion to `official`, confirm:
-
-- provenance exists;
-- lexical form and sense are reviewed;
-- meanings are accurate;
-- pronunciation is verified or left unverified;
-- examples are natural;
-- patterns are genuine;
-- domain is justified;
-- priority reflects PTNK learning value;
-- source quality is honest;
-- CEFR is not guessed;
-- the record is curated rather than a raw transcription copy.
-
-## 7. Migration
-
-Older data directories may remain for historical/source purposes:
-
-```text
-data/vocabulary/
-data/idioms/
-data/phrasal_verbs/
-data/collocations/
-data/word_formation/
-```
-
-Migration should preserve those files and map their content into the unified Lexicon only after provenance and lifecycle status are clear.
-
-Do not silently delete or overwrite historical evidence during migration.
+This file describes pipeline implementation only and must not introduce competing learning-material rules.
