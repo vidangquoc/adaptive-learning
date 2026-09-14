@@ -103,6 +103,34 @@ Use web search for genuinely external research, not as a substitute for reposito
 
 ---
 
+## Problem 5 — Large canonical files may be truncated by connector output
+
+### Observed failure
+
+Fetching a large canonical Markdown file can return only a truncated representation in the tool response. The file may be present and valid in GitHub, but the assistant-visible tool output can be clamped before the complete file content is available for a safe full-file replacement.
+
+This creates a specific risk: `update_file` requires the **complete replacement content**, so reconstructing a large file from a truncated fetch can accidentally delete content that was not visible in the response.
+
+### Correct recovery procedure
+
+When a large canonical file is too large to inspect completely in one tool response:
+
+1. Do **not** overwrite it using only the truncated content.
+2. Record the current blob SHA from the fetch result.
+3. Retrieve the file through an available chunked/resource mechanism, or use another repository-supported method that preserves the complete content.
+4. Reconstruct the complete current file before editing it.
+5. Apply the intended change to the complete content.
+6. Update using the exact current blob SHA.
+7. Fetch the resulting file or otherwise verify the edited section and confirm that unrelated content was preserved.
+
+### Permanent rule
+
+> **Never perform a full-file replacement of a large canonical document from truncated tool output. Preserve the complete current file first, then edit and write it atomically.**
+
+This rule is especially important for canonical project documents such as `docs/learning-material-principles.md`.
+
+---
+
 ## Recovery checklist
 
 Before any GitHub repository write:
@@ -111,6 +139,7 @@ Before any GitHub repository write:
 - [ ] Exact target path?
 - [ ] Does the target already exist?
 - [ ] If it exists, do I have its **current** blob SHA?
+- [ ] Is the complete current file content available if using `update_file`?
 - [ ] `update_file` for an existing file, `create_file` for a new file?
 - [ ] Complete replacement content?
 - [ ] Meaningful commit message?
@@ -119,4 +148,4 @@ Before any GitHub repository write:
 
 ### Permanent operating rule
 
-> **Inspect current GitHub state before mutating it; use the correct create/update operation; verify consequential writes.**
+> **Inspect current GitHub state before mutating it; use the correct create/update operation; preserve complete content before large-file replacement; verify consequential writes.**
