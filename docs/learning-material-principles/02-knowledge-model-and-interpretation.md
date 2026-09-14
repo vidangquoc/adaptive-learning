@@ -39,6 +39,40 @@ Use explicit typed relationships only when they provide real learning, assessmen
 
 Learner mastery belongs to learner-state data, not to the static atom.
 
+## Official Knowledge Atom Representation
+
+Official knowledge is the canonical promoted layer consumed downstream by competency, diagnostic, challenge, and adaptive-learning systems.
+
+The official atom contract is defined separately in:
+
+```text
+schemas/official-knowledge-atom.schema.json
+```
+
+The current canonical fields are:
+
+| Field | Role |
+|---|---|
+| `id` | Positional identifier in the official knowledge base. It identifies the atom's position and must not encode the lexical item or sense. |
+| `atom_type` | Type of knowledge represented by the atom. |
+| `canonical_form` | Canonical lexical/constructional form represented by the atom. |
+| `part_of_speech` | Part of speech when applicable and supported by the source. |
+| `definition` | Source-provided definition, preserved verbatim when the source supplies one. Do not paraphrase it during promotion. |
+| `example` | Source example sentence when available. |
+| `candidate_ref` | Single pointer to the reviewed candidate record from which the official atom was promoted. |
+
+Official atoms intentionally do **not** carry candidate-review metadata, source-analysis metadata, evidence arrays, confidence, promotion status, or learner-state fields. Those concerns remain in their corresponding layers. `candidate_ref` is the explicit lineage pointer back to the reviewed candidate.
+
+Official atom IDs are positional, for example:
+
+```text
+<book>/<unit>/<section>/<position>
+```
+
+The position may change only through an intentional knowledge-base reorganization; the ID must not be designed to encode lexical meaning or sense.
+
+The field contract is a knowledge representation contract, not a learning-priority model. No intrinsic priority belongs in an official atom.
+
 ## Evidence Extraction Is Not Knowledge Interpretation
 
 Parsing, evidence discovery, contextual interpretation, normalization, and learning design are separate operations.
