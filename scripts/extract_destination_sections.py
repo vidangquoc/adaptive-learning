@@ -62,7 +62,7 @@ def discover(lines):
         candidate = {
             "line_index": index,
             "line_number": index + 1,
-            "raw_heading": raw.strip(),
+            "raw_heading": raw.rstrip("\r\n"),
             "heading": normalize_heading(raw),
             "kind": kind,
             "name": name,
@@ -97,6 +97,21 @@ def build_plan():
             if c["line_count"] <= 1:
                 errors.append(f"Unit {number:02d}: empty section at line {c['line_number']}")
         plan.append((number, path, lines, candidates))
+
+    output_names = {}
+    for number, _, _, candidates in plan:
+        for index, candidate in enumerate(candidates, start=1):
+            filename = safe_name(number, index, candidate)
+            previous = output_names.get(filename)
+            if previous is not None:
+                errors.append(
+                    f"output filename collision: {filename} "
+                    f"for Unit {previous[0]:02d} section {previous[1]} and "
+                    f"Unit {number:02d} section {candidate['name']}"
+                )
+            else:
+                output_names[filename] = (number, candidate["name"])
+
     if errors:
         print("PLAN VALIDATION: FAIL")
         for error in errors:
@@ -105,10 +120,10 @@ def build_plan():
     return plan
 
 
-def safe_name(number, candidate):
+def safe_name(number, section_index, candidate):
     slug = candidate["name"].replace(":", "-")
     slug = re.sub(r"[^a-z0-9-]+", "-", slug.casefold()).strip("-")
-    return f"unit-{number:02d}-{slug}.txt"
+    return f"unit-{number:02d}-s{section_index:02d}-{slug}.txt"
 
 
 def extract(plan):
@@ -117,15 +132,15 @@ def extract(plan):
     SECTIONS.mkdir(parents=True, exist_ok=True)
     manifest = []
     for number, path, lines, candidates in plan:
-        for candidate in candidates:
+        for section_index, candidate in enumerate(candidates, start=1):
             start = candidate["line_index"]
             end = candidate["end_line"]
             content = "\n".join(lines[start:end]) + "\n"
-            output = SECTIONS / safe_name(number, candidate)
+            output = SECTIONS / safe_name(number, section_index, candidate)
             output.write_text(content, encoding="utf-8", newline="\n")
             manifest.append(
-                f"unit={number:02d}\tsection={candidate['name']}\theading={candidate['heading']}"
-                f"\tstart_line={candidate['line_number']}\tend_line={end}"
+                f"unit={number:02d}\tsection_index={section_index:02d}\tsection={candidate['name']}"
+                f"\theading={candidate['heading']}\tstart_line={candidate['line_number']}\tend_line={end}"
                 f"\tline_count={candidate['line_count']}\tsource={path.relative_to(ROOT)}"
                 f"\tfile={output.relative_to(ROOT)}"
             )
@@ -135,32 +150,62 @@ def extract(plan):
 def validate(plan):
     errors = []
     expected_files = []
+
     for number, path, lines, candidates in plan:
-        unit_dir = SECTIONS
-        for candidate in candidates:
-            output = unit_dir / safe_name(number, candidate)
+        for section_index, candidate in enumerate(candidates, start=1):
+            output = SECTIONS / safe_name(number, section_index, candidate)
             expected_files.append(output)
             if not output.exists():
                 errors.append(f"missing output: {output}")
                 continue
+
             actual = output.read_text(encoding="utf-8", errors="replace")
             expected = "\n".join(lines[candidate["line_index"]:candidate["end_line"]]) + "\n"
             if actual != expected:
                 errors.append(f"content mismatch: {output}")
-            first = actual.splitlines()[0] if actual.splitlines() else ""
-            if first != candidate["heading"] and first != candidate["raw_heading"]:
-                errors.append(f"heading mismatch: {output}")
+                continue
+
+            actual_lines = actual.splitlines()
+            if not actual_lines:
+                errors.append(f"empty output: {output}")
+                continue
+
+            # The section file must preserve the exact raw source heading as its
+            # first line. Normalized heading text is metadata, never replacement
+            # content. This avoids false positives from PDF extraction artifacts.
+            if actual_lines[0] != candidate["raw_heading"]:
+                errors.append(
+                    f"heading mismatch: {output} "
+                    f"expected={candidate['raw_heading']!r} actual={actual_lines[0]!r}"
+                )
+
+            expected_count = candidate["line_count"]
+            if len(actual_lines) != expected_count:
+                errors.append(
+                    f"line-count mismatch: {output} "
+                    f"expected={expected_count} actual={len(actual_lines)}"
+                )
+
     actual_files = sorted(p for p in SECTIONS.glob("*.txt") if p.name != "MANIFEST.tsv")
     if sorted(actual_files) != sorted(expected_files):
         errors.append("output file set does not match validated plan")
+
     manifest = SECTIONS / "MANIFEST.tsv"
     if not manifest.exists():
         errors.append("missing MANIFEST.tsv")
+    else:
+        manifest_lines = manifest.read_text(encoding="utf-8", errors="replace").splitlines()
+        if len(manifest_lines) != len(expected_files):
+            errors.append(
+                f"manifest row-count mismatch: expected={len(expected_files)} actual={len(manifest_lines)}"
+            )
+
     if errors:
         print("POST-EXTRACTION VALIDATION: FAIL")
         for error in errors:
             print(f"ERROR: {error}")
         raise SystemExit(1)
+
     print("POST-EXTRACTION VALIDATION: PASS")
     print(f"Validated {len(expected_files)} section files across {EXPECTED_UNITS} units.")
 
