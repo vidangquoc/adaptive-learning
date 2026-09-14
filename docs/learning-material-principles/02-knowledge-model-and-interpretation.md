@@ -54,12 +54,19 @@ The current canonical fields are:
 | Field | Role |
 |---|---|
 | `id` | Positional identifier in the official knowledge base. It identifies the atom's position and must not encode the lexical item or sense. |
-| `atom_type` | Type of knowledge represented by the atom. |
+| `knowledge_domain` | High-level learning domain: `grammar` or `vocabulary`. It answers which broad learning domain the atom belongs to. |
+| `atom_type` | Type of knowledge represented by the atom. It answers what kind of knowledge the atom is. |
 | `canonical_form` | Canonical lexical/constructional form represented by the atom. |
+| `pronunciation` | Verified pronunciation, preferably in IPA. Pronunciation must not be guessed. |
 | `part_of_speech` | Part of speech when applicable and supported by the source. |
 | `definition` | Source-provided definition, preserved verbatim when the source supplies one. Do not paraphrase it during promotion. |
-| `example` | Source example sentence when available. |
+| `mother_says` | Learner-facing Vietnamese meaning corresponding to the verified atom. |
+| `patterns` | Verified usage patterns genuinely associated with the atom. |
+| `usage_note` | Verified usage restriction, register, nuance, contrast, or other important usage note. |
+| `examples` | One or more source or explicitly marked enriched example sentences supporting the atom. |
 | `candidate_ref` | Single pointer to the reviewed candidate record from which the official atom was promoted. |
+
+Fields such as `pronunciation`, `mother_says`, `patterns`, and `usage_note` may remain absent when reliable evidence is not available. Do not fill them by guessing merely because they exist in the schema.
 
 Official atoms intentionally do **not** carry candidate-review metadata, source-analysis metadata, evidence arrays, confidence, promotion status, or learner-state fields. Those concerns remain in their corresponding layers. `candidate_ref` is the explicit lineage pointer back to the reviewed candidate.
 
