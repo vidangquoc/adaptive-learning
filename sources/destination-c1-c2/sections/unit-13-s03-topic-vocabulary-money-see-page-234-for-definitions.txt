@@ -1,8 +1,0 @@
-       Topic vocabulary: Money                                                                                     see page 234 for definitions
-
-       benefit (v, n)                      deposit (v, n)                  insurance (n)                        overdraft (n)
-       compensation (n)                    direct debit (n phr)            interest (n)                         pension (n)
-       damages (n)                         dividend (n)                    investment (n)                       share (n)
-       debt (n)                            down payment (n phr)            lump sum (n phr)                     speculate (v)
-       deduct (v)                          finance (v, n)                  mortgage (n)                         withdraw (v)
-

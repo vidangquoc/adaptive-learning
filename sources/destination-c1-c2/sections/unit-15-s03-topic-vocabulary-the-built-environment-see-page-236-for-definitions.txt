@@ -1,8 +1,0 @@
-      Topic vocabulary: The built environment                                                               see page 236 for definitions
-
-      built-up (adj)                   dwell (v)                       infrastructure (n)                skyscraper (n)
-      bypass (v, n)                    estate (n)                      inner city (n phr)                structure (n)
-      construct (v)                    evict (v)                       occupy (v)                        suburban (adj)
-      demolish (v)                     high-rise (adj)                 populated (adj)                   surroundings (n pi)
-      district (n)                     housing (n)                     skyline (n)                       urban (adj)
-

@@ -1,8 +1,0 @@
-      Topic vocabulary: Technology                                                                     see page 226 for definitions
-
-      breakthrough (n)               craft (v, n)                    manual (adj. n)                primitive (adj)
-      broadband (adj, n)             data (n)                        network (v, n)                 programmer (n)
-      click (v)                      download (v, n)                 nuclear (adj)                  resource (n)
-      complex (adj)                  file (nl                        offline (adj, advl             technique (nl
-      consumer electronics (n phr)   (games) console (n phr)         online (adj. adv)              upload (v)
-

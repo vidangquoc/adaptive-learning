@@ -1,8 +1,0 @@
-      Topic vocabulary: The media                                                                                see page 231 for definitions
-
-      anchor (v, n)                    coverage (n)                     manifesto (n)                        spine (n)
-      broadcast (v, n)                 critic (n)                       novelist (n}                         subtitles (n}
-      caption (n}                      footnote (n}                     pamphlet (n)                         supplement (n)
-      columnist (n}                    ghostwriter {n}                  prerecorded (adj)                    tabloid (n. adj)
-      correspondent (n)                handbook (n}                     reviewer (n)                         trailer (n}
-
