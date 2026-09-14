@@ -11,7 +11,7 @@ The pipeline must not treat parser output as knowledge. Extraction tools are use
 The canonical flow is:
 
 ```text
-validated source evidence
+validated Unit source
         ↓
 source-order extraction / evidence discovery
         ↓
@@ -30,23 +30,26 @@ There is intentionally no requirement that a permanent intermediate `candidate` 
 
 ## 2. Inputs
 
-Canonical structural evidence:
+Canonical structural evidence is the **Unit source itself**:
 
 ```text
-sources/destination-c1-c2/sections/
-  MANIFEST.tsv
-  unit-*.txt
+sources/destination-c1-c2/units/
+  unit-01.txt
+  unit-02.txt
+  ...
 ```
 
-The section extractor has already validated that these files match the planned source slices. The knowledge-atom pipeline must not modify them.
+A Unit is the canonical source boundary. The knowledge-atom pipeline must not depend on, require, or reconstruct a pre-cut `sections/` directory or section manifest.
+
+Before discovery begins, validate the Unit boundaries and preserve the Unit source immutably. If Unit boundaries are invalid, stop the pipeline and repair the extraction layer before producing candidates.
 
 ## 3. Source-Order and Context Requirements
 
-Analysis must preserve the instructional order of the source.
+Analysis must preserve the instructional order of the Unit.
 
 For each potential knowledge item, collect enough surrounding material to interpret it, including where available:
 
-- section heading and subsection heading;
+- headings and subheadings within the Unit;
 - source lines around the item;
 - lexical table row or word box;
 - definitions or explanations supplied by the source;
@@ -54,7 +57,7 @@ For each potential knowledge item, collect enough surrounding material to interp
 - usage notes and patterns;
 - contrast sets;
 - nearby instructions or task framing;
-- relevant references elsewhere in the same section.
+- relevant references elsewhere in the same Unit.
 
 Do not reduce an item to an isolated token before analysis when surrounding context may determine its part of speech, sense, usage, or atom type.
 
@@ -75,7 +78,7 @@ For vocabulary, topic vocabulary, phrasal verbs, phrases/patterns/collocations, 
 
 For grammar, useful evidence signals include:
 
-- explicit grammar headings;
+- explicit grammar headings within a Unit;
 - numbered explanations;
 - rule statements;
 - examples;
@@ -83,7 +86,7 @@ For grammar, useful evidence signals include:
 - contrast blocks;
 - usage restrictions.
 
-For assessment sections, question content is primarily assessment evidence. Answer choices must not be promoted into knowledge atoms merely because they appear in an exercise.
+For assessment material, question content is primarily assessment evidence. Answer choices must not be promoted into knowledge atoms merely because they appear in an exercise.
 
 Discovery output is **evidence location**, not canonical knowledge.
 
@@ -137,6 +140,8 @@ one evidence span → no atom
 
 Split when distinctions are independently useful for learning, assessment, querying, or learner-state tracking. For example, a source entry marked `(v,n)` may support separate verb and noun atoms if the evidence supports both readings.
 
+For grammar, the same principle applies: if a Unit supports separate uses or contrasts that can be independently learned or assessed, split them into flat independent atoms. Do not create a parent grammar atom with child uses merely because they share a textbook heading.
+
 Do not merge merely because forms are similar, meanings overlap, items share a word family, or one expression contains another.
 
 False deduplication is more damaging than controlled redundancy.
@@ -147,8 +152,8 @@ The pipeline should produce a reviewable **atom proposal** containing, where sup
 
 - stable proposal ID;
 - source ID/type;
-- unit and section;
-- source line start/end;
+- source Unit;
+- precise source location within the Unit;
 - exact original source span;
 - surrounding context/evidence references;
 - proposed atom type;
@@ -174,16 +179,15 @@ At minimum preserve:
 - `source_id`;
 - `source_type`;
 - Unit;
-- section file;
-- section index when available;
-- source line start/end;
+- precise source location within the Unit;
 - exact original source span;
-- relevant surrounding context;
-- section type/name;
+- relevant surrounding Unit context;
 - evidence status;
 - inference status where applicable.
 
 A proposal without sufficient provenance cannot become canonical.
+
+The Unit is the source-boundary identifier. A textbook heading, topic label, exercise label, or exam section may be recorded as descriptive context when useful, but none is a required extracted source layer.
 
 ## 9. Automated Validation and Quality Gates
 
@@ -191,7 +195,7 @@ Automated analysis is advisory but must perform substantive validation before hu
 
 Validate, as applicable:
 
-1. Source section exists and is structurally valid.
+1. Unit exists and is structurally valid.
 2. Source span exactly matches the cited evidence.
 3. Provenance is complete enough for review.
 4. Proposed atom type is supported or explicitly pending.
@@ -202,7 +206,7 @@ Validate, as applicable:
 9. Atom splitting/merging decisions have evidence.
 10. Duplicate or near-duplicate proposals are flagged rather than silently collapsed.
 11. Relationships reference known or explicitly pending entities.
-12. Internal section-boundary anomalies are resolved or the proposal remains blocked.
+12. Unit-boundary anomalies are resolved or the proposal remains blocked.
 13. No intrinsic lexical priority is introduced.
 14. Ambiguous or competing interpretations are explicitly flagged.
 15. Insufficient evidence results in `null`, `pending`, or `review-needed`, not a guessed value.
@@ -241,14 +245,14 @@ Preserve the evidence and mark the proposal for review instead.
 
 ## 12. Reproducibility and Source Preservation
 
-Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting the raw evidence layer.
+Raw Unit source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting the raw evidence layer.
 
 Transformations should be reproducible and idempotent where practical. Do not silently repair source evidence; record repairs or downstream normalization explicitly.
 
 Keep these concerns separable:
 
 ```text
-source evidence
+source Unit evidence
 contextual interpretation
 validation
 human decision
