@@ -6,7 +6,9 @@ Every knowledge atom and source-derived question must retain enough provenance t
 
 > **Where did this come from, and what evidence supports it?**
 
-Preserve source ID/type, source quality/title/reference, unit/section/page/source location, exercise/question identifier, relevant exam/year metadata, source context/role, uncertainty, and license/usage information where applicable.
+Preserve source ID/type, source quality/title/reference, **source Unit**, precise location within that Unit, exercise/question identifier when applicable, relevant exam/year metadata, source context/role, uncertainty, and license/usage information where applicable.
+
+The **Unit is the canonical source boundary** for Destination learning-material extraction. The project does not use a pre-cut `sections/` layer as a source boundary or provenance layer.
 
 Keep source evidence, PTNK relevance, CEFR evidence, and project status as separate provenance dimensions.
 
@@ -17,7 +19,7 @@ Discovery and promotion are different states.
 A **candidate** is an evidence-backed hypothesis about a possible knowledge atom. It is not yet canonical knowledge. Candidate data must be preserved so that analysis, review, and promotion remain traceable and reproducible.
 
 ```text
-EVIDENCE
+EVIDENCE FROM UNIT
    ↓
 CANDIDATE
    ↓
@@ -82,7 +84,7 @@ DATA/
 └── review/       ← learner review and adaptive-learning data
 ```
 
-`knowledge/` contains canonical official knowledge organized by source/book, unit, and section. `review/` contains learner-specific attempts, learning state, review history, review queue, and related adaptive-learning data. Learner review data must not determine whether static material is admitted into official knowledge.
+`knowledge/` contains canonical official knowledge organized by source/book and Unit. It must not depend on extracted section files. `review/` contains learner-specific attempts, learning state, review history, review queue, and related adaptive-learning data. Learner review data must not determine whether static material is admitted into official knowledge.
 
 ## Back-Matter Evidence
 
@@ -106,7 +108,7 @@ WARN → continue only when explicitly acceptable
 FAIL → stop / preserve evidence / require review
 ```
 
-Quality gates should cover structural validity, provenance, semantic plausibility, answer uniqueness, schema validity, duplication, unsupported inference, and source/license constraints as appropriate.
+Quality gates should cover Unit-boundary validity, provenance, semantic plausibility, answer uniqueness, schema validity, duplication, unsupported inference, and source/license constraints as appropriate.
 
 If evidence is insufficient or competing interpretations remain unresolved:
 
@@ -123,7 +125,7 @@ Transformations should be reproducible and idempotent where practical. Do not si
 Keep these concerns separable:
 
 ```text
-source evidence
+source Unit evidence
 candidate knowledge
 human review decision
 official knowledge
