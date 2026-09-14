@@ -1,6 +1,6 @@
 # PTNK Project — Context Recovery
 
-> Recovery prompt for the PTNK Adaptive Preparation System. The repository is the source of truth; inspect current files before trusting remembered conversation details.
+> Recovery guide for the PTNK Adaptive Preparation System. The repository is the source of truth; inspect current files before trusting remembered conversation details.
 
 ## 1. Master recovery prompt
 
@@ -27,64 +27,53 @@ Source/data principles:
 - Accuracy beats completeness; preserve uncertainty instead of guessing.
 - Structural extraction and provenance validation fail closed.
 
-Destination extraction state:
-- 26 units structurally validated.
-- 177 structural section files extracted and validated.
-- Section inventory: `sources/destination-c1-c2/sections/MANIFEST.tsv`.
-- v3 evidence-specific discovery: 1,410 lexical candidates, 0 errors, 285 warnings.
-- These 1,410 records are discovery candidates, NOT canonical knowledge atoms.
-- v3 evidence classes: explicit_pos_row, explicit_word_box, lexical_table_head.
-- Exercise markers, option pairs, and fill-in-the-blank rows are primarily question/exercise evidence and must not automatically become knowledge atoms.
+Destination source-boundary decision:
+- The canonical structural source boundary is the **Unit**.
+- Use `sources/destination-c1-c2/units/unit-XX.txt` as the authoritative Unit input.
+- Do not use, require, or reconstruct `sources/destination-c1-c2/sections/`.
+- Do not create a section manifest as an intermediate source-of-truth layer.
+- Headings, topic labels, grammar labels, exercise labels, and other internal Unit structure may be retained as descriptive evidence/context, but they are not separate source-boundary files.
+- Validate Unit boundaries before evidence discovery. If a Unit boundary is wrong, stop the pipeline and repair the source extraction before creating candidates.
+- Provenance points to the Unit plus a precise location/span inside that Unit.
 
 Knowledge-atom core decision:
 - Knowledge atoms are FLAT and independent.
 - One lexical sense = one atom by default.
-- Do not create word → sense → pattern → expression ownership/ancestry trees.
+- The same flat-atom rule applies to grammar: each independently useful grammar use, construction, rule, or contrast is its own atom when the source supports that distinction.
+- Do not create word → sense → pattern → expression ancestry trees.
+- Do not create parent grammar atoms with child uses merely because the source uses a shared heading.
 - Related items may be separate atoms connected by explicit typed relationships when those relationships add real learning/query value.
-- Learner mastery belongs in learner-state data, not in static atoms.
+- Learner mastery belongs in learner-state data, not in static knowledge.
 
-Current candidate-specific model is separate from the official atom model.
-Read:
-- `schemas/knowledge-atom-candidate.schema.json`
-- `schemas/official-knowledge-atom.schema.json` (or the current official schema path in the repo)
-- `docs/learning-material-principles/02-knowledge-model-and-interpretation.md`
-- `docs/knowledge-atom-pipeline.md`
-- relevant discovery/extraction scripts
-
-Candidate atoms are complete reviewable proposals, not minimal placeholders.
-Candidate fields currently include:
-- atom_type
-- canonical_form
-- part_of_speech
-- sense
-- definition
-- mother_says
-- patterns
-- usage_note
-- source_status
-- source_location
-- evidence
-- source_example
-- context_status
-- review_status
-
-Important candidate rules:
-- Preserve ALL candidate fields even when data is unavailable. Do not delete empty fields.
-- `definition` preserves a source-provided definition verbatim when available; do not paraphrase it.
-- `mother_says` is the learner-facing Vietnamese meaning. Explanatory wording beyond the concise equivalent goes in parentheses, e.g. `suy ngẫm (suy nghĩ rất kỹ về điều gì đó trong một thời gian dài)`.
-- `mother_says` is learner-facing interpretation, not source evidence or a source quote.
-- `patterns` contains only genuine usage patterns supported by source evidence or strong context. No arbitrary combinations, translations, or synonyms. If unsupported, use `[]`.
-- `usage_note` contains verified or strongly context-supported restriction, register, nuance, contrast, or other important usage information. If unsupported, leave blank/null.
-- `source_status`, `context_status`, and `review_status` are separate. Strong source/context status does not imply `APPROVED`.
-- `mother_says`, `patterns`, and `usage_note` are visible during human review; they are NOT invented only during officialization.
-- If evidence is insufficient, preserve uncertainty rather than guessing.
-- Officialization must not silently add new semantic interpretation to an approved candidate. Promotion is primarily copy + transform according to the official schema, with separately authorized enrichment only.
-- Generated examples must never replace or masquerade as source evidence.
-- If core semantic identity changes, return to candidate/review rather than silently patching official knowledge.
+Candidate-specific model:
+- Candidate and official representations are separate.
+- A candidate is a complete reviewable proposal, not a minimal parser row.
+- Candidate fields include:
+  atom_type
+  canonical_form
+  part_of_speech
+  sense
+  definition
+  mother_says
+  patterns
+  usage_note
+  source_status
+  source_location
+  evidence
+  source_example
+  context_status
+  review_status
+- Preserve ALL candidate fields even when values are blank/null/[] as appropriate.
+- `definition` preserves a source-provided definition verbatim when available.
+- `mother_says` is learner-facing Vietnamese interpretation, not source evidence.
+- `patterns` and `usage_note` are populated only when supported by source evidence/context; otherwise remain empty/pending.
+- `source_status`, `context_status`, and `review_status` are separate.
+- Generated examples never replace source evidence.
+- Officialization must not silently add new semantic interpretation.
 
 Candidate → official flow:
 
-SOURCE EVIDENCE
+SOURCE UNIT EVIDENCE
       ↓
 CONTEXT-GROUNDED ANALYSIS
       ↓
@@ -98,82 +87,97 @@ COPY / PROMOTE
       ↓
 OFFICIAL KNOWLEDGE
 
-Human review is the final gate for promotion.
-Officialization is intentionally simple:
+Officialization:
 - current candidate status `APPROVED` and not yet officialized → promote/copy;
 - already officialized → skip;
-- any other status → do nothing.
-A candidate may be reviewed again later and changed to `APPROVED`; no candidate-versioning machinery is required for this workflow.
+- any other status → do nothing;
+- preserve candidate records intact;
+- preserve provenance through `candidate_ref` or the current official lineage mechanism;
+- do not invent new semantic meaning, patterns, usage notes, or evidence during promotion.
 
-Do not collapse candidate and official schemas for convenience.
-Do not modify the final official schema merely because an extraction structure suggests a field. Settle ontology first, then update schema/pipeline.
-```
-
-## 2. Candidate atom recovery prompt
+## 2. Discovery / extraction recovery prompt
 
 ```text
-Resume the PTNK candidate knowledge-atom model.
+Resume Destination C1/C2 knowledge discovery.
+
+Input:
+- `sources/destination-c1-c2/units/unit-XX.txt`
+
+Before discovery:
+1. validate that Unit boundaries are correct;
+2. confirm each Unit is complete and does not contain material from another Unit;
+3. preserve the Unit source unchanged;
+4. only then perform evidence discovery.
+
+Discovery must work directly against Unit content.
+
+Useful evidence signals include:
+- explicit lexical/POS rows;
+- word boxes and lexical tables;
+- definitions and explanations;
+- grammar headings and rule statements;
+- examples and contrast blocks;
+- collocation/pattern rows;
+- idiom/phrasal-verb entries;
+- word-formation rows;
+- exercise/question material as assessment evidence.
+
+Discovery output is evidence location, not canonical knowledge.
+Do not automatically promote option pairs, fill-in answers, generic exercise markers, or other assessment artifacts into knowledge atoms.
+
+For each proposal preserve:
+- source Unit;
+- precise location/span within Unit;
+- exact source evidence;
+- relevant surrounding Unit context;
+- evidence type/status;
+- inferred-vs-source-stated attributes.
+
+Fail closed on:
+- Unit-boundary errors;
+- missing or contradictory provenance;
+- unsupported semantic inference;
+- malformed source spans;
+- ambiguous atom identity.
+```
+
+## 3. Knowledge-model recovery prompt
+
+```text
+Resume the PTNK knowledge-atom model.
 
 Read:
 1. `schemas/knowledge-atom-candidate.schema.json`
-2. `docs/learning-material-principles/02-knowledge-model-and-interpretation.md`
-3. `data/candidates/` relevant files
+2. `schemas/official-knowledge-atom.schema.json`
+3. `docs/learning-material-principles/02-knowledge-model-and-interpretation.md`
+4. `docs/knowledge-atom-pipeline.md`
 
-Current decision:
-A candidate is a complete reviewable knowledge-atom proposal.
+Core ontology:
+- flat independent atoms;
+- one lexical sense = one atom by default;
+- independently useful grammar uses/constructions/contrasts are separate atoms when supported;
+- relationships are explicit typed links, not ancestry or inherited mastery;
+- learner state is separate.
 
-Keep all candidate fields. Empty data stays represented as blank/null/[]; fields are never deleted merely because data is unavailable.
-
-Candidate fields:
-atom_type
-canonical_form
-part_of_speech
-sense
-definition
-mother_says
-patterns
-usage_note
-source_status
-source_location
-evidence
-source_example
-context_status
-review_status
-
-`mother_says`, `patterns`, and `usage_note` must be decided before human review when evidence supports them. Do not defer semantic interpretation to officialization.
-
-Rules:
-- source definition is preserved verbatim;
-- mother_says = Vietnamese learner-facing meaning, with explanatory clarification in parentheses; it is not source evidence;
-- patterns = evidence-supported genuine usage patterns only;
-- usage_note = evidence-supported restriction/register/nuance/contrast only;
-- unsupported values remain empty/pending;
-- source_status, context_status, and review_status are separate and must not be conflated;
-- generated examples are enrichment, not source evidence;
-- no guessing merely to fill schema fields.
+Do not infer ontology from parser structure or textbook headings.
 ```
 
-## 3. Officialization recovery prompt
+## 4. Officialization recovery prompt
 
 ```text
 Resume the candidate → official knowledge promotion workflow.
 
-Candidate and official are distinct representations.
-
 Promotion:
-- if candidate `review_status` is `APPROVED` and the candidate has not already been officialized: copy/promote it;
+- if candidate `review_status` is `APPROVED` and not already officialized: copy/promote it;
 - if already officialized: skip it;
-- if status is anything other than `APPROVED`: do nothing;
+- if status is anything else: do nothing;
 - preserve candidate records intact;
-- preserve candidate/source provenance through `candidate_ref` or the current official lineage mechanism;
+- preserve candidate/source provenance;
 - do not silently invent new meaning, patterns, usage notes, or other semantic interpretation during promotion;
-- apply only explicit official-schema normalization/transformation and separately authorized enrichment;
-- generated examples must remain distinguishable from source examples/evidence.
-
-No candidate-versioning machinery is required for this workflow.
+- generated examples remain distinguishable from source examples/evidence.
 ```
 
-## 4. Adaptive-learning recovery prompt
+## 5. Adaptive-learning recovery prompt
 
 ```text
 Core adaptive loop:
@@ -194,30 +198,26 @@ These are heuristics, not immutable constants.
 Knowing one related atom never automatically implies knowing another atom.
 ```
 
-## 5. Discovery / extraction recovery prompt
+## 6. Important stable decisions
 
-```text
-Resume Destination C1/C2 knowledge discovery.
+- Destination C1/C2 = foundation; other sources are expansion layers.
+- Challenge-first rather than sequential textbook completion.
+- Destination exercises = canonical seed questions.
+- PTNK specialized English is C1-centered with a C1+ competitive zone and a smaller C2 tail; do not label the whole exam C2 without official evidence.
+- Individual vocabulary has no intrinsic priority.
+- Raw/evidence/curated/learner-state layers remain separate.
+- Source and official learning data are distinct: a raw source can support an official item without itself being the official learning record.
+- `cefr_source` records where CEFR was independently verified; it is not the lexical source/provenance field.
+- Fail closed on structural/provenance errors.
+- Flat independent knowledge atoms; no mandatory lexical or grammar ancestry hierarchy.
+- One lexical sense = one atom by default.
+- Candidate-specific schema is distinct from official schema.
+- Candidate is a complete reviewable proposal.
+- `mother_says`, `patterns`, and `usage_note` belong in candidacy, not only officialization.
+- Human review is the final promotion gate.
+- Officialization is copy/promote, not hidden semantic authoring.
 
-Current validated structure:
-- 26 units
-- 177 sections
-- MANIFEST.tsv is the structural inventory
-
-v3 discovery:
-- 1,410 lexical candidates
-- 0 errors
-- 285 warnings
-- evidence classes: explicit_pos_row, explicit_word_box, lexical_table_head
-
-Treat discovery output as evidence candidates, not canonical atoms.
-Do not automatically promote option pairs, fill blanks, or generic exercise markers.
-Validate canonical form, atom type, source location, lexical/layout authenticity, expression completeness, exercise contamination, provenance fidelity, and duplicate handling.
-Fail closed on validation errors.
-Do not weaken validation to increase counts.
-```
-
-## 6. Repository navigation prompt
+## 7. Repository navigation prompt
 
 ```text
 Before substantive work, inspect current repository state and identify authoritative files.
@@ -229,33 +229,11 @@ At minimum inspect:
 - candidate and official schemas
 - relevant `data/candidates/` and `data/knowledge/` files
 - relevant `scripts/`
-- `sources/destination-c1-c2/sections/MANIFEST.tsv`
+- `sources/destination-c1-c2/units/`
 
-Treat the current repository as authoritative. Use Git history to understand decisions, but do not revive superseded decisions without discussion.
+Do not use an extracted `sections/` directory as a source-of-truth layer.
+Use Git history to understand previous decisions, but do not revive superseded section-based extraction rules.
 ```
-
-## 7. Important historical decisions
-
-- Destination C1/C2 = foundation; other sources are expansion layers.
-- Challenge-first rather than sequential textbook completion.
-- Destination exercises = canonical seed questions.
-- PTNK specialized English is best treated as C1-centered with a C1+ competitive zone and smaller C2 tail; do not label the whole exam C2 without official evidence.
-- Individual vocabulary has no intrinsic priority.
-- Raw/evidence/curated/learner-state layers remain separate.
-- Fail closed on structural/provenance errors.
-- Flat independent knowledge atoms; no mandatory lexical ancestry hierarchy.
-- One lexical sense = one atom by default.
-- Candidate-specific schema is distinct from official schema.
-- Candidate is a complete reviewable proposal.
-- `mother_says`, `patterns`, and `usage_note` belong in candidacy, not only officialization.
-- `mother_says` is learner-facing interpretation, not source evidence.
-- Source examples remain source evidence; generated examples are separate enrichment.
-- `source_status`, `context_status`, and `review_status` are distinct.
-- Temporary parser candidates may exist internally; candidates entering human review must be persisted under `data/candidates/`.
-- Officialization is intentionally simple and idempotent: current `APPROVED` + not yet officialized → copy/promote; already officialized → skip; any other status → do nothing.
-- Officialization does not require candidate-versioning machinery.
-- Officialization is copy/promote, not a hidden semantic-authoring step.
-- Human review is the final promotion gate.
 
 ## 8. Recovery checklist
 
@@ -265,35 +243,20 @@ Treat the current repository as authoritative. Use Git history to understand dec
 4. Read candidate and official knowledge schemas.
 5. Read `docs/knowledge-atom-pipeline.md`.
 6. Inspect current Git state before assuming an old version is current.
-7. Confirm 177-section extraction state.
-8. Confirm v3 discovery state; do not rerun blindly.
-9. Treat 1,410 as candidates, not canonical atoms.
-10. Preserve flat-atom and candidate/official separation.
-11. Make changes incrementally and verify consequential writes.
+7. Validate the Unit source boundaries.
+8. Confirm the Unit files are complete before discovery.
+9. Preserve flat-atom and candidate/official separation.
+10. Make changes incrementally and verify consequential writes.
 
 ## 9. Maintenance rule
 
 Update this file whenever a major architectural, ontology, data-layer, or governance decision is settled.
 
-Do not record every temporary hypothesis. Record only stable decisions needed to reconstruct the project accurately.
+Do not record temporary hypotheses. Record only stable decisions needed to reconstruct the project accurately.
 
 When a decision is superseded:
 1. update the current rule;
 2. preserve historical reasoning in the appropriate design document/Git history when useful;
 3. remove obsolete instructions from recovery prompts so future sessions do not revive them.
 
-## 10. Current repository state snapshot
-
-Latest candidate schema update:
-- commit: `fb6e21c7b1401eff227aba3d8e6d402381b6e857`
-- content SHA: `f7301c3e3c280e69ab7da803f26f041bc5637dd1`
-
-Latest knowledge-model interpretation update:
-- commit: `9f9c535858ed9b867b974e7842cfb3c8552a5c4f`
-- content SHA: `db4399d233fe87870b5c4386c3c63e093715db0b0`
-
-Latest evidence/provenance/governance update:
-- commit: `f165096f7a27fb623c17822b343ec376d8436cd1`
-- content SHA: `6a14aa910b40baf0bfd24e0f3ee5b94343f424a0`
-
-These hashes are navigation aids, not substitutes for inspecting current repository state.
+The former section-based Destination extraction is superseded. Do not revive the old `177 sections`, `MANIFEST.tsv`, or `1,410 discovery candidates` as current repository state.
