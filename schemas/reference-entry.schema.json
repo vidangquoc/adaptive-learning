@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Destination Reference Entry",
+  "type": "object",
+  "required": [
+    "reference_id",
+    "source_id",
+    "source_path",
+    "source_type",
+    "source_location",
+    "source_text",
+    "parsed_fields",
+    "parser_version"
+  ],
+  "properties": {
+    "reference_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "source_path": {"type": "string"},
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "topic_vocabulary_database",
+        "phrasal_verbs_database",
+        "phrases_patterns_collocations_database",
+        "idioms_database",
+        "answer_key",
+        "other"
+      ]
+    },
+    "source_location": {"type": "string"},
+    "source_text": {"type": "string"},
+    "parsed_fields": {"type": "object"},
+    "parser_version": {"type": "string"}
+  },
+  "additionalProperties": false
+}
