@@ -44,23 +44,11 @@ The reviewer may:
 
 The human decision and its rationale must be preserved with provenance. Candidate records and official atoms must remain distinguishable so that every official atom can be traced back to its evidence and final human decision.
 
-A previous `REJECT` decision is **not permanent**. A candidate may be reviewed again later. If a reviewer changes the decision from `REJECT` (or `HOLD`) to `APPROVE`, the candidate becomes eligible for promotion under the normal promotion rules.
+A candidate with `APPROVED` status is eligible for officialization. A candidate with any other status is left untouched by the officialization process.
 
-Review history must be append-only/auditable: do not erase or rewrite the fact that an earlier review rejected or held the candidate. Record the new decision, rationale, reviewer, and review context as a subsequent review event, while treating the latest valid decision as the current decision for promotion eligibility.
+A previous `REJECT` or `HOLD` does not permanently prevent later review. If a candidate is intentionally reviewed again and its current status is changed to `APPROVED`, it becomes eligible for officialization. The project does not require candidate-versioning machinery merely to support this workflow.
 
-```text
-REJECT / HOLD
-      ↓
-   REVIEW AGAIN
-      ↓
-   APPROVE
-      ↓
-PROMOTION / COPY
-      ↓
-OFFICIAL KNOWLEDGE
-```
-
-> **A rejection is revisable; review history is not.**
+> **Officialization reads the current candidate status. `APPROVED` → eligible; anything else → leave it alone.**
 
 > **Machine proposes. Human decides.**
 
@@ -72,15 +60,16 @@ Official knowledge must be produced by a **promotion process** from approved can
 
 The promotion process must:
 
-1. select only candidates whose **current valid review decision** is explicit `APPROVE`;
-2. copy the approved knowledge into the official knowledge hierarchy;
-3. preserve provenance linking each official atom to its candidate, source evidence, and applicable review decision/history;
-4. leave the original candidate data and review history intact;
-5. never promote a candidate whose current valid decision is `REJECT` or `HOLD`.
+1. select candidate records whose current status is explicit `APPROVED`;
+2. if that candidate has already been officialized, skip it;
+3. copy the approved knowledge into the official knowledge hierarchy;
+4. preserve provenance linking each official atom to its candidate and source evidence;
+5. leave the original candidate data intact;
+6. never officialize a candidate whose current status is `REJECTED`, `HOLD`, `PENDING`, or any other non-`APPROVED` state.
 
-Official knowledge must not be created by moving, deleting, or destructively transforming candidate records. The candidate layer is the source of truth for the proposal/review history; the official knowledge layer is the canonical learning-material snapshot consumed by downstream systems.
+Officialization is intentionally simple and idempotent: **approved and not-yet-officialized → promote; already officialized → skip; anything not approved → do nothing.**
 
-A successful promotion is therefore a **copy-and-promote operation**, not a move operation.
+Official knowledge must not be created by moving, deleting, or destructively transforming candidate records. The candidate layer preserves the proposal/review data; the official knowledge layer is the canonical learning-material snapshot consumed by downstream systems.
 
 ## Knowledge Data and Learner Review Data Are Separate
 
