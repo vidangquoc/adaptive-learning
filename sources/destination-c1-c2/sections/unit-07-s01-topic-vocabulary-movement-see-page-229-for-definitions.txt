@@ -1,0 +1,14 @@
+      Topic vocabulary: Movement                                                                                      see page 229 for definitions
+
+      accelerate (v)                   drift (v, n)                      jog (v, n)                               sink (v)
+      approach (v, n)                  emigrate (v)                      leap (v, n)                              skid (v, n)
+      ascend (v)                       float (v)                         march (v, n)                             skip (v)
+      bounce (v, n)                    flow (v, n)                       migrate (v)                              slide (v, n)
+      clamber (v)                      fumble (v)                        point (v)                                slip (v)
+      clench (v)                       gesture (v, n)                    punch (v)                                step (v, n)
+      clutch (v)                       glide (v)                         refugee (n)                              stride (v, n)
+      crawl (v)                        grab (v)                           roam (v)                                trip (v)
+      creep (v)                        grasp (v)                         roll (v)                                 velocity (n)
+      dash (v)                         hop (v, n)                        rotate (v)                               wander (v)
+      descend (v)                      immigrant (n)                     route (n)                                wave (v, n)
+

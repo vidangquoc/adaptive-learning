@@ -1,0 +1,13 @@
+       Topic vocabulary: Quantity                                                                                  see page 233 for definitions
+
+       abundant (adj)                      equation (n)                    intensity (n)                       rate (v, n)
+       ample (adj)                         equidistant (adj)               magnitude (n)                       ratio (n)
+       area (n)                            expand (v)                      major (adj)                         ration (v, n)
+       average (n, adj)                    extent (n)                      mass (n)                            shrink (v)
+       batch (v, n)                        finite (adj)                    meagre (adj)                        sufficient (adj)
+       bulk (n)                            force (v, n)                    minor (adj)                         sum (n)
+       considerable (adj)                  fraction (n)                    minute (adj)                        uneven (adj)
+       countless (adj)                     heap (v, n)                     multiple (n, adj)                   vast (adj)
+       dimension (n)                       imbalance (n)                   proportion (n)                      volume (n)
+       diminish (v)                        immense (adj)                   quantify (v)                        widespread (adj)
+

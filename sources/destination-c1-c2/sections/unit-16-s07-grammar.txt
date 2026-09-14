@@ -1,0 +1,129 @@
+             17 Grammar
+U N IT
+
+
+
+                             � Clauses
+
+
+      Relative pronouns in relative clauses
+      who       to refer to people (and animals when we want                 There are a lot of people who hate having injections.
+                to give them a personality)
+      which     to refer to things and concepts (and animals when we         This is the prescription which the doctor gave me.
+                don't want to give them a personality)
+      whom      a formal word for who; as an object; must be used            That's the consultant with whom I spoke.
+                directly after a preposition
+      that      a more informal word for who, which, when, where,            This is the prescription that the doctor gave me.
+                why; only used in defining relative clauses
+      when      to refer to time; = in/on/etc which                          I'll never forget the day when I broke my finger.
+      where     to refer to place or situation; = in/at/etc which            Harley Street, where she was born, is famous
+                                                                             for its clinics.
+      why       often after the word reason; = the reason for which;         And that's (the reason) why I wanted to become a vet.
+                only used in defining relative clauses
+      whose     the possessive of who and which; can also come               There are several kids in my class whose parents
+                after a preposition                                          are doctors.
+      what      = the thing(s) which; only used in defining relative clauses What I don't understand is why she didn't take her pills.
+
+
+             • When we use a preposition with a relative pronoun, it is more formal to put the preposition before the pronoun.
+               ✓ This is the medical encyclopaedia to which I referred. (very formal)
+               ✓ This is the medical encyclopaedia which I referred to. (less formal)
+             • Which can refer to the whole preceding clause, rather than just the preceding noun.
+               ✓ She announced that she wanted to be a pathologist, which really shocked us. ( = the announcement shocked us)
+
+
+
+      Defining and non-defining relative clauses
+      Defining relative clauses                                        Non-defining relative clauses
+      These tell us which one of a group of things/people we are       These simply give us more information about
+      talking about. The sentence doesn't usually make complete        someone/something. The sentence makes complete sense
+      sense if we remove the relative clause.                          if we remove the relative clause.
+      ✓ That's the doctor who did Karen's operation.                   ✓ Dr Lake, who has been working here for over ten
+                                                                         years, is a very experienced surgeon.
+      We can use that instead of who/which/etc. This is                We cannot use that instead of who/which/etc.
+      more informal.
+      ✓ That's the doctor that did Karen's operation.
+      We don't use a comma or commas.                                  We must use a comma or commas.
+      ✓ That's the doctor who did Karen's operation.                   ✓ Dr Lake, who is an experienced surgeon, is my uncle.
+      We can omit the relative pronoun if it is the object.            We cannot omit the relative pronoun.
+      ✓ That's the doctor who she saw. (more formal)                   ✓ Dr Lake, who is my uncle, is 50 years old.
+      ✓ That's the doctor she saw. (less formal)
+      When, where and why can be omitted.                              We do not use why.
+      ✓ I'll never forget the day when I broke my arm.                 We cannot omit where and when.
+      ✓ I'll never forget the day I broke my arm.                      ✓ Harley Street, where she was born, is famous for its clinics.
+      We cannot put a number or a determiner such as some,             We can put a number or a determiner such as some, none,
+      none, much and many before of which or of whom.                  much and many before of which or of whom.
+                                                                       ✓ I bought some drugs, some of which were expensive.
+
+
+
+
+138
+
+                                                                                                                                Clauses   Unit 17
+
+
+
+Participle clauses
+To replace a relative clause              She was the nurse looking after the patients at the time. (who was looking)
+                                          The boy taken to hospital was 1 3 years old. (who was taken)
+With prepositions and conjunctions        After giving blood, I went home.
+                                          After having given blood, I went home.
+To explain the reason for something       Being frightened of needles, Tony was not looking forward to the injection.
+                                          Having had several operations before, Ali wasn't particularly nervous this time.
+To talk about actions happening           Sitting in the waiting room, I could hear the sound of the dentist drilling.
+at the same time
+To talk about actions happening           Having found an optician close to the office, I made an appointment for that evening.
+in sequence
+As an alternative passive form            Given an aspirin, I began to feel better. (when/because I was given an aspirin)
+As an alternative conditional form        Given the chance, I'd definitely study pharmacology. (if I were given the chance)
+
+
+
+          When the participle clause doesn't have its own subject, the clause and the rest of the sentence must both refer
+          to the same subject.
+          ✓ Standing in the hot, crowded room, I began to feel dizzy. ( = I was standing)
+          X .,,d11ui11� ;,, w� 11ut, t-tuwu�u 1uu11,, my 11c:du u�t5a11 tu ,��, 11�avy. ( = my head wasn't standing)
+
+
+
+Infinitive clauses
+To start a sentence                       To be a successful surgeon is the dream of many young children.
+                                          ( = It is the dream of many young children to be a successful surgeon.)
+After the verb to be                      My job was to give the patients their lunch.
+
+
+Concession clauses
+although / though / even though           Even though she'd put on sun cream, Tamsin got burnt.
+                                          Tamsin got burnt, though she had put on sun cream.
+                                          Tamsin put on sun cream. She still got burnt, though.
+in spite of I despite ( + noun or -ing)   Despite putting on sun cream, Tamsin got burnt.
+                                          In spite of the fact that she put on sun cream, Tamsin got burnt.
+                                          Despite the sun cream, Tamsin still got burnt.
+while/whereas                             While antibiotics are effective against bacteria, they do not work against viruses.
+                                          Bacterial infections can be cured with antibiotics, whereas viruses cannot.
+however                                   Penicillin is a powerful antibiotic. However, some people are allergic to it.
+                                          Penicillin is a powerful antibiotic. Some people are allergic to it, however.
+                                          Penicillin is a powerful antibiotic. Some people, however, are allergic to it.
+other phrases and structures              Try as he might, he couldn't put up with the pain.
+                                          However hard he (might have) tried, he couldn't put up with the pain.
+                                          Hard though/as he tried, he couldn't put up with the pain.
+                                          Much as he tried, he couldn't put up with the pain.
+
+
+
+      • With in spite of/ despite + -ing, both parts of the sentence must refer to the same subject.
+
+ I    • Even if is used to emphasise that it doesn't matter if something happens or is true, another situation remains
+        the same.
+        ✓ Even if they found a cure for cancer tomorrow, it would take several years before it was available.
+      • Even if is used to suggest that something may or may not happen, whereas even though suggests that the action
+        actually takes place.
+        ✓ Even if she tried to give her an injection, she couldn't. ( = She probably hasn't tried yet.)
+        ✓ Even though she tried to give her an injection, she couldn't. ( = She tried and was unsuccessful.)
+
+
+
+
+                                                                                                                                          139
+

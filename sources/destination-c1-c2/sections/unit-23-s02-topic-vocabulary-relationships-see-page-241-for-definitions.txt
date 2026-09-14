@@ -1,0 +1,14 @@
+      Topic vocabulary: Relationships                                                                             see page 241 for definitions
+
+      adjacent (adj)                      consistent (adj)                 exclude (v)                        involve (v)
+      attach (v)                          contradict (v)                   external (adj)                     joint (adj)
+      bond (v, n)                         contrasting (adj)                identify (v)                       liken (v)
+      coexist (v)                         cooperate (v)                    integral (adj)                     link (v, n)
+      coherent (adj)                      correspond (v)                   integrate (v)                      merge (v)
+      compatible (adj)                    dispute (v, n)                   interfere (v)                      mutual (adj)
+      comprise (v)                        distinguish (v)                  intermediate (adj)                  negotiate (v)
+      compromise (v, n)                   diverse (adj)                    internal (adj)                     related (adj)
+      conflict (v, n)                     divorce (v, n)                   intervene (v)                      relative (adj)
+      confront (v)                        equivalent (n, adj)              intimate (adj)                     resemblance (n)
+
+

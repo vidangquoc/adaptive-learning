@@ -1,0 +1,7 @@
+      Topic vocabulary: The arts                                                                                see page 241 for definitions
+      abstract (n, adj)                  curator (n)                     masterpiece (n)                     retrospective (n, adj)
+      auction (n)                        fine art (n phr)                paperback (n)                       score (n)
+      audition (n)                       installation (n)                period (n, adj)                     sketch (v, n)
+      bestseller (n)                     lines (n pi)                    priceless (adj)                     work of art (n phr)
+      collector's item (n phr)           lyrics (n pi)                   recital (n)                         worthless (adj)
+

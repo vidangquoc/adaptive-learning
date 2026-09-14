@@ -1,0 +1,13 @@
+      Topic vocabulary: Communication                                                                            see page 230 for definitions
+
+      allege (v}                       context (n)                      illegible (adj)                      rant (v, n)
+      ambiguous (adj)                  contradict (v}                   inkling (n)                          rave (v)
+      assert (v}                       convey (v}                       insist (v)                           relevant (adj)
+      blunt (adj)                      declare (v)                      jargon (n}                           scribble (v, n}
+      boast (v, n)                     denounce (v}                     literal (adj}                        slang (n, adj)
+      clarification (n)                disclose (v}                      mumble (v, n}                       stumble (v, n)
+      colloquial (adj)                 exaggerate (v)                   murmur (v, n}                        stutter (v, n)
+      comprehend (v)                   flatter (v}                      petition (n)                         tip (n)
+      confide (v)                      gist (n)                         placard (n)                          utter (v)
+      confirm (v)                      hint (v, n)                      quibble (v}                          vague (adj)
+

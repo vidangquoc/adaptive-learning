@@ -1,0 +1,7 @@
+      Topic vocabulary: Transport                                                                                     see page 230 for definitions
+      airline (n)                      destination (n)                   load (v, n)                              quay (n)
+      cargo (n)                        hiker (n)                         passerby (n)                             return fare (n phr)
+      carriage (n)                     hitchhiker (n)                    pedestrian (n)                           round trip (n phr)
+      charter (v)                      jet lag (n)                       pier (n)                                 steer (v)
+      commute (v)                      legroom (n)                       pilot (v, n)                             steward (n)
+

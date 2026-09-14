@@ -1,0 +1,13 @@
+      Topic vocabulary: Time                                                                                   see page 227 for definitions
+
+      abrupt (adj)                    era (n)                           millennium (n)                     punctual (adj)
+      anachronism (n)                 eternal (adj)                     obsolete (adj)                     seasonal (adj)
+      annual (adj)                    expire (v)                        overdue (adj)                      simultaneous (adj)
+      antique (adj, n)                frequency (n)                     period (n)                         span (v, n)
+      century (n)                     instantaneous (adj)               permanent (adj)                    spell (n)
+      chronological (adj)             interim (n, adj)                  phase (n)                          stint (n)
+      contemporary (n, adj)           interval (n)                      postpone (v)                       subsequent (adj)
+      decade (n)                      lapse (v, n)                      prior (adj)                        temporary (adj)
+      duration (n)                    lifetime (n)                      prompt (adj)                       timely (adj)
+      elapse (v)                      long-standing (adj)               provisional (adj)                  vintage (n, adj)
+
