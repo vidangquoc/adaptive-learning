@@ -235,7 +235,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `I'm in a dilemma over whether to tell him or not.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-015 — discriminate — sense 1
 - atom_type: word
@@ -250,7 +250,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `Employers are not allowed to discriminate on the basis of gender.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-016 — discriminate — sense 2
 - atom_type: word
@@ -265,7 +265,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `Long-range missile attacks simply cannot discriminate between military and civilian targets.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-017 — dubious — sense 1
 - atom_type: word
@@ -280,7 +280,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `The story seemed a bit dubious to me.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-018 — dubious — sense 2
 - atom_type: word
@@ -295,7 +295,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `I'm very dubious about his ability to do the job.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-019 — estimate — sense 1
 - atom_type: word
@@ -310,7 +310,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `According to official estimates, over 25% of carbon emissions come from the United States.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-020 — estimate — sense 2
 - atom_type: word
@@ -325,7 +325,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `The committee are currently getting estimates for repairs to the stonework.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-021 — estimate — sense 3
 - atom_type: word
@@ -340,7 +340,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `It's difficult to estimate the cost of making your house safe.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-022 — faith
 - atom_type: word
@@ -355,7 +355,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `I'm delighted to know you have such faith in me.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-023 — gather
 - atom_type: word
@@ -370,7 +370,7 @@ The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubiou
   - claim_status: source-stated
 - source_example: `You're new here, I gather.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ## What this prototype demonstrates
 
