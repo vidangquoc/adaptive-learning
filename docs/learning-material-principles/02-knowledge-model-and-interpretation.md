@@ -60,20 +60,22 @@ The current canonical fields, in order, are:
 | `pronunciation` | Verified pronunciation, preferably in IPA. Pronunciation must not be guessed. |
 | `part_of_speech` | Part of speech when applicable and supported by the source. |
 | `definition` | Source-provided definition, preserved verbatim when the source supplies one. Do not paraphrase it during promotion. |
-| `mother_says` | Learner-facing Vietnamese meaning corresponding to the verified atom. |
+| `mother_says` | Meaning in the learner's mother language. In the current project this means the Vietnamese meaning of the verified atom; it is **not** a usage explanation, native-speaker intuition note, or paraphrase of `definition`. |
 | `examples` | One or more source or explicitly marked enriched example sentences supporting the atom. |
 | `patterns` | Verified usage patterns genuinely associated with the atom. |
 | `usage_note` | Verified usage restriction, register, nuance, contrast, or other important usage note. |
 | `candidate_ref` | Single pointer to the reviewed candidate record from which the official atom was promoted. |
 
-Fields such as `pronunciation`, `mother_says`, `patterns`, and `usage_note` may remain absent when reliable evidence is not available. Do not fill them by guessing merely because they exist in the schema.
+For vocabulary atoms, `mother_says` should answer **“Nghĩa tiếng Việt của từ/cụm này là gì?”** It may be concise and learner-friendly, but it should preserve the verified sense rather than introducing unsupported interpretation. Information about register, nuance, contrasts, or how native speakers use the item belongs in `usage_note` instead.
+
+Fields such as `pronunciation`, `mother_says`, `patterns`, and `usage_note` remain present in the representation even when reliable evidence is not available; use a blank value or empty array as appropriate. Do not fill them by guessing merely because they exist in the schema.
 
 Official atoms intentionally do **not** carry candidate-review metadata, source-analysis metadata, evidence arrays, confidence, promotion status, or learner-state fields. Those concerns remain in their corresponding layers. `candidate_ref` is the explicit lineage pointer back to the reviewed candidate.
 
-Official atom IDs are positional, for example:
+Official atom IDs use the canonical component separator `__` rather than `/`, for example:
 
 ```text
-<book>/<unit>/<section>/<position>
+<book>__<unit>__<section>__<position>
 ```
 
 The position may change only through an intentional knowledge-base reorganization; the ID must not be designed to encode lexical meaning or sense.
