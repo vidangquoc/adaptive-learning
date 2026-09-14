@@ -66,7 +66,13 @@ The current canonical fields, in order, are:
 | `usage_note` | Verified usage restriction, register, nuance, contrast, or other important usage note. |
 | `candidate_ref` | Single pointer to the reviewed candidate record from which the official atom was promoted. |
 
-For vocabulary atoms, `mother_says` should answer **“Nghĩa tiếng Việt của từ/cụm này là gì?”** It may be concise and learner-friendly, but it should preserve the verified sense rather than introducing unsupported interpretation. Information about register, nuance, contrasts, or how native speakers use the item belongs in `usage_note` instead.
+For vocabulary atoms, `mother_says` should answer **“Nghĩa tiếng Việt của từ/cụm này là gì?”** It should contain the concise Vietnamese equivalent(s) of the verified sense. If additional wording is needed to explain or clarify the meaning rather than provide another equivalent, put that explanation in parentheses `()` immediately after the equivalent(s). Do not present explanatory wording as if it were a synonym. For example:
+
+```text
+suy ngẫm (suy nghĩ rất kỹ về điều gì đó trong một thời gian dài)
+```
+
+Information about register, broader usage restrictions, contrasts, or other usage-specific notes belongs in `usage_note` instead.
 
 Fields such as `pronunciation`, `mother_says`, `patterns`, and `usage_note` remain present in the representation even when reliable evidence is not available; use a blank value or empty array as appropriate. Do not fill them by guessing merely because they exist in the schema.
 
