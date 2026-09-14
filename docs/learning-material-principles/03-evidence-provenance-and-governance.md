@@ -14,23 +14,27 @@ Keep source evidence, PTNK relevance, CEFR evidence, and project status as separ
 
 Discovery and promotion are different states.
 
-A **candidate** is an evidence-backed hypothesis about a possible knowledge atom. It is not yet canonical knowledge.
+A **candidate** is an evidence-backed hypothesis about a possible knowledge atom. It is not yet canonical knowledge. Candidate data must be preserved so that analysis, review, and promotion remain traceable and reproducible.
 
 ```text
 EVIDENCE
    ↓
 CANDIDATE
    ↓
-VERIFIED
+HUMAN REVIEW
    ↓
-ENRICHED
+APPROVED
+   ↓
+PROMOTION / COPY
+   ↓
+OFFICIAL KNOWLEDGE
 ```
 
 Automated discovery and analysis may identify candidates, collect evidence, perform linguistic/semantic analysis, assess curricular evidence, calculate confidence, and flag warnings. These outputs are advisory and must not independently promote a candidate to official knowledge.
 
 ## Human Review Is the Final Promotion Gate
 
-A candidate becomes an official learning-material knowledge atom only after explicit human approval.
+A candidate becomes eligible for official learning-material knowledge only after explicit human approval.
 
 The reviewer may:
 
@@ -43,6 +47,35 @@ The human decision and its rationale must be preserved with provenance. Candidat
 > **Machine proposes. Human decides.**
 
 Automated curricular signals—including instructional evidence, back-matter presence, linguistic confidence, and related evidence—are inputs to human review, not authoritative promotion rules.
+
+## Official Knowledge Is a Promoted Copy
+
+Official knowledge must be produced by a **promotion process** from approved candidates.
+
+The promotion process must:
+
+1. select only candidates with an explicit `APPROVE` decision;
+2. copy the approved knowledge into the official knowledge hierarchy;
+3. preserve provenance linking each official atom to its candidate and source evidence;
+4. leave the original candidate data intact;
+5. never promote `REJECT` or `HOLD` candidates.
+
+Official knowledge must not be created by moving, deleting, or destructively transforming candidate records. The candidate layer is the source of truth for the proposal/review history; the official knowledge layer is the canonical learning-material snapshot consumed by downstream systems.
+
+A successful promotion is therefore a **copy-and-promote operation**, not a move operation.
+
+## Knowledge Data and Learner Review Data Are Separate
+
+Static official learning material and dynamic learner-state data must remain separate concerns.
+
+```text
+DATA/
+├── candidates/   ← proposed knowledge atoms
+├── knowledge/    ← approved / official knowledge
+└── review/       ← learner review and adaptive-learning data
+```
+
+`knowledge/` contains canonical official knowledge organized by source/book, unit, and section. `review/` contains learner-specific attempts, learning state, review history, review queue, and related adaptive-learning data. Learner review data must not determine whether static material is admitted into official knowledge.
 
 ## Back-Matter Evidence
 
@@ -84,9 +117,9 @@ Keep these concerns separable:
 
 ```text
 source evidence
-interpretation
-validation
-enrichment
+candidate knowledge
+human review decision
+official knowledge
 learning design
 learner state
 ```
