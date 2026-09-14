@@ -76,10 +76,12 @@ review_status
 
 - `definition` preserves a source-provided definition verbatim when available; do not paraphrase it merely to make the candidate look complete.
 - `mother_says` is the learner-facing Vietnamese meaning of the proposed sense. If explanatory wording is needed beyond the concise equivalent, put it in parentheses immediately after the equivalent(s). Never guess it merely because the field exists.
+- `mother_says` is an interpretation for the learner; it is **not source evidence** and must not be represented as though it were a source quote or source-stated definition.
 - `patterns` records genuine usage patterns that are verified or strongly supported by source context. It must not contain synonyms, translations, arbitrary word combinations, or patterns invented only to populate the field. If no reliable pattern is established, keep `[]`.
 - `usage_note` records verified or strongly context-supported usage restrictions, register, nuance, contrasts, or other important usage information. If none is established, keep it blank/null.
+- `source_status`, `context_status`, and `review_status` are separate concerns. `source_status` describes the quality/availability of source evidence; `context_status` describes the strength of contextual interpretation; `review_status` records the human decision. Strong source/context status does not imply `APPROVED`.
 - `patterns` and `usage_note` should be proposed before human review whenever the evidence supports them, so the reviewer can approve, reject, or hold the interpretation explicitly.
-- Officialization must **not silently add new interpretations** to an approved candidate. Promotion should primarily copy the approved candidate into the official representation, while applying only the explicit official-schema transformation and enrichment rules.
+- Officialization must **not silently add new semantic interpretation** to an approved candidate. Promotion primarily copies the approved candidate into the official representation, applying only the explicit official-schema transformation and separately authorized enrichment.
 - If a pattern or usage note is not sufficiently supported at candidacy time, it remains unresolved rather than being automatically inferred during promotion.
 
 This makes candidacy a complete reviewable proposal rather than a minimal placeholder whose meaning changes during promotion.
@@ -139,7 +141,7 @@ Parsing, evidence discovery, contextual interpretation, normalization, and learn
 
 A parser is an **evidence-location tool**, not a knowledge-authoring tool. Its output is a set of source spans or evidence signals that require contextual analysis. A pattern match must never silently become a canonical atom.
 
-The system should not require an artificial permanent candidate layer when it adds no value. A parser may create temporary candidates internally, but the substantive intermediate artifact is the context-grounded knowledge-atom proposal.
+The system should not require an artificial permanent candidate layer when it adds no value. A parser may create temporary candidates internally, but **any candidate that enters human review must be materialized as a persistent record under `data/candidates/`**. Not every temporary parser candidate needs to be persisted.
 
 ```text
 SOURCE
@@ -151,6 +153,8 @@ EVIDENCE LOCATION
 CONTEXTUAL LINGUISTIC / SEMANTIC ANALYSIS
   ↓
 KNOWLEDGE-ATOM PROPOSAL
+  ↓
+PERSIST REVIEWABLE CANDIDATE
   ↓
 VALIDATION / QUALITY GATES
   ↓
@@ -193,7 +197,7 @@ At minimum, preserve:
 - any additional context needed to distinguish the sense;
 - whether each claim is source-stated or inferred.
 
-If an example sentence exists in the source, prefer that sentence over an invented example for the evidence layer. A generated example may be added later as enrichment, but it must never replace the original evidence.
+If an example sentence exists in the source, prefer that sentence over an invented example for the evidence layer. A generated example may be added later as enrichment, but it must never replace the original evidence or be presented as source evidence.
 
 When the source provides a definition but no example, record the definition evidence and leave the source-example field null. When neither is available, do not fabricate evidence.
 
@@ -261,7 +265,7 @@ Definitions and meanings must be grounded in reliable lexical evidence. Pronunci
 
 When the source contains a sentence or example containing the target item, preserve it as source evidence and associate it with the specific atom/sense it supports. Do not replace it with a generic invented sentence during extraction.
 
-Generated examples may be added later as enrichment and must be explicitly marked as generated rather than source evidence.
+Generated examples may be added later as enrichment and must be explicitly marked as generated rather than source evidence. Enrichment may add examples, verified patterns, competency mappings, or assessment mappings when those additions have their own provenance. Enrichment must not silently change the core semantic identity of an approved candidate; if the identity, sense, definition, or other core interpretation changes, it must return to candidacy/review rather than being patched into official knowledge.
 
 Patterns must represent genuine usage information rather than synonyms, paraphrases, translations, or arbitrary combinations.
 
