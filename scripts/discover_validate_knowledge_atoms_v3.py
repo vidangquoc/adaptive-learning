@@ -111,7 +111,7 @@ def split_word_box(row, line_no, line):
     for ordinal, form in enumerate(parts, 1):
         if not re.fullmatch(r"[A-Za-z][A-Za-z'/-]*", form):
             continue
-        item = make_candidate(row, line_no, form, norm(line), "explicit_word_box", "lexical word-box entry; no answer inference", ordinal)
+        item = make_candidate(row, line_no, form, line, "explicit_word_box", "lexical word-box entry; no answer inference", ordinal)
         if item:
             out.append(item)
     return out
@@ -135,7 +135,7 @@ def lexical_head(row, line_no, line):
     if head.casefold() in {"phrases", "patterns", "collocations", "idioms", "word formation", "phrasal verbs"}:
         return []
     typ = "phrasal_verb" if "phrasal-verbs" in section else "idiom" if "idioms" in section else "collocation" if "phrases-patterns" in section else "word_formation"
-    item = make_candidate(row, line_no, head, text, "lexical_table_head", f"conservative headword extracted from {typ} source layout")
+    item = make_candidate(row, line_no, head, line, "lexical_table_head", f"conservative headword extracted from {typ} source layout")
     if item:
         item["atom_type"] = typ
         return [item]
