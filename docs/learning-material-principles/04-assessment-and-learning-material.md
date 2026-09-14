@@ -4,9 +4,9 @@
 
 Exercises already contained in Destination are the initial **canonical seed question bank**.
 
-Extract them faithfully and retain source, unit, section/exercise, location, question identifier, and task type.
+Extract them faithfully and retain the source Unit, precise location within that Unit, exercise/task identifier, question identifier, and task type.
 
-Generated questions are an additional layer for targeted practice, discrimination, transfer, retention, and retesting.
+A textbook's internal headings may be retained as descriptive metadata when useful, but they are not separate source-boundary files. Generated questions are an additional layer for targeted practice, discrimination, transfer, retention, and retesting.
 
 ## Question ↔ Knowledge Linkage
 
@@ -56,7 +56,7 @@ Do not force a competency label when evidence is insufficient.
 
 Grammar knowledge requires interpretation of **form, meaning, function, constraints, discourse context, and contrasts** where relevant.
 
-Model the smallest useful construction/rule that can support instruction and valid assessment.
+Model the smallest useful construction/rule that can support instruction and valid assessment. The same flat-atom rule used for lexical knowledge applies to grammar: if the source supports independently useful grammar uses or contrasts, represent them as independent atoms rather than creating a parent grammar atom with child uses.
 
 If the source does not provide enough evidence to determine a rule or constraint, preserve the evidence and mark the interpretation pending/review-needed. Do not invent it.
 
