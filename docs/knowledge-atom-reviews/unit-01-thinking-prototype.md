@@ -35,7 +35,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `We tried to assess his suitability for the job.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-002 — assess — sense 2
 - atom_type: word
@@ -50,7 +50,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `Our agent will assess the value of your property.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-003 — assume
 - atom_type: word
@@ -65,7 +65,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `Everyone accepted she was telling the truth, although in fact this was quite a lot to assume.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-004 — baffle
 - atom_type: word
@@ -80,7 +80,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `Detectives remain baffled by these murders.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-005 — biased
 - atom_type: word
@@ -95,7 +95,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `It was a biased report.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-006 — concentrate
 - atom_type: word
@@ -110,7 +110,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `I was sleeping badly and finding it hard to concentrate.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: REJECTED
 
 ### KA-U01-007 — consider — sense 1
 - atom_type: word
@@ -125,7 +125,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `She paused and considered for a moment.`
 - context_status: no independent Unit 1 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: REJECTED
 
 ### KA-U01-008 — consider — sense 2
 - atom_type: word
@@ -140,7 +140,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `They consider it inevitable that some jobs will be lost.`
 - context_status: no independent Unit 1 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-009 — contemplate — sense 1
 - atom_type: word
@@ -155,7 +155,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `I'm contemplating retirement next year.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-010 — contemplate — sense 2
 - atom_type: word
@@ -170,7 +170,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `I haven't got time to sit around contemplating the meaning of life.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-011 — cynical
 - atom_type: word
@@ -185,7 +185,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `I know that some of you are very cynical about the proposals.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-012 — deduce
 - atom_type: word
@@ -200,7 +200,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `Finding fossils far inland, he deduced that the area had once been covered by water.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ### KA-U01-013 — deliberate
 - atom_type: word
@@ -215,7 +215,7 @@ Source evidence:
   - claim_status: source-stated
 - source_example: `The judges deliberated for an hour before choosing the winner.`
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
-- review_status: PENDING
+- review_status: APPROVED
 
 ## What this prototype demonstrates
 
