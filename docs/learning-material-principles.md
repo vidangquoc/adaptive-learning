@@ -16,7 +16,7 @@ Defines the project's purpose, Destination C1 & C2 as the initial backbone, chal
 
 `02-knowledge-model-and-interpretation.md`
 
-Defines knowledge distinctions, flat knowledge atoms, evidence-vs-interpretation boundaries, lexical and grammatical reasoning, context-grounded inference, accuracy over completeness, definitions, pronunciation, examples, patterns, word formation, and deduplication.
+Defines knowledge distinctions, flat knowledge atoms, evidence-vs-interpretation boundaries, source-order and context-aware reasoning, lexical and grammatical reasoning, context-grounded inference, atom splitting/aggregation, accuracy over completeness, definitions, pronunciation, examples, patterns, word formation, and deduplication.
 
 ### 3. Evidence, Provenance, and Governance
 
@@ -51,21 +51,23 @@ When two principles interact, the more specific rule governs the specific operat
 5. Separate raw evidence from normalization, interpretation, and learning design.
 6. A parser discovers evidence; it does not author canonical knowledge.
 7. Lexical and grammatical atomization requires linguistic/semantic reasoning.
-8. Context may support inference of attributes such as POS, sense, usage, or meaning, but inferred values must remain distinguishable from source-stated facts.
-9. If evidence is insufficient, leave the field null/pending; never guess merely to fill the schema.
-10. Preserve provenance for every source-derived atom and question.
-11. Prefer accuracy over completeness.
-12. Preserve useful distinctions; do not flatten independently learnable knowledge.
-13. Knowledge atoms are flat and independent; relationships are not ancestry or inherited mastery.
-14. Automated analysis is advisory; human review is the final promotion gate.
-15. Learner state must not determine admission into the static learning-material knowledge base.
-16. PTNK papers calibrate and validate the model; they are not the primary curriculum.
-17. Destination exercises are canonical seed questions.
-18. Link questions to the knowledge they actually test.
-19. Generated material must add instructional value.
-20. Grammar questions must have a uniquely defensible answer.
-21. Answer keys do not override demonstrated ambiguity.
-22. Fail closed when structural, provenance, semantic, or validation gates fail.
+8. Preserve source order and inspect relevant surrounding lesson context before making semantic or grammatical judgments.
+9. Context may support inference of attributes such as POS, sense, usage, or meaning, but inferred values must remain distinguishable from source-stated facts.
+10. If evidence is insufficient, leave the field null/pending; never guess merely to fill the schema.
+11. One source span does not necessarily equal one atom; split, aggregate, or reject evidence according to independently useful knowledge distinctions.
+12. Preserve provenance for every source-derived atom and question.
+13. Prefer accuracy over completeness.
+14. Preserve useful distinctions; do not flatten independently learnable knowledge.
+15. Knowledge atoms are flat and independent; relationships are not ancestry or inherited mastery.
+16. Automated analysis is advisory; human review is the final promotion gate.
+17. Learner state must not determine admission into the static learning-material knowledge base.
+18. PTNK papers calibrate and validate the model; they are not the primary curriculum.
+19. Destination exercises are canonical seed questions.
+20. Link questions to the knowledge they actually test.
+21. Generated material must add instructional value.
+22. Grammar questions must have a uniquely defensible answer.
+23. Answer keys do not override demonstrated ambiguity.
+24. Fail closed when structural, provenance, semantic, or validation gates fail.
 
 ## Maintenance Rule
 

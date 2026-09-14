@@ -39,27 +39,48 @@ Learner mastery belongs to learner-state data, not to the static atom.
 
 ## Evidence Extraction Is Not Knowledge Interpretation
 
-Parsing, interpretation, normalization, and learning design are separate operations.
+Parsing, evidence discovery, contextual interpretation, normalization, and learning design are separate operations.
 
-A parser is an **evidence-discovery tool**, not a knowledge-authoring tool. A pattern match must never silently become a canonical atom.
+A parser is an **evidence-location tool**, not a knowledge-authoring tool. Its output is a set of source spans or evidence signals that require contextual analysis. A pattern match must never silently become a canonical atom.
+
+The system should not require an artificial permanent candidate layer when it adds no value. A parser may create temporary candidates internally, but the substantive intermediate artifact is the context-grounded knowledge-atom proposal.
 
 ```text
 SOURCE
   ↓
 RAW / STRUCTURAL EVIDENCE
   ↓
-EVIDENCE CANDIDATES
+EVIDENCE LOCATION
   ↓
-LINGUISTIC / SEMANTIC ANALYSIS
+CONTEXTUAL LINGUISTIC / SEMANTIC ANALYSIS
   ↓
-KNOWLEDGE-ATOM CANDIDATES
+KNOWLEDGE-ATOM PROPOSAL
   ↓
 VALIDATION / QUALITY GATES
   ↓
-VERIFIED KNOWLEDGE ATOMS
+HUMAN REVIEW
+  ↓
+VERIFIED KNOWLEDGE ATOM
 ```
 
-Parser output count must never be equated with knowledge-atom count. One evidence span may produce multiple candidates, multiple spans may support one atom, or an evidence span may produce no atom.
+Parser output count must never be equated with knowledge-atom count. One evidence span may produce multiple proposals, multiple spans may support one atom, or an evidence span may produce no atom.
+
+## Source-Order and Context Are Part of Interpretation
+
+Knowledge extraction must preserve the instructional order of the source and inspect the surrounding lesson content before making semantic or grammatical judgments.
+
+Where available, analysis should consider:
+
+- section and subsection headings;
+- lexical table rows or word boxes;
+- definitions and explanations;
+- example sentences;
+- usage notes and patterns;
+- contrast sets;
+- task instructions and framing;
+- relevant nearby source spans.
+
+Do not reduce a candidate to an isolated token when surrounding content may determine its part of speech, intended sense, usage, or atom type.
 
 ## Lexical and Grammatical Interpretation
 
@@ -75,8 +96,6 @@ The reasoning layer may infer attributes such as **part of speech, intended sens
 
 Inferred attributes must remain distinguishable from directly source-stated attributes and must carry appropriate confidence/provenance.
 
-> **If context provides sufficient evidence, infer the attribute and record the inference. If context does not provide sufficient evidence, leave the field null/pending rather than guessing.**
-
 Use this evidence hierarchy:
 
 ```text
@@ -84,12 +103,34 @@ explicit source statement
         ↓
 strong contextual inference
         ↓
-weak / ambiguous inference → leave null or review-needed
+weak / ambiguous inference
+        ↓
+null / pending / review-needed
 ```
+
+> **If context provides sufficient evidence, infer the attribute and record the inference. If context does not provide sufficient evidence, leave the field null/pending rather than guessing.**
 
 A field being present in the schema is never a reason to fill it.
 
 Context may identify which documented sense is intended, but a sentence alone must not be treated as authority for inventing a dictionary definition.
+
+## Atom Splitting and Evidence Aggregation
+
+One source span does not necessarily represent one knowledge atom.
+
+Analysis may determine that:
+
+```text
+one evidence span → multiple independent atoms
+multiple evidence spans → one atom with multiple evidence links
+one evidence span → no atom
+```
+
+Split when distinctions are independently useful for learning, assessment, querying, or learner-state tracking. Merge evidence only when it supports the same underlying knowledge item and sense.
+
+Do not merge merely because spellings are similar, meanings overlap, items share a word family, or one expression contains another.
+
+False deduplication is more damaging than controlled redundancy.
 
 ## Accuracy Over Completeness
 
