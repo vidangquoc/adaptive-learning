@@ -1,130 +1,122 @@
 # GitHub Problems & Recovery Notes
 
-## Problem: confusing parser output with knowledge-atom discovery
+> This file is **only** for problems encountered while operating on the GitHub repository through the GitHub connector/tooling, plus the verified recovery procedure for those GitHub-specific problems.
+>
+> Do **not** put learning-material architecture, ontology, parser design, grammar rules, or other project-domain principles here. Those belong in the appropriate project documentation.
+
+---
+
+## Problem 1 — Updating an existing file without the current blob SHA
 
 ### Observed failure
 
-The first knowledge-atom discovery approach treated parser-detected lexical structures as if they were already knowledge atoms. This is unsafe.
-
-A parser can reliably find evidence such as:
-
-- POS rows;
-- word boxes;
-- lexical tables;
-- expression-like strings;
-- phrasal-verb-looking patterns;
-- headings;
-- exercise boundaries.
-
-But a pattern match does not prove what the underlying learning unit is.
-
-The same problem was exposed more clearly by the grammar prototype: a grammar heading or rule fragment cannot automatically become a grammar atom because the final atom requires interpretation of form, meaning, function, constraints, context, and contrasts.
-
-The same principle applies to lexical material. A parser cannot by itself reliably decide whether a string is:
-
-- one word with one sense;
-- one word with multiple independently useful senses;
-- a lexicalized multiword expression;
-- a literal compositional phrase;
-- an idiom;
-- a phrasal verb with one or several senses/patterns;
-- a genuine collocation;
-- a word-formation relationship;
-- multiple distinct knowledge items that happen to share surface text.
+An attempt was made to update `docs/learning-material-principles.md` without first supplying the file's current blob SHA required by the GitHub `update_file` operation. The first update attempt therefore did not complete as intended.
 
 ### Root cause
 
-The pipeline implicitly collapsed two different tasks:
+The GitHub file-update operation uses optimistic concurrency: when replacing an existing file, it requires the **current content/blob SHA** so GitHub can verify that the file has not changed unexpectedly.
+
+Knowing the repository path is not sufficient.
+
+### Correct recovery procedure
+
+When updating an existing file:
+
+1. Call `fetch_file` for the exact repository path.
+2. Read the returned `sha` field.
+3. Prepare the complete replacement content.
+4. Call `update_file` with the repository, exact path, complete content, meaningful commit message, and returned SHA.
+5. Verify that the operation returns a new commit/content SHA.
+6. If the update fails because the SHA is stale, fetch the file again and use the newest SHA. Do not blindly retry with the stale SHA.
+
+Canonical pattern:
 
 ```text
-Evidence discovery
-        ≠
-Knowledge interpretation
+fetch_file(path)
+      ↓
+read current sha
+      ↓
+prepare complete replacement content
+      ↓
+update_file(path, content, message, sha)
+      ↓
+verify commit/content SHA
 ```
 
-Regex/parser logic is appropriate for finding evidence candidates, but semantic/linguistic interpretation is required before promotion to canonical knowledge.
+### Permanent rule
 
-### Correct architecture
+> **Never call `update_file` on an existing GitHub file using a remembered or guessed SHA. Fetch the current file first when the current SHA is not guaranteed to be current.**
 
-Use a fail-closed layered pipeline:
+---
+
+## Problem 2 — Creating a file that already exists
+
+### Root cause
+
+`create_file` is for a **new** file. Replacing an existing file requires `update_file` with the existing blob SHA.
+
+### Correct recovery procedure
+
+1. Call `fetch_file` on the target path.
+2. If it exists, use `update_file` with the returned SHA.
+3. If it does not exist, use `create_file`.
+4. Do not guess from memory whether the path exists.
 
 ```text
-SOURCE
-  ↓
-RAW / STRUCTURAL EVIDENCE
-  ↓
-EVIDENCE CANDIDATES
-  ↓
-LINGUISTIC / SEMANTIC ANALYSIS
-  ↓
-KNOWLEDGE-ATOM CANDIDATES
-  ↓
-VALIDATION / QUALITY GATES
-  ↓
-VERIFIED KNOWLEDGE ATOMS
+fetch_file(path)
+      ↓
+exists?
+ ┌────┴────┐
+ YES       NO
+  ↓         ↓
+update    create
 ```
 
-Core rule:
+---
 
-> **Parser discovers evidence. Reasoning interprets evidence. Validation decides whether the interpretation is safe enough to become knowledge.**
+## Problem 3 — A successful GitHub write does not prove semantic correctness
 
-### Required handling when this problem recurs
+### Root cause
 
-1. **Do not improve the regex first merely because atom quality is poor.**
-2. Determine whether the failure is actually an evidence-discovery problem or an interpretation problem.
-3. If the parser is finding the relevant source evidence but atomization is wrong, keep the parser and add/fix the linguistic-analysis layer.
-4. Preserve the original evidence and provenance; do not overwrite raw material with inferred interpretations.
-5. Allow one evidence span to produce multiple atom candidates.
-6. Allow multiple evidence spans to support one atom candidate.
-7. Allow an evidence span to produce no atom and be marked `review-needed` when evidence is insufficient.
-8. Never equate candidate count with verified-atom count.
-9. Never promote a candidate merely because a regex matched.
-10. Apply the same principle to lexical and grammatical material.
-11. Fail closed when competing interpretations cannot be resolved safely.
+A write returning a commit SHA proves that GitHub accepted the write. It does **not** prove that the requested document change was correct.
 
-### Example: lexical material
+### Correct recovery procedure
 
-Evidence:
+After a consequential write:
 
-```text
-look up
-```
+1. Verify the returned commit/content SHA.
+2. Fetch the resulting file again when the change is important.
+3. Confirm the target path and relevant content.
+4. Only then report the repository change as complete.
 
-The parser may correctly identify the string. It must not decide by itself that there is exactly one atom. Linguistic analysis may determine that multiple independently useful senses/patterns exist and should be represented as separate flat atoms.
+For large canonical documents, verify the changed section rather than relying only on the write response.
 
-Likewise:
+---
 
-```text
-spill the beans
-```
+## Problem 4 — Use the GitHub connector for connected-repository operations
 
-requires distinguishing the idiomatic use from a literal occurrence.
+### Rule
 
-### Example: grammar material
+When the user asks to inspect, modify, create, delete, or otherwise operate on the connected GitHub repository, use the GitHub connector/tool rather than generic web access.
 
-Evidence:
+Use web search for genuinely external research, not as a substitute for repository operations.
 
-```text
-Past time
-Past perfect
-```
+---
 
-These are structural headings, not automatically knowledge atoms. The analyzer must derive a useful construction/rule with form, meaning/function, constraints, and assessment implications.
+## Recovery checklist
 
-### Related validation rule
+Before any GitHub repository write:
 
-For grammar questions, grammaticality is not enough. The system must check:
+- [ ] Exact repository?
+- [ ] Exact target path?
+- [ ] Does the target already exist?
+- [ ] If it exists, do I have its **current** blob SHA?
+- [ ] `update_file` for an existing file, `create_file` for a new file?
+- [ ] Complete replacement content?
+- [ ] Meaningful commit message?
+- [ ] Write returned commit/content SHA?
+- [ ] Should the result be fetched for verification?
 
-```text
-grammaticality
-contextual appropriateness
-intended meaning
-```
+### Permanent operating rule
 
-If two candidates are grammatical and contextually compatible, reject or rewrite the question even if a source answer key selects one.
-
-### Permanent project rule
-
-This problem resulted in an update to the canonical learning-material principles. The canonical rule is now that **parser output is evidence discovery, not canonical knowledge**, and that **lexical as well as grammatical atomization requires linguistic/semantic reasoning before promotion**.
-
-When implementing future extraction/discovery work, consult `docs/learning-material-principles.md` first and preserve this separation of responsibilities.
+> **Inspect current GitHub state before mutating it; use the correct create/update operation; verify consequential writes.**
