@@ -72,11 +72,15 @@ Important candidate rules:
 - Preserve ALL candidate fields even when data is unavailable. Do not delete empty fields.
 - `definition` preserves a source-provided definition verbatim when available; do not paraphrase it.
 - `mother_says` is the learner-facing Vietnamese meaning. Explanatory wording beyond the concise equivalent goes in parentheses, e.g. `suy ngẫm (suy nghĩ rất kỹ về điều gì đó trong một thời gian dài)`.
+- `mother_says` is learner-facing interpretation, not source evidence or a source quote.
 - `patterns` contains only genuine usage patterns supported by source evidence or strong context. No arbitrary combinations, translations, or synonyms. If unsupported, use `[]`.
 - `usage_note` contains verified or strongly context-supported restriction, register, nuance, contrast, or other important usage information. If unsupported, leave blank/null.
+- `source_status`, `context_status`, and `review_status` are separate. Strong source/context status does not imply `APPROVED`.
 - `mother_says`, `patterns`, and `usage_note` are visible during human review; they are NOT invented only during officialization.
 - If evidence is insufficient, preserve uncertainty rather than guessing.
 - Officialization must not silently add new semantic interpretation to an approved candidate. Promotion is primarily copy + transform according to the official schema, with separately authorized enrichment only.
+- Generated examples must never replace or masquerade as source evidence.
+- If core semantic identity changes, return to candidate/review rather than silently patching official knowledge.
 
 Candidate → official flow:
 
@@ -94,7 +98,12 @@ COPY / PROMOTE
       ↓
 OFFICIAL KNOWLEDGE
 
-Human review is the final gate for promotion. A rejection is revisable; review history is not.
+Human review is the final gate for promotion.
+Officialization is intentionally simple:
+- current candidate status `APPROVED` and not yet officialized → promote/copy;
+- already officialized → skip;
+- any other status → do nothing.
+A candidate may be reviewed again later and changed to `APPROVED`; no candidate-versioning machinery is required for this workflow.
 
 Do not collapse candidate and official schemas for convenience.
 Do not modify the final official schema merely because an extraction structure suggests a field. Settle ontology first, then update schema/pipeline.
@@ -135,10 +144,12 @@ review_status
 
 Rules:
 - source definition is preserved verbatim;
-- mother_says = Vietnamese learner-facing meaning, with explanatory clarification in parentheses;
+- mother_says = Vietnamese learner-facing meaning, with explanatory clarification in parentheses; it is not source evidence;
 - patterns = evidence-supported genuine usage patterns only;
 - usage_note = evidence-supported restriction/register/nuance/contrast only;
 - unsupported values remain empty/pending;
+- source_status, context_status, and review_status are separate and must not be conflated;
+- generated examples are enrichment, not source evidence;
 - no guessing merely to fill schema fields.
 ```
 
@@ -150,15 +161,16 @@ Resume the candidate → official knowledge promotion workflow.
 Candidate and official are distinct representations.
 
 Promotion:
-- select only candidates whose current valid review decision is APPROVE;
+- if candidate `review_status` is `APPROVED` and the candidate has not already been officialized: copy/promote it;
+- if already officialized: skip it;
+- if status is anything other than `APPROVED`: do nothing;
 - preserve candidate records intact;
-- copy/promote rather than destructively move;
 - preserve candidate/source provenance through `candidate_ref` or the current official lineage mechanism;
 - do not silently invent new meaning, patterns, usage notes, or other semantic interpretation during promotion;
 - apply only explicit official-schema normalization/transformation and separately authorized enrichment;
-- never promote REJECT or HOLD.
+- generated examples must remain distinguishable from source examples/evidence.
 
-A rejection is revisable; review history is not.
+No candidate-versioning machinery is required for this workflow.
 ```
 
 ## 4. Adaptive-learning recovery prompt
@@ -236,6 +248,12 @@ Treat the current repository as authoritative. Use Git history to understand dec
 - Candidate-specific schema is distinct from official schema.
 - Candidate is a complete reviewable proposal.
 - `mother_says`, `patterns`, and `usage_note` belong in candidacy, not only officialization.
+- `mother_says` is learner-facing interpretation, not source evidence.
+- Source examples remain source evidence; generated examples are separate enrichment.
+- `source_status`, `context_status`, and `review_status` are distinct.
+- Temporary parser candidates may exist internally; candidates entering human review must be persisted under `data/candidates/`.
+- Officialization is intentionally simple and idempotent: current `APPROVED` + not yet officialized → copy/promote; already officialized → skip; any other status → do nothing.
+- Officialization does not require candidate-versioning machinery.
 - Officialization is copy/promote, not a hidden semantic-authoring step.
 - Human review is the final promotion gate.
 
@@ -271,7 +289,11 @@ Latest candidate schema update:
 - content SHA: `f7301c3e3c280e69ab7da803f26f041bc5637dd1`
 
 Latest knowledge-model interpretation update:
-- commit: `797c6f150ac2be932afec9e8dd222cd1d1f14e0c`
-- content SHA: `a817e409956de1185f8c5f001bc85989b7375a51`
+- commit: `9f9c535858ed9b867b974e7842cfb3c8552a5c4f`
+- content SHA: `db4399d233fe87870b5c4386c3c63e093715db0b0`
+
+Latest evidence/provenance/governance update:
+- commit: `f165096f7a27fb623c17822b343ec376d8436cd1`
+- content SHA: `6a14aa910b40baf0bfd24e0f3ee5b94343f424a0`
 
 These hashes are navigation aids, not substitutes for inspecting current repository state.
