@@ -36,6 +36,12 @@ Defines Destination exercises as canonical seed questions, question-to-knowledge
 
 Defines the role of intrinsic vocabulary priority, PTNK papers as calibration evidence, domain, CEFR/external metadata, and copyright/source boundaries.
 
+### 6. Source Unit Boundary
+
+`06-source-unit-boundary.md`
+
+Defines the authoritative Destination source boundary. Destination extraction uses **Units only**. The former extracted `sections/` layer and section manifest are superseded and must not be used as source-of-truth, provenance, or pipeline boundaries.
+
 ## Governing Principle
 
 These documents are one rulebook. The split is organizational only: a principle should be maintained in the document that best matches its conceptual role.
@@ -51,24 +57,26 @@ When two principles interact, the more specific rule governs the specific operat
 5. Separate raw evidence from normalization, interpretation, and learning design.
 6. A parser discovers evidence; it does not author canonical knowledge.
 7. Lexical and grammatical atomization requires linguistic/semantic reasoning.
-8. Preserve source order and inspect relevant surrounding lesson context before making semantic or grammatical judgments.
-9. Context may support inference of attributes such as POS, sense, usage, or meaning, but inferred values must remain distinguishable from source-stated facts.
-10. If evidence is insufficient, leave the field null/pending; never guess merely to fill the schema.
-11. One source span does not necessarily equal one atom; split, aggregate, or reject evidence according to independently useful knowledge distinctions.
-12. Preserve provenance for every source-derived atom and question.
-13. Prefer accuracy over completeness.
-14. Preserve useful distinctions; do not flatten independently learnable knowledge.
-15. Knowledge atoms are flat and independent; relationships are not ancestry or inherited mastery.
-16. Automated analysis is advisory; human review is the final promotion gate.
-17. Learner state must not determine admission into the static learning-material knowledge base.
-18. PTNK papers calibrate and validate the model; they are not the primary curriculum.
-19. Destination exercises are canonical seed questions.
-20. Link questions to the knowledge they actually test.
-21. Generated material must add instructional value.
-22. Grammar questions must have a uniquely defensible answer.
-23. Answer keys do not override demonstrated ambiguity.
-24. Fail closed when structural, provenance, semantic, or validation gates fail.
+8. Preserve source order and inspect relevant surrounding **Unit** context before making semantic or grammatical judgments.
+9. **Unit is the canonical Destination source boundary. Do not depend on an extracted `sections/` layer or section manifest.**
+10. Context may support inference of attributes such as POS, sense, usage, or meaning, but inferred values must remain distinguishable from source-stated facts.
+11. If evidence is insufficient, leave the field null/pending; never guess merely to fill the schema.
+12. One source span does not necessarily equal one atom; split, aggregate, or reject evidence according to independently useful knowledge distinctions.
+13. Preserve provenance for every source-derived atom and question, including Unit and precise location within Unit.
+14. Prefer accuracy over completeness.
+15. Preserve useful distinctions; do not flatten independently learnable knowledge.
+16. Knowledge atoms are flat and independent; relationships are not ancestry or inherited mastery.
+17. Automated analysis is advisory; human review is the final promotion gate.
+18. Learner state must not determine admission into the static learning-material knowledge base.
+19. PTNK papers calibrate and validate the model; they are not the primary curriculum.
+20. Destination exercises are canonical seed questions.
+21. Link questions to the knowledge they actually test.
+22. Generated material must add instructional value.
+23. Grammar questions must have a uniquely defensible answer.
+24. Fail closed when Unit-boundary, structural, provenance, semantic, or validation gates fail.
 
 ## Maintenance Rule
 
 New learning-material rules should be added to the most conceptually appropriate child document first. The index should be updated only when the rulebook structure changes or a new non-negotiable rule must be surfaced.
+
+The former section-based Destination extraction is superseded. References to a textbook's internal section/topic/exercise labels may remain as descriptive source context, but `sections/` is not a canonical data layer.
