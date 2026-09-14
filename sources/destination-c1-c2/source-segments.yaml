@@ -1,0 +1,257 @@
+# Canonical source-segment map for Destination C1 & C2.
+# Page numbers are 1-based PDF viewer pages, not printed book page numbers.
+# The original PDF remains the source of truth. This manifest is the human-reviewed
+# logical segmentation map used by extraction tooling.
+
+source:
+  id: destination-c1-c2
+  file: sources/Destination_C1-C2.pdf
+  page_numbering: pdf_viewer_1_based
+
+source_segments:
+  - id: header
+    type: header
+    start_page: 1
+
+  - id: unit-01
+    type: unit
+    number: 1
+    start_page: 7
+  - id: unit-02
+    type: unit
+    number: 2
+    start_page: 13
+  - id: review-01
+    type: review
+    number: 1
+    covers: [unit-01, unit-02]
+    start_page: 21
+  - id: unit-03
+    type: unit
+    number: 3
+    start_page: 23
+  - id: unit-04
+    type: unit
+    number: 4
+    start_page: 29
+  - id: review-02
+    type: review
+    number: 2
+    covers: [unit-03, unit-04]
+    start_page: 37
+  - id: unit-05
+    type: unit
+    number: 5
+    start_page: 39
+  - id: unit-06
+    type: unit
+    number: 6
+    start_page: 45
+  - id: review-03
+    type: review
+    number: 3
+    covers: [unit-05, unit-06]
+    start_page: 53
+  - id: unit-07
+    type: unit
+    number: 7
+    start_page: 55
+  - id: unit-08
+    type: unit
+    number: 8
+    start_page: 61
+  - id: review-04
+    type: review
+    number: 4
+    covers: [unit-07, unit-08]
+    start_page: 69
+  - id: unit-09
+    type: unit
+    number: 9
+    start_page: 71
+  - id: unit-10
+    type: unit
+    number: 10
+    start_page: 77
+  - id: review-05
+    type: review
+    number: 5
+    covers: [unit-09, unit-10]
+    start_page: 85
+  - id: unit-11
+    type: unit
+    number: 11
+    start_page: 87
+  - id: unit-12
+    type: unit
+    number: 12
+    start_page: 93
+  - id: review-06
+    type: review
+    number: 6
+    covers: [unit-11, unit-12]
+    start_page: 101
+  - id: progress-test-01
+    type: progress_test
+    number: 1
+    covers: [unit-01, unit-02, unit-03, unit-04, unit-05, unit-06, unit-07, unit-08, unit-09, unit-10, unit-11, unit-12]
+    start_page: 103
+
+  - id: unit-13
+    type: unit
+    number: 13
+    start_page: 107
+  - id: unit-14
+    type: unit
+    number: 14
+    start_page: 113
+  - id: review-07
+    type: review
+    number: 7
+    covers: [unit-13, unit-14]
+    start_page: 121
+  - id: unit-15
+    type: unit
+    number: 15
+    start_page: 123
+  - id: unit-16
+    type: unit
+    number: 16
+    start_page: 129
+  - id: review-08
+    type: review
+    number: 8
+    covers: [unit-15, unit-16]
+    start_page: 137
+  - id: unit-17
+    type: unit
+    number: 17
+    start_page: 139
+  - id: unit-18
+    type: unit
+    number: 18
+    start_page: 145
+  - id: review-09
+    type: review
+    number: 9
+    covers: [unit-17, unit-18]
+    start_page: 153
+  - id: unit-19
+    type: unit
+    number: 19
+    start_page: 155
+  - id: unit-20
+    type: unit
+    number: 20
+    start_page: 161
+  - id: review-10
+    type: review
+    number: 10
+    covers: [unit-19, unit-20]
+    start_page: 169
+  - id: unit-21
+    type: unit
+    number: 21
+    start_page: 171
+  - id: unit-22
+    type: unit
+    number: 22
+    start_page: 177
+  - id: review-11
+    type: review
+    number: 11
+    covers: [unit-21, unit-22]
+    start_page: 185
+  - id: unit-23
+    type: unit
+    number: 23
+    start_page: 187
+  - id: unit-24
+    type: unit
+    number: 24
+    start_page: 193
+  - id: review-12
+    type: review
+    number: 12
+    covers: [unit-23, unit-24]
+    start_page: 201
+  - id: unit-25
+    type: unit
+    number: 25
+    start_page: 203
+  - id: unit-26
+    type: unit
+    number: 26
+    start_page: 209
+  - id: review-13
+    type: review
+    number: 13
+    covers: [unit-25, unit-26]
+    start_page: 217
+  - id: progress-test-02
+    type: progress_test
+    number: 2
+    covers: [unit-13, unit-14, unit-15, unit-16, unit-17, unit-18, unit-19, unit-20, unit-21, unit-22, unit-23, unit-24, unit-25, unit-26]
+    start_page: 219
+
+  - id: database-topic-vocabulary
+    type: database
+    name: topic_vocabulary
+    start_page: 225
+  - id: database-phrasal-verbs
+    type: database
+    name: phrasal_verbs
+    start_page: 246
+  - id: database-phrases-patterns-collocations
+    type: database
+    name: phrases_patterns_collocations
+    start_page: 252
+  - id: database-idioms
+    type: database
+    name: idioms
+    start_page: 258
+  - id: database-word-formation
+    type: database
+    name: word_formation
+    start_page: 262
+
+  - id: revision-test-01
+    type: revision_test
+    number: 1
+    covers: [unit-01, unit-02, unit-03, unit-04]
+    start_page: 266
+  - id: revision-test-02
+    type: revision_test
+    number: 2
+    covers: [unit-05, unit-06, unit-07, unit-08]
+    start_page: 268
+  - id: revision-test-03
+    type: revision_test
+    number: 3
+    covers: [unit-09, unit-10, unit-11, unit-12]
+    start_page: 270
+  - id: revision-test-04
+    type: revision_test
+    number: 4
+    covers: [unit-13, unit-14, unit-15, unit-16]
+    start_page: 272
+  - id: revision-test-05
+    type: revision_test
+    number: 5
+    covers: [unit-17, unit-18, unit-19, unit-20]
+    start_page: 274
+  - id: revision-test-06
+    type: revision_test
+    number: 6
+    covers: [unit-21, unit-22, unit-23, unit-24]
+    start_page: 276
+  - id: revision-answer-key
+    type: revision_answer_key
+    start_page: 278
+  - id: answer-key
+    type: answer_key
+    start_page: 282
+
+  - id: footer
+    type: footer
+    start_page: 314
