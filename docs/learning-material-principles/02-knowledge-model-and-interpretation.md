@@ -49,7 +49,7 @@ The official atom contract is defined separately in:
 schemas/official-knowledge-atom.schema.json
 ```
 
-The current canonical fields are:
+The current canonical fields, in order, are:
 
 | Field | Role |
 |---|---|
@@ -61,9 +61,9 @@ The current canonical fields are:
 | `part_of_speech` | Part of speech when applicable and supported by the source. |
 | `definition` | Source-provided definition, preserved verbatim when the source supplies one. Do not paraphrase it during promotion. |
 | `mother_says` | Learner-facing Vietnamese meaning corresponding to the verified atom. |
+| `examples` | One or more source or explicitly marked enriched example sentences supporting the atom. |
 | `patterns` | Verified usage patterns genuinely associated with the atom. |
 | `usage_note` | Verified usage restriction, register, nuance, contrast, or other important usage note. |
-| `examples` | One or more source or explicitly marked enriched example sentences supporting the atom. |
 | `candidate_ref` | Single pointer to the reviewed candidate record from which the official atom was promoted. |
 
 Fields such as `pronunciation`, `mother_says`, `patterns`, and `usage_note` may remain absent when reliable evidence is not available. Do not fill them by guessing merely because they exist in the schema.
