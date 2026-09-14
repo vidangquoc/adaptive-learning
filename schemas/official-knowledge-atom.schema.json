@@ -2,11 +2,12 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/vidangquoc/PTNK/blob/main/schemas/official-knowledge-atom.schema.json",
   "title": "PTNK Official Knowledge Atom",
-  "description": "Canonical schema for promoted official knowledge. Official atoms contain only downstream learning knowledge plus one provenance pointer back to the reviewed candidate.",
+  "description": "Canonical schema for promoted official knowledge. Official atoms contain downstream learning knowledge plus one provenance pointer back to the reviewed candidate.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "id",
+    "knowledge_domain",
     "atom_type",
     "canonical_form",
     "candidate_ref"
@@ -16,6 +17,11 @@
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9._/-]*$",
       "description": "Positional identifier in the official knowledge base. It identifies the atom's position and must not encode the lexical item or sense."
+    },
+    "knowledge_domain": {
+      "type": "string",
+      "enum": ["grammar", "vocabulary"],
+      "description": "High-level learning domain of the atom. This is distinct from atom_type, which describes the kind of knowledge represented."
     },
     "atom_type": {
       "type": "string",
@@ -40,6 +46,11 @@
       "type": "string",
       "minLength": 1
     },
+    "pronunciation": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Verified pronunciation, preferably in IPA. Pronunciation must not be guessed."
+    },
     "part_of_speech": {
       "type": "string",
       "minLength": 1
@@ -49,10 +60,31 @@
       "minLength": 1,
       "description": "Source-provided definition preserved verbatim. Do not paraphrase a definition that already exists in the source."
     },
-    "example": {
+    "mother_says": {
       "type": "string",
       "minLength": 1,
-      "description": "Source example sentence when available."
+      "description": "Learner-facing Vietnamese meaning corresponding to the verified atom."
+    },
+    "patterns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Verified usage patterns, such as syntactic or lexical patterns genuinely associated with the atom."
+    },
+    "usage_note": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Verified usage restriction, register, nuance, contrast, or other important usage note."
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "One or more source or explicitly marked enriched example sentences supporting the atom."
     },
     "candidate_ref": {
       "type": "string",
