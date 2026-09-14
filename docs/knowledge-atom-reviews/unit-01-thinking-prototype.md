@@ -7,6 +7,7 @@ This is a small source-order prototype. It is not a bulk promotion and does not 
 ## Representation decisions validated by this prototype
 
 - **One lexical sense = one atom.** If the source explicitly documents two senses, create two independent atoms so a reviewer can approve, reject, or hold them separately.
+- **Use the source's own definition whenever one is provided.** Do not rewrite or paraphrase a source-provided definition as the atom's primary sense description. Preserve the source wording and provenance. Add a translated meaning or an inferred interpretation only as a separate, explicitly labelled field when needed.
 - **Source examples belong to the relevant sense atom.** Prefer the book's own example sentence over an invented example during extraction.
 - **Evidence is first-class.** Every proposal records where the claim comes from, what source text supports it, and whether the claim is source-stated or inferred.
 - **Cross-reference resolution is done by directly reading the relevant source sections.** No intermediate reference parser is required for this prototype.
@@ -217,6 +218,160 @@ Source evidence:
 - context_status: no independent Unit 01 sentence context in the topic-vocabulary table
 - review_status: APPROVED
 
+## Next source-order batch
+
+The next ten lexical entries are `dilemma`, `discriminate` (two senses), `dubious` (two senses), `estimate` (three senses), `faith`, and `gather`. The Topic Vocabulary Database provides source definitions and examples for all of them, so the primary meaning field below preserves the source definition verbatim rather than paraphrasing it.
+
+### KA-U01-014 — dilemma
+- atom_type: word
+- canonical_form: dilemma
+- part_of_speech: noun
+- definition: `a situation in which you have to make a difficult decision`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `dilemma (n) a situation in which you have to make a difficult decision: I'm in a dilemma over whether to tell him or not.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `I'm in a dilemma over whether to tell him or not.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-015 — discriminate — sense 1
+- atom_type: word
+- canonical_form: discriminate
+- part_of_speech: verb
+- definition: `to treat someone unfairly because of their religion, race or other personal features`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `discriminate (v) to treat someone unfairly because of their religion, race or other personal features: Employers are not allowed to discriminate on the basis of gender.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `Employers are not allowed to discriminate on the basis of gender.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-016 — discriminate — sense 2
+- atom_type: word
+- canonical_form: discriminate
+- part_of_speech: verb
+- definition: `to recognise the difference between things`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `discriminate (v) to recognise the difference between things: Long-range missile attacks simply cannot discriminate between military and civilian targets.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `Long-range missile attacks simply cannot discriminate between military and civilian targets.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-017 — dubious — sense 1
+- atom_type: word
+- canonical_form: dubious
+- part_of_speech: adjective
+- definition: `not completely good, safe or honest`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `dubious (adj) not completely good, safe or honest: The story seemed a bit dubious to me.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `The story seemed a bit dubious to me.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-018 — dubious — sense 2
+- atom_type: word
+- canonical_form: dubious
+- part_of_speech: adjective
+- definition: `not sure about the truth or quality of something, or whether you should do something`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `dubious (adj) not sure about the truth or quality of something, or whether you should do something: I'm very dubious about his ability to do the job.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `I'm very dubious about his ability to do the job.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-019 — estimate — sense 1
+- atom_type: word
+- canonical_form: estimate
+- part_of_speech: noun
+- definition: `an amount that you guess or calculate using the information available`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `estimate (n) an amount that you guess or calculate using the information available: According to official estimates, over 25% of carbon emissions come from the United States.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `According to official estimates, over 25% of carbon emissions come from the United States.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-020 — estimate — sense 2
+- atom_type: word
+- canonical_form: estimate
+- part_of_speech: noun
+- definition: `a statement telling a customer how much money you will charge if they employ you to do a particular piece of work`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `estimate (n) a statement telling a customer how much money you will charge if they employ you to do a particular piece of work: The committee are currently getting estimates for repairs to the stonework.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `The committee are currently getting estimates for repairs to the stonework.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-021 — estimate — sense 3
+- atom_type: word
+- canonical_form: estimate
+- part_of_speech: verb
+- definition: `to say what you think an amount or value will be, either by guessing or by using available information to calculate it`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `estimate (v) to say what you think an amount or value will be, either by guessing or by using available information to calculate it: It's difficult to estimate the cost of making your house safe.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `It's difficult to estimate the cost of making your house safe.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-022 — faith
+- atom_type: word
+- canonical_form: faith
+- part_of_speech: noun
+- definition: `strong belief in or trust of someone or something`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `faith (n) strong belief in or trust of someone or something: I'm delighted to know you have such faith in me.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `I'm delighted to know you have such faith in me.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
+### KA-U01-023 — gather
+- atom_type: word
+- canonical_form: gather
+- part_of_speech: verb
+- definition: `to believe that something is true, although no one has directly told you about it`
+- source_status: source-stated
+- source_location: Unit 01 Topic Vocabulary: Thinking; Topic Vocabulary Database, p.224
+- evidence:
+  - source_text: `gather (v) to believe that something is true, although no one has directly told you about it: You're new here, I gather.`
+  - evidence_type: definition_and_source_example
+  - claim_status: source-stated
+- source_example: `You're new here, I gather.`
+- context_status: no independent Unit 01 sentence context in the topic-vocabulary table
+- review_status: PENDING
+
 ## What this prototype demonstrates
 
 1. A single spelling can produce multiple independent atoms when the source documents distinct senses.
@@ -224,9 +379,10 @@ Source evidence:
 3. When the source provides an example sentence, preserve it with the specific sense atom it supports.
 4. Evidence is not just a source location: preserve the relevant source text/definition/example so a reviewer can verify the proposal without reconstructing the reasoning from scratch.
 5. POS is taken from explicit source evidence; it is not inferred when already stated.
-6. Meaning summaries are derived from source evidence; they are not invented from a word list alone.
-7. Absence of sentence-level context in the Unit 01 topic-vocabulary table is recorded rather than filled by guesswork.
-8. These proposals remain pending until human review.
+6. When a source provides a definition, preserve the source definition verbatim rather than rewriting it as a model-generated sense summary.
+7. Meaning summaries or translations may be added separately when useful, but they must not silently replace source wording.
+8. Absence of sentence-level context in the Unit 01 topic-vocabulary table is recorded rather than filled by guesswork.
+9. These proposals remain pending until human review.
 
 ## Next expansion gate
 
