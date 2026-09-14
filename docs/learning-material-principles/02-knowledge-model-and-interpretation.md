@@ -39,6 +39,51 @@ Use explicit typed relationships only when they provide real learning, assessmen
 
 Learner mastery belongs to learner-state data, not to the static atom.
 
+## Candidate Knowledge Atom Representation
+
+Candidate knowledge is the reviewable intermediate representation between source-grounded analysis and official promoted knowledge.
+
+The candidate contract is defined separately in:
+
+```text
+schemas/knowledge-atom-candidate.schema.json
+```
+
+The candidate must preserve **all candidate fields even when some values are not yet established**. A missing value is represented as blank, `null`, or an empty array according to the field type. Fields must not be removed merely because no reliable value is currently available.
+
+The candidate contract includes:
+
+```text
+atom_type
+canonical_form
+part_of_speech
+sense
+definition
+mother_says
+patterns
+usage_note
+source_status
+source_location
+evidence
+source_example
+context_status
+review_status
+```
+
+`mother_says`, `patterns`, and `usage_note` are therefore part of the candidate proposal and must be visible during human review. They are not fields that should first be invented during officialization.
+
+### Candidate interpretation rules
+
+- `definition` preserves a source-provided definition verbatim when available; do not paraphrase it merely to make the candidate look complete.
+- `mother_says` is the learner-facing Vietnamese meaning of the proposed sense. If explanatory wording is needed beyond the concise equivalent, put it in parentheses immediately after the equivalent(s). Never guess it merely because the field exists.
+- `patterns` records genuine usage patterns that are verified or strongly supported by source context. It must not contain synonyms, translations, arbitrary word combinations, or patterns invented only to populate the field. If no reliable pattern is established, keep `[]`.
+- `usage_note` records verified or strongly context-supported usage restrictions, register, nuance, contrasts, or other important usage information. If none is established, keep it blank/null.
+- `patterns` and `usage_note` should be proposed before human review whenever the evidence supports them, so the reviewer can approve, reject, or hold the interpretation explicitly.
+- Officialization must **not silently add new interpretations** to an approved candidate. Promotion should primarily copy the approved candidate into the official representation, while applying only the explicit official-schema transformation and enrichment rules.
+- If a pattern or usage note is not sufficiently supported at candidacy time, it remains unresolved rather than being automatically inferred during promotion.
+
+This makes candidacy a complete reviewable proposal rather than a minimal placeholder whose meaning changes during promotion.
+
 ## Official Knowledge Atom Representation
 
 Official knowledge is the canonical promoted layer consumed downstream by competency, diagnostic, challenge, and adaptive-learning systems.
