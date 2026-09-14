@@ -130,7 +130,7 @@ take responsibility
 take something for granted
 ```
 
-Learner mastery belongs to learner-state data, not to the static atom. One atom must not inherit mastery merely because it is related to another.
+Learner mastery belongs to learner-state data, not to the static atom. One atom must not inherit mastery merely because it is related.
 
 Stable identity and provenance are mandatory concepts.
 
@@ -196,7 +196,49 @@ Examples of questions that may require reasoning rather than pattern matching:
 
 For example, `look up` may support different independently useful senses/patterns, while `spill the beans` requires distinguishing idiomatic from literal use. A parser can surface these strings, but cannot by itself establish the correct atomization.
 
-### 7.2 Grammar knowledge requires interpretation too
+### 7.2 Context-grounded inference and missing evidence
+
+The reasoning layer may infer attributes such as **part of speech, intended sense, usage, or meaning** from sufficiently informative source context. This is allowed even when the source does not state the attribute explicitly.
+
+However, inferred attributes must remain distinguishable from directly source-stated attributes and must carry appropriate confidence/provenance. Context is evidence for interpretation; it is not permission to invent unsupported facts.
+
+Use the following rule:
+
+> **If context provides sufficient evidence, infer the attribute and record the inference. If context does not provide sufficient evidence, leave the field null/pending rather than guessing.**
+
+Examples:
+
+```text
+estimate (v, n)
+        ↓
+verb atom + noun atom
+```
+
+The POS is directly source-supported, so it may be populated immediately.
+
+If a sentence such as `The estimate was much higher than expected` clearly licenses the noun reading, the noun sense may be inferred from context. If the available source merely says `query (v, n)` with no informative context, the atom may retain POS while leaving meaning/sense unspecified.
+
+A field being present in the schema is never a reason to fill it.
+
+Inference should follow this evidence hierarchy where applicable:
+
+```text
+explicit source statement
+        ↓
+strong contextual inference
+        ↓
+weak / ambiguous inference → leave null or review-needed
+```
+
+Context-derived inference must never silently become source-verified fact.
+
+### 7.3 Source-grounded meanings
+
+Context may help identify **which documented sense is intended**, but a sentence alone must not be treated as authority for inventing a dictionary definition.
+
+When the source context supports a meaning strongly enough to identify the intended sense but does not provide authoritative definitional wording, store the interpretation as an inferred/pending meaning and preserve the supporting evidence. Later enrichment may verify or refine it from an appropriate lexical source.
+
+### 7.4 Grammar knowledge requires interpretation too
 
 Grammar requires the same evidence-to-knowledge distinction, with reasoning over form, meaning, function, constraints, discourse context, and contrasts where relevant.
 
@@ -493,98 +535,81 @@ multiple evidence spans → 1 atom
 1 evidence span → no atom / review-needed
 ```
 
-Source presentation structure and knowledge structure are not identical.
+Source presentation structure and atom structure must remain independent.
 
 ---
 
 ## 27. Quality gates and fail-closed behavior
 
-Every material stage should have explicit validation criteria.
+Every transformation stage must have explicit quality gates.
 
-At minimum validate structural boundaries, provenance, schema validity, atom type, source-span integrity, interpretation confidence/status, question answer uniqueness, question ↔ knowledge linkage, and copyright/source-use constraints.
+When a quality gate fails, do not silently continue with potentially corrupted or ambiguous data.
 
-When a required gate fails:
+Prefer:
 
-> **Fail closed. Do not silently promote questionable output.**
+```text
+PASS → continue
+WARN → continue only when the warning is explicitly acceptable
+FAIL → stop / preserve evidence / require review
+```
 
-Warnings may be retained for review, but warnings must not be mislabeled as validated knowledge.
-
----
-
-## 28. Copyright and source-use boundaries
-
-Use source material as evidence according to applicable rights and licenses.
-
-For copyrighted books and restricted sources:
-
-- preserve provenance and acquisition metadata;
-- do not redistribute the full source text without permission;
-- prefer structured metadata, source locations, verified mappings, and original generated follow-up material where appropriate;
-- keep source-derived content distinguishable from generated content.
+Quality gates should cover structural validity, provenance, semantic plausibility, answer uniqueness, schema validity, duplication, unsupported inference, and source/license constraints as appropriate.
 
 ---
 
-## 29. Pipeline and data-governance rules
+## 28. Copyright and source boundaries
 
-### 29.1 Evidence first
+Use copyrighted books as source material within applicable rights and project permissions.
 
-Preserve source evidence before interpretation.
+Preserve provenance, canonical source references, extraction metadata, and checksums where appropriate, but do not redistribute copyrighted source text wholesale unless permitted.
 
-### 29.2 Raw layers are immutable
-
-Downstream normalization must never overwrite the raw evidence layer.
-
-### 29.3 Provenance follows every transformation
-
-A derived record must remain traceable to its supporting evidence.
-
-### 29.4 Idempotence
-
-Rerunning an extraction or discovery process against the same source and version should produce the same result unless the code/version explicitly changes the transformation.
-
-### 29.5 No silent repair
-
-If an extraction artifact is ambiguous, preserve it and flag it rather than silently inventing the intended source text.
-
-### 29.6 Separate evidence, interpretation, enrichment, and learner state
-
-Do not store learner mastery, adaptive urgency, or inferred metadata as if they were properties of the original source.
+Generated summaries, metadata, mappings, and original follow-up questions should not be treated as a substitute for source provenance.
 
 ---
 
-## 30. What this file does not control
+## 29. Pipeline governance
 
-This document does not define learner mastery state, review scheduling algorithms, exact adaptive thresholds, implementation-specific parser code, UI design, infrastructure details, or source-specific acquisition instructions that do not alter learning-material rules.
+Evidence should be preserved before interpretation.
 
-Those may evolve independently as long as they do not contradict this canonical rulebook.
+Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting the raw evidence layer.
 
----
+Transformations should be reproducible and idempotent where practical. Do not silently repair source evidence; record repairs or downstream normalization explicitly.
 
-## 31. Non-negotiable rules
+Keep at least these concerns separable:
 
-1. **Build a knowledge system, not a vocabulary list.**
-2. **Destination C1 & C2 is the initial knowledge backbone.**
-3. **Challenge first when prior knowledge is plausible.**
-4. **Extract the whole taught knowledge universe, not only exercised words.**
-5. **Keep raw evidence separate from normalization, interpretation, and learning design.**
-6. **Parser output is evidence discovery, not canonical knowledge.**
-7. **Lexical and grammatical atomization requires linguistic/semantic reasoning.**
-8. **Preserve provenance.**
-9. **Accuracy beats completeness.**
-10. **Never invent unsupported definitions, meanings, pronunciation, examples, patterns, CEFR, or provenance.**
-11. **Preserve meaningful distinctions.**
-12. **Knowledge atoms are flat independent units by default.**
-13. **Do not assign intrinsic vocabulary priority.**
-14. **PTNK papers are calibration/validation evidence, not the primary curriculum.**
-15. **Destination exercises are canonical seed questions.**
-16. **Link questions to the knowledge they actually test.**
-17. **Generated material must add instructional value.**
-18. **Grammar questions require demonstrated answer uniqueness.**
-19. **Answer keys do not override demonstrated ambiguity.**
-20. **Fail closed when evidence or validation is insufficient.**
+```text
+source evidence
+interpretation
+validation
+enrichment
+learning design
+learner state
+```
+
+This separation allows the project to improve its reasoning and adaptive strategy without repeatedly downloading or re-extracting the source.
 
 ---
 
-## Maintenance rule
+## 30. Non-negotiable rules
 
-If a later document introduces a rule about learning-material construction, knowledge representation, source interpretation, question validity, or directly supporting data governance, reconcile it with this document rather than creating a competing rulebook.
+1. Build a knowledge system, not a vocabulary list.
+2. Destination C1 & C2 is the initial knowledge backbone.
+3. Challenge first when prior knowledge is plausible.
+4. Extract the whole taught knowledge universe, not only exercise words.
+5. Separate raw evidence from normalization, interpretation, and learning design.
+6. A parser discovers evidence; it does not author canonical knowledge.
+7. Lexical and grammatical atomization requires linguistic/semantic reasoning.
+8. Context may support inference of attributes such as POS, sense, usage, or meaning, but inferred values must remain distinguishable from source-stated facts.
+9. If evidence is insufficient, leave the field null/pending; never guess merely to fill the schema.
+10. Preserve provenance for every source-derived atom and question.
+11. Prefer accuracy over completeness.
+12. Preserve useful distinctions; do not flatten independently learnable knowledge.
+13. Knowledge atoms are flat and independent; relationships are not ancestry or inherited mastery.
+14. Do not assign intrinsic vocabulary priority.
+15. PTNK papers calibrate and validate the model; they are not the primary curriculum.
+16. Destination exercises are canonical seed questions.
+17. Link questions to the knowledge they actually test.
+18. Generated material must add instructional value.
+19. Grammar questions must have a uniquely defensible answer.
+20. Answer keys do not override demonstrated ambiguity.
+21. Fail closed when structural, provenance, semantic, or validation gates fail.
