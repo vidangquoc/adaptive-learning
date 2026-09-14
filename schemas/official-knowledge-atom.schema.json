@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vidangquoc/PTNK/blob/main/schemas/official-knowledge-atom.schema.json",
+  "title": "PTNK Official Knowledge Atom",
+  "description": "Canonical schema for promoted official knowledge. Official atoms contain only downstream learning knowledge plus one provenance pointer back to the reviewed candidate.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "atom_type",
+    "canonical_form",
+    "candidate_ref"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._/-]*$",
+      "description": "Positional identifier in the official knowledge base. It identifies the atom's position and must not encode the lexical item or sense."
+    },
+    "atom_type": {
+      "type": "string",
+      "enum": [
+        "word",
+        "multiword_expression",
+        "idiom",
+        "phrasal_verb",
+        "collocation",
+        "fixed_expression",
+        "grammar_rule",
+        "grammar_pattern",
+        "lexical_contrast",
+        "word_formation",
+        "usage_restriction",
+        "meaning_distinction",
+        "example_or_context",
+        "unknown"
+      ]
+    },
+    "canonical_form": {
+      "type": "string",
+      "minLength": 1
+    },
+    "part_of_speech": {
+      "type": "string",
+      "minLength": 1
+    },
+    "definition": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Source-provided definition preserved verbatim. Do not paraphrase a definition that already exists in the source."
+    },
+    "example": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Source example sentence when available."
+    },
+    "candidate_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Pointer to the reviewed candidate record from which this official atom was promoted."
+    }
+  }
+}
