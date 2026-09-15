@@ -102,7 +102,55 @@ Knowledge atoms are **flat and independently diagnosable**. One lexical sense is
 
 Do not create mandatory parent/child ancestry trees. Relationships are explicit typed links. Learner mastery belongs in learner-state data, not static knowledge.
 
-## 7. Evidence and provenance rules
+## 7. Data-layer boundary
+
+The repository has two explicit data boundaries:
+
+- `data/knowledge/` — what there is to learn and the evidence supporting it.
+- `data/learner/` — what a learner has done, knows, needs to review, and how their learning state changes over time.
+
+Recommended structure:
+
+```text
+data/
+├── knowledge/
+│   ├── sources/
+│   │   ├── books/
+│   │   │   └── <book>/
+│   │   │       ├── book.yaml
+│   │   │       └── chapters/
+│   │   │           ├── ch01.txt
+│   │   │           └── ch02.txt
+│   │   └── ...
+│   ├── atoms/
+│   │   ├── grammar/
+│   │   └── lexicon/
+│   ├── relations/
+│   └── assessments/
+└── learner/
+    ├── profile.yaml
+    ├── state/
+    │   ├── atom-state.yaml
+    │   └── competency-state.yaml
+    ├── attempts/
+    ├── sessions/
+    └── review-queue.yaml
+```
+
+A knowledge atom must not contain a learner's mastery state. Learner state references atom IDs rather than duplicating the knowledge definition. Assessment items live in the knowledge layer because they describe what can be used to assess knowledge; actual responses and outcomes live in the learner layer.
+
+The conceptual boundary is:
+
+```text
+data/knowledge/ = What is there to learn?
+
+data/learner/   = What does this learner know,
+                  how well do they know it,
+                  what have they attempted,
+                  and what should they review next?
+```
+
+## 8. Evidence and provenance rules
 
 - Evidence > intuition.
 - Accuracy > completeness.
@@ -112,7 +160,7 @@ Do not create mandatory parent/child ancestry trees. Relationships are explicit 
 - Generated practice/challenges are not evidence that an item is required.
 - Structural extraction and provenance validation should fail closed on errors.
 
-## 8. PTNK inheritance boundary
+## 9. PTNK inheritance boundary
 
 PTNK-specific artifacts may retain PTNK naming because they represent historical/domain-specific evidence. Examples include:
 
@@ -125,7 +173,7 @@ These names should **not** be renamed merely for cosmetic consistency. They desc
 
 Project-level documentation, however, must identify the repository as **Adaptive Learning** and describe PTNK as its predecessor/domain source.
 
-## 9. Learning state
+## 10. Learning state
 
 Learning state is separate from static knowledge.
 
@@ -148,7 +196,57 @@ UNSEEN → KNOWN → RECALLABLE → USABLE → MASTERED → MAINTENANCE
 
 These are working concepts/heuristics, not immutable constants.
 
-## 10. Current implementation direction
+## 11. Book-to-learning workflow
+
+When a learner supplies a book and asks to study a chapter, the intended workflow is:
+
+```text
+Book / Chapter
+      ↓
+Extract grammar + lexicon atoms
+      ↓
+Preserve source provenance
+      ↓
+Identify exercises / assessment opportunities
+      ↓
+Map questions to atoms and dimensions
+      ↓
+Diagnostic / challenge
+      ↓
+Learner response
+      ↓
+Attempt history
+      ↓
+Update learner state
+      ↓
+Review queue
+      ↓
+Adaptive next question
+      ↺
+```
+
+One exercise may test multiple atoms, and one atom may be tested by multiple questions. Do not assume a one-to-one relationship between exercises and atoms.
+
+## 12. Review session model
+
+A review session is a sequence of adaptive decisions, not merely a pre-generated list of questions:
+
+```text
+Question
+   ↓
+Learner response
+   ↓
+Attempt / evidence
+   ↓
+State update
+   ↓
+Select next question
+   ↺
+```
+
+The selector should balance weak/uncertain items, retention review, important or prerequisite items, and new/exploratory coverage. Begin with deterministic rules and keep the policy adjustable.
+
+## 13. Current implementation direction
 
 The next major implementation phase is to make the adaptive loop executable:
 
@@ -163,7 +261,7 @@ The next major implementation phase is to make the adaptive loop executable:
 
 Do not revert to a vocabulary-only workflow.
 
-## 11. Recovery protocol
+## 14. Recovery protocol
 
 When recovering context:
 
@@ -175,7 +273,7 @@ When recovering context:
 6. Inspect current Git state and current data before changing anything.
 7. Treat this repository as authoritative over stale conversation memory.
 
-## 12. Maintenance rule
+## 15. Maintenance rule
 
 When a major architectural, ontology, data-layer, or governance decision is settled, update the canonical project documentation and recovery prompts.
 
