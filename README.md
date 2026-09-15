@@ -1,27 +1,61 @@
-# PTNK Advanced English
+# Adaptive Learning
 
-Dataset and study system for preparing for the English specialized entrance exam at Trường Phổ thông Năng khiếu (ĐHQG-HCM).
+Evidence-based adaptive learning system for building knowledge, diagnosing learner state, selecting the next-best learning activity, and validating transfer.
 
-## Structure
+## Project origin
 
-- `data/` — curated lexical datasets
-  - `vocabulary/` — advanced general vocabulary
-  - `idioms/` — idioms and fixed expressions
-  - `phrasal_verbs/` — phrasal verbs
-  - `collocations/` — high-value collocations
-  - `word_formation/` — word families and transformations
-- `sources/` — source material and provenance by exam year
-- `analysis/` — CEFR, frequency, and exam-pattern analysis
-- `flashcards/` — study-ready exports
-- `docs/` — methodology and vocabulary profile
+**PTNK** was the predecessor project from which this repository was split. PTNK work remains an important domain-specific evidence source and validation target, but **Adaptive Learning is the broader project and the canonical repository identity**.
 
-## Priority model
+The system is not merely a vocabulary collection or a PTNK paper-analysis project. Vocabulary, grammar, challenges, assessments, learner state, and review logic are components of a larger adaptive learning system.
 
-- P1: PTNK Core — high-value advanced general English and recurring exam patterns
-- P2: Academic/general reading vocabulary
-- P3: Topic-specific reading vocabulary
-- P4: Rare/specialized vocabulary mainly handled through context and inference
+## Core architecture
 
-## Data principle
+```text
+Goal
+  ↓
+Competency model
+  ↓
+Knowledge sources
+  ↓
+Diagnostic / Challenge
+  ↓
+Learner state
+  ↓
+Learning frontier
+  ↓
+Next-best activity
+  ↓
+Assessment
+  ↓
+Updated learner state
+  ↺
+```
 
-Every lexical item should preserve provenance: source, exam year, section, question type, and confidence/verification status where available.
+## Current backbone
+
+- **Destination C1 & C2** — initial knowledge and competency backbone.
+- **Challenge-first learning** — challenge before routine instruction when prior knowledge is plausible.
+- **PTNK** — an important calibration/validation domain, not the identity of the whole system.
+- Additional books/sources — targeted expansion layers, not mandatory parallel curricula.
+
+## Repository structure
+
+- `data/` — curated knowledge and evidence datasets
+- `sources/` — source material and provenance
+- `analysis/` — evidence and research analysis
+- `flashcards/` — learner-facing exports and experiments
+- `schemas/` — machine-readable data contracts
+- `scripts/` — extraction, validation, and transformation tooling
+- `docs/` — methodology, architecture, rules, and recovery documentation
+
+## Data principles
+
+- Evidence over intuition.
+- Accuracy over completeness.
+- Preserve provenance and uncertainty.
+- Never fabricate definitions, pronunciation, examples, relationships, CEFR, or source evidence.
+- Static knowledge and learner state are separate layers.
+- Knowledge atoms are flat and independently diagnosable.
+- Human review remains the promotion gate where required.
+
+PTNK-specific files and paths retain their `ptnk-*` naming because they represent PTNK evidence, not because PTNK is the repository's project identity.
