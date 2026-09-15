@@ -1,67 +1,122 @@
-# Context Recovery Verification
+# Kiểm tra Context Recovery
 
-## Purpose
+## Mục đích
 
-This file defines a small verification checklist to determine whether the required context has been recovered correctly before continuing work.
+File này chứa các **câu hỏi kiểm tra bằng tiếng Việt** để người dùng hỏi AI sau khi AI đã khôi phục context.
 
-Verification is a **test of recovered context**, not a replacement for reading the authoritative sources.
+Nó không phải là hướng dẫn để AI tự động thực thi trong quá trình recovery.
 
-## Recovery Input
+Mục đích của các câu hỏi là kiểm tra xem AI có:
 
-Before answering the verification questions, the AI should have read:
+- khôi phục đúng context cần thiết hay chưa;
+- hiểu đúng project hay chưa;
+- phân biệt đúng các domain dữ liệu hay chưa;
+- dựa vào nguồn authoritative thay vì suy đoán hay không.
 
-1. `context-recover/context-recover.md` — current conversation context.
-2. `context-recover/context-recover-principles.md` — recovery rules.
-3. `context-recover/project-knowledge.md` — stable project, learning-material, and learner-data knowledge.
-4. Any authoritative `docs/`, data, sources, or implementation files required to verify the answers.
+## Cách sử dụng
 
-## Verification Questions
+Sau khi AI đã thực hiện context recovery, người dùng có thể đặt các câu hỏi dưới đây cho AI.
 
-### 1. Project Understanding
+Không yêu cầu AI phải đọc file này như một bước bắt buộc của recovery. Đây là **bộ câu hỏi kiểm tra**, không phải recovery procedure.
 
-**Question:**
+## Các câu hỏi kiểm tra
 
-> Give a brief preliminary summary of the Adaptive Learning project. What is the project trying to accomplish, what are its main conceptual components, and how do those components relate to one another?
+### 1. Kiểm tra hiểu biết về project
 
-**Verification goal:**
+**Câu hỏi:**
 
-The answer should demonstrate a coherent high-level understanding of the project without relying on unsupported assumptions or confusing historical/domain-specific material with the project as a whole.
+> Hãy tóm tắt ngắn gọn project Adaptive Learning. Project đang cố gắng giải quyết vấn đề gì? Các thành phần khái niệm chính của hệ thống là gì và chúng liên hệ với nhau như thế nào?
 
----
+**Mục đích kiểm tra:**
 
-### 2. Knowledge-Atom Understanding
-
-**Question:**
-
-> Summarize the knowledge-atom inventory currently available in the repository. Report the number of knowledge atoms and break them down by the relevant atom categories/types. Identify the authoritative data locations used to obtain these counts.
-
-**Verification goal:**
-
-The answer should be based on the current repository data, not on remembered numbers from previous conversations. The AI should be able to distinguish knowledge data from source material, generated assessments, and learner state.
-
-If the repository does not contain enough information to produce an exact count, the AI must explicitly say so rather than estimate or invent one.
+Câu trả lời phải thể hiện được hiểu biết nhất quán về project, không nhầm lẫn project với một domain hoặc một nguồn dữ liệu cụ thể, đồng thời không dựa trên những giả định không có căn cứ.
 
 ---
 
-### 3. Learner-Data Understanding
+### 2. Kiểm tra hiểu biết về learning-material / knowledge data
 
-**Question:**
+**Câu hỏi:**
 
-> Give a concise summary of the learner data currently stored in the repository. What learner information exists, what learning activity/history is recorded, what learner-state information is maintained, and how does it relate to the knowledge atoms?
+> Hãy mô tả dữ liệu knowledge hiện đang có trong repository. Knowledge được tổ chức như thế nào? Hiện có những loại knowledge atom nào? Nếu cần đưa ra số lượng cụ thể, hãy lấy số liệu trực tiếp từ dữ liệu authoritative trong repository và cho biết nguồn đã sử dụng.
 
-**Verification goal:**
+**Mục đích kiểm tra:**
 
-The answer should demonstrate that the AI understands learner data as a separate domain from static knowledge. It should identify the relevant authoritative data locations and distinguish current learner state from historical attempts or sessions.
+Câu trả lời phải dựa trên dữ liệu hiện tại của repository, không sử dụng các con số được nhớ từ những cuộc hội thoại trước.
 
-## Verification Rules
+AI phải phân biệt được:
 
-1. **Use repository evidence.** Answers must be grounded in the current repository.
-2. **Do not use remembered values.** Previous conversation context may guide recovery but must not substitute for verification.
-3. **Do not invent missing data.** Unknown, unavailable, or ambiguous information must be reported as such.
-4. **Distinguish domains.** Project knowledge, learning-material knowledge, and learner data must not be conflated.
-5. **Prefer exact counts from data.** Statistics must be derived from the current authoritative data sources whenever possible.
-6. **Verify before continuing.** If one or more answers reveal that context has not been recovered correctly, return to the relevant authoritative sources before continuing the task.
+- source / evidence;
+- curated knowledge;
+- knowledge atoms;
+- relations;
+- assessments;
+- learner data.
 
-## Pass Condition
+Nếu repository không đủ thông tin để xác định chính xác một số liệu, AI phải nói rõ điều đó thay vì ước lượng hoặc tự tạo số liệu.
 
-Context recovery passes when the AI can answer all three questions coherently, with repository-grounded evidence, without unsupported assumptions, and with the three context domains correctly separated.
+---
+
+### 3. Kiểm tra hiểu biết về learner data
+
+**Câu hỏi:**
+
+> Hãy mô tả ngắn gọn learner data hiện đang được lưu trong repository. Có những loại thông tin nào về learner? Learning activity hoặc history nào được ghi nhận? Learner state được duy trì như thế nào? Learner state liên hệ với knowledge atoms ra sao?
+
+**Mục đích kiểm tra:**
+
+Câu trả lời phải thể hiện rằng AI hiểu learner data là một domain riêng biệt với static knowledge.
+
+AI phải phân biệt được:
+
+- learner profile;
+- historical attempts;
+- sessions / learning activity;
+- current learner state;
+- review queue.
+
+Khi cần giải thích learner state, AI phải có thể liên hệ state với knowledge-atom IDs tương ứng.
+
+---
+
+### 4. Kiểm tra khả năng phân biệt các domain
+
+**Câu hỏi:**
+
+> Hãy phân biệt rõ bốn loại context sau trong Adaptive Learning:
+>
+> 1. project knowledge;
+> 2. learning-material / knowledge data;
+> 3. learner / user learning data;
+> 4. current conversation context.
+>
+> Với mỗi loại, hãy cho biết nó trả lời câu hỏi gì và nguồn nào là authoritative đối với nó.
+
+**Mục đích kiểm tra:**
+
+AI không được trộn lẫn kiến thức về project, dữ liệu về thứ cần học, dữ liệu về learner và context của cuộc hội thoại hiện tại.
+
+---
+
+### 5. Kiểm tra nguồn của thông tin
+
+**Câu hỏi:**
+
+> Với những thông tin quan trọng trong các câu trả lời trên, hãy cho biết AI đã dựa vào những file hoặc nguồn authoritative nào trong repository để khôi phục chúng. Phân biệt thông tin được đọc trực tiếp từ repository với thông tin chỉ được suy luận hoặc chưa xác định được.
+
+**Mục đích kiểm tra:**
+
+Kiểm tra khả năng truy nguyên nguồn và phát hiện những phần context mà AI đang giả định thay vì thực sự xác minh.
+
+## Nguyên tắc đánh giá
+
+1. **Dựa trên repository hiện tại.** Các câu trả lời phải phản ánh trạng thái hiện tại của repository khi câu hỏi yêu cầu thông tin hiện tại.
+2. **Không dùng trí nhớ thay cho dữ liệu.** Context từ cuộc hội thoại trước có thể giúp định hướng recovery nhưng không thay thế authoritative source.
+3. **Không bịa dữ liệu.** Nếu không xác định được thông tin, AI phải nói rõ là chưa xác định được.
+4. **Không nhầm domain.** Project knowledge, learning-material / knowledge data, learner data và conversation context phải được phân biệt rõ.
+5. **Số liệu phải có nguồn.** Những con số hoặc inventory cụ thể phải được lấy từ nguồn dữ liệu authoritative khi có thể.
+6. **Phân biệt fact và inference.** AI phải phân biệt thông tin đã xác minh với thông tin suy luận.
+7. **Phát hiện thiếu context.** Nếu câu trả lời cho thấy một phần context chưa được recover đầy đủ, cần quay lại recovery procedure và đọc thêm authoritative sources trước khi tiếp tục công việc.
+
+## Điều kiện đạt
+
+Context recovery được xem là đạt khi AI có thể trả lời các câu hỏi một cách nhất quán, dựa trên evidence phù hợp, không đưa ra các giả định không có căn cứ, và giữ đúng ranh giới giữa các domain.
