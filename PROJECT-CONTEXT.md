@@ -1,141 +1,84 @@
-# PTNK Project Context & Recovery Guide
+# Adaptive Learning — Project Context
 
-> Canonical high-level context for continuing the project.
+> Canonical high-level context for continuing the project. The repository is the source of truth; inspect current files before relying on remembered conversation details.
 
 ## 1. Project identity
 
-This is **not merely a vocabulary collection project**.
+The canonical project is **Adaptive Learning** (`vidangquoc/adaptive-learning`).
 
-Working concept:
+**PTNK was the predecessor project from which Adaptive Learning was split.** PTNK remains an important domain-specific evidence source and validation target, but it is not the identity or scope of the whole repository.
 
-> **PTNK Adaptive Preparation System** — an evidence-based, adaptive learning and strategy system whose objective is to maximize the learner's probability of success in the PTNK specialized English entrance exam, under finite time and school-load constraints.
+This is not merely a vocabulary collection project and not merely a PTNK paper-analysis project. Vocabulary, grammar, knowledge atoms, challenges, assessments, learner state, and review logic are subsystems of a broader adaptive learning system.
 
-Vocabulary/lexical research is one subsystem, not the final product.
+## 2. Core objective
 
-## 2. Core optimization principle
+Build an evidence-based system that maximizes learning value under finite time and other real-world constraints by continuously deciding:
 
-Optimize **learning value**, not hours, pages, word counts, or syllabus completion.
+> **What should the learner do next, and why?**
 
-Core loop:
+Optimize learning value, not hours, pages, word counts, or syllabus completion.
 
-```text
-Goal → competency model → knowledge sources → diagnostic → learning state → learning frontier → next-best activity → assessment → updated learning state → review / extension
-```
-
-The curriculum must never punish mastery with repetition.
-
-If the learner already knows something, skip it.
-If the learner learns quickly, accelerate.
-If one dimension is weak, target that dimension rather than reteaching everything.
-If the target competency is mastered, stop or extend.
-
-## 3. Challenge-first learning principle
-
-The learner should encounter **challenging tasks before routine instruction whenever prior knowledge is plausible**.
-
-The system should use challenge as the primary learner-facing interface and instruction as a response to demonstrated need.
-
-Core loop:
+## 3. Core adaptive loop
 
 ```text
-Destination knowledge base
-        ↓
-   Challenge first
-        ↓
- ┌──────┴────────┐
- ↓               ↓
-Correct       Wrong / uncertain
- ↓               ↓
-Skip / extend   Trace the gap
-                 ↓
-          Learn what is needed
-                 ↓
-               Retest
+Goal
+  ↓
+Competency model
+  ↓
+Knowledge sources
+  ↓
+Diagnostic / Challenge
+  ↓
+Learner state
+  ↓
+Learning frontier
+  ↓
+Next-best activity
+  ↓
+Assessment
+  ↓
+Updated learner state
+  ↺
 ```
 
-Principles:
+The curriculum must not punish mastery with repetition.
 
-- **Test → fail → discover → learn → beat the challenge.**
-- Do not force the learner to read through a textbook in page order when a challenge can reveal what is actually needed.
-- If the learner succeeds reliably, compress or skip instruction and increase difficulty, discrimination, or transfer demand.
-- If the learner fails, trace the failure to the smallest useful knowledge/competency gap and teach that gap rather than restarting the whole chapter.
-- After targeted learning, retest the same competency in a sufficiently different context to verify transfer rather than memorization.
-- Challenge difficulty should be high enough to expose gaps, but not so high that failure becomes uninformative noise.
+- If the learner already knows something, skip or compress it.
+- If the learner learns quickly, accelerate.
+- If one dimension is weak, target that dimension.
+- If the competency is mastered, stop, maintain, or extend.
 
-**Destination C1 & C2 is therefore primarily a backend knowledge base and competency source, not a mandatory textbook sequence. Challenges are the frontend learning experience.**
+## 4. Challenge-first principle
 
-This principle does not eliminate deliberate instruction. It changes its trigger: instruction should be **evidence-driven**, not page-driven.
-
-## 4. Curriculum backbone: Destination C1 & C2
-
-**Destination C1 & C2 is the initial curriculum backbone.** It is the primary map from which the first competency/knowledge universe is constructed.
-
-The system should first establish broad, durable mastery of the relevant competencies represented by Destination before systematically expanding into additional books.
-
-Important: "master Destination" does **not** mean completing every page or exercise. It means demonstrating mastery of the competencies and knowledge items extracted from it.
-
-Expansion principle:
+When prior knowledge is plausible, challenging tasks should normally come before routine instruction.
 
 ```text
-Destination C1 & C2
+Knowledge / competency
         ↓
-Diagnostic
-        ↓
-Learn / skip / target weak dimensions
-        ↓
-Mastery + delayed retention
-        ↓
-Expansion gate
-        ↓
-Open additional sources only where they add meaningful breadth, depth, precision, or transfer
+Challenge
+   ↙         ↘
+correct     wrong / uncertain
+  ↓               ↓
+skip/extend   trace exact gap
+                  ↓
+             targeted learning
+                  ↓
+                retest
 ```
 
-Additional sources are **expansion layers**, not parallel textbooks that must all be completed.
+Instruction is evidence-driven rather than page-driven.
 
-Suggested expansion roles:
+## 5. Curriculum backbone
 
-- English Vocabulary in Use Advanced → vocabulary breadth/depth
-- Advanced Grammar in Use → grammar depth and precision
-- English Collocations in Use Advanced → collocation depth
-- English Idioms in Use Advanced → idiom depth
-- English Phrasal Verbs in Use Advanced → phrasal-verb depth
-- Advanced Language Practice → integrated grammar/vocabulary practice
-- Objective Advanced / Complete Advanced / Ready for Advanced / Expert Advanced → C1 competency and transfer practice
-- C1 Advanced Trainer 2 / Cambridge authentic samples → assessment and transfer validation
+**Destination C1 & C2** is the initial curriculum/knowledge backbone. It is a source of competencies and knowledge, not a mandatory textbook sequence.
 
-A new source should normally be opened because the learner has reached an evidence-based frontier, not merely because the book exists.
+Additional books and sources are expansion layers. Open them when evidence shows a concrete breadth, depth, precision, or transfer benefit.
 
-## 5. Role of PTNK papers
+PTNK papers are primarily **calibration and validation evidence**. They help characterize competency coverage, task formats, difficulty/discrimination, and transfer requirements. They do not define the entire curriculum and past appearance does not make an individual vocabulary item intrinsically important.
 
-PTNK papers are **calibration and validation evidence, not the primary vocabulary curriculum**.
+Current working characterization of PTNK specialized English remains C1-centered, with a C1+ competitive/discrimination zone and a smaller C2 tail. Do not treat the whole exam as C2 without evidence.
 
-Do not build a "PTNK vocabulary list" by treating past appearance as a prerequisite or by ranking words according to past frequency.
-
-Working assumption:
-
-> A C1/C2 item contained in the selected knowledge base is a legitimate candidate for future PTNK assessment, whether or not it appeared in the observed PTNK papers.
-
-PTNK papers are used primarily to study:
-
-- competency coverage;
-- task formats;
-- difficulty/discrimination;
-- how advanced knowledge is operationalized in tasks;
-- transfer requirements.
-
-PTNK evidence may inform learning design and assessment, but **does not determine which individual vocabulary items are intrinsically more important**.
-
-## 6. Current view of PTNK specialized English
-
-Based on research of PTNK specialized English exams from 2022–2026:
-
-- Do **not** assume the whole exam is C2.
-- Best working characterization: **C1-centered, with a C1+ competitive/discrimination zone and a smaller C2 tail**.
-- PTNK tests more than vocabulary: lexical precision, collocations, idioms, phrasal verbs, advanced grammar, cloze, reading inference, word formation, error identification, and sentence transformation.
-- 2024–2026 especially place substantial weight on Language Use and Writing.
-- Therefore preparation must be competency-based, not vocabulary-only.
-
-## 7. Data architecture
+## 6. Knowledge architecture
 
 ```text
 External sources
@@ -155,39 +98,38 @@ REVIEW QUEUE
 NEXT-BEST ACTIVITY
 ```
 
-### Vocabulary
+Knowledge atoms are **flat and independently diagnosable**. One lexical sense is one atom by default. Independently useful grammar uses/constructions/contrasts are separate atoms when supported by source evidence.
 
-The Lexicon contains single words, idioms, phrasal verbs, collocations, fixed expressions, and selected word-formation results.
+Do not create mandatory parent/child ancestry trees. Relationships are explicit typed links. Learner mastery belongs in learner-state data, not static knowledge.
 
-Current learner-facing schema should **not require a vocabulary priority score**. Priority ranking of individual words is intentionally removed.
+## 7. Evidence and provenance rules
 
-Core fields:
+- Evidence > intuition.
+- Accuracy > completeness.
+- Preserve provenance and uncertainty.
+- Never fabricate definitions, pronunciation, examples, patterns, relationships, CEFR, domain, or source evidence.
+- Raw source material is distinct from curated knowledge.
+- Generated practice/challenges are not evidence that an item is required.
+- Structural extraction and provenance validation should fail closed on errors.
 
-```text
-id | word | word_type | pronunciation | meaning_en | meaning_vi | examples | patterns | usage_note | domain | word_formation | source_id | source_type | source_quality | official_status | cefr_status | cefr_source
-```
+## 8. PTNK inheritance boundary
 
-Accuracy > completeness.
-Never fabricate definitions, IPA, examples, patterns, CEFR, domain, or provenance.
+PTNK-specific artifacts may retain PTNK naming because they represent historical/domain-specific evidence. Examples include:
 
-## 8. Learning state
+- `docs/ptnk-2026-pipeline-report.md`
+- `sources/ptnk-2026/`
+- `data/evidence/ptnk-2026-*`
+- PTNK-specific lexical datasets
 
-See `docs/learning-state-specification.md`.
+These names should **not** be renamed merely for cosmetic consistency. They describe the origin or target domain of the data.
 
-Main levels:
+Project-level documentation, however, must identify the repository as **Adaptive Learning** and describe PTNK as its predecessor/domain source.
 
-```text
-item → competency → module → PTNK skill
-```
+## 9. Learning state
 
-Core states:
+Learning state is separate from static knowledge.
 
-```text
-UNSEEN → KNOWN → RECALLABLE → USABLE → MASTERED → MAINTENANCE
-                                             ↘ EXTENDED
-```
-
-Important mastery dimensions:
+Important dimensions include:
 
 - recognition
 - recall
@@ -197,161 +139,44 @@ Important mastery dimensions:
 - transfer
 - retention
 
-A single high score is not enough to declare mastery if a required dimension is weak.
-
-## 9. Adaptive curriculum
-
-Default module lifecycle:
+Working progression:
 
 ```text
-Diagnostic
-→ Core
-→ Usage
-→ Application
-→ Discrimination
-→ Transfer
-→ Mastery Gate
-→ Maintenance / Extension
+UNSEEN → KNOWN → RECALLABLE → USABLE → MASTERED → MAINTENANCE
+                                      ↘ EXTENDED
 ```
 
-A module is a single testable competency, not a chapter or a fixed number of words.
+These are working concepts/heuristics, not immutable constants.
 
-Diagnostic-first rule:
+## 10. Current implementation direction
 
-- ≥90–95% and no critical weak dimension → skip/compress core;
-- 80–89% → targeted practice;
-- 65–79% → developing/remediation;
-- <65% → weak/remediate.
+The next major implementation phase is to make the adaptive loop executable:
 
-These thresholds are starting heuristics, not sacred constants.
+1. concrete learner-state schema;
+2. attempt-history schema;
+3. competency-state schema;
+4. review-queue schema;
+5. deterministic state-update rules;
+6. deterministic review-priority rules;
+7. small end-to-end adaptive pilot;
+8. only then expand knowledge coverage where the pilot demonstrates a need.
 
-## 10. Expansion gate
+Do not revert to a vocabulary-only workflow.
 
-The system should expand beyond Destination when all of the following are sufficiently satisfied:
+## 11. Recovery protocol
 
-1. the relevant Destination backbone competencies are broadly mastered;
-2. delayed retention is stable enough;
-3. important transfer weaknesses have been addressed;
-4. the learner still has meaningful unused capacity/time;
-5. an additional source offers a concrete breadth/depth/precision/transfer benefit.
+When recovering context:
 
-Expansion should be **targeted**, not sequential book completion.
+1. Read `PROJECT-CONTEXT.md`.
+2. Read `PROJECT-STATUS.md`.
+3. Read `docs/learning-state-specification.md`.
+4. Read `docs/knowledge-atom-pipeline.md` and the relevant learning-material principles.
+5. Read the relevant source/data rules.
+6. Inspect current Git state and current data before changing anything.
+7. Treat this repository as authoritative over stale conversation memory.
 
-The default rule is:
+## 12. Maintenance rule
 
-> **Master → expand outward → deepen selectively when evidence shows depth has higher marginal value.**
+When a major architectural, ontology, data-layer, or governance decision is settled, update the canonical project documentation and recovery prompts.
 
-Do not indefinitely deepen a semantic neighborhood merely because the learner is good at it.
-
-## 11. 700-hour framework
-
-The 700 hours are a **ceiling / available learning budget**, not a requirement.
-
-Conceptual allocation:
-
-```text
-CORE       ~300h
-STRONG     ~200h
-STRETCH    ~200h
-TOTAL      ≤700h
-```
-
-Actual time must be generated from learning state.
-
-A module planned for 8h may take 2h if already mastered, or longer if a critical transfer weakness requires it.
-
-Do not force the learner to consume all 700h.
-
-## 12. Strategic priorities
-
-Near-term objective:
-
-> maximize probability of admission to PTNK specialized English while respecting school workload, health, sustainability, and opportunity cost.
-
-The learner has strong demonstrated English ability and unusually good vocabulary learning capacity; therefore the system should aggressively avoid low-value repetition and use excess capacity for depth, discrimination, transfer, and advanced challenge.
-
-Robotics is currently treated as a lower-priority activity during the fixed PTNK preparation window, with the understanding that this is a temporary allocation decision rather than abandonment of the longer-term STEM trajectory. Do not make absolute claims that Robotics has no relevance to future admissions.
-
-## 13. Repository artifacts already established
-
-Important files:
-
-- `docs/data-collection-rules.md`
-- `docs/data-pipeline.md`
-- `docs/lexical-definition-rules.md`
-- `docs/ptnk-2026-pipeline-report.md`
-- `docs/learning-state-specification.md`
-- `sources/ptnk-2026/english-specialized.md`
-- `data/evidence/ptnk-2026-specialized-english.csv`
-- `data/lexicon/ptnk-2026-official-v0.1.csv`
-- `data/lexicon/ptnk-2026-p1.csv`
-- `data/lexicon/ptnk-2026-p2.csv`
-- `data/lexicon/ptnk-2026-p3.csv`
-- `data/lexicon/ptnk-2026-p4.csv`
-- `docs/source-registry.md`
-- `sources/source-registry.csv`
-- `docs/books.md`
-
-The current lexicon is an **end-to-end pilot**, not an exhaustive extraction of every lexical item from every exam.
-
-## 14. Source-library policy
-
-The current book library is considered **sufficient**. Do not continue expanding the bibliography merely to find more C1/C2 books.
-
-The selected books have different roles, but Destination is the backbone. Other books are opened selectively as expansion layers.
-
-Source discovery is therefore effectively frozen unless a genuinely new source demonstrates a clear missing capability that the existing library cannot cover.
-
-Do not scrape or redistribute copyrighted books wholesale. Preserve provenance, acquisition procedure, checksums, extraction notes, and licensing/usage constraints where applicable.
-
-## 15. What to build next
-
-The next implementation step is **not simply adding more vocabulary**.
-
-Priority order:
-
-1. Formalize Destination C1 & C2 as the backbone knowledge/competency source.
-2. Define a challenge-bank schema and original challenge-generation workflow.
-3. Create concrete learning-state CSV schemas.
-4. Create attempt-history structure.
-5. Create competency/module definitions.
-6. Create review-queue generation rules.
-7. Map competencies to PTNK skills and task formats.
-8. Create a small end-to-end pilot with real learner attempts.
-9. Add expansion-source mappings only where the pilot reveals a concrete need.
-
-Desired eventual system:
-
-```text
-Challenge / exercise result
-        ↓
-Attempt history
-        ↓
-Learning-state update
-        ↓
-Weakness / retention detection
-        ↓
-Review queue
-        ↓
-Next-best activity
-```
-
-## 16. Recovery instructions
-
-If this conversation is lost, start by reading:
-
-1. `PROJECT-CONTEXT.md`
-2. `docs/learning-state-specification.md`
-3. `docs/books.md`
-4. `docs/ptnk-2026-pipeline-report.md`
-5. `docs/data-pipeline.md`
-6. `docs/data-collection-rules.md`
-7. current files under `data/lexicon/`
-
-Then inspect current Git history and repository state before making changes.
-
-Do **not** restart the project as a vocabulary-list project or a PTNK-paper reverse-engineering project.
-
-The correct mental model is:
-
-> **Destination-backed, challenge-first adaptive PTNK preparation system; Destination is the backend knowledge base, challenges are the primary learning interface, the broader C1/C2 library is an expansion layer, and PTNK papers are calibration/validation evidence.**
+When a decision is superseded, remove obsolete instructions so future sessions do not revive them.
