@@ -88,15 +88,16 @@ Do not use one domain as a substitute for another.
 For a task requiring project or learning-state understanding:
 
 1. Read `context-recover/context-recover.md` to recover the current conversation context.
-2. Read `context-recover/context-recover-principles.md` to recover the governing recovery principles.
-3. Read this file to determine which authoritative project/data sources must be inspected.
-4. Read the relevant authoritative documentation.
-5. Inspect the relevant current repository data, source material, and implementation.
-6. Verify important facts before relying on them.
-7. Use `context-recover/context-recover-verification.md` when a full recovery check is required.
-8. Only then continue the task.
+2. Read this file to determine which authoritative project/data sources must be inspected.
+3. Read the relevant authoritative documentation.
+4. Inspect the relevant current repository data, source material, and implementation.
+5. Verify important facts against authoritative sources before relying on them.
+6. Expand recovery only when the current task, missing information, or uncertainty requires it.
+7. Only then continue the task.
 
-Recovery should be progressive: inspect only the sources necessary for the current task, while expanding recovery when evidence or uncertainty requires it.
+Do **not** read `context-recover/context-recovery-authoring-principles.md` as part of normal recovery. That file governs the creation and maintenance of the recovery system itself.
+
+Do **not** treat `context-recover/context-recover-verification.md` as an automatic recovery procedure. It contains questions for the user to ask the AI after recovery when verification is desired.
 
 ## Verification Rules
 
