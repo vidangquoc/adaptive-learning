@@ -4,17 +4,21 @@
 
 This file is the entry point for recovering the **current conversation context** of `vidangquoc/adaptive-learning`.
 
-It does not contain the project's full knowledge. For the stable knowledge required to understand the project, learning materials, and learner data, read:
+It does not contain the project's full knowledge. To recover the project, learning-material / knowledge, and learner-data understanding required for the current task, follow:
 
-- `context-recover/project-knowledge.md`
+- `context-recover/project-knowledge-recover.md`
 
-The governing recovery rules are defined in:
+The context-recovery authoring principles are defined in:
 
-- `context-recover/context-recover-principles.md`
+- `context-recover/context-recovery-authoring-principles.md`
 
-Verification is defined in:
+That file governs the creation and maintenance of recovery files. It is **not** part of the normal recovery procedure.
+
+Verification questions are provided in:
 
 - `context-recover/context-recover-verification.md`
+
+These questions are intended for the user to ask the AI after recovery; they are not an automatic recovery step.
 
 ## 2. Current Conversation Context
 
@@ -28,18 +32,16 @@ Separate:
 
 1. **Project knowledge** — stable knowledge required to understand the project and its data.
 2. **Conversation context** — temporary context required to continue the current line of work.
-3. **Verification** — questions used to test whether the required context has actually been recovered.
+3. **Recovery instructions** — procedures telling the AI how to recover the required context.
+4. **Verification** — questions used by the user to test whether the required context has actually been recovered.
 
 ### Current decisions
 
-- `context-recover/project-knowledge.md` is the compact baseline for recovering knowledge about:
-  - the Adaptive Learning project;
-  - learning-material / knowledge data;
-  - learner data.
-- `context-recover/context-recover.md` is conversation-specific and should contain only the context needed to continue the current work.
-- `context-recover/context-recover-principles.md` defines the governing principles and boundaries.
-- `context-recover/context-recover-verification.md` defines the recovery verification questions.
-- Detailed project knowledge remains authoritative in `docs/` and the repository's actual data/source/code.
+- `context-recover/context-recover.md` contains instructions for recovering current conversation context.
+- `context-recover/project-knowledge-recover.md` contains instructions for recovering project knowledge, learning-material / knowledge data, and learner / user learning data.
+- `context-recover/context-recovery-authoring-principles.md` defines how the recovery files themselves should be created, updated, and maintained. It is not a normal recovery step.
+- `context-recover/context-recover-verification.md` contains questions for the user to ask the AI to verify recovery quality. It is not a recovery procedure.
+- Detailed project knowledge remains authoritative in `docs/` and the repository's actual data, source material, implementation, and history.
 - Do not recreate `PROJECT-CONTEXT.md` or `PROJECT-STATUS.md` as parallel recovery files.
 
 ### Current constraints
@@ -55,28 +57,31 @@ Separate:
 ```text
 context-recover/
 ├── context-recover.md
-├── context-recover-principles.md
-├── context-recover-verification.md
-└── project-knowledge.md
+├── project-knowledge-recover.md
+├── context-recovery-authoring-principles.md
+└── context-recover-verification.md
 ```
 
 ### Immediate next step
 
-Use `context-recover/context-recover-verification.md` to verify that the recovered context is sufficient and correct. If verification exposes a gap, inspect the relevant authoritative documentation/data and update `project-knowledge.md` or the current conversation context as appropriate.
+When context has been recovered, use `context-recover/context-recover-verification.md` as a set of questions to test whether the recovery is sufficient and correct. If a question exposes a gap, inspect the relevant authoritative documentation/data and recover the missing context before continuing.
 
 ## 3. Recovery Procedure
 
 For a new conversation or lost context:
 
 1. Read this file to recover the current conversation context.
-2. Read `context-recover/context-recover-principles.md` to apply the recovery rules.
-3. Read `context-recover/project-knowledge.md` to recover the stable project/knowledge/learner baseline.
-4. Read only the authoritative `docs/`, data, sources, and implementation files relevant to the current task.
-5. Run the verification questions when context correctness needs to be established.
-6. Only then continue the task.
+2. Read `context-recover/project-knowledge-recover.md` to determine which authoritative project, learning-material, and learner-data sources are relevant.
+3. Read only the authoritative `docs/`, data, sources, and implementation files relevant to the current task.
+4. Recover the required project/knowledge/learner context progressively rather than reading the entire repository indiscriminately.
+5. Continue the task once sufficient context has been recovered.
+
+After recovery, the user may use `context-recover/context-recover-verification.md` to test whether the recovered context is correct.
+
+Do **not** read `context-recover/context-recovery-authoring-principles.md` as a normal recovery step. Consult it when creating, updating, reviewing, or redesigning the recovery system itself.
 
 ## 4. Boundary
 
-> **`project-knowledge.md` describes what must be understood. `context-recover.md` describes what must be remembered to continue the current conversation.**
+> **`context-recover.md` describes how to recover the current conversation context. `project-knowledge-recover.md` describes how to recover the project, learning-material / knowledge, and learner-data understanding required for the task. `context-recover-verification.md` provides questions for the user to test the result. `context-recovery-authoring-principles.md` governs how these recovery files are authored and maintained.**
 
-This file should remain short. When stable project knowledge changes, update the authoritative documentation and the relevant summary in `project-knowledge.md`; do not copy that knowledge into this file.
+This file should remain focused on the current conversation. Stable project knowledge belongs in authoritative documentation and data; recovery instructions belong in the appropriate recovery file; verification questions belong in the verification file.
