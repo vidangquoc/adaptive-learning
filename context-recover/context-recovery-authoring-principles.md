@@ -14,11 +14,12 @@ Hệ thống context recovery gồm các file sau:
 
 ### `context-recover/context-recovery-prompt.md`
 
-Chứa **prompt mở đầu dành cho người dùng** khi bắt đầu một hội thoại mới và muốn yêu cầu AI khôi phục context của project.
+Chứa **các prompt dành cho người dùng** khi làm việc với hệ thống context recovery, được chia thành hai nhóm:
+
+1. **Prompt khôi phục** — dùng để yêu cầu AI khôi phục context trong một hội thoại mới.
+2. **Prompt kiểm tra** — dùng để kiểm tra kết quả recovery sau khi AI đã khôi phục context.
 
 File này là điểm vào ở phía người dùng. Nó không phải recovery instruction mà AI phải tự đọc trong quá trình recovery.
-
-Prompt trong file yêu cầu AI bắt đầu từ `context-recover.md` và thực hiện các recovery instructions liên quan.
 
 ### `context-recover/context-recover.md`
 
@@ -35,12 +36,6 @@ Chứa **instructions để AI khôi phục hiểu biết cần thiết về**:
 3. learner / user learning data.
 
 Đây là navigation và recovery procedure, không phải cơ sở dữ liệu project knowledge. Documentation, data, source material, implementation và history authoritative trong repository vẫn là nguồn sự thật.
-
-### `context-recover/context-recover-verification.md`
-
-Chứa **các câu hỏi kiểm tra bằng tiếng Việt để người dùng hỏi AI sau khi recovery**.
-
-File này không phải instruction mà AI phải tự động thực thi trong quá trình recovery. Mục đích của nó là kiểm tra xem AI đã khôi phục context đúng, đủ và có căn cứ hay chưa.
 
 ### `context-recover/context-recovery-authoring-principles.md`
 
@@ -73,10 +68,9 @@ Quy trình recovery thông thường chỉ thực hiện các recovery instructi
 
 Mỗi file phải có một trách nhiệm rõ ràng:
 
-- `context-recovery-prompt.md` → cung cấp prompt mở đầu để người dùng yêu cầu AI thực hiện recovery.
+- `context-recovery-prompt.md` → cung cấp prompt khôi phục và prompt kiểm tra cho người dùng.
 - `context-recover.md` → hướng dẫn khôi phục current conversation context.
 - `project-knowledge-recover.md` → hướng dẫn khôi phục project, learning-material / knowledge và learner-data understanding.
-- `context-recover-verification.md` → cung cấp các câu hỏi để người dùng kiểm tra kết quả recovery.
 - `context-recovery-authoring-principles.md` → quy định cách tạo và duy trì chính hệ thống recovery.
 
 Một file MUST NOT âm thầm tiếp nhận vai trò của file khác.
@@ -157,8 +151,6 @@ Khi tạo hoặc sửa một recovery file, cần xác định:
 
 Nếu nội dung là project knowledge thực tế, nó thường thuộc authoritative documentation hoặc data phù hợp thay vì recovery file.
 
-Nếu nội dung là câu hỏi dùng để kiểm tra context đã recover, nó thuộc `context-recover-verification.md`.
-
-Nếu nội dung là prompt để người dùng khởi động recovery trong hội thoại mới, nó thuộc `context-recovery-prompt.md`.
+Nếu nội dung là prompt khôi phục hoặc prompt kiểm tra dành cho người dùng, nó thuộc `context-recovery-prompt.md`.
 
 Nếu nội dung là instruction để AI thực hiện recovery, nó thuộc recovery-instruction file phù hợp.
