@@ -47,8 +47,6 @@ Learning State
 - [x] Candidate vs official knowledge separation
 - [x] Destination C1 & C2 identified as the initial curriculum backbone
 - [x] PTNK evidence pipeline retained as a calibration/validation subsystem
-- [x] Explicit `data/knowledge/` boundary for static knowledge, sources, relations, and assessment definitions
-- [x] Explicit `data/learner/` boundary for learner profile, state, attempts, sessions, and review queue
 
 ### Adaptive learning
 
@@ -61,6 +59,12 @@ Learning State
 - [x] Review queue concept
 - [x] Expansion-gate concept
 - [x] 700h treated as a ceiling/learning budget rather than a quota
+
+### Data model
+
+- [x] Canonical `data/knowledge/` and `data/learner/` boundaries agreed
+- [x] Knowledge and learner state explicitly separated
+- [x] Assessment definitions separated from learner attempts
 
 ### Continuity
 
@@ -83,41 +87,11 @@ The project-level identity is now:
 
 > **Adaptive Learning** — with PTNK as one important predecessor/domain and validation target.
 
-## 4. Current repository layers
+## 4. Current implementation direction
 
-Canonical learning data is divided into two boundaries:
+The next major phase is to make Learning State and the adaptive loop executable.
 
-```text
-data/
-├── knowledge/
-│   ├── sources/
-│   ├── atoms/
-│   │   ├── grammar/
-│   │   └── lexicon/
-│   ├── relations/
-│   └── assessments/
-└── learner/
-    ├── profile.yaml
-    ├── state/
-    ├── attempts/
-    ├── sessions/
-    └── review-queue.yaml
-```
-
-The intended meaning is:
-
-```text
-data/knowledge/ = What is there to learn?
-data/learner/   = What does this learner know and what should happen next?
-```
-
-Static knowledge must not contain learner mastery. Learner state references knowledge-atom IDs. Assessment definitions describe what can be tested; learner attempts record what actually happened.
-
-The broader repository still contains other historical/domain-specific layers such as `sources/` and PTNK-specific datasets. Those should not be moved or renamed merely for cosmetic consistency; the `data/knowledge/` and `data/learner/` boundary applies to the canonical learning-data model.
-
-## 5. Immediate next work
-
-### Priority 1 — make Learning State executable
+### Priority 1 — schemas and deterministic rules
 
 - [ ] Define concrete learner-state schema
 - [ ] Define attempt-history schema
@@ -126,7 +100,7 @@ The broader repository still contains other historical/domain-specific layers su
 - [ ] Define deterministic state-update rules
 - [ ] Define deterministic review-priority rules
 
-### Priority 2 — build a small adaptive pilot
+### Priority 2 — small adaptive pilot
 
 - [ ] Select representative competencies
 - [ ] Create challenge/diagnostic items
@@ -147,7 +121,7 @@ Only after the adaptive loop works:
 
 Do not collect large amounts of knowledge without a learning-state purpose.
 
-## 6. Design rules
+## 5. Design rules
 
 ### Rule A — mastery beats exposure
 
@@ -181,7 +155,7 @@ Thresholds and review intervals are working rules until supported by project dat
 
 Knowledge and evidence must remain traceable to their sources where applicable.
 
-## 7. Definition of success for the next phase
+## 6. Definition of success for the next phase
 
 The adaptive loop should eventually be able to take an attempt such as:
 
@@ -208,3 +182,9 @@ Next-best targeted activity selected
 ```
 
 At that point Adaptive Learning has moved from a knowledge repository into a functioning closed-loop learning system.
+
+## 7. Documentation boundary
+
+`PROJECT-CONTEXT.md` and `PROJECT-STATUS.md` are recovery/status documents, not the authoritative home for detailed project specifications or data documentation.
+
+Detailed architecture, schemas, data layouts, extraction rules, learning-state definitions, and implementation specifications must live in the appropriate `docs/` files or other domain-specific project documentation. These two files should contain only concise summaries needed to recover context and understand current status.
