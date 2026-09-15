@@ -14,11 +14,11 @@ The context-recovery authoring principles are defined in:
 
 That file governs the creation and maintenance of recovery files. It is **not** part of the normal recovery procedure.
 
-Verification questions are provided in:
+User-facing recovery and verification prompts are provided in:
 
-- `context-recover/context-recover-verification.md`
+- `context-recover/context-recovery-prompt.md`
 
-These questions are intended for the user to ask the AI after recovery; they are not an automatic recovery step.
+That file contains prompts for the user to start recovery and prompts for the user to verify the result. It is not an automatic recovery step.
 
 ## 2. Current Conversation Context
 
@@ -33,14 +33,14 @@ Separate:
 1. **Project knowledge** — stable knowledge required to understand the project and its data.
 2. **Conversation context** — temporary context required to continue the current line of work.
 3. **Recovery instructions** — procedures telling the AI how to recover the required context.
-4. **Verification** — questions used by the user to test whether the required context has actually been recovered.
+4. **User prompts** — prompts used to start recovery and to test whether recovery succeeded.
 
 ### Current decisions
 
 - `context-recover/context-recover.md` contains instructions for recovering current conversation context.
 - `context-recover/project-knowledge-recover.md` contains instructions for recovering project knowledge, learning-material / knowledge data, and learner / user learning data.
+- `context-recover/context-recovery-prompt.md` contains two groups of user-facing prompts: prompts for recovery and prompts for verification after recovery.
 - `context-recover/context-recovery-authoring-principles.md` defines how the recovery files themselves should be created, updated, and maintained. It is not a normal recovery step.
-- `context-recover/context-recover-verification.md` contains questions for the user to ask the AI to verify recovery quality. It is not a recovery procedure.
 - Detailed project knowledge remains authoritative in `docs/` and the repository's actual data, source material, implementation, and history.
 - Do not recreate `PROJECT-CONTEXT.md` or `PROJECT-STATUS.md` as parallel recovery files.
 
@@ -56,15 +56,15 @@ Separate:
 
 ```text
 context-recover/
+├── context-recovery-prompt.md
 ├── context-recover.md
 ├── project-knowledge-recover.md
-├── context-recovery-authoring-principles.md
-└── context-recover-verification.md
+└── context-recovery-authoring-principles.md
 ```
 
 ### Immediate next step
 
-When context has been recovered, use `context-recover/context-recover-verification.md` as a set of questions to test whether the recovery is sufficient and correct. If a question exposes a gap, inspect the relevant authoritative documentation/data and recover the missing context before continuing.
+After context has been recovered, the user may use the **Prompt kiểm tra** section in `context-recover/context-recovery-prompt.md` to test whether the recovery is sufficient and correct. If a question exposes a gap, inspect the relevant authoritative documentation/data and recover the missing context before continuing.
 
 ## 3. Recovery Procedure
 
@@ -76,12 +76,12 @@ For a new conversation or lost context:
 4. Recover the required project/knowledge/learner context progressively rather than reading the entire repository indiscriminately.
 5. Continue the task once sufficient context has been recovered.
 
-After recovery, the user may use `context-recover/context-recover-verification.md` to test whether the recovered context is correct.
+After recovery, the user may use the **Prompt kiểm tra** section in `context-recover/context-recovery-prompt.md` to test whether the recovered context is correct.
 
 Do **not** read `context-recover/context-recovery-authoring-principles.md` as a normal recovery step. Consult it when creating, updating, reviewing, or redesigning the recovery system itself.
 
 ## 4. Boundary
 
-> **`context-recover.md` describes how to recover the current conversation context. `project-knowledge-recover.md` describes how to recover the project, learning-material / knowledge, and learner-data understanding required for the task. `context-recover-verification.md` provides questions for the user to test the result. `context-recovery-authoring-principles.md` governs how these recovery files are authored and maintained.**
+> **`context-recover.md` describes how to recover the current conversation context. `project-knowledge-recover.md` describes how to recover the project, learning-material / knowledge, and learner-data understanding required for the task. `context-recovery-prompt.md` provides user-facing prompts for starting recovery and testing the result. `context-recovery-authoring-principles.md` governs how these recovery files are authored and maintained.**
 
-This file should remain focused on the current conversation. Stable project knowledge belongs in authoritative documentation and data; recovery instructions belong in the appropriate recovery file; verification questions belong in the verification file.
+This file should remain focused on the current conversation. Stable project knowledge belongs in authoritative documentation and data; recovery instructions belong in the appropriate recovery file; user-facing prompts belong in `context-recovery-prompt.md`.
