@@ -1,75 +1,103 @@
 # Methodology
 
-## Goal
+## 1. Project scope
 
-Build a PTNK-specific advanced English lexical system rather than a generic C2 word list.
+**Adaptive Learning** is the broader project. It was split out from the earlier **PTNK** project, which remains a domain-specific predecessor, evidence source, and validation target.
 
-## Evidence hierarchy
+The goal is not to build a generic C2 word list and not to reverse-engineer PTNK papers into a curriculum. The goal is to build an evidence-based adaptive learning system whose knowledge can support multiple learning targets while using PTNK as one important calibration domain.
 
-1. Actual PTNK specialized English exams and official materials.
-2. Cambridge English / English Profile / CEFR evidence.
+Vocabulary/lexical research is one subsystem of the learning system.
+
+## 2. Evidence hierarchy
+
+1. Primary/source materials and official assessment evidence for the target domain.
+2. Cambridge English / English Profile / CEFR evidence where relevant.
 3. Reliable learner/corpus evidence.
-4. AI-generated practice material — useful for testing, but not evidence that a word is PTNK-required.
+4. AI-generated practice material — useful for testing and challenge generation, but not evidence that a knowledge item is required.
 
-## Dataset design principles
+PTNK exam papers are primarily calibration and validation evidence. Their appearance does not by itself make an individual lexical item intrinsically important.
 
-The dataset separates the lexical item itself from the form actually tested. For example, `sound` is stored with the tested form `sound judgement`, rather than treating every sense of `sound` as equally relevant.
+## 3. Dataset and knowledge design
 
-Each item should preserve provenance: year, section, question, role in the item, source quality, and source note. CEFR levels are not assigned unless independently verified.
+Separate:
 
-## Knowledge atoms
+- raw source evidence;
+- evidence/observations;
+- curated/normalized knowledge;
+- learner state;
+- generated challenges and assessment history.
 
-Each independent knowledge unit is represented as a flat atom. An atom is a unit that can be independently diagnosed, taught, and assessed, while its boundary must be supported by source evidence rather than invented by AI.
+Every promoted knowledge item should preserve provenance. CEFR levels must not be assigned unless independently verified.
 
-Lexical and grammar knowledge follow the same flat-atom principle. Relationships between atoms are represented explicitly as typed relationships rather than by forcing a parent/child knowledge tree.
+## 4. Knowledge atoms
 
-### Grammar knowledge atoms
+Each independent knowledge unit is represented as a **flat atom**: a unit that can be independently diagnosed, taught, and assessed.
 
-A grammar atom is an independent grammar knowledge unit that a learner may need to diagnose, learn, and assess separately. The unit may be a distinct grammatical use, form, contrast, or other source-supported grammar knowledge unit.
+Lexical and grammar knowledge follow the same flat-atom principle. Relationships are represented explicitly as typed relationships rather than by forcing a parent/child knowledge tree.
 
-A grammar point with multiple independently teachable uses should normally be split into separate atoms. For example, if a source explicitly teaches Present Simple for general truths, current habits, and permanent situations/states, these are separate atoms rather than one `present simple` atom containing all uses.
+One lexical sense is one atom by default. Independently useful grammar uses, constructions, rules, or contrasts are separate atoms when the source supports that distinction.
 
-Different grammatical forms may also be separate atoms when the source teaches them as independent knowledge units. Contrastive knowledge may likewise be its own atom when the source explicitly teaches the distinction, such as Present Perfect versus Past Simple.
+Do not infer ontology from parser structure, textbook headings, or isolated examples.
 
-A grammar example alone is not sufficient evidence for creating a grammar atom. The system may use examples to understand context and interpret source material, but it must not infer an unstated grammar rule from an example alone. If the source does not provide sufficient evidence for an independent grammar unit, the corresponding field remains empty/null rather than being authored by AI.
+## 5. Grammar knowledge atoms
 
-Grammar patterns, usage notes, and relationships must follow the same provenance rule. A pattern is recorded only when supported by the source; it must not be reverse-engineered from an isolated example and presented as source fact.
+A grammar example alone is not sufficient evidence for creating a grammar atom. If the source does not provide sufficient evidence for an independent grammar unit, the corresponding field remains empty/null rather than being authored as source fact by AI.
 
-An exercise may test multiple grammar atoms simultaneously. Atoms remain separate for knowledge storage and learner-state diagnosis even when a single challenge activates several atoms.
+Grammar patterns, usage notes, and relationships follow the same provenance rule: record them only when supported by source evidence.
 
-## Roles
+An exercise may activate multiple atoms simultaneously. The atoms remain separate for knowledge storage and learner-state diagnosis.
+
+## 6. Roles
 
 - `correct_answer`: the keyed answer.
 - `distractor`: an option that appeared in the question but was not the keyed answer.
-- `reading_only`: vocabulary retained because it occurs in a reading/writing passage rather than as a direct lexical target.
+- `reading_only`: knowledge retained because it occurs in a reading/writing passage rather than as a direct target.
 - `transformation_target`: a form required by a transformation task.
 
-## Study modes
+## 7. Study modes
 
-- `learn`: high-value item worth active study.
+- `learn`: high-value knowledge worth active study.
 - `recognize`: useful to recognize in context, but not necessarily a first-tier memorization target.
-- `defer`: retain for provenance/reference, but postpone active study until the item is independently validated or recurs.
+- `defer`: retain for provenance/reference, but postpone active study until independently validated or recurrent.
 
-## Priority
+## 8. Priority
 
-- `P1`: core PTNK/general-English value; active study recommended.
-- `P2`: useful secondary item; study after P1 or when weak.
-- `P3`: mainly recognition or topic-specific vocabulary; do not let it crowd out core items.
+Priority is a **study decision**, not a CEFR claim.
 
-Priority is a study decision, not a CEFR claim.
+For PTNK-specific datasets, historical P1/P2/P3/P4 labels may remain because they are part of that dataset's provenance and workflow. They must not be interpreted as the universal priority model of Adaptive Learning.
 
-## Learning states
+## 9. Learning states
 
-- `unknown`: learner does not know the item.
-- `recognition_gap`: knows the meaning in isolation but misses it in context.
-- `usage_gap`: knows the item but uses it incorrectly.
-- `context_inferable`: can infer from context; do not automatically promote to core.
-- `mastered`: confidently recognized and used.
+Learning state belongs to the learner layer rather than static knowledge. The broader project uses dimensions such as recognition, recall, usage, discrimination, transfer, and retention to determine whether a competency is actually mastered.
 
-## Specialized vocabulary
+Working states and thresholds are heuristics until validated by project data.
 
-Topic-specific words appearing in reading passages are retained with domain metadata, but are normally lower priority unless they recur or have broader academic value.
+## 10. Challenge-first learning
 
-## Versioning
+When prior knowledge is plausible, challenge should precede routine instruction:
 
-`v0.1` is the initial extraction. `v0.2` adds tested form/context, role, study mode, source quality, and CEFR-source placeholders without inventing CEFR levels. New exam years should use the v0.2 schema only after this pilot is reviewed.
+```text
+Knowledge / competency
+        ↓
+Challenge
+   ↙         ↘
+correct     wrong / uncertain
+  ↓               ↓
+skip/extend   trace gap
+                  ↓
+             targeted learning
+                  ↓
+                retest
+```
+
+The system optimizes learning value rather than pages, hours, word counts, or syllabus completion. Mastery should reduce unnecessary repetition.
+
+## 11. Source expansion
+
+Destination C1 & C2 is the initial curriculum backbone. Additional books and sources are expansion layers opened when evidence shows they add meaningful breadth, depth, precision, or transfer value.
+
+PTNK evidence is used to calibrate and validate the system, not to replace the broader competency model.
+
+## 12. Versioning
+
+Knowledge schemas, extraction rules, and learner-state schemas must be versioned explicitly. When a rule changes, update the authoritative documentation and remove obsolete recovery instructions so future sessions do not revive superseded decisions.
