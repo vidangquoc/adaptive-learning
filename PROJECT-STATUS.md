@@ -47,6 +47,8 @@ Learning State
 - [x] Candidate vs official knowledge separation
 - [x] Destination C1 & C2 identified as the initial curriculum backbone
 - [x] PTNK evidence pipeline retained as a calibration/validation subsystem
+- [x] Explicit `data/knowledge/` boundary for static knowledge, sources, relations, and assessment definitions
+- [x] Explicit `data/learner/` boundary for learner profile, state, attempts, sessions, and review queue
 
 ### Adaptive learning
 
@@ -83,38 +85,35 @@ The project-level identity is now:
 
 ## 4. Current repository layers
 
+Canonical learning data is divided into two boundaries:
+
 ```text
-sources/
-    ↓
-data / evidence
-    ↓
-curated knowledge
-    ↓
-knowledge atoms
-    ↓
-competencies / modules
-    ↓
-learner state
-    ↓
-attempt history
-    ↓
-review queue
-    ↓
-next-best activity
+data/
+├── knowledge/
+│   ├── sources/
+│   ├── atoms/
+│   │   ├── grammar/
+│   │   └── lexicon/
+│   ├── relations/
+│   └── assessments/
+└── learner/
+    ├── profile.yaml
+    ├── state/
+    ├── attempts/
+    ├── sessions/
+    └── review-queue.yaml
 ```
 
-Important documentation includes:
+The intended meaning is:
 
-- `PROJECT-CONTEXT.md`
-- `PROJECT-STATUS.md`
-- `docs/context-recover.md`
-- `context-recover.md`
-- `docs/methodology.md`
-- `docs/knowledge-atom-pipeline.md`
-- `docs/learning-state-specification.md`
-- `docs/learning-material-principles/`
-- `docs/data-collection-rules.md`
-- `docs/data-pipeline.md`
+```text
+data/knowledge/ = What is there to learn?
+data/learner/   = What does this learner know and what should happen next?
+```
+
+Static knowledge must not contain learner mastery. Learner state references knowledge-atom IDs. Assessment definitions describe what can be tested; learner attempts record what actually happened.
+
+The broader repository still contains other historical/domain-specific layers such as `sources/` and PTNK-specific datasets. Those should not be moved or renamed merely for cosmetic consistency; the `data/knowledge/` and `data/learner/` boundary applies to the canonical learning-data model.
 
 ## 5. Immediate next work
 
