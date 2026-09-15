@@ -22,23 +22,23 @@ Optimize learning value, not hours, pages, word counts, or syllabus completion.
 
 ```text
 Goal
-  ↓
+ ↓
 Competency model
-  ↓
+ ↓
 Knowledge sources
-  ↓
+ ↓
 Diagnostic / Challenge
-  ↓
+ ↓
 Learner state
-  ↓
+ ↓
 Learning frontier
-  ↓
+ ↓
 Next-best activity
-  ↓
+ ↓
 Assessment
-  ↓
+ ↓
 Updated learner state
-  ↺
+ ↺
 ```
 
 The curriculum must not punish mastery with repetition.
@@ -102,55 +102,7 @@ Knowledge atoms are **flat and independently diagnosable**. One lexical sense is
 
 Do not create mandatory parent/child ancestry trees. Relationships are explicit typed links. Learner mastery belongs in learner-state data, not static knowledge.
 
-## 7. Data-layer boundary
-
-The repository has two explicit data boundaries:
-
-- `data/knowledge/` — what there is to learn and the evidence supporting it.
-- `data/learner/` — what a learner has done, knows, needs to review, and how their learning state changes over time.
-
-Recommended structure:
-
-```text
-data/
-├── knowledge/
-│   ├── sources/
-│   │   ├── books/
-│   │   │   └── <book>/
-│   │   │       ├── book.yaml
-│   │   │       └── chapters/
-│   │   │           ├── ch01.txt
-│   │   │           └── ch02.txt
-│   │   └── ...
-│   ├── atoms/
-│   │   ├── grammar/
-│   │   └── lexicon/
-│   ├── relations/
-│   └── assessments/
-└── learner/
-    ├── profile.yaml
-    ├── state/
-    │   ├── atom-state.yaml
-    │   └── competency-state.yaml
-    ├── attempts/
-    ├── sessions/
-    └── review-queue.yaml
-```
-
-A knowledge atom must not contain a learner's mastery state. Learner state references atom IDs rather than duplicating the knowledge definition. Assessment items live in the knowledge layer because they describe what can be used to assess knowledge; actual responses and outcomes live in the learner layer.
-
-The conceptual boundary is:
-
-```text
-data/knowledge/ = What is there to learn?
-
-data/learner/   = What does this learner know,
-                  how well do they know it,
-                  what have they attempted,
-                  and what should they review next?
-```
-
-## 8. Evidence and provenance rules
+## 7. Evidence and provenance rules
 
 - Evidence > intuition.
 - Accuracy > completeness.
@@ -160,7 +112,7 @@ data/learner/   = What does this learner know,
 - Generated practice/challenges are not evidence that an item is required.
 - Structural extraction and provenance validation should fail closed on errors.
 
-## 9. PTNK inheritance boundary
+## 8. PTNK inheritance boundary
 
 PTNK-specific artifacts may retain PTNK naming because they represent historical/domain-specific evidence. Examples include:
 
@@ -173,7 +125,7 @@ These names should **not** be renamed merely for cosmetic consistency. They desc
 
 Project-level documentation, however, must identify the repository as **Adaptive Learning** and describe PTNK as its predecessor/domain source.
 
-## 10. Learning state
+## 9. Learning state
 
 Learning state is separate from static knowledge.
 
@@ -196,57 +148,7 @@ UNSEEN → KNOWN → RECALLABLE → USABLE → MASTERED → MAINTENANCE
 
 These are working concepts/heuristics, not immutable constants.
 
-## 11. Book-to-learning workflow
-
-When a learner supplies a book and asks to study a chapter, the intended workflow is:
-
-```text
-Book / Chapter
-      ↓
-Extract grammar + lexicon atoms
-      ↓
-Preserve source provenance
-      ↓
-Identify exercises / assessment opportunities
-      ↓
-Map questions to atoms and dimensions
-      ↓
-Diagnostic / challenge
-      ↓
-Learner response
-      ↓
-Attempt history
-      ↓
-Update learner state
-      ↓
-Review queue
-      ↓
-Adaptive next question
-      ↺
-```
-
-One exercise may test multiple atoms, and one atom may be tested by multiple questions. Do not assume a one-to-one relationship between exercises and atoms.
-
-## 12. Review session model
-
-A review session is a sequence of adaptive decisions, not merely a pre-generated list of questions:
-
-```text
-Question
-   ↓
-Learner response
-   ↓
-Attempt / evidence
-   ↓
-State update
-   ↓
-Select next question
-   ↺
-```
-
-The selector should balance weak/uncertain items, retention review, important or prerequisite items, and new/exploratory coverage. Begin with deterministic rules and keep the policy adjustable.
-
-## 13. Current implementation direction
+## 10. Current implementation direction
 
 The next major implementation phase is to make the adaptive loop executable:
 
@@ -261,20 +163,21 @@ The next major implementation phase is to make the adaptive loop executable:
 
 Do not revert to a vocabulary-only workflow.
 
-## 14. Recovery protocol
+## 11. Recovery protocol
 
 When recovering context:
 
 1. Read `PROJECT-CONTEXT.md`.
 2. Read `PROJECT-STATUS.md`.
-3. Read `docs/learning-state-specification.md`.
-4. Read `docs/knowledge-atom-pipeline.md` and the relevant learning-material principles.
-5. Read the relevant source/data rules.
-6. Inspect current Git state and current data before changing anything.
-7. Treat this repository as authoritative over stale conversation memory.
+3. Read the relevant methodology/specification documents for the task.
+4. Read the relevant source/data rules.
+5. Inspect current Git state and current data before changing anything.
+6. Treat this repository as authoritative over stale conversation memory.
 
-## 15. Maintenance rule
+`PROJECT-CONTEXT.md` and `PROJECT-STATUS.md` are **context-recovery documents only**. They summarize project identity, settled architectural decisions, current status, and recovery instructions. They are not substitutes for the project's specifications, schemas, methodology, data documentation, or implementation documentation. Detailed project documentation belongs in the appropriate `docs/` or domain-specific files.
 
-When a major architectural, ontology, data-layer, or governance decision is settled, update the canonical project documentation and recovery prompts.
+## 12. Maintenance rule
 
-When a decision is superseded, remove obsolete instructions so future sessions do not revive them.
+When a major architectural, ontology, data-layer, or governance decision is settled, update the appropriate authoritative project documentation and, when necessary, add only a concise recovery summary here.
+
+When a decision is superseded, remove obsolete recovery instructions so future sessions do not revive them.
