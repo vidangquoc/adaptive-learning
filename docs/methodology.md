@@ -17,6 +17,26 @@ The dataset separates the lexical item itself from the form actually tested. For
 
 Each item should preserve provenance: year, section, question, role in the item, source quality, and source note. CEFR levels are not assigned unless independently verified.
 
+## Knowledge atoms
+
+Each independent knowledge unit is represented as a flat atom. An atom is a unit that can be independently diagnosed, taught, and assessed, while its boundary must be supported by source evidence rather than invented by AI.
+
+Lexical and grammar knowledge follow the same flat-atom principle. Relationships between atoms are represented explicitly as typed relationships rather than by forcing a parent/child knowledge tree.
+
+### Grammar knowledge atoms
+
+A grammar atom is an independent grammar knowledge unit that a learner may need to diagnose, learn, and assess separately. The unit may be a distinct grammatical use, form, contrast, or other source-supported grammar knowledge unit.
+
+A grammar point with multiple independently teachable uses should normally be split into separate atoms. For example, if a source explicitly teaches Present Simple for general truths, current habits, and permanent situations/states, these are separate atoms rather than one `present simple` atom containing all uses.
+
+Different grammatical forms may also be separate atoms when the source teaches them as independent knowledge units. Contrastive knowledge may likewise be its own atom when the source explicitly teaches the distinction, such as Present Perfect versus Past Simple.
+
+A grammar example alone is not sufficient evidence for creating a grammar atom. The system may use examples to understand context and interpret source material, but it must not infer an unstated grammar rule from an example alone. If the source does not provide sufficient evidence for an independent grammar unit, the corresponding field remains empty/null rather than being authored by AI.
+
+Grammar patterns, usage notes, and relationships must follow the same provenance rule. A pattern is recorded only when supported by the source; it must not be reverse-engineered from an isolated example and presented as source fact.
+
+An exercise may test multiple grammar atoms simultaneously. Atoms remain separate for knowledge storage and learner-state diagnosis even when a single challenge activates several atoms.
+
 ## Roles
 
 - `correct_answer`: the keyed answer.
