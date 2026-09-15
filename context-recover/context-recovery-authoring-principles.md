@@ -1,146 +1,164 @@
 # Context Recovery Authoring Principles
 
-## 1. Purpose
+## 1. Mục đích
 
-This file defines the principles that govern the **creation, modification, and maintenance of the context-recovery instruction system** in this repository.
+File này định nghĩa các nguyên tắc chi phối việc **tạo, sửa, review và duy trì hệ thống context recovery** trong repository.
 
-It is a **meta-level authoring specification**. It is not a recovery instruction and MUST NOT be treated as a required step of normal context recovery.
+Đây là một **meta-level authoring specification**. Nó không phải recovery instruction và **không phải một bước trong quy trình khôi phục context thông thường**.
 
-These principles apply when an AI is asked to create, update, review, redesign, or restructure the files that make up the context-recovery system.
+Các nguyên tắc trong file này được áp dụng khi AI được yêu cầu tạo mới, cập nhật, review, thiết kế lại hoặc tái cấu trúc các file thuộc hệ thống context recovery.
 
-## 2. Context-Recovery Files
+## 2. Các file trong hệ thống Context Recovery
 
-The context-recovery system consists of the following files:
+Hệ thống context recovery gồm các file sau:
+
+### `context-recover/context-recovery-prompt.md`
+
+Chứa **prompt mở đầu dành cho người dùng** khi bắt đầu một hội thoại mới và muốn yêu cầu AI khôi phục context của project.
+
+File này là điểm vào ở phía người dùng. Nó không phải recovery instruction mà AI phải tự đọc trong quá trình recovery.
+
+Prompt trong file yêu cầu AI bắt đầu từ `context-recover.md` và thực hiện các recovery instructions liên quan.
 
 ### `context-recover/context-recover.md`
 
-The entry-point instructions for recovering the **current conversation context**.
+Là **điểm vào của quy trình khôi phục context hiện tại của cuộc hội thoại**.
 
-It tells an AI what current conversational information must be recovered and where to continue from. It is concerned with the work currently being continued, not with storing the complete project knowledge base.
+File này hướng dẫn AI xác định và khôi phục những thông tin cần thiết để tiếp tục công việc hiện tại. Nó không phải nơi lưu trữ toàn bộ project knowledge.
 
 ### `context-recover/project-knowledge-recover.md`
 
-Instructions for recovering the information required to understand:
+Chứa **instructions để AI khôi phục hiểu biết cần thiết về**:
 
-1. the Adaptive Learning project;
+1. Adaptive Learning project;
 2. learning-material / knowledge data;
 3. learner / user learning data.
 
-It is a navigation and recovery procedure, not a project-knowledge database. Authoritative project documentation, data, source material, implementation, and history remain the sources of truth.
+Đây là navigation và recovery procedure, không phải cơ sở dữ liệu project knowledge. Documentation, data, source material, implementation và history authoritative trong repository vẫn là nguồn sự thật.
 
 ### `context-recover/context-recover-verification.md`
 
-A set of **verification questions written for the user to ask the AI** after context recovery.
+Chứa **các câu hỏi kiểm tra bằng tiếng Việt để người dùng hỏi AI sau khi recovery**.
 
-It is not an instruction that the AI must automatically execute during recovery. Its purpose is to test whether the AI has recovered the required context correctly and can demonstrate that understanding.
+File này không phải instruction mà AI phải tự động thực thi trong quá trình recovery. Mục đích của nó là kiểm tra xem AI đã khôi phục context đúng, đủ và có căn cứ hay chưa.
 
-## 3. Authoring Principles
+### `context-recover/context-recovery-authoring-principles.md`
 
-### CR-01 — Recovery Files Are Instructions, Not Knowledge Stores
+Chứa **các nguyên tắc để AI tạo, sửa, review và duy trì các file của hệ thống context recovery**.
 
-Recovery files MUST primarily tell an AI:
+File này thuộc tầng meta của hệ thống. Nó không phải nguồn project knowledge và không phải một bước trong normal context recovery.
 
-- what to recover;
-- where to look;
-- which sources are authoritative;
-- how to distinguish relevant domains;
-- what to verify;
-- what to do when information is missing or contradictory.
+## 3. Nguyên tắc Authoring
 
-They MUST NOT become parallel repositories of detailed project knowledge.
+### CR-01 — Recovery Files Là Instructions, Không Phải Knowledge Stores
 
-### CR-02 — Separate Authoring from Execution
+Recovery files MUST chủ yếu chỉ cho AI:
 
-The principles in this file govern the **authoring and maintenance** of the recovery system.
+- cần khôi phục điều gì;
+- cần tìm ở đâu;
+- nguồn nào là authoritative;
+- phải phân biệt các domain như thế nào;
+- cần kiểm tra điều gì;
+- phải xử lý thế nào khi thông tin thiếu hoặc mâu thuẫn.
 
-Normal context recovery should execute the relevant recovery instructions without requiring this file to be read as part of the recovery procedure.
+Recovery files MUST NOT trở thành một kho project knowledge song song.
 
-### CR-03 — Preserve File Roles
+### CR-02 — Tách Authoring khỏi Execution
 
-Each recovery file MUST have one clear responsibility:
+Các nguyên tắc trong file này chi phối **việc authoring và maintenance** của hệ thống recovery.
 
-- `context-recover.md` → recover current conversation context.
-- `project-knowledge-recover.md` → recover project, learning-material / knowledge, and learner-data understanding.
-- `context-recover-verification.md` → provide questions for testing whether recovery succeeded.
+Quy trình recovery thông thường chỉ thực hiện các recovery instructions liên quan và không yêu cầu AI phải đọc file này như một bước recovery.
 
-A file MUST NOT silently take over another file's role.
+### CR-03 — Giữ đúng vai trò của từng file
 
-### CR-04 — Repository Is the Source of Truth
+Mỗi file phải có một trách nhiệm rõ ràng:
 
-Recovery instructions MUST direct the AI to authoritative repository sources whenever correctness depends on current project state, data, implementation, provenance, or documented rules.
+- `context-recovery-prompt.md` → cung cấp prompt mở đầu để người dùng yêu cầu AI thực hiện recovery.
+- `context-recover.md` → hướng dẫn khôi phục current conversation context.
+- `project-knowledge-recover.md` → hướng dẫn khôi phục project, learning-material / knowledge và learner-data understanding.
+- `context-recover-verification.md` → cung cấp các câu hỏi để người dùng kiểm tra kết quả recovery.
+- `context-recovery-authoring-principles.md` → quy định cách tạo và duy trì chính hệ thống recovery.
 
-Conversation memory and inference are secondary and MUST NOT override repository evidence.
+Một file MUST NOT âm thầm tiếp nhận vai trò của file khác.
 
-### CR-05 — No Duplication of Authoritative Knowledge
+### CR-04 — Repository Là Source of Truth
 
-Authoring a recovery file MUST NOT copy detailed project documentation, data inventories, learner state, or historical records merely for convenience.
+Recovery instructions MUST hướng AI đến các nguồn authoritative trong repository khi độ chính xác phụ thuộc vào project state, data, implementation, provenance hoặc documented rules hiện tại.
 
-Recovery files should point to authoritative information rather than reproduce it.
+Conversation memory và inference là nguồn phụ trợ và MUST NOT override repository evidence.
 
-### CR-06 — Preserve Domain Separation
+### CR-05 — Không Duplicate Authoritative Knowledge
 
-Recovery instructions MUST keep these domains distinct:
+Khi authoring recovery file, MUST NOT sao chép detailed project documentation, data inventories, learner state hoặc historical records chỉ để tiện sử dụng.
+
+Recovery files nên chỉ đến thông tin authoritative thay vì tái tạo thông tin đó.
+
+### CR-06 — Giữ Domain Separation
+
+Recovery instructions MUST giữ các domain sau độc lập:
 
 - project knowledge;
 - learning-material / knowledge data;
 - learner / user learning data;
 - current conversation context.
 
-In particular, static knowledge MUST NOT be confused with learner state or historical learning activity.
+Đặc biệt, static knowledge MUST NOT bị nhầm với learner state hoặc historical learning activity.
 
-### CR-07 — Progressive and Task-Driven Recovery
+### CR-07 — Progressive và Task-Driven Recovery
 
-Recovery instructions SHOULD direct the AI to recover context progressively, starting with the minimum information needed for the current task and expanding only when required.
+Recovery instructions SHOULD hướng AI khôi phục context theo từng bước, bắt đầu bằng lượng thông tin tối thiểu cần thiết cho task hiện tại và chỉ mở rộng khi cần.
 
-They SHOULD identify authoritative entry points and task-relevant sources rather than instructing the AI to read the entire repository indiscriminately.
+Instructions SHOULD xác định các authoritative entry points và task-relevant sources thay vì yêu cầu AI đọc toàn bộ repository một cách không cần thiết.
 
 ### CR-08 — Recover Enough Context, Not Everything
 
-The goal of recovery is to provide sufficient information to perform the current task correctly.
+Mục tiêu của recovery là cung cấp đủ thông tin để thực hiện task hiện tại một cách chính xác.
 
-Authoring SHOULD avoid unnecessary recovery steps that increase context size without improving task correctness.
+Khi authoring, SHOULD tránh các bước recovery không cần thiết làm tăng context size nhưng không cải thiện độ chính xác của task.
 
-### CR-09 — Specify Verification and Failure Handling
+### CR-09 — Phải quy định Verification và Failure Handling
 
-Recovery instructions SHOULD explicitly state how the AI should behave when:
+Recovery instructions SHOULD nêu rõ cách AI xử lý khi:
 
-- information is missing;
-- sources conflict;
-- current repository state differs from remembered context;
-- exact data cannot be determined;
-- an authoritative source cannot be located.
+- thông tin bị thiếu;
+- các source mâu thuẫn;
+- repository state hiện tại khác với context được nhớ;
+- không thể xác định chính xác một dữ liệu;
+- không tìm thấy authoritative source.
 
-The instructions SHOULD prefer verification and explicit uncertainty over guessing.
+Instructions SHOULD ưu tiên verification và thể hiện uncertainty rõ ràng thay vì đoán.
 
-### CR-10 — Current Context Must Not Rewrite History
+### CR-10 — Current Context Không Được Rewrite History
 
-Recovery instructions MUST preserve the distinction between historical records, current repository state, and current conversation decisions.
+Recovery instructions MUST giữ khác biệt giữa historical records, current repository state và current conversation decisions.
 
-A recovered conversation snapshot MUST NOT be treated as an authoritative historical record.
+Recovered conversation snapshot MUST NOT được xem là authoritative historical record.
 
-### CR-11 — Recovery Must Be Reproducible
+### CR-11 — Recovery Phải Reproducible
 
-A new AI session with no access to the previous conversation SHOULD be able to follow the recovery instructions and reconstruct the context required to continue the work without undocumented assumptions.
+Một AI session mới không có quyền truy cập conversation trước đó SHOULD có thể làm theo recovery instructions và tái tạo context cần thiết để tiếp tục công việc mà không phụ thuộc vào undocumented assumptions.
 
-### CR-12 — Keep the Recovery System Stable and Minimal
+### CR-12 — Giữ Recovery System Stable và Minimal
 
-Recovery files SHOULD change only when their roles, recovery procedures, verification requirements, or relevant context structure change.
+Recovery files SHOULD chỉ thay đổi khi role, recovery procedure, verification requirements hoặc context structure liên quan thay đổi.
 
-Normal project evolution SHOULD primarily update authoritative project documentation and data, not accumulate project knowledge inside recovery files.
+Project evolution SHOULD chủ yếu cập nhật authoritative project documentation và data, không tích lũy project knowledge vào recovery files.
 
 ## 4. Authoring Boundary
 
-When creating or modifying a recovery file, ask:
+Khi tạo hoặc sửa một recovery file, cần xác định:
 
-1. **What is this file responsible for?**
-2. **What does the AI need to do?**
-3. **Where should the AI obtain the required information?**
-4. **Which source is authoritative?**
-5. **How should ambiguity or missing information be handled?**
-6. **Is this content an instruction, a verification question, or actual project knowledge?**
+1. **File này chịu trách nhiệm về điều gì?**
+2. **AI cần thực hiện hành động gì?**
+3. **AI cần lấy thông tin ở đâu?**
+4. **Nguồn nào là authoritative?**
+5. **Phải xử lý ambiguity hoặc missing information như thế nào?**
+6. **Nội dung đang viết là instruction, verification question, user-facing prompt hay actual project knowledge?**
 
-If the content is actual project knowledge, it normally belongs in the appropriate authoritative documentation or data rather than in a recovery file.
+Nếu nội dung là project knowledge thực tế, nó thường thuộc authoritative documentation hoặc data phù hợp thay vì recovery file.
 
-If the content is a question used to test recovered context, it belongs in `context-recover-verification.md`.
+Nếu nội dung là câu hỏi dùng để kiểm tra context đã recover, nó thuộc `context-recover-verification.md`.
 
-If the content is an instruction for recovering context, it belongs in the appropriate recovery-instruction file.
+Nếu nội dung là prompt để người dùng khởi động recovery trong hội thoại mới, nó thuộc `context-recovery-prompt.md`.
+
+Nếu nội dung là instruction để AI thực hiện recovery, nó thuộc recovery-instruction file phù hợp.
