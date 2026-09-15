@@ -6,6 +6,15 @@ This file defines a small verification checklist to determine whether the requir
 
 Verification is a **test of recovered context**, not a replacement for reading the authoritative sources.
 
+## Recovery Input
+
+Before answering the verification questions, the AI should have read:
+
+1. `context-recover/context-recover.md` — current conversation context.
+2. `context-recover/context-recover-principles.md` — recovery rules.
+3. `context-recover/project-knowledge.md` — stable project, learning-material, and learner-data knowledge.
+4. Any authoritative `docs/`, data, sources, or implementation files required to verify the answers.
+
 ## Verification Questions
 
 ### 1. Project Understanding
