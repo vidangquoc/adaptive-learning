@@ -1,18 +1,18 @@
 # Assessment and Learning-Material Construction
 
-## Destination Exercises as Seed Questions
+## Source-Derived Questions
 
-Exercises already contained in Destination are the initial **canonical seed question bank**.
+Exercises contained in a selected source may form the initial canonical seed question bank for that source.
 
-Extract them faithfully and retain the source Unit, precise location within that Unit, exercise/task identifier, question identifier, and task type.
+Extract them faithfully and retain source boundary, precise location, exercise/task identifier, question identifier, and task type. Internal headings may be retained as descriptive metadata but are not separate source layers.
 
-A textbook's internal headings may be retained as descriptive metadata when useful, but they are not separate source-boundary files. Generated questions are an additional layer for targeted practice, discrimination, transfer, retention, and retesting.
+Generated questions are a separate layer for targeted practice, discrimination, transfer, retention, and retesting.
 
 ## Question ↔ Knowledge Linkage
 
 Each source-derived question should be linked to the knowledge atom(s) it actually tests whenever that relationship can be defended.
 
-A linkage must be evidence-based, not inferred merely because the same word appears nearby.
+A linkage must be evidence-based, not inferred merely because the same word appears nearby. One question may test multiple atoms, and one atom may be tested by multiple questions.
 
 ## Generated Material Must Add Instructional Value
 
@@ -29,9 +29,9 @@ Generate follow-up questions or explanations only for a concrete instructional r
 
 Generated content must remain distinguishable from source-derived content.
 
-## Multiple Mastery Dimensions
+## Assessment Dimensions
 
-Where applicable, learning material should support:
+Where applicable, assessment should provide evidence about:
 
 - recognition;
 - recall;
@@ -44,25 +44,17 @@ Where applicable, learning material should support:
 - transfer;
 - delayed retention.
 
-Mastery is learner-state evidence, not a static property of the atom.
+These are evidence dimensions. Their accumulated interpretation belongs to learner state.
 
 ## Competency Mapping
 
-Knowledge and questions should ultimately be linkable to competencies and, where useful, target-domain skill/task categories.
+Questions may be linked to competencies and target-domain task types when the relationship is supported by the learning design.
 
 Do not force a competency label when evidence is insufficient.
 
-## Grammar Modeling
+## Grammar Assessment
 
-Grammar knowledge requires interpretation of **form, meaning, function, constraints, discourse context, and contrasts** where relevant.
-
-Model the smallest useful construction/rule that can support instruction and valid assessment. The same flat-atom rule used for lexical knowledge applies to grammar: if the source supports independently useful grammar uses or contrasts, represent them as independent atoms rather than creating a parent grammar atom with child uses.
-
-If the source does not provide enough evidence to determine a rule or constraint, preserve the evidence and mark the interpretation pending/review-needed. Do not invent it.
-
-### Grammaticality Is Not Contextual Appropriateness
-
-Grammar assessment must distinguish:
+Grammar assessment should distinguish:
 
 ```text
 grammaticality
@@ -70,16 +62,14 @@ contextual appropriateness
 intended meaning
 ```
 
-### Answer Uniqueness Is Mandatory
+A grammar item should be evaluated for grammaticality, interpretation, contextual licensing, and answer uniqueness before entering a canonical question bank.
 
-Before a grammar question enters the canonical question bank, evaluate every candidate for grammaticality, interpretation, contextual licensing, and uniqueness.
-
-If two or more candidates are grammatical **and** contextually compatible, **reject or rewrite the item**.
+If two or more candidates are grammatical and contextually compatible, reject or rewrite the item.
 
 A source answer key is evidence of the author's intended answer, not proof that the item is objectively valid.
 
-### Prefer Context-Rich and Contrastive Assessment
+When close constructions compete, prefer context-conditioned or otherwise objectively constrained assessment over artificially forcing a distinction into an ambiguous single-answer MCQ.
 
-When several constructions are close competitors, prefer context-conditioned multiple choice, explicit contrast selection, objectively constrained error identification, meaning-preserving transformation, controlled production, or explanation/justification when appropriate.
+## Relationship to Knowledge Construction
 
-Do not force every grammar distinction into a single-answer MCQ.
+This document defines how knowledge is **assessed**. It does not define the atom ontology or atom schema. Those are owned by `docs/knowledge/`.
