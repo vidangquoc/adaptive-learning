@@ -1,8 +1,8 @@
-# PTNK Learning State Specification v0.1
+# Adaptive Learning State Specification v0.1
 
 ## 1. Purpose
 
-This specification defines how the PTNK learning system keeps track of what the learner knows, what needs review, what needs remediation, and what can be skipped.
+This specification defines how Adaptive Learning keeps track of what the learner knows, what needs review, what needs remediation, and what can be skipped.
 
 The system is **adaptive**: the learner is not required to complete every lesson, word, or hour. Learning time is allocated according to demonstrated mastery and the current learning frontier.
 
@@ -10,9 +10,7 @@ Core principle:
 
 > Test first → locate the frontier → teach only what is needed → verify transfer → review only what is at risk.
 
-The 700-hour curriculum is a **ceiling / available learning budget**, not a completion quota.
-
----
+A learning-time budget is a **ceiling / available learning budget**, not a completion quota.
 
 ## 2. Separation of concerns
 
@@ -23,25 +21,23 @@ RAW / EVIDENCE
       ↓
 CURATED / NORMALIZED
       ↓
-OFFICIAL LEXICON / CURRICULUM
+OFFICIAL KNOWLEDGE / CURRICULUM
       ↓
 LEARNING STATE
       ↓
 REVIEW QUEUE / NEXT BEST ACTIVITY
 ```
 
-- **Lexicon** answers: What should potentially be learned?
-- **Competency/module definitions** answer: What skill does the learner need to demonstrate?
+- **Knowledge** answers: What should potentially be learned?
+- **Competency/module definitions** answer: What capability does the learner need to demonstrate?
 - **Learning state** answers: How well does the learner currently know it?
 - **Review queue** answers: What should be done next, and why?
 
-Learning state must never alter source evidence or lexical truth.
-
----
+Learning state must never alter source evidence or canonical knowledge.
 
 ## 3. Units of tracking
 
-The system tracks mastery at four levels.
+The system tracks mastery at three levels.
 
 ### 3.1 Item
 
@@ -71,14 +67,6 @@ Extended (optional)
 Maintenance
 ```
 
-### 3.4 PTNK skill
-
-A target exam behavior, such as Grammar & Vocabulary, Guided/Open Cloze, Reading, Word Formation, Error Identification, or Sentence Transformation.
-
-A competency may map to multiple PTNK skills.
-
----
-
 ## 4. Knowledge dimensions
 
 At minimum, distinguish:
@@ -90,12 +78,10 @@ At minimum, distinguish:
 | `usage` | Can use/select the item correctly in context |
 | `collocation` | Knows required patterns, prepositions, and fixed combinations |
 | `discrimination` | Can distinguish it from near-synonyms/confusable forms |
-| `transfer` | Can apply it in PTNK-style tasks |
+| `transfer` | Can apply it in the target task context |
 | `retention` | Remains correct after a delay |
 
 Not every module requires every dimension. The module definition specifies which dimensions matter.
-
----
 
 ## 5. Mastery states
 
@@ -112,15 +98,13 @@ The learner can retrieve the information independently.
 The learner can use the knowledge correctly in relevant contexts.
 
 ### `MASTERED`
-The learner demonstrates stable performance across the dimensions required by the competency, including relevant PTNK transfer where applicable.
+The learner demonstrates stable performance across the dimensions required by the competency, including relevant transfer where applicable.
 
 ### `MAINTENANCE`
 Previously mastered knowledge remains stable through delayed checks.
 
 ### `EXTENDED`
-Core mastery is secure and the learner has moved into higher-discrimination C1+/C2 or advanced transfer work.
-
----
+Core mastery is secure and the learner has moved into higher-discrimination or advanced transfer work.
 
 ## 6. Mastery gates
 
@@ -136,8 +120,6 @@ Default thresholds are heuristics and may be tuned after collecting real learner
 
 These thresholds must not be applied only to an aggregate score.
 
----
-
 ## 7. Diagnostic-first rule
 
 Every substantial module should begin with a diagnostic unless reliable recent evidence already exists.
@@ -145,8 +127,6 @@ Every substantial module should begin with a diagnostic unless reliable recent e
 Diagnostic outcomes should identify mastered, partially mastered, weak, unseen, strong/weak dimensions, and whether extension is appropriate.
 
 If the diagnostic is consistently ≥90–95% and no critical dimension is weak, the module should normally be skipped or compressed.
-
----
 
 ## 8. Attempt/event model
 
@@ -158,7 +138,6 @@ learner_id
 item_id
 competency_id
 module_id
-ptnk_skill
 attempt_date
 result
 response_type
@@ -173,8 +152,6 @@ notes
 Assessment types may include diagnostic, active_recall, context_selection, collocation, discrimination, cloze, word_formation, error_identification, sentence_transformation, reading, and delayed_review.
 
 An assessment event is evidence. Learning state is the current interpretation of accumulated evidence.
-
----
 
 ## 9. Learning-state model
 
@@ -207,8 +184,6 @@ updated_at
 
 Scores are estimates, not immutable facts. New evidence can move a learner backwards or forwards.
 
----
-
 ## 10. Review scheduling
 
 Review is triggered by evidence, not by a fixed textbook calendar.
@@ -220,8 +195,6 @@ Suggested initial intervals after successful delayed recall:
 ```
 
 These are starting heuristics and should be adjusted using observed retention data.
-
----
 
 ## 11. Review queue
 
@@ -238,34 +211,29 @@ reason
 recommended_activity
 due_at
 estimated_minutes
-ptnk_skill
 priority
 created_at
 ```
-
----
 
 ## 12. Priority calculation
 
 Learning priority is not the same as difficulty. A task priority may consider:
 
 ```text
-PTNK relevance
-× current weakness
+current weakness
 × forgetting risk
 × competency dependency
-× exam proximity
+× learning-target relevance
+× opportunity cost
 ```
 
 Exact numeric weighting remains open until real performance data exists.
-
----
 
 ## 13. Next-best-activity logic
 
 ```text
 Is required competency already mastered?
- ├─ YES → Is there a weak PTNK transfer dimension?
+ ├─ YES → Is there a weak transfer dimension?
  │          ├─ YES → target transfer
  │          └─ NO  → extension or skip
  │
@@ -276,8 +244,6 @@ Is required competency already mastered?
 
 If performance is high, increase difficulty rather than repetition. If weakness is narrow, do not reteach the entire module.
 
----
-
 ## 14. Adaptive branching
 
 ### Fast learner branch
@@ -285,13 +251,13 @@ If performance is high, increase difficulty rather than repetition. If weakness 
 Diagnostic ≥90–95%, no critical dimension weak, and strong delayed retention:
 
 ```text
-skip core → advanced discrimination → difficult PTNK transfer → optional C2 tail
+skip core → advanced discrimination → difficult transfer → optional advanced extension
 ```
 
 ### Normal branch
 
 ```text
-targeted core → usage → PTNK transfer → mastery gate
+targeted core → usage → transfer → mastery gate
 ```
 
 ### Remediation branch
@@ -300,13 +266,9 @@ targeted core → usage → PTNK transfer → mastery gate
 reduce scope → reteach weak concept → controlled practice → delayed check
 ```
 
----
+## 15. Transfer coverage
 
-## 15. PTNK transfer coverage
-
-A competency should map to one or more exam skills. A learner should not receive `MASTERED` solely because they know a vocabulary meaning if the competency's required transfer dimension is weak.
-
----
+A competency should map to one or more target task types. A learner should not receive `MASTERED` solely because they know a vocabulary meaning if the competency's required transfer dimension is weak.
 
 ## 16. Maintenance
 
@@ -314,35 +276,22 @@ A mastered item/competency should enter maintenance when immediate performance, 
 
 A maintenance failure should reopen only the failed dimension whenever possible rather than resetting the entire competency.
 
----
-
 ## 17. Learning frontier
 
 ```text
 GREEN   = already solid → skip / maintain
 BLUE    = partially solid → targeted practice
 YELLOW  = within reach → active learning
-RED     = too difficult / low PTNK value → defer or omit
+RED     = low value or currently out of reach → defer or omit
 ```
 
 The frontier is dynamic and can move after new evidence.
 
----
+## 18. Learning-time integration
 
-## 18. 700-hour integration
+A learning-time framework is a budget, not a syllabus-completion requirement. Actual allocation is generated from learning state.
 
-The 700-hour framework is a budget, not a syllabus-completion requirement. Actual allocation is generated from learning state.
-
-```text
-CORE       ~300h
-STRONG     ~200h
-STRETCH    ~200h
-TOTAL      ≤700h
-```
-
-The system optimizes for competency, not seat time.
-
----
+The system optimizes for competency and learning value, not seat time.
 
 ## 19. Data integrity rules
 
@@ -353,7 +302,7 @@ The system optimizes for competency, not seat time.
 5. Preserve historical attempts; do not overwrite them.
 6. Allow mastery to regress when new evidence warrants it.
 7. Do not use difficulty as a proxy for mastery.
-8. Do not use vocabulary breadth as a proxy for PTNK readiness.
+8. Do not use vocabulary breadth as a proxy for readiness for a particular target.
 9. Keep source/provenance for assessment material.
 10. Treat thresholds and scheduling intervals as tunable heuristics until validated by project data.
 
