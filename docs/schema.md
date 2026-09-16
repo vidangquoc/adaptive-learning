@@ -16,11 +16,12 @@ domain:
 type:
 subtype:
 
-canonical_form:
+name:
 
 meaning:
-knowledge:
-form:
+mother_says:
+explanation:
+structure:
 usage:
 constraints:
 
@@ -108,27 +109,27 @@ subtype: derivational_family
 
 A subtype should not be invented merely to avoid leaving the field empty.
 
-### `canonical_form`
+### `name`
 
-The canonical representation of the knowledge object that the atom describes.
+The standard name of the knowledge object that the atom describes.
 
-It identifies **what the atom is about** in its standard form.
+It identifies **what the atom is about** in a concise, stable form.
 
 Examples:
 
 ```yaml
-canonical_form: assess
+name: assess
 ```
 
 ```yaml
-canonical_form: present perfect continuous
+name: present perfect continuous
 ```
 
 ```yaml
-canonical_form: strike a balance
+name: strike a balance
 ```
 
-`canonical_form` is not the same as `form`. For example, for a grammar atom, the canonical form may be `present perfect continuous`, while the structural form is `have/has + been + V-ing`.
+`name` should identify the knowledge object itself rather than describe the learner's task or mastery of it.
 
 ### `meaning`
 
@@ -148,34 +149,42 @@ or:
 meaning: an activity continuing up to the present with emphasis on duration
 ```
 
-`meaning` should be concise. The detailed teachable knowledge belongs in `knowledge`.
+`meaning` should be concise. Further explanation belongs in `explanation`.
 
-### `knowledge`
+### `mother_says`
 
-The core knowledge claim that the learner needs to know.
+A learner-facing expression of the atom's meaning in the learner's mother tongue.
 
-This is the most important semantic field in the atom. It should state the actual knowledge represented by the atom in a form that can be taught, checked, and diagnosed.
+For the current learner, this field contains Vietnamese. It is the only schema field whose content is intentionally written in the learner's mother tongue; all other field content should normally be in English.
 
-Examples:
+For grammar atoms, this field is not necessary and should use `null` so that the common schema remains consistent across atom types.
 
-```yaml
-knowledge: >
-  Assess means evaluating something systematically using available
-  information or criteria, especially its quality, value, condition,
-  ability, risk, or importance.
-```
-
-For grammar:
+Example:
 
 ```yaml
-knowledge: >
-  The present perfect continuous is used to emphasize an activity
-  that has continued up to the present, especially its duration or process.
+mother_says: đánh giá, thẩm định
 ```
 
-`knowledge` should be grounded in the source evidence. It must not contain unsupported additions or learner-specific mastery judgments.
+`mother_says` is not required to be a word-for-word translation. It should communicate the relevant concept naturally and accurately in Vietnamese.
 
-### `form`
+### `explanation`
+
+A fuller explanation of the knowledge represented by the atom.
+
+This field provides the detail needed to understand, teach, distinguish, or diagnose the atom beyond the concise `meaning` field.
+
+Example:
+
+```yaml
+explanation: >
+  Assess is used when making a considered judgment about the quality,
+  value, condition, ability, risk, or importance of something, usually
+  based on available evidence or criteria.
+```
+
+`explanation` should remain grounded in source evidence and should not contain unsupported additions or learner-specific mastery judgments.
+
+### `structure`
 
 The structural, formal, or pattern representation of the knowledge.
 
@@ -184,18 +193,18 @@ The exact content depends on the atom type.
 Examples:
 
 ```yaml
-form: assess + noun
+structure: assess + noun
 ```
 
 ```yaml
-form: have/has + been + V-ing
+structure: have/has + been + V-ing
 ```
 
 ```yaml
-form: strike + a balance + between A and B
+structure: strike + a balance + between A and B
 ```
 
-For a knowledge type where no meaningful structural form applies, use `null` rather than forcing unrelated information into this field.
+For a knowledge type where no meaningful structural representation applies, use `null` rather than forcing unrelated information into this field.
 
 ### `usage`
 
@@ -251,9 +260,9 @@ Use `[]` when no examples are available or appropriate.
 
 ### `related_atoms`
 
-Explicit relationships between this atom and other knowledge atoms.
+Relationships between this atom and other knowledge atoms.
 
-Relationships should be typed rather than represented only as an unstructured list of IDs.
+An atom may have zero, one, or multiple relationships. Each relationship should identify the related atom and the type of relationship.
 
 Example:
 
@@ -362,13 +371,14 @@ domain: vocabulary
 type: lexical_sense
 subtype: verb
 
-canonical_form: assess
+name: assess
 
 meaning: evaluate something
-knowledge: >
+mother_says: đánh giá, thẩm định
+explanation: >
   Assess means evaluating something systematically using available
   information or criteria.
-form: assess + noun
+structure: assess + noun
 usage:
   - evaluation
 constraints: []
@@ -388,13 +398,14 @@ domain: grammar
 type: grammar
 subtype: tense
 
-canonical_form: present perfect continuous
+name: present perfect continuous
 
 meaning: activity continuing up to the present with emphasis on duration or process
-knowledge: >
+mother_says: null
+explanation: >
   The present perfect continuous is formed with have/has + been + V-ing
   and is used especially to emphasize duration or an ongoing process.
-form: have/has + been + V-ing
+structure: have/has + been + V-ing
 usage:
   - continuing activity up to the present
   - duration
