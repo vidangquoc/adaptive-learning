@@ -6,7 +6,7 @@
 
 ## 1. Purpose
 
-The PTNK system is building a knowledge system, not a vocabulary list. A knowledge atom should therefore represent a sufficiently small, identifiable unit of knowledge that can be:
+Adaptive Learning is building a knowledge system, not a vocabulary list. A knowledge atom should therefore represent a sufficiently small, identifiable unit of knowledge that can be:
 
 - grounded in source evidence;
 - referenced independently;
@@ -45,7 +45,7 @@ A knowledge atom is not automatically:
 - one difficulty score;
 - one intrinsic vocabulary-priority score.
 
-In particular, **intrinsic lexical priority is not part of the ontology**. A lexical item appearing in the C1/C2 source material remains potentially relevant regardless of how frequently it appears in past PTNK papers.
+A lexical item remains potentially relevant according to the learning target and source evidence rather than an arbitrary historical frequency threshold.
 
 ## 4. Candidate ontology families
 
@@ -325,14 +325,13 @@ The following questions must be resolved before the final schema is treated as c
 1. What is the minimum information required for an atom to be considered valid?
 2. Should patterns/collocations be atoms themselves or typed relationships/components of another atom? The current default is to allow them to be independent atoms when they are independently teachable/assessable.
 3. Which knowledge types require distinct schemas rather than one polymorphic schema?
-4. What is the minimum information required for an atom to be considered valid?
-5. Which fields are source evidence, which are normalized canonical data, and which are derived metadata?
-6. How should conflicting source evidence be represented?
-7. How should grammar knowledge be represented alongside lexical knowledge?
-8. Which relationships should be first-class and queryable?
-9. Which fields are allowed to be unknown rather than inferred?
-10. What constitutes promotion from discovered candidate to verified atom?
-11. How should atom versioning work when the ontology evolves?
+4. Which fields are source evidence, which are normalized canonical data, and which are derived metadata?
+5. How should conflicting source evidence be represented?
+6. How should grammar knowledge be represented alongside lexical knowledge?
+7. Which relationships should be first-class and queryable?
+8. Which fields are allowed to be unknown rather than inferred?
+9. What constitutes promotion from discovered candidate to verified atom?
+10. How should atom versioning work when the ontology evolves?
 
 The previous question about whether a lexical sense should be a parent entity has been resolved: **no parent lexical entity is required merely to organize related atoms**.
 
@@ -340,7 +339,7 @@ The previous question about whether a lexical sense should be a parent entity ha
 
 - Preserve provenance.
 - Preserve raw source evidence separately from normalized knowledge.
-- Never invent definitions, meanings, pronunciation, examples, CEFR, or relationships.
+- Never invent definitions, meanings, pronunciation, examples, proficiency labels, or relationships.
 - Preserve lexical distinctions.
 - Treat independently teachable/assessable lexical variants as independent atoms.
 - Do not require parent/child/grandparent hierarchies among lexical atoms.
@@ -354,7 +353,7 @@ The previous question about whether a lexical sense should be a parent entity ha
 ## 14. Current pipeline relationship
 
 ```text
-Source sections
+Source content
       ↓
 Evidence-specific discovery
       ↓
@@ -376,8 +375,6 @@ Adaptive next-best activity
 ```
 
 ## 15. Status
-
-The current Destination C1/C2 discovery pipeline has demonstrated a promotion-gate PASS for evidence-specific candidate extraction. That does **not** mean the discovered candidates are already the final ontology.
 
 The current ontology decision for lexical knowledge is intentionally simple: **knowledge atoms are flat, independently assessable units; lexical relatedness is represented through optional explicit relationships rather than ancestry.**
 
