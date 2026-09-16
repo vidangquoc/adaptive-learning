@@ -1,112 +1,63 @@
-# Knowledge Atom Discovery, Contextual Analysis, and Promotion Pipeline
+# Knowledge Atom Discovery and Promotion Pipeline
 
-> Implementation specification for converting validated Destination source evidence into context-grounded knowledge-atom proposals. The canonical learning-material rules remain in `docs/learning-material-principles.md` and its conceptually grouped child documents.
+> Implementation specification for converting validated source evidence into reviewable knowledge-atom proposals and then official knowledge. Conceptual ontology belongs to `model.md`; formal structure belongs to `atom-structure.md`; governance policy belongs to `docs/learning-material/principles/03-evidence-provenance-and-governance.md`.
 
 ## 1. Purpose
 
-A **knowledge atom** is the smallest useful, independently referenceable piece of source-grounded knowledge that can later be linked to questions, competencies, and learner state.
-
-The pipeline must not treat parser output as knowledge. Extraction tools are used to locate and preserve evidence; interpretation and validation must operate on the source content and its relevant context.
-
-The canonical flow is:
+The pipeline locates source evidence, analyzes it in context, produces reviewable atom proposals, validates them, and promotes approved proposals into official knowledge.
 
 ```text
-validated Unit source
-        ↓
-source-order extraction / evidence discovery
-        ↓
-context-aware linguistic / semantic analysis
-        ↓
-knowledge-atom proposal
-        ↓
+validated source
+      ↓
+evidence discovery
+      ↓
+contextual analysis
+      ↓
+atom proposal
+      ↓
+validation
+      ↓
 human review
-        ↓
-verified knowledge atom
-        ↓
-enrichment / knowledge base
+      ↓
+official knowledge
 ```
 
-There is intentionally no requirement that a permanent intermediate `candidate` dataset exist between extraction and analysis. A tool may create temporary candidates internally when useful, but the reviewable output must be a context-grounded proposal rather than an unvalidated parser row.
+The pipeline does not treat parser output as knowledge.
 
-## 2. Inputs
+## 2. Inputs and Preconditions
 
-Canonical structural evidence is the **Unit source itself**:
+The pipeline consumes validated source material and its provenance. Source-boundary validation is defined by the learning-material source-boundary document.
 
-```text
-sources/destination-c1-c2/units/
-  unit-01.txt
-  unit-02.txt
-  ...
-```
+Before discovery begins:
 
-A Unit is the canonical source boundary. The knowledge-atom pipeline must not depend on, require, or reconstruct a pre-cut `sections/` directory or section manifest.
+- the source input must be structurally valid;
+- source evidence must be preserved immutably;
+- provenance must be sufficient for later review.
 
-Before discovery begins, validate the Unit boundaries and preserve the Unit source immutably. If Unit boundaries are invalid, stop the pipeline and repair the extraction layer before producing candidates.
+## 3. Evidence Discovery
 
-## 3. Source-Order and Context Requirements
+Parsers, layout detectors, regular expressions, table detectors, or similar tools may locate likely evidence.
 
-Analysis must preserve the instructional order of the Unit.
-
-For each potential knowledge item, collect enough surrounding material to interpret it, including where available:
-
-- headings and subheadings within the Unit;
-- source lines around the item;
-- lexical table row or word box;
-- definitions or explanations supplied by the source;
-- example sentences;
-- usage notes and patterns;
-- contrast sets;
-- nearby instructions or task framing;
-- relevant references elsewhere in the same Unit.
-
-Do not reduce an item to an isolated token before analysis when surrounding context may determine its part of speech, sense, usage, or atom type.
-
-When context is insufficient, preserve the uncertainty rather than inventing missing information.
-
-## 4. Evidence Discovery
-
-A parser, layout detector, regex, table detector, or other extraction method may be used to locate likely lexical or grammatical evidence.
-
-For vocabulary, topic vocabulary, phrasal verbs, phrases/patterns/collocations, idioms, and word formation, useful evidence signals include:
-
-- table-like lexical entries;
-- lexical form + part-of-speech markers;
-- lexical form + definition/usage text;
-- phrasal-verb + explanation pairs;
-- collocation/pattern rows;
-- word-formation rows or explicit derivational statements.
-
-For grammar, useful evidence signals include:
-
-- explicit grammar headings within a Unit;
-- numbered explanations;
-- rule statements;
-- examples;
-- tables;
-- contrast blocks;
-- usage restrictions.
-
-For assessment material, question content is primarily assessment evidence. Answer choices must not be promoted into knowledge atoms merely because they appear in an exercise.
+Discovery may identify lexical entries, phrases, patterns, collocations, idioms, phrasal verbs, word formation, grammar, contrasts, examples, explanations, and assessment evidence.
 
 Discovery output is **evidence location**, not canonical knowledge.
 
-## 5. Context-Aware Analysis
+## 4. Contextual Analysis
 
-After evidence is located, analyze the source content before proposing the atom.
+After evidence is located, analyze the relevant source context before proposing knowledge.
 
 The analysis may determine or propose:
 
-- canonical form;
 - atom type;
+- canonical form;
 - part of speech;
 - intended sense;
 - meaning;
-- lexicalization / idiomaticity;
+- lexicalization or idiomaticity;
 - syntactic or usage pattern;
 - word-formation relationship;
 - lexical or grammatical contrast;
-- orthographic variants;
-- relationships to other independently useful atoms.
+- relationships to other independent atoms.
 
 Use the evidence hierarchy:
 
@@ -120,118 +71,74 @@ weak / ambiguous inference
 null / pending / review-needed
 ```
 
-A field must remain null or pending when the available context does not support a reliable inference.
+When context is insufficient, preserve uncertainty rather than inventing missing information.
 
-Context may identify an intended sense, but context alone must not be treated as authority for inventing a dictionary definition.
+## 5. Atom Splitting, Merging, and Deduplication
 
-All inferred attributes must be distinguishable from source-stated attributes and retain appropriate evidence/provenance and confidence.
-
-## 6. Atom Splitting, Merging, and Deduplication
-
-One source span does not necessarily equal one knowledge atom.
-
-The analysis may propose:
+One source span does not necessarily equal one atom:
 
 ```text
-one evidence span → multiple independent atoms
-multiple evidence spans → one atom with multiple evidence links
+one evidence span → multiple atoms
+multiple evidence spans → one atom
 one evidence span → no atom
 ```
 
-Split when distinctions are independently useful for learning, assessment, querying, or learner-state tracking. For example, a source entry marked `(v,n)` may support separate verb and noun atoms if the evidence supports both readings.
-
-For grammar, the same principle applies: if a Unit supports separate uses or contrasts that can be independently learned or assessed, split them into flat independent atoms. Do not create a parent grammar atom with child uses merely because they share a textbook heading.
+Split when independently useful knowledge distinctions are supported by evidence. Merge evidence only when it supports the same underlying knowledge item and sense/use.
 
 Do not merge merely because forms are similar, meanings overlap, items share a word family, or one expression contains another.
 
 False deduplication is more damaging than controlled redundancy.
 
-## 7. Proposal Output
+## 6. Proposal Output
 
-The pipeline should produce a reviewable **atom proposal** containing, where supported:
+A reviewable proposal should preserve, where applicable:
 
 - stable proposal ID;
-- source ID/type;
-- source Unit;
-- precise source location within the Unit;
-- exact original source span;
-- surrounding context/evidence references;
+- source identity and boundary;
+- precise source location;
+- exact source span;
+- relevant context/evidence references;
 - proposed atom type;
-- proposed canonical form;
-- source-stated attributes;
-- inferred attributes;
+- proposed knowledge fields;
+- source-stated versus inferred attributes;
 - confidence;
 - warnings/anomalies;
-- relationships, if supported;
-- analysis notes;
+- supported relationships;
 - validation status.
 
-No proposal field should be populated solely because the schema permits it.
+No field should be populated solely because the schema permits it.
 
-## 8. Provenance Contract
+## 7. Validation
 
-Every proposal must preserve enough provenance to answer:
+Automated validation should check, as applicable:
 
-> **Where did this come from, and what evidence supports this interpretation?**
+1. source structure and boundary validity;
+2. exact source-span correspondence;
+3. provenance completeness;
+4. supported atom type and canonical form;
+5. source-grounded meaning and part of speech;
+6. unsupported definitions, pronunciation, examples, patterns, proficiency, or domain claims;
+7. evidence for splitting/merging decisions;
+8. duplicate or near-duplicate proposals;
+9. relationship references;
+10. ambiguous or competing interpretations;
+11. schema validity.
 
-At minimum preserve:
+Validation is a gate, not a replacement for human approval.
 
-- `source_id`;
-- `source_type`;
-- Unit;
-- precise source location within the Unit;
-- exact original source span;
-- relevant surrounding Unit context;
-- evidence status;
-- inference status where applicable.
+## 8. Human Review and Promotion
 
-A proposal without sufficient provenance cannot become canonical.
-
-The Unit is the source-boundary identifier. A textbook heading, topic label, exercise label, or exam section may be recorded as descriptive context when useful, but none is a required extracted source layer.
-
-## 9. Automated Validation and Quality Gates
-
-Automated analysis is advisory but must perform substantive validation before human review.
-
-Validate, as applicable:
-
-1. Unit exists and is structurally valid.
-2. Source span exactly matches the cited evidence.
-3. Provenance is complete enough for review.
-4. Proposed atom type is supported or explicitly pending.
-5. Canonical form is grounded in the source.
-6. Part of speech is source-stated or context-supported.
-7. Meaning/sense is source-stated or sufficiently supported by context.
-8. Unsupported definitions, pronunciation, CEFR, examples, patterns, or domains are not fabricated.
-9. Atom splitting/merging decisions have evidence.
-10. Duplicate or near-duplicate proposals are flagged rather than silently collapsed.
-11. Relationships reference known or explicitly pending entities.
-12. Unit-boundary anomalies are resolved or the proposal remains blocked.
-13. No intrinsic lexical priority is introduced.
-14. Ambiguous or competing interpretations are explicitly flagged.
-15. Insufficient evidence results in `null`, `pending`, or `review-needed`, not a guessed value.
-
-Validation is a gate, not a score. A high confidence value does not replace human approval.
-
-## 10. Human Promotion Gate
-
-After automated contextual analysis and validation, the proposal enters human review.
-
-The reviewer may:
+After validation, proposals enter human review. Promotion follows the governance policy in `03-evidence-provenance-and-governance.md`.
 
 ```text
-APPROVE
-REJECT
-HOLD
+APPROVE → eligible for promotion
+REJECT  → do not promote
+HOLD    → do not promote
 ```
 
-Only `APPROVE` may promote a proposal to an official knowledge atom.
+The implementation must preserve the review decision and provenance and must not destroy the proposal record when creating official knowledge.
 
-The human decision and rationale must be preserved with provenance.
-
-> **Machine proposes. Human decides.**
-
-## 11. Fail-Closed Behavior
+## 9. Fail-Closed Behavior
 
 ```text
 PASS → continue
@@ -239,24 +146,10 @@ WARN → continue only when explicitly acceptable
 FAIL → stop / preserve evidence / require review
 ```
 
-If structure, provenance, context, semantics, or atom identity cannot be established with sufficient confidence, do not promote.
+If source structure, provenance, context, semantics, or atom identity cannot be established sufficiently, do not promote.
 
-Preserve the evidence and mark the proposal for review instead.
+## 10. Reproducibility and Preservation
 
-## 12. Reproducibility and Source Preservation
+Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting raw evidence.
 
-Raw Unit source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting the raw evidence layer.
-
-Transformations should be reproducible and idempotent where practical. Do not silently repair source evidence; record repairs or downstream normalization explicitly.
-
-Keep these concerns separable:
-
-```text
-source Unit evidence
-contextual interpretation
-validation
-human decision
-enrichment
-learning design
-learner state
-```
+Transformations should be reproducible and idempotent where practical. Repairs must be explicit rather than silently altering source evidence.
