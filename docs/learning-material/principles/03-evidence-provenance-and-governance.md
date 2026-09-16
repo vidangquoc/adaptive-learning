@@ -2,105 +2,82 @@
 
 ## Provenance Is Mandatory
 
-Every knowledge atom and source-derived question must retain enough provenance to answer:
+Every source-derived knowledge atom and question must retain enough provenance to answer:
 
 > **Where did this come from, and what evidence supports it?**
 
-Preserve source ID/type, source quality/title/reference, **source Unit or equivalent source boundary**, precise location within that boundary, exercise/question identifier when applicable, source context/role, uncertainty, and license/usage information where applicable.
+Preserve source identity, source boundary, precise location, relevant source context, uncertainty, and licensing/usage information where applicable.
 
-The **Unit is the canonical source boundary** for Destination learning-material extraction. The project does not use a pre-cut `sections/` layer as a source boundary or provenance layer.
+External evidence such as proficiency frameworks must remain distinguishable from source evidence and project status.
 
-Keep source evidence, external proficiency evidence, and project status as separate provenance dimensions.
+The detailed Unit-boundary rules are owned by `06-source-unit-boundary.md`.
 
-## Knowledge-Atom Discovery and Promotion
+## Candidate and Promotion States
 
 Discovery and promotion are different states.
 
-A **candidate** is an evidence-backed hypothesis about a possible knowledge atom. It is not yet canonical knowledge. Candidate data must be preserved so that analysis, review, and promotion remain traceable and reproducible.
+A **candidate** is an evidence-backed hypothesis about possible canonical knowledge. It is not official knowledge. Candidate data must remain reviewable so analysis, review, and promotion are traceable and reproducible.
 
 ```text
-EVIDENCE FROM SOURCE
-   ↓
+SOURCE EVIDENCE
+      ↓
 CANDIDATE
-   ↓
+      ↓
 HUMAN REVIEW
-   ↓
+      ↓
 APPROVED
-   ↓
-PROMOTION / COPY
-   ↓
+      ↓
+PROMOTION
+      ↓
 OFFICIAL KNOWLEDGE
 ```
 
-Automated discovery and analysis may identify candidates, collect evidence, perform linguistic/semantic analysis, assess curricular evidence, calculate confidence, and flag warnings. These outputs are advisory and must not independently promote a candidate to official knowledge.
+Automated discovery and analysis are advisory. They may locate evidence, analyze linguistic/semantic properties, calculate confidence, and flag warnings, but they do not independently promote knowledge.
 
-## Human Review Is the Final Promotion Gate
+## Human Review Is the Promotion Gate
 
-A candidate becomes eligible for official learning-material knowledge only after explicit human approval.
+A candidate becomes eligible for official learning material only after explicit human approval.
 
-The reviewer may:
+```text
+APPROVE
+REJECT
+HOLD
+```
 
-- `APPROVE`
-- `REJECT`
-- `HOLD`
+The human decision and rationale must be preserved with provenance.
 
-The human decision and its rationale must be preserved with provenance. Candidate records and official atoms must remain distinguishable so that every official atom can be traced back to its evidence and final human decision.
+A candidate may be reviewed again later. Promotion always reads the current review status:
 
-A candidate with `APPROVED` status is eligible for officialization. A candidate with any other status is left untouched by the officialization process.
-
-A previous `REJECT` or `HOLD` does not permanently prevent later review. If a candidate is intentionally reviewed again and its current status is changed to `APPROVED`, it becomes eligible for officialization.
-
-> **Officialization reads the current candidate status. `APPROVED` → eligible; anything else → leave it alone.**
+```text
+APPROVED → eligible for promotion
+anything else → do nothing
+```
 
 > **Machine proposes. Human decides.**
 
-Automated curricular signals are inputs to human review, not authoritative promotion rules.
+## Officialization
 
-## Official Knowledge Is a Promoted Copy
+Official knowledge is a promoted representation of approved candidate knowledge.
 
-Official knowledge must be produced by a **promotion process** from approved candidates.
+Promotion must:
 
-The promotion process must:
+1. select candidates whose current status is `APPROVED`;
+2. skip candidates already officialized;
+3. create the official representation without destroying the candidate record;
+4. preserve links to candidate and source evidence;
+5. never promote `REJECTED`, `HOLD`, `PENDING`, or other non-approved candidates.
 
-1. select candidate records whose current status is explicit `APPROVED`;
-2. if that candidate has already been officialized, skip it;
-3. copy the approved knowledge into the official knowledge hierarchy;
-4. preserve provenance linking each official atom to its candidate and source evidence;
-5. leave the original candidate data intact;
-6. never officialize a candidate whose current status is `REJECTED`, `HOLD`, `PENDING`, or any other non-`APPROVED` state.
+The exact official atom structure is defined by the knowledge-layer schema documentation.
 
-Officialization is intentionally simple and idempotent: **approved and not-yet-officialized → promote; already officialized → skip; anything not approved → do nothing.**
+## Knowledge Admission Is Independent of Learner State
 
-Official knowledge must not be created by moving, deleting, or destructively transforming candidate records. The candidate layer preserves the proposal/review data; the official knowledge layer is the canonical learning-material snapshot consumed by downstream systems.
+Static learning-material admission must not be controlled by learner mastery, review urgency, opportunity cost, or other learner-specific signals.
 
-## Knowledge Data and Learner Review Data Are Separate
+Learner evidence may influence adaptive activity selection, but it must not rewrite source evidence or determine whether static knowledge is canonical.
 
-Static official learning material and dynamic learner-state data must remain separate concerns.
+## Quality Gates
 
-```text
-DATA/
-├── candidates/   ← proposed knowledge atoms
-├── knowledge/    ← approved / official knowledge
-└── review/       ← learner review and adaptive-learning data
-```
-
-`knowledge/` contains canonical official knowledge organized by source and source boundary. It must not depend on extracted section files. `review/` contains learner-specific attempts, learning state, review history, review queue, and related adaptive-learning data. Learner review data must not determine whether static material is admitted into official knowledge.
-
-## Back-Matter Evidence
-
-Author-curated back matter such as word lists, phrasal-verb databases, collocation databases, and idiom databases is strong curricular evidence that a source treats an item as part of its target learning scope.
-
-Back-matter evidence informs human review but does not by itself prove semantic identity, meaning, or official atom status.
-
-## Learner State Must Not Govern Material Admission
-
-Learning-material admission must be determined independently of learner state.
-
-Learner mastery, scheduling urgency, opportunity cost, and other learner-specific signals belong to downstream adaptive learning and must not determine whether a candidate becomes an official knowledge atom.
-
-## Quality Gates and Fail-Closed Behavior
-
-Every transformation stage must have explicit quality gates.
+Every transformation stage should have explicit gates:
 
 ```text
 PASS → continue
@@ -108,7 +85,7 @@ WARN → continue only when explicitly acceptable
 FAIL → stop / preserve evidence / require review
 ```
 
-Quality gates should cover source-boundary validity, provenance, semantic plausibility, answer uniqueness, schema validity, duplication, unsupported inference, and source/license constraints as appropriate.
+Gates should cover applicable structural validity, provenance, semantic plausibility, schema validity, duplication, unsupported inference, answer validity, and source/license constraints.
 
 If evidence is insufficient or competing interpretations remain unresolved:
 
@@ -116,9 +93,7 @@ If evidence is insufficient or competing interpretations remain unresolved:
 
 ## Pipeline Governance
 
-Evidence should be preserved before interpretation.
-
-Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting the raw evidence layer.
+Evidence should be preserved before interpretation. Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting raw evidence.
 
 Transformations should be reproducible and idempotent where practical. Do not silently repair source evidence; record repairs or downstream normalization explicitly.
 
@@ -132,3 +107,5 @@ official knowledge
 learning design
 learner state
 ```
+
+Implementation details for discovering, validating, and promoting atoms belong in `docs/knowledge/atom-pipeline.md`.
