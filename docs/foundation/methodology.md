@@ -91,10 +91,6 @@ Adaptive learning
 
 Source-specific extraction rules, provenance requirements, and source boundaries are defined under `docs/learning-material/`.
 
-## 8. Initial Source Backbone
-
-Destination C1 & C2 is the initial curriculum backbone. It is a starting knowledge universe, not a mandatory page-by-page sequence. Additional sources may be introduced when they add meaningful breadth, depth, precision, or transfer value.
-
-## 9. Versioning
+## 8. Versioning
 
 Authoritative rules must be versioned through repository history. When a rule changes, update the document that owns that rule and remove obsolete recovery instructions so future sessions do not revive superseded decisions.
