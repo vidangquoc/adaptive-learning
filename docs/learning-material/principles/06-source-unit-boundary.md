@@ -18,7 +18,7 @@ Each `unit-XX.txt` must contain the complete source content belonging to that Un
 
 ## No `sections/` Layer
 
-The project does **not** use an extracted `sections/` directory or `MANIFEST.tsv` as a source-of-truth layer.
+The project does not use an extracted `sections/` directory or `MANIFEST.tsv` as a source-of-truth layer.
 
 Do not:
 
@@ -28,20 +28,18 @@ Do not:
 - require a section manifest for validation;
 - recreate the old section-based extraction pipeline.
 
-A textbook may contain internal headings, topic labels, grammar labels, exercise labels, or other divisions. Those are **content inside the Unit**, not mandatory structural files in the repository.
+Textbook headings, topic labels, grammar labels, exercise labels, and similar divisions remain content inside the Unit.
 
 ## Unit Validation Gate
 
-Before evidence discovery begins, validate every Unit boundary.
-
-At minimum verify:
+Before downstream evidence discovery begins, validate every Unit boundary:
 
 1. Unit start is correct.
 2. Unit end is correct.
 3. No content is missing.
-4. No content from the next/previous Unit is included.
+4. No content from adjacent Units is included.
 5. Unit order is preserved.
-6. The Unit can be read as the complete source context for downstream analysis.
+6. The Unit can be read as complete source context for downstream analysis.
 
 If any condition fails:
 
@@ -49,11 +47,11 @@ If any condition fails:
 FAIL → stop extraction → repair Unit boundary → revalidate
 ```
 
-Do not continue into candidate generation with a known-invalid Unit.
+Do not continue with known-invalid Unit input.
 
-## Provenance
+## Unit-Based Provenance
 
-Every source-derived candidate and official atom must be traceable to:
+For Unit-based extraction, source provenance identifies:
 
 ```text
 source
@@ -65,47 +63,22 @@ precise location/span within Unit
 source evidence
 ```
 
-A textbook heading may be recorded as descriptive metadata when useful, but it does not replace Unit provenance.
+A textbook heading or exercise label may be recorded as descriptive context, but it does not replace Unit provenance or become a separate source layer.
 
-## Discovery
+## Downstream Discovery
 
-Evidence discovery operates directly on Unit content.
+Evidence discovery operates directly on Unit content. It may identify vocabulary, phrases, patterns, collocations, idioms, phrasal verbs, word formation, grammar, contrasts, examples, explanations, and assessment evidence.
 
-The discovery layer may identify:
+Discovery output is evidence location, not canonical knowledge. Knowledge interpretation and atomization are defined elsewhere.
 
-- vocabulary entries;
-- topic vocabulary;
-- phrases, patterns, and collocations;
-- idioms;
-- phrasal verbs;
-- word formation;
-- grammar rules and constructions;
-- lexical/grammatical contrasts;
-- examples and explanations;
-- exercises and assessment evidence.
-
-Discovery output is evidence location, not canonical knowledge.
-
-One Unit may contain many knowledge domains and evidence types. Do not split the Unit into artificial repository sections merely to make extraction easier.
-
-## Knowledge Atom Implication
-
-Unit boundaries and knowledge-atom boundaries are different concepts.
-
-A single Unit may produce many independent atoms, and one atom may be supported by multiple evidence spans within the same Unit or, where explicitly allowed, across source records.
-
-The flat-atom rule remains:
-
-> **Each independently useful knowledge unit is represented as its own atom.**
-
-This applies equally to lexical and grammatical knowledge.
+One Unit may contain many knowledge domains and evidence types. Do not split the Unit into artificial repository sections merely to simplify extraction.
 
 ## Assessment Evidence
 
-Exercises and questions inside a Unit are primarily assessment evidence. They may be linked to knowledge atoms, but answer choices, fill-in rows, and generic exercise markers must not automatically become knowledge atoms.
+Exercises and questions inside a Unit are source evidence for assessment. They may be linked to knowledge atoms, but answer choices, fill-in rows, and generic exercise markers must not automatically become knowledge atoms.
 
 ## Migration Rule
 
-The former section-based extraction artifacts are historical and superseded. New pipeline code, schemas, provenance rules, validation, and recovery instructions must not depend on them.
+The former section-based extraction artifacts are historical and superseded. New pipeline code, schemas, provenance rules, and recovery instructions must not depend on them.
 
-If an old script still expects `sections/`, update or retire the script before using it in the new pipeline.
+If an old script still expects `sections/`, update or retire it before using it in the current pipeline.
