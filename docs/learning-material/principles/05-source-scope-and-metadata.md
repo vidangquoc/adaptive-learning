@@ -2,17 +2,17 @@
 
 ## No Intrinsic Vocabulary Priority
 
-Individual vocabulary items must **not** receive intrinsic learning-priority scores based on frequency in PTNK papers, perceived difficulty, usefulness, or any other heuristic.
+Individual vocabulary items must **not** receive intrinsic learning-priority scores based on perceived difficulty, usefulness, frequency, or any other unsupported heuristic.
 
-> **C1/C2 knowledge represented in the selected backbone is legitimate learning material unless evidence shows that it is outside the target scope.**
+> **Knowledge explicitly represented in a selected learning source is legitimate learning material unless evidence shows that it is outside the target scope.**
 
 Adaptive urgency belongs to learner state and task selection, not to the lexical item itself.
 
-## PTNK Papers Are Calibration Evidence
+## Source Scope and Selection
 
-PTNK papers are used primarily to calibrate and validate competency coverage, task formats, difficulty/discrimination, how advanced knowledge is operationalized, and transfer requirements.
+A source library is not a mandatory curriculum. Sources should be selected and combined according to the current learning target, competency coverage, diagnostic evidence, and marginal learning value.
 
-Do not construct the curriculum by reverse-engineering a frequency-based vocabulary list from past papers.
+Do not construct a curriculum by reverse-engineering a frequency list from a single assessment source.
 
 ## Domain and Specialist Context
 
@@ -20,17 +20,17 @@ Domain describes meaningful subject/topic context when it adds useful informatio
 
 Do not force a specialized domain when the item is broadly transferable. If uncertain, leave the field pending.
 
-Domain does not determine CEFR or learner priority.
+Domain does not determine proficiency level or learner priority.
 
-## CEFR and External Metadata
+## Proficiency and External Metadata
 
-Do not invent CEFR levels.
+Do not invent proficiency levels.
 
-Do not infer C1/C2 merely because an item looks advanced, occurs in a difficult question, or feels difficult.
+Do not infer a level merely because an item looks advanced, occurs in a difficult question, or feels difficult.
 
-Record CEFR only when independently verified and preserve its source separately from lexical provenance and PTNK evidence.
+Record proficiency metadata only when independently verified and preserve its source separately from lexical provenance and source evidence.
 
-CEFR may apply to a particular sense or use; do not automatically generalize it to every sense of a headword.
+A proficiency label may apply to a particular sense or use; do not automatically generalize it to every sense of a headword.
 
 ## Copyright and Source Boundaries
 
