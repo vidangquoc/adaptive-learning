@@ -24,11 +24,11 @@ That file contains prompts for the user to start recovery and prompts for the us
 
 ### Current task
 
-Establish a clean, reproducible context-recovery system for the repository.
+Recover enough current conversation context and repository understanding to continue the user's present task accurately.
 
 ### Current objective
 
-Separate:
+Keep four distinct layers separate:
 
 1. **Project knowledge** — stable knowledge required to understand the project and its data.
 2. **Conversation context** — temporary context required to continue the current line of work.
@@ -44,6 +44,39 @@ Separate:
 - Detailed project knowledge remains authoritative in `docs/` and the repository's actual data, source material, implementation, and history.
 - Do not recreate `PROJECT-CONTEXT.md` or `PROJECT-STATUS.md` as parallel recovery files.
 
+### Current documentation structure
+
+The main authoritative documentation domains are:
+
+```text
+docs/
+├── foundation/
+│   └── methodology.md
+├── learning-material/
+│   ├── principles/
+│   │   ├── overall.md
+│   │   ├── 01-purpose-and-learning-strategy.md
+│   │   ├── 02-knowledge-model-and-interpretation.md
+│   │   ├── 03-evidence-provenance-and-governance.md
+│   │   ├── 04-assessment-and-learning-material.md
+│   │   ├── 05-source-scope-and-metadata.md
+│   │   └── 06-source-unit-boundary.md
+│   ├── sources/
+│   ├── procedures/
+│   └── rules/
+├── knowledge/
+│   ├── overall.md
+│   ├── atom-types.md
+│   ├── atom-structure.md
+│   └── atom-pipeline.md
+├── data/
+│   └── architecture.md
+└── learner/
+    └── learning-state.md
+```
+
+Recovery instructions must use these current paths rather than obsolete pre-reorganization paths.
+
 ### Current constraints
 
 - Do not duplicate detailed project documentation into recovery files.
@@ -51,6 +84,7 @@ Separate:
 - Do not treat old conversation memory as authoritative when repository evidence is available.
 - Keep project knowledge, learning-material knowledge, learner data, and current conversation context distinct.
 - When information is missing or contradictory, verify it from authoritative repository sources rather than guessing.
+- Treat the repository's current structure and file contents as authoritative; do not preserve obsolete paths merely because they appeared in earlier recovery instructions.
 
 ### Relevant files
 
