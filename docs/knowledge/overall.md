@@ -84,13 +84,63 @@ relation
 metadata
 ```
 
-A property describes an existing atom; a relation connects independent atoms; metadata describes source or system context.
+A **property** is information that describes an existing atom. By itself, a property does not create another atom.
 
-However, information being related to or describing another atom does not automatically make it a property. If that knowledge has its own learning value and should be identified, learned, and assessed as a separate learning target, it may be represented as its own atom.
+However, being a property does not permanently prevent the same knowledge from also being represented as a separate atom. If the knowledge can function as a meaningful learning target that should be assessed separately, it may become its own atom.
+
+For example, the form `have/has + past participle` can be recorded as a property of the `present perfect` atom:
+
+```text
+Atom: present perfect
+Property:
+    form = have/has + past participle
+```
+
+If the source material provides evidence that the form is taught or tested as a distinct target, it may also justify separate atoms such as:
+
+```text
+present perfect with have
+present perfect with has
+```
+
+The existence of the property does not prevent these from being separate atoms. The atom decision should be grounded in the source material rather than by automatically turning every property into an atom.
+
+In particular, **assessment evidence in the source is an important signal for deciding atom granularity**. If the original material explicitly teaches, exercises, contrasts, or tests a piece of knowledge as a separate learning target, that evidence can justify representing it as a separate atom. If it only functions as descriptive information about another atom and there is no evidence that it is a separately targeted piece of knowledge, it can remain a property.
+
+A **relation** connects knowledge atoms. It does not turn one atom into a parent or child of another.
+
+For example:
+
+```text
+present perfect
+        │
+        ├── related_to → present perfect with have
+        └── related_to → present perfect with has
+```
+
+The relation records how the atoms are connected; it is not itself a knowledge atom.
+
+**Metadata** describes source, provenance, system, or other contextual information. It is not part of the knowledge itself.
+
+Therefore, the practical distinction is:
+
+```text
+Does it describe an existing atom?
+    → Property
+
+Can it itself be a meaningful learning target?
+    → It may be an Atom
+
+Does it describe a connection between atoms?
+    → Relation
+
+Does it describe source/system context?
+    → Metadata
+```
+
+The important point is that **Property versus Atom is not decided only by whether the information describes another atom**. The same knowledge may be a property in one context and a separately represented atom when source evidence shows that it is a distinct learning target worth assessing separately.
 
 Synonymy, antonymy, near-synonymy, semantic distinctions, derivation, prerequisite relationships, and competency support are normally relations rather than additional atoms.
-
-Create an atom when the knowledge itself is independently meaningful as a learning target and useful to teach, assess, track, or retrieve separately. Complete conceptual independence is not required.
 
 ## 5. Knowledge versus Assessment
 
