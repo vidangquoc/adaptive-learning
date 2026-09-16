@@ -10,41 +10,48 @@ It is an implementation SOP, not a competing learning-material policy. The canon
 
 > Preserve evidence first; postpone interpretation rather than guessing.
 
-The extraction pipeline must keep the original source recoverable and must separate extraction from cleaning, normalization, curation, and learning design.
+The extraction pipeline must keep the original source recoverable, preserve structural provenance, and separate source extraction from evidence discovery, knowledge interpretation, validation, and learner-state design.
 
-## Standard pipeline
+## Canonical pipeline
 
 ```text
-SOURCE FILE
+SOURCE PDF
     ↓
 source registration
     ↓
-immutable source / provenance record
+source-segments.yaml
     ↓
-text extraction
+segment PDFs
     ↓
-RAW EVIDENCE
+segment text
     ↓
-extraction-quality inspection
+segment validation
     ↓
-structure detection
+evidence discovery
     ↓
-boundary validation
+candidate atoms
     ↓
-structural evidence files
+validation / promotion gate
     ↓
-knowledge extraction + exercise extraction
-    ↓
-CLEAN / NORMALIZED
-    ↓
-CURATED KNOWLEDGE
-    ↓
-KNOWLEDGE ATOMS
-    ↓
-QUESTION BANK
-    ↓
-COMPETENCY MAPPING
+official atoms
 ```
+
+The key boundary is **Segment**. A Segment is a canonical structural source boundary defined by `source-segments.yaml` and represented by a segment PDF. A Unit is one Segment with `type: unit`; it is not a separate repository layer.
+
+The canonical source layer is:
+
+```text
+sources/
+├── <original-source>.pdf
+└── <source-id>/
+    ├── source-segments.yaml
+    ├── segments/
+    └── segment-text/
+```
+
+`segments/` contains structural source PDFs. `segment-text/` contains derived machine-readable text for those same segments. Neither layer replaces the original source PDF.
+
+Do not introduce `raw/`, a whole-source TXT intermediate layer, a separate `units/` directory, or a separate `sections/` directory into the current pipeline.
 
 ## 1. Register the source
 
@@ -55,39 +62,81 @@ Before extraction:
 3. record source type and acquisition method;
 4. preserve canonical URL/reference when available;
 5. record retrieval/acquisition timestamp;
-6. compute and record a checksum for the acquired file;
+6. compute and record a checksum for the acquired source file;
 7. record license and usage restrictions;
 8. record the extraction method intended for the source.
 
-Do not begin curation before source registration.
+Do not begin segmentation or evidence discovery before source registration is complete.
 
-## 2. Preserve the original source
+## 2. Preserve the original source / source of truth
 
-The acquired source is the recovery point.
-
-```text
-SOURCE FILE
-    ↓
-immutable source archive/reference
-    ↓
-raw extraction
-```
-
-Never overwrite the original source to repair extraction problems.
-
-If redistribution is restricted, preserve the source only where legally and operationally permitted, while retaining enough provenance and metadata to reproduce the extraction.
-
-## 3. Extract to an immutable raw evidence layer
-
-For a text-based PDF, a typical deterministic workflow is:
+The acquired source PDF is the recovery point and source of truth for structural extraction.
 
 ```text
-PDF
- ↓
-pdftotext -layout
- ↓
-RAW TXT
+ORIGINAL SOURCE PDF
+       ↓
+segmentation + derived representations
 ```
+
+Never overwrite or modify the original source to repair extraction problems.
+
+If redistribution is restricted, preserve the source only where legally and operationally permitted, while retaining enough provenance and metadata to identify and reproduce the extraction.
+
+The source PDF must remain independently recoverable from all derived segment and text files.
+
+## 3. Define source segmentation
+
+Segmentation converts the source PDF into explicit, deterministic structural boundaries.
+
+The segmentation manifest is `source-segments.yaml`. It records the segment IDs, types, ordering, and source boundaries needed to reproduce the structural split.
+
+Typical segment types may include:
+
+- `unit`;
+- `review`;
+- `progress-test`;
+- `database`;
+- `revision-test`;
+- `answer-key`;
+- `header`;
+- `footer`.
+
+The exact set of segment types is source-dependent and must be defined by the segmentation manifest rather than inferred from a generic hierarchy.
+
+A Unit is represented as a Segment with `type: unit`. Do not create a second Unit-specific storage layer.
+
+Segmentation must preserve source order and page/boundary provenance. Segment boundaries must be based on structural evidence in the source, not on arbitrary text lengths or downstream knowledge topics.
+
+## 4. Generate segment PDFs
+
+After the segmentation manifest is defined and reviewed, generate one PDF for each canonical Segment.
+
+Rules:
+
+- each segment PDF must map to exactly one manifest segment;
+- output naming must be deterministic and stable;
+- source page ranges or equivalent boundary information must remain traceable;
+- the original source PDF must remain unchanged;
+- segmentation must be reproducible from the source PDF and manifest;
+- an unexpected existing output must fail loudly rather than being silently overwritten.
+
+The segment PDF is the canonical structural representation of that Segment. It is the primary source artifact used to inspect whether a boundary is correct.
+
+## 5. Generate segment text
+
+Generate machine-readable text from each segment PDF when text processing is required.
+
+The relationship is:
+
+```text
+Original source PDF
+      ↓
+Segment PDF
+      ↓
+Segment text
+```
+
+`segment-text/` is a derived representation, not an independent source layer.
 
 Record when practical:
 
@@ -98,90 +147,57 @@ Record when practical:
 - input checksum;
 - output checksum.
 
-The raw text is evidence, not learner-facing content.
+Do not construct the canonical text corpus by first extracting the entire book into one intermediate TXT file and then splitting it. The canonical segmentation boundary comes first.
 
-## 4. Inspect extraction quality before mass parsing
+## 6. Validate segment boundaries and text
 
-Inspect representative pages or sections before running a full parser.
+Validate segmentation before evidence discovery.
+
+For a representative sample, inspect:
+
+1. the beginning of each selected Segment;
+2. the end of each selected Segment;
+3. the corresponding pages in the original source PDF;
+4. the segment PDF against the manifest boundary;
+5. the segment text against the segment PDF.
 
 Check for:
 
-- missing text;
-- broken character encoding;
-- duplicated headers/footers;
+- missing pages or content;
+- content leaking across segment boundaries;
+- duplicated or omitted pages;
 - incorrect reading order;
-- columns merged incorrectly;
-- tables damaged;
-- page numbers mixed into content;
-- symbols or diacritics corrupted;
-- answer choices reordered;
-- exercise boundaries damaged.
+- broken encoding;
+- damaged tables or answer choices;
+- corrupted symbols or diacritics;
+- duplicated headers/footers;
+- text extraction that materially changes meaning.
 
-If extraction is materially unreliable, stop and change the extraction strategy. Do not silently rewrite raw evidence to compensate.
+If a Segment is wrong, fix the segmentation or extraction process before discovering evidence from it. Do not silently repair source evidence during downstream parsing.
 
-## 5. Detect document structure
+A segment is not ready for evidence discovery until its boundary and derived text are sufficiently trustworthy for the intended task.
 
-Identify structural anchors such as:
+## 7. Discover evidence
 
-```text
-Book
- ├─ Unit / Chapter
- │   ├─ Section
- │   ├─ Instructional content
- │   ├─ Examples
- │   ├─ Exercises
- │   │   └─ Questions
- │   └─ Review / Test
- └─ Answer key / Reference material
-```
+Evidence discovery identifies source-supported instructional and assessment evidence inside validated Segments.
 
-Use multiple structural signals where possible.
+The evidence-discovery process should work from segment text while remaining traceable to the segment PDF and original source PDF.
 
-Do not assume every occurrence of a heading is a real boundary: PDFs commonly repeat running headers, page titles, and other navigation text.
-
-## 6. Validate boundaries on a small sample
-
-Before full-book extraction:
-
-1. identify candidate boundaries;
-2. select a representative unit or section;
-3. extract a small test range;
-4. inspect its beginning and end;
-5. verify that the content belongs to the intended section;
-6. verify that the next section has not leaked into the output;
-7. only then run mass extraction.
-
-A boundary parser that has not passed sample validation is not ready for full-book extraction.
-
-## 7. Split structural evidence deterministically
-
-Once boundaries are validated, create stable structural evidence files where useful.
-
-Example:
+Every discovered evidence item should preserve enough provenance to answer:
 
 ```text
-raw/
-  Source.txt
-
-units/
-  unit-01.txt
-  unit-02.txt
-  ...
+Which source?
+Which Segment?
+Which segment PDF?
+Which text span or source location?
+What does the source actually say or show?
 ```
 
-Rules:
+Evidence discovery is not yet official atom creation. Do not silently convert an interpretation into a source fact.
 
-- deterministic output names;
-- stable ordering;
-- no silent overwriting;
-- explicit failure when an expected output already exists;
-- preserve source line/location relationships where practical.
+## 8. Extract instructional knowledge evidence
 
-## 8. Parse instructional knowledge separately
-
-Do not treat exercise answers as the entire knowledge universe.
-
-Extract from instructional content:
+From instructional content, identify evidence relevant to knowledge extraction, including where applicable:
 
 - lexical items and senses;
 - multiword expressions;
@@ -191,120 +207,126 @@ Extract from instructional content:
 - grammar rules and patterns;
 - word formation;
 - usage and register;
-- examples and contextual evidence.
+- examples and contextual evidence;
+- contrasts and boundaries explicitly supported by the source.
 
-Every extracted record should retain source location and provenance.
+Preserve the source span and Segment provenance for every candidate finding.
 
-## 9. Parse exercises and questions separately
+The detailed schema and field semantics for knowledge atoms are defined in `docs/knowledge/atom-structure.md`; this SOP does not redefine that schema.
 
-Extract exercises into source-derived question records.
+## 9. Extract assessment evidence separately
+
+Extract exercises, tests, reviews, and answer material as source-derived assessment evidence.
 
 Preserve, where available:
 
-- exercise identifier;
+- Segment ID/type;
+- exercise or test identifier;
 - question number;
 - original task type;
 - prompt;
 - options;
 - answer/key when legitimately available;
 - source location;
-- provenance.
+- provenance;
+- the instructional or knowledge target supported by the source.
 
-Do not transform source questions into generated questions during this stage.
+Do not transform source questions into generated questions during source extraction.
 
-## 10. Preserve question ↔ knowledge relationships
+Assessment evidence can support atom discovery and validation, but a question does not automatically prove that every word or concept appearing in it is a tested knowledge target.
 
-Map source-derived questions to the knowledge atoms they actually test.
+## 10. Preserve question ↔ evidence / atom relationships
 
-Use evidence from:
+When source-derived questions are linked to knowledge findings, preserve the relationship explicitly.
+
+Use evidence such as:
 
 - answer structure;
 - instructional explanation;
 - exercise instructions;
 - lexical or grammatical target;
-- source context.
+- source context;
+- explicit source references.
 
-Do not infer a relationship merely because a word appears somewhere in the same unit.
+Do not infer a relationship merely because a word or construction appears somewhere in the same Segment.
 
-## 11. Normalize only downstream
+Question-to-knowledge relationships must remain traceable back to the source evidence that justified the relationship.
 
-After raw structural extraction is validated:
+## 11. Create candidate atoms
 
-```text
-RAW
- ↓
-CLEAN
- ↓
-NORMALIZED
- ↓
-CURATED
-```
+Validated evidence may be synthesized into candidate knowledge atoms.
 
-Typical downstream operations include:
+Candidate creation is an interpretation step. The candidate must retain its supporting evidence and provenance so that another reviewer or later process can reconstruct why the candidate exists.
 
-- encoding cleanup;
-- whitespace normalization;
-- structural canonicalization;
-- controlled deduplication;
-- normalization of labels and identifiers;
-- conversion to machine-readable schemas.
+At this stage:
 
-Never make these edits directly to raw evidence.
+- do not treat candidates as official knowledge;
+- do not invent unsupported meanings, constraints, or examples;
+- do not silently merge distinct concepts merely because they are related;
+- do not put learner mastery or attempt history into the atom;
+- do not finalize fields beyond what the evidence supports.
 
-## 12. Run quality gates
+The canonical atom structure, taxonomy, and semantic-ID rules are defined separately in `docs/knowledge/`.
 
-Before promoting extracted material, verify:
+## 12. Run validation and promotion gates
 
-- source checksum and provenance are recorded;
-- extraction is reproducible;
-- expected structural boundaries are present;
-- boundaries are validated;
-- unexpected cross-boundary leakage is absent or flagged;
-- question counts are plausible;
+Before a candidate atom becomes official, verify at minimum:
+
+- source identity and provenance are recorded;
+- Segment identity and source location are recoverable;
+- supporting evidence is actually present in the source;
+- segment boundaries are valid;
+- the interpretation does not exceed the evidence;
 - source-derived and generated content are distinguishable;
-- knowledge/question provenance is retained;
-- unresolved extraction problems are explicitly marked;
-- no unsupported content was invented to repair extraction gaps.
+- assessment relationships are justified;
+- unresolved extraction or interpretation problems are explicitly marked;
+- no unsupported content was invented to repair gaps;
+- the candidate conforms to the canonical atom taxonomy and structure.
 
-## 13. Promote to the knowledge system
+Promotion is a controlled state transition, not an automatic consequence of successful text extraction or candidate generation.
 
-Only after evidence and structural validation:
+## 13. Promote validated candidates to official atoms
+
+Only candidates that pass the required validation gate may enter the official knowledge layer.
+
+The conceptual transition is:
 
 ```text
-RAW / EVIDENCE
-      ↓
-CLEAN / NORMALIZED
-      ↓
-CURATED KNOWLEDGE
-      ↓
-KNOWLEDGE ATOMS
-      ↓
-QUESTION BANK
-      ↓
-COMPETENCY MAPPING
+validated Segment evidence
+        ↓
+candidate atom
+        ↓
+validation / review
+        ↓
+official atom
 ```
 
-Promotion is a controlled state transition, not an automatic consequence of successful text extraction.
+Official atoms must retain source provenance. Officialization must not erase the evidence or turn the atom into an unexplained standalone assertion.
+
+Learner mastery, attempts, review state, and other learner-specific information belong to the learner-state layer, not to the knowledge atom itself.
 
 ## 14. Source-specific adaptation
 
-This SOP is the default procedure, not a rigid parser implementation.
+This SOP is the default operational procedure, not a rigid parser implementation.
 
 For EPUB, HTML, scanned PDF/OCR, DOCX, or other formats:
 
 - adapt acquisition and extraction mechanics;
-- preserve the raw/evidence boundary;
-- preserve provenance;
-- validate structure before mass parsing;
-- keep cleaning downstream;
-- preserve recoverability;
-- document source-specific deviations.
+- preserve the original source of truth;
+- produce an explicit structural segmentation appropriate to the source;
+- preserve Segment-level provenance where the source supports it;
+- validate boundaries before mass evidence discovery;
+- keep derived text downstream of the structural source representation;
+- document source-specific deviations;
+- do not reintroduce obsolete whole-source text or parallel structural layers merely because a tool prefers them.
+
+For OCR sources in particular, extraction quality must be validated before evidence discovery because OCR errors can change lexical, grammatical, and assessment evidence.
 
 ## 15. Reproducibility and idempotence
 
 A source-extraction pipeline should be safe to rerun.
 
-Given the same source and extraction configuration, it should produce the same structural outputs except for explicitly nondeterministic metadata.
+Given the same source PDF, segmentation manifest, extraction configuration, and tool versions, it should produce the same structural outputs except for explicitly nondeterministic metadata.
 
 Scripts should:
 
@@ -312,12 +334,16 @@ Scripts should:
 - avoid silent overwrites;
 - make output paths explicit;
 - record tool/configuration versions where useful;
-- make structural validation testable.
+- make segment-boundary validation testable;
+- preserve stable IDs and ordering;
+- make it possible to trace derived files back to their source inputs.
+
+A change to segmentation boundaries is a source-structure change and should be reviewed as such; it must not silently alter downstream evidence or official knowledge.
 
 ## 16. Relationship to the canonical rulebook
 
 `docs/learning-material/principles/` defines **what the learning system must preserve and why**.
 
-This SOP defines **how source material is operationally extracted and moved into that system**.
+This SOP defines **how source material is operationally segmented, extracted, validated, and moved into the knowledge system**.
 
-If a future implementation detail conflicts with a canonical learning-material principle, preserve the principle and adapt the implementation.
+The Segment architecture defined by `docs/learning-material/principles/06-source-unit-boundary.md` is the canonical source boundary. If a future implementation detail conflicts with that architecture or another canonical learning-material principle, preserve the principle and adapt the implementation.
