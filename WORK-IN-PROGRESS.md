@@ -31,12 +31,14 @@ Evidence discovery
 A Unit is a `type: unit` Segment. There is no separate canonical `units/` directory and no `raw/` layer.
 
 ### 2. Align the extraction SOP
-- [ ] Update `docs/learning-material/procedures/source-extraction-sop.md` to match the final Segment-based source architecture.
-- [ ] Ensure the pipeline is unambiguous:
+- [x] Update `docs/learning-material/procedures/source-extraction-sop.md` to match the final Segment-based source architecture.
+- [x] Ensure the pipeline is unambiguous:
 
 ```text
 Source PDF → Segmentation → Segment validation → Evidence → Candidate atoms → Validation → Official atoms
 ```
+
+The SOP now treats the original source PDF as the source of truth, `source-segments.yaml` as the segmentation manifest, Segment PDFs as the canonical structural source artifacts, and `segment-text/` as derived machine-readable text. It no longer uses an obsolete whole-source text layer or separate `units/` / `sections/` layers.
 
 ### 3. Finalize atom taxonomy + structure
 - [ ] Make `docs/knowledge/atom-types.md` and `docs/knowledge/atom-structure.md` use one coherent taxonomy.
