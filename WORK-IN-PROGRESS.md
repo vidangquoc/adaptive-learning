@@ -8,18 +8,34 @@ Make the repository's **source layer, atom model, and schemas agree with each ot
 
 ## Order of work
 
-### 1. Fix the source / Unit boundary
-- [ ] Decide the canonical Unit-level source files and location.
-- [ ] Make the actual `sources/` structure agree with `docs/learning-material/principles/06-source-unit-boundary.md`.
-- [ ] Decide the role of existing `raw/`, `segments/`, `segment-text/`, and `source-segments.yaml` artifacts.
-- [ ] Preserve useful historical/intermediate evidence without letting obsolete segmentation become the canonical knowledge input.
+### 1. Fix the source segmentation / Segment boundary
+- [x] Establish `Segment` as the canonical structural source boundary.
+- [x] Make the actual `sources/` structure agree with `docs/learning-material/principles/06-source-unit-boundary.md`.
+- [x] Define the roles of `raw/`, `segments/`, `segment-text/`, and `source-segments.yaml`.
+- [x] Preserve useful historical/intermediate evidence without making obsolete whole-book text or old Unit splitting the canonical extraction pipeline.
+
+The canonical source flow is:
+
+```text
+Original source PDF
+      ↓
+source-segments.yaml
+      ↓
+Segment PDFs
+      ↓
+Segment text
+      ↓
+Evidence discovery
+```
+
+A Unit is a `type: unit` Segment. There is no separate canonical `units/` directory.
 
 ### 2. Align the extraction SOP
-- [ ] Update `docs/learning-material/procedures/source-extraction-sop.md` to match the final Unit-based source architecture.
+- [ ] Update `docs/learning-material/procedures/source-extraction-sop.md` to match the final Segment-based source architecture.
 - [ ] Ensure the pipeline is unambiguous:
 
 ```text
-Source → RAW → Unit validation → Evidence → Candidate atoms → Validation → Official atoms
+Source PDF → Segmentation → Segment validation → Evidence → Candidate atoms → Validation → Official atoms
 ```
 
 ### 3. Finalize atom taxonomy + structure
@@ -78,7 +94,7 @@ extra:
 
 Before large-scale atom extraction, all of the following should be true:
 
-- Source/Unit boundary is unambiguous.
+- Source segmentation / Segment boundary is unambiguous.
 - Extraction SOP matches that boundary.
 - Atom taxonomy and structure agree.
 - Candidate and official schemas agree with the documented atom model.
@@ -90,4 +106,4 @@ Before large-scale atom extraction, all of the following should be true:
 
 **Do not start large-scale knowledge-atom extraction until the Definition of Done above is satisfied.**
 
-We solve the checklist **one item at a time**, starting from **1. Fix the source / Unit boundary**.
+We solve the checklist **one item at a time**, starting from **1. Fix the source segmentation / Segment boundary**.
