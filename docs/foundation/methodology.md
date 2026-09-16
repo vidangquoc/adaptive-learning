@@ -2,20 +2,20 @@
 
 ## 1. Project scope
 
-**Adaptive Learning** is the broader project. It was split out from the earlier **PTNK** project, which remains a domain-specific predecessor, evidence source, and validation target.
+**Adaptive Learning** is an evidence-based adaptive learning system. Its knowledge can support multiple learning targets and source domains.
 
-The goal is not to build a generic C2 word list and not to reverse-engineer PTNK papers into a curriculum. The goal is to build an evidence-based adaptive learning system whose knowledge can support multiple learning targets while using PTNK as one important calibration domain.
+The goal is not to build a generic word list or follow textbooks mechanically. The goal is to build a learning system that represents trustworthy knowledge, diagnoses what the learner needs, and selects useful next activities.
 
 Vocabulary/lexical research is one subsystem of the learning system.
 
 ## 2. Evidence hierarchy
 
-1. Primary/source materials and official assessment evidence for the target domain.
-2. Cambridge English / English Profile / CEFR evidence where relevant.
+1. Primary/source materials and authoritative assessment evidence for the target domain.
+2. Reliable reference and framework evidence where relevant.
 3. Reliable learner/corpus evidence.
 4. AI-generated practice material — useful for testing and challenge generation, but not evidence that a knowledge item is required.
 
-PTNK exam papers are primarily calibration and validation evidence. Their appearance does not by itself make an individual lexical item intrinsically important.
+The appearance of an item in an assessment does not by itself make that item intrinsically important.
 
 ## 3. Dataset and knowledge design
 
@@ -27,7 +27,7 @@ Separate:
 - learner state;
 - generated challenges and assessment history.
 
-Every promoted knowledge item should preserve provenance. CEFR levels must not be assigned unless independently verified.
+Every promoted knowledge item should preserve provenance. External proficiency labels must not be assigned unless independently verified.
 
 ## 4. Data-layer boundary
 
@@ -46,8 +46,6 @@ data/
 │   │   │   └── <book>/
 │   │   │       ├── book.yaml
 │   │   │       └── chapters/
-│   │   │           ├── ch01.txt
-│   │   │           └── ch02.txt
 │   │   └── ...
 │   ├── atoms/
 │   │   ├── grammar/
@@ -99,9 +97,7 @@ An exercise may activate multiple atoms simultaneously. The atoms remain separat
 
 ## 9. Priority
 
-Priority is a **study decision**, not a CEFR claim.
-
-For PTNK-specific datasets, historical P1/P2/P3/P4 labels may remain because they are part of that dataset's provenance and workflow. They must not be interpreted as the universal priority model of Adaptive Learning.
+Priority is a **study decision**, not a proficiency claim. It should be based on evidence relevant to the current learning target, learner state, competency needs, and opportunity cost.
 
 ## 10. Learning states
 
@@ -163,7 +159,7 @@ One exercise may test multiple atoms, and one atom may be tested by multiple que
 
 Destination C1 & C2 is the initial curriculum backbone. Additional books and sources are expansion layers opened when evidence shows they add meaningful breadth, depth, precision, or transfer value.
 
-PTNK evidence is used to calibrate and validate the system, not to replace the broader competency model.
+The source backbone is not a mandatory sequence. Its role is to provide a broad, structured starting knowledge universe from which adaptive learning can expand.
 
 ## 14. Versioning
 
