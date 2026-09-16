@@ -1,6 +1,6 @@
 # Learning Material Construction Principles
 
-> **Canonical index for the learning-material rulebook of the PTNK Adaptive Preparation System.**
+> **Canonical index for the learning-material rulebook of Adaptive Learning.**
 >
 > The detailed principles are intentionally split into focused documents. They are grouped by conceptual dependency rather than by arbitrary size.
 
@@ -34,7 +34,7 @@ Defines Destination exercises as canonical seed questions, question-to-knowledge
 
 `05-source-scope-and-metadata.md`
 
-Defines the role of intrinsic vocabulary priority, PTNK papers as calibration evidence, domain, CEFR/external metadata, and copyright/source boundaries.
+Defines source scope, intrinsic vocabulary priority, domain, proficiency/external metadata, and copyright/source boundaries.
 
 ### 6. Source Unit Boundary
 
@@ -68,12 +68,11 @@ When two principles interact, the more specific rule governs the specific operat
 16. Knowledge atoms are flat and independent; relationships are not ancestry or inherited mastery.
 17. Automated analysis is advisory; human review is the final promotion gate.
 18. Learner state must not determine admission into the static learning-material knowledge base.
-19. PTNK papers calibrate and validate the model; they are not the primary curriculum.
-20. Destination exercises are canonical seed questions.
-21. Link questions to the knowledge they actually test.
-22. Generated material must add instructional value.
-23. Grammar questions must have a uniquely defensible answer.
-24. Fail closed when Unit-boundary, structural, provenance, semantic, or validation gates fail.
+19. Destination exercises are canonical seed questions.
+20. Link questions to the knowledge they actually test.
+21. Generated material must add instructional value.
+22. Grammar questions must have a uniquely defensible answer.
+23. Fail closed when Unit-boundary, structural, provenance, semantic, or validation gates fail.
 
 ## Maintenance Rule
 
