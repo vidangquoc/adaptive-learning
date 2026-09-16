@@ -301,15 +301,169 @@ Example:
 
 ```yaml
 related_atoms:
-  - id: lex.assume.01
+  - id: lex.assume
     relation: contrasts_with
-  - id: lex.infer.01
+  - id: lex.infer
     relation: related_to
 ```
 
 Possible relation types include `synonym`, `near_synonym`, `antonym`, `contrasts_with`, `broader_than`, `narrower_than`, `derived_from`, `variant_of`, `part_of`, `requires`, `commonly_used_with`, and `grammatically_related`.
 
 Only relationships supported by evidence or by an explicit knowledge-model decision should be added.
+
+## Field Semantics by Atom Type
+
+The common schema defines the same fields for every atom type, but the **meaning and expected content of those fields depend on the atom type**. This section is the semantic contract for extracting and maintaining atoms from knowledge sources.
+
+The purpose is to prevent different atom types from using the same field for unrelated kinds of information while preserving one common schema for storage and processing.
+
+### General rules
+
+1. The field names and field count do not change between atom types.
+2. A field should be populated only with information appropriate to its semantics for that atom type.
+3. If a field has no meaningful content for a particular atom, use `null` or `[]` rather than inventing content merely for completeness.
+4. Type-specific semantics do not create a type-specific schema. They only explain how the common fields are interpreted.
+5. Source evidence takes priority over inferred completeness. Do not add unsupported definitions, structures, usages, constraints, examples, or relationships.
+6. `extra` remains metadata and provenance; it must not be used to hide knowledge that belongs in the core fields.
+
+### Field-role overview by type
+
+| Type | `meaning` | `explanation` | `structure` | `usage` | `constraints` |
+|---|---|---|---|---|---|
+| `lexical_sense` | Relevant lexical sense | Semantic nuance, distinctions, and explanation | Lexical/syntactic pattern when meaningful | Contexts, functions, register, and typical use | Meaning, syntax, register, or selection restrictions | 
+| `collocation` | Meaning/function of the combination | Why the combination works and what it expresses | Lexical or syntactic combination pattern | Contexts and functions where the combination is natural | Word choice, grammatical, or selection restrictions | 
+| `phrasal_verb` | Meaning of the phrasal verb | Meaning, particle behavior, and important distinctions | Verb + particle pattern and object placement where relevant | Contexts, functions, and typical use | Transitivity, separability, object restrictions, register, or other limits | 
+| `idiom` | Idiomatic meaning | Figurative meaning, interpretation, and important nuance | Fixed or semi-fixed form | Contexts, functions, and register | Fixedness, allowed variation, register, or usage restrictions | 
+| `grammar` | Grammatical meaning/function | Detailed grammatical explanation and contrasts | Grammatical form/construction | Specific grammatical uses and contexts | Conditions, exclusions, exceptions, contrasts, and restrictions | 
+| `word_formation` | Meaning/function of the derived form or formation | Formation process and semantic relationship between forms | Morphological formation pattern | Productive or contextual use of the formation | Formation restrictions, spelling changes, productivity limits, or semantic restrictions | 
+
+The table is an overview. The detailed rules below take precedence when a type-specific question arises.
+
+### `lexical_sense`
+
+Represents one independently meaningful sense of a lexical item.
+
+- `name`: The lexical item and, when useful, a concise sense label.
+- `meaning`: The concise meaning of this specific sense, not the entire dictionary entry for the word.
+- `mother_says`: A natural Vietnamese rendering of this sense.
+- `explanation`: Semantic nuance, boundaries of the sense, and distinctions from nearby senses or near-synonyms when supported by evidence.
+- `structure`: A meaningful lexical or syntactic pattern, such as a required complement or common construction. Use `null` when none is supported.
+- `usage`: Contexts, situations, functions, register, and other information about when the sense is naturally used.
+- `constraints`: Restrictions on meaning, syntax, register, selection, or interpretation that prevent common misuse.
+- `examples`: Sentences or source examples that demonstrate this specific sense. Do not use an example of another sense merely because it contains the same word.
+- `related_atoms`: Explicitly supported relationships to other senses, near-synonyms, contrasts, or other relevant atoms.
+
+A `lexical_sense` atom should not combine multiple independently diagnosable senses merely because they share the same spelling or lemma.
+
+### `collocation`
+
+Represents a conventional lexical combination whose components have a meaningful relationship in use.
+
+- `name`: The collocation in its canonical form.
+- `meaning`: The meaning or communicative function of the combination as a whole when this is distinct from the meanings of its individual words.
+- `mother_says`: A natural Vietnamese rendering of the relevant combined meaning or function.
+- `explanation`: Why the combination is used as a unit, including relevant semantic or lexical nuance when supported.
+- `structure`: The lexical/syntactic pattern, including slots or grammatical variation where useful, such as `make + a decision`.
+- `usage`: Contexts and functions in which the collocation is natural.
+- `constraints`: Selection restrictions, grammatical restrictions, or important lexical alternatives that affect correctness or naturalness.
+- `examples`: Examples showing the combination in natural context.
+- `related_atoms`: Component words, related collocations, contrasts, or other supported relationships.
+
+Do not create a collocation atom merely because two words happen to occur next to each other in a source. The combination should be supported as a meaningful or conventional lexical relationship.
+
+### `phrasal_verb`
+
+Represents a verb-particle construction whose combined meaning or grammatical behavior is knowledge worth learning independently.
+
+- `name`: The phrasal verb in its canonical form.
+- `meaning`: The relevant meaning of the phrasal verb.
+- `mother_says`: A natural Vietnamese rendering of that meaning.
+- `explanation`: Semantic behavior, important nuances, and distinctions from similar verbs or phrasal verbs.
+- `structure`: The verb + particle pattern, including transitivity, object placement, or separability when supported.
+- `usage`: Contexts, functions, register, and typical situations of use.
+- `constraints`: Transitivity, separability, pronoun placement, object restrictions, register, or other limitations.
+- `examples`: Examples that demonstrate the phrasal verb and, where relevant, its structural behavior.
+- `related_atoms`: Related verbs, particles, near-synonyms, contrasts, or other supported relationships.
+
+Do not use `structure` to store general explanations of meaning; structural behavior belongs there, while semantic explanation belongs in `meaning` and `explanation`.
+
+### `idiom`
+
+Represents a conventional fixed or semi-fixed expression whose meaning cannot be fully derived from the literal meanings of its components.
+
+- `name`: The canonical idiomatic expression.
+- `meaning`: The concise idiomatic meaning.
+- `mother_says`: A natural Vietnamese rendering of the idiomatic meaning, not necessarily a literal translation.
+- `explanation`: Figurative interpretation, semantic nuance, and important contextual meaning.
+- `structure`: The fixed or semi-fixed form, including variable slots or grammatical variation when supported.
+- `usage`: Contexts, functions, register, and situations where the idiom is natural.
+- `constraints`: Fixedness, allowed variation, grammatical restrictions, register, or contexts where the expression would be inappropriate.
+- `examples`: Examples showing the idiom in natural context.
+- `related_atoms`: Related idioms, contrasts, component relationships, or other explicitly supported links.
+
+Literal examples should not be used as evidence for an idiomatic meaning unless the source explicitly treats the expression literally as well.
+
+### `grammar`
+
+Represents an independently diagnosable grammatical meaning, construction, contrast, or use.
+
+- `name`: The grammatical construction or phenomenon being represented.
+- `meaning`: The concise grammatical meaning or function.
+- `mother_says`: Normally `null` under the current common schema.
+- `explanation`: The detailed grammatical explanation needed to understand the construction, including important contrasts with related constructions when supported.
+- `structure`: The grammatical form or construction pattern, such as `have/has + been + V-ing`.
+- `usage`: The specific uses, contexts, or functions represented by the atom.
+- `constraints`: Conditions, exclusions, exceptions, contrasts, or restrictions necessary for accurate use.
+- `examples`: Source examples demonstrating the construction or use. Each example should support the specific grammatical atom represented.
+- `related_atoms`: Related grammatical constructions, contrasts, dependencies, or lexical atoms where explicitly supported.
+
+A grammar atom should represent a unit that can be independently diagnosed. Do not collapse distinct grammatical contrasts into one atom merely because they appear in the same textbook explanation.
+
+### `word_formation`
+
+Represents knowledge about how a word or lexical family member is formed and what the formation contributes to meaning or grammatical category.
+
+- `name`: The formation or derived form being represented.
+- `meaning`: The meaning or function contributed by the formation.
+- `mother_says`: A natural Vietnamese rendering of the relevant meaning when useful.
+- `explanation`: The relationship between the source form and derived form, including semantic or grammatical effects supported by evidence.
+- `structure`: The morphological formation pattern, such as stem + suffix, including spelling or form changes when relevant.
+- `usage`: Contexts or productive uses of the formation.
+- `constraints`: Restrictions on productivity, spelling, semantic compatibility, grammatical category, or other formation limits.
+- `examples`: Derived forms or source examples demonstrating the formation.
+- `related_atoms`: Related forms in the same derivational family or explicitly supported morphological relationships.
+
+A `word_formation` atom should represent an actual formation rule, relationship, or derived-form knowledge supported by the source, not merely a list of words that happen to share a root.
+
+### Type-specific empty values
+
+The common schema requires every field to remain present even when a field is not applicable.
+
+Typical examples include:
+
+```yaml
+# Grammar
+mother_says: null
+```
+
+```yaml
+# Any type with no meaningful structural information
+structure: null
+```
+
+```yaml
+# No supported relationships
+related_atoms: []
+```
+
+```yaml
+# No source-level testing evidence
+extra:
+  is_tested: false
+  test_evidence: []
+```
+
+These empty values mean **no applicable or supported information is currently represented**. They do not mean that the information is impossible to obtain or that the atom is deficient.
 
 ## `extra`
 
