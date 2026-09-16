@@ -4,13 +4,16 @@
 
 ## 1. Purpose
 
-A knowledge atom is a stable, source-grounded unit of knowledge that is small enough to assess and relate independently, but complete enough to have a meaningful interpretation in the learning system.
+A **Knowledge Atom is a unit of knowledge that has its own meaning and can be identified, learned, and assessed as a separate learning target.**
+
+The key criterion is whether the knowledge itself is a learning target that the system may want to teach and evaluate separately. An atom does not need to be completely independent from all other knowledge. It may depend on, overlap with, or be closely related to other atoms and still be a separate atom.
 
 A knowledge atom may be:
 
 - grounded in source evidence;
-- referenced independently;
-- tested by one or more assessment items;
+- identified as a distinct learning target;
+- learned independently as a target;
+- assessed independently or together with other atoms;
 - related to other knowledge;
 - reused across competencies and learning activities.
 
@@ -28,20 +31,47 @@ Learner-specific mastery never belongs in the static atom.
 
 ## 3. Flat Atom Model
 
-Knowledge atoms are flat and independent by default.
+**Knowledge atoms are flat. There is no parent/child hierarchy between atoms.**
 
-If distinct senses, constructions, patterns, expressions, or uses can be independently learned or assessed, they may be represented as separate atoms. A shared surface form does not require a parent atom.
+An atom may be related to another atom, depend on another atom, overlap with another atom, or be more specific in content, but these relationships do not create an atom hierarchy and do not make one atom the parent of another.
 
-For example:
+For example, the following are separate atoms in the same flat knowledge set:
+
+```text
+present perfect
+present perfect + since
+present perfect + for
+present perfect + ever
+present perfect + never
+```
+
+The fact that `present perfect + since` is related to `present perfect` does **not** mean that it is a child atom of `present perfect`.
+
+The relationship can instead be represented explicitly:
+
+```text
+present perfect
+        │
+        ├── related_to → present perfect + since
+        └── related_to → present perfect + for
+```
+
+The diagram shows a relationship, not a hierarchy.
+
+Likewise, different meanings of the same surface form can be separate atoms:
 
 ```text
 bank — financial institution
 bank — side of a river
 ```
 
-can be two independent atoms.
+There is no requirement to create a parent atom for the shared form `bank`.
 
-Relatedness does not imply hierarchy or inherited mastery.
+The practical question for deciding whether something should be an atom is:
+
+> **Is this a learning target that we want to identify, learn, and assess separately?**
+
+If yes, it can be a separate atom even when another atom is closely related to it.
 
 ## 4. Atom versus Property versus Relation
 
@@ -56,9 +86,11 @@ metadata
 
 A property describes an existing atom; a relation connects independent atoms; metadata describes source or system context.
 
+However, information being related to or describing another atom does not automatically make it a property. If that knowledge has its own learning value and should be identified, learned, and assessed as a separate learning target, it may be represented as its own atom.
+
 Synonymy, antonymy, near-synonymy, semantic distinctions, derivation, prerequisite relationships, and competency support are normally relations rather than additional atoms.
 
-Create an atom when the knowledge itself is independently meaningful and useful to teach, assess, track, or retrieve.
+Create an atom when the knowledge itself is independently meaningful as a learning target and useful to teach, assess, track, or retrieve separately. Complete conceptual independence is not required.
 
 ## 5. Knowledge versus Assessment
 
@@ -104,8 +136,9 @@ Learner mastery dimensions and adaptive decisions belong to `docs/learner/learni
 
 ## 9. Design Constraints
 
+- Knowledge atoms are flat; do not create parent/child hierarchies between atoms.
 - Preserve lexical and grammatical distinctions that matter for learning.
-- Do not require parent/child hierarchies merely to group related atoms.
+- Do not require hierarchy merely to group related or overlapping atoms.
 - Use explicit relationships when they provide real learning or querying value.
 - Do not confuse an assessment structure with the underlying knowledge ontology.
 - Do not assign learner mastery or adaptive priority to static knowledge.
