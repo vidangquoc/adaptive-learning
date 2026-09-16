@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The Source Registry is the metadata layer for external evidence used by the PTNK Adaptive Preparation System.
+The Source Registry is the metadata layer for external evidence used by Adaptive Learning.
 
 It separates **source provenance** from **curated learning data** so that extraction, filtering, prioritization, and curriculum strategy can change without having to rediscover the underlying sources.
 
@@ -25,23 +25,23 @@ NORMALIZATION / EXTRACTION
       ↓
 CANDIDATE POOL
       ↓
-PTNK RELEVANCE + LEARNER STATE + COVERAGE FILTERS
+LEARNER STATE + COVERAGE FILTERS
       ↓
 OFFICIAL LEARNING DATA
 ```
 
 ## Source roles
 
-`source_role` is mandatory because CEFR level alone does not determine how a source should be used.
+`source_role` is mandatory because proficiency level alone does not determine how a source should be used.
 
 | Role | Meaning |
 |---|---|
-| `ptnk_evidence` | Direct evidence from PTNK exams and official materials. Highest priority for PTNK claims. |
-| `c1_candidate_lexicon` | Candidate-generation source for C1/C1-C2 lexical material. Never automatically becomes curriculum. |
+| `candidate_lexicon` | Candidate-generation source for lexical material. Never automatically becomes curriculum. |
 | `grammar_reference` | Grammar reference/practice source used to model competencies. |
 | `competency_practice` | Practice source used to extract or reinforce testable competencies. |
-| `exam_coursebook` | C1 exam-preparation coursebook covering multiple skills. |
-| `assessment` | Diagnostic, transfer, and mock-test evidence. Not a curriculum source. |
+| `coursebook` | Integrated coursebook covering multiple skills. |
+| `assessment` | Diagnostic, transfer, and mock-test evidence. Not automatically a curriculum source. |
+| `reference` | Reference source used to verify meanings, pronunciation, usage, or other knowledge properties. |
 
 ## Registry fields
 
@@ -49,50 +49,39 @@ OFFICIAL LEARNING DATA
 |---|---|---|
 | `source_id` | yes | Stable internal identifier |
 | `source_name` | yes | Human-readable source name |
-| `source_type` | yes | `exam`, `book`, `lexicon`, `phrase_list`, `frequency`, etc. |
-| `source_role` | yes | Operational role in the PTNK evidence pipeline |
+| `source_type` | yes | `book`, `exam`, `lexicon`, `phrase_list`, `frequency`, etc. |
+| `source_role` | yes | Operational role in the learning-material pipeline |
 | `publisher` | yes | Organization responsible for the source |
 | `url` | yes | Canonical landing/resource URL |
 | `version` | recommended | Edition, release, or version when known |
-| `cefr_coverage` | recommended | Actual CEFR scope represented by the source |
-| `data_types` | yes | Words, collocations, idioms, grammar, exam tasks, etc. |
+| `proficiency_coverage` | recommended | Actual proficiency scope represented by the source |
+| `data_types` | yes | Words, collocations, idioms, grammar, tasks, etc. |
 | `frequency_available` | yes | `yes`, `no`, or `partial` |
 | `acquisition_method` | yes | How the source is obtained |
 | `raw_cache_path` | recommended | Repository path for permitted raw material or acquisition metadata |
 | `status` | yes | `active`, `candidate`, `deprecated`, `blocked`, or `superseded` |
 | `notes` | recommended | Interpretation, limitations, and provenance notes |
 
-## What was removed from the initial registry
+## Source-selection rule
 
-The following broad resources were removed from the active registry because they are useful evidence sources in general but do **not** belong in the focused C1 book/source library:
+The source library should be centered on sources that contribute to one or more of:
 
-- Oxford 3000/5000 — broad A1-C1 resource, not a C1-specific source.
-- OPAL — academic vocabulary/phrases resource, not a C1-specific general candidate list.
-- Cambridge English Vocabulary Profile / English Profile — broad A1-C2 research resource, not a C1-only syllabus.
-- EFLLex / CEFRLex — broad A1-C2 frequency/CEFR resource; frequency metadata should be a separate future layer rather than being mistaken for a C1 curriculum source.
-- Oxford Phrase List — useful A1-C1 multiword source, but not sufficiently C1-specific for the current focused bibliography. It can be reintroduced later as a supplementary multiword evidence source if needed.
-
-These removals do **not** mean the resources are bad. They mean their role is different from a focused C1 candidate bibliography.
-
-## Current source-selection rule
-
-The current bibliography is deliberately centered on sources that can contribute to one of four things:
-
-1. C1/C1-C2 lexical candidate generation;
+1. lexical candidate generation;
 2. advanced grammar and competency modeling;
-3. C1 exam-skill practice;
-4. diagnostic and transfer assessment.
+3. skill and competency practice;
+4. diagnostic, transfer, and assessment evidence;
+5. reliable lexical or grammatical reference.
 
-A book being labeled C1 does **not** make every item inside it mandatory.
+A book being labeled C1 or C2 does **not** make every item inside it mandatory.
 
-The pipeline remains:
+The general pipeline is:
 
 ```text
-C1/C1-C2 source
+learning source
       ↓
 candidate universe
       ↓
-PTNK evidence
+source evidence
       ↓
 learner diagnostic
       ↓
@@ -103,15 +92,15 @@ official learning data
 
 ## Evidence hierarchy
 
-For PTNK-specific claims, prefer:
+For source-specific claims, prefer:
 
-1. official PTNK documents;
-2. primary publisher/research sources;
+1. official or primary source material;
+2. authoritative publisher/reference sources;
 3. established corpus/lexical resources;
 4. reputable secondary analysis;
 5. third-party lists only for candidate discovery.
 
-A C1 book is therefore a **candidate source**, not evidence that PTNK requires every item in that book.
+A learning book is therefore a **candidate or reference source** according to its registered role, not automatic evidence that every item must be learned.
 
 ## Raw-data policy
 
@@ -130,19 +119,19 @@ Do not treat a generated CSV as a substitute for provenance.
 
 ## Current registry scope
 
-The registry currently covers:
+The registry covers selected C1/C2 and advanced learning sources, including:
 
-- PTNK specialized-English entrance papers, 2022-2026;
-- C1/C1-C2 vocabulary;
-- C1/C1-C2 collocations;
-- C1/C1-C2 idioms;
-- C1/C1-C2 phrasal verbs;
+- vocabulary;
+- collocations;
+- idioms;
+- phrasal verbs;
 - advanced grammar;
-- advanced grammar/vocabulary practice;
-- C1 exam-preparation coursebooks;
-- C1 Advanced mock/assessment sources.
+- grammar/vocabulary practice;
+- integrated advanced coursebooks;
+- assessment sources;
+- lexical and grammatical reference sources.
 
-The registry intentionally does **not** attempt to be an exhaustive catalogue of every C1 book.
+The registry intentionally does **not** attempt to be an exhaustive catalogue of every advanced learning source.
 
 ## Future extensions
 
