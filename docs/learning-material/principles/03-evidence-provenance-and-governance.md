@@ -6,11 +6,11 @@ Every knowledge atom and source-derived question must retain enough provenance t
 
 > **Where did this come from, and what evidence supports it?**
 
-Preserve source ID/type, source quality/title/reference, **source Unit**, precise location within that Unit, exercise/question identifier when applicable, relevant exam/year metadata, source context/role, uncertainty, and license/usage information where applicable.
+Preserve source ID/type, source quality/title/reference, **source Unit or equivalent source boundary**, precise location within that boundary, exercise/question identifier when applicable, source context/role, uncertainty, and license/usage information where applicable.
 
 The **Unit is the canonical source boundary** for Destination learning-material extraction. The project does not use a pre-cut `sections/` layer as a source boundary or provenance layer.
 
-Keep source evidence, PTNK relevance, CEFR evidence, and project status as separate provenance dimensions.
+Keep source evidence, external proficiency evidence, and project status as separate provenance dimensions.
 
 ## Knowledge-Atom Discovery and Promotion
 
@@ -19,7 +19,7 @@ Discovery and promotion are different states.
 A **candidate** is an evidence-backed hypothesis about a possible knowledge atom. It is not yet canonical knowledge. Candidate data must be preserved so that analysis, review, and promotion remain traceable and reproducible.
 
 ```text
-EVIDENCE FROM UNIT
+EVIDENCE FROM SOURCE
    ↓
 CANDIDATE
    ↓
@@ -48,13 +48,13 @@ The human decision and its rationale must be preserved with provenance. Candidat
 
 A candidate with `APPROVED` status is eligible for officialization. A candidate with any other status is left untouched by the officialization process.
 
-A previous `REJECT` or `HOLD` does not permanently prevent later review. If a candidate is intentionally reviewed again and its current status is changed to `APPROVED`, it becomes eligible for officialization. The project does not require candidate-versioning machinery merely to support this workflow.
+A previous `REJECT` or `HOLD` does not permanently prevent later review. If a candidate is intentionally reviewed again and its current status is changed to `APPROVED`, it becomes eligible for officialization.
 
 > **Officialization reads the current candidate status. `APPROVED` → eligible; anything else → leave it alone.**
 
 > **Machine proposes. Human decides.**
 
-Automated curricular signals—including instructional evidence, back-matter presence, linguistic confidence, and related evidence—are inputs to human review, not authoritative promotion rules.
+Automated curricular signals are inputs to human review, not authoritative promotion rules.
 
 ## Official Knowledge Is a Promoted Copy
 
@@ -84,11 +84,11 @@ DATA/
 └── review/       ← learner review and adaptive-learning data
 ```
 
-`knowledge/` contains canonical official knowledge organized by source/book and Unit. It must not depend on extracted section files. `review/` contains learner-specific attempts, learning state, review history, review queue, and related adaptive-learning data. Learner review data must not determine whether static material is admitted into official knowledge.
+`knowledge/` contains canonical official knowledge organized by source and source boundary. It must not depend on extracted section files. `review/` contains learner-specific attempts, learning state, review history, review queue, and related adaptive-learning data. Learner review data must not determine whether static material is admitted into official knowledge.
 
 ## Back-Matter Evidence
 
-Author-curated back matter such as word lists, phrasal-verb databases, collocation databases, and idiom databases is strong curricular evidence that the source treats an item as part of the target learning scope.
+Author-curated back matter such as word lists, phrasal-verb databases, collocation databases, and idiom databases is strong curricular evidence that a source treats an item as part of its target learning scope.
 
 Back-matter evidence informs human review but does not by itself prove semantic identity, meaning, or official atom status.
 
@@ -108,7 +108,7 @@ WARN → continue only when explicitly acceptable
 FAIL → stop / preserve evidence / require review
 ```
 
-Quality gates should cover Unit-boundary validity, provenance, semantic plausibility, answer uniqueness, schema validity, duplication, unsupported inference, and source/license constraints as appropriate.
+Quality gates should cover source-boundary validity, provenance, semantic plausibility, answer uniqueness, schema validity, duplication, unsupported inference, and source/license constraints as appropriate.
 
 If evidence is insufficient or competing interpretations remain unresolved:
 
@@ -125,7 +125,7 @@ Transformations should be reproducible and idempotent where practical. Do not si
 Keep these concerns separable:
 
 ```text
-source Unit evidence
+source evidence
 candidate knowledge
 human review decision
 official knowledge
