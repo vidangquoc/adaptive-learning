@@ -1,0 +1,34 @@
+# Lexical Evidence Rules
+
+> **Canonical learning-material construction rules:** `docs/learning-material-principles.md`
+>
+> This file no longer defines a competing set of learning-material principles. It exists as a focused reference for the evidence requirements behind lexical meanings and pronunciation.
+
+## Scope
+
+These rules support the implementation of the canonical principles in `docs/learning-material-principles.md`, especially the requirements for evidence-backed meanings, Vietnamese meanings, and pronunciation.
+
+## Evidence requirements
+
+- Definitions must be grounded in a reliable lexical source.
+- Context may identify the intended sense, but must not be used to invent a dictionary definition.
+- Vietnamese meanings must preserve the verified intended sense.
+- Pronunciation must be grounded in a reliable source for the actual lexical item and relevant pronunciation variant.
+- US IPA, when used by the project, must be independently verified rather than guessed from spelling or context.
+- Paraphrasing is allowed only when it preserves the documented meaning.
+- If suitable evidence is unavailable, leave the field pending/unverified rather than fabricating it.
+- Definition provenance and pronunciation provenance must remain distinguishable from PTNK provenance and CEFR provenance.
+
+## Preferred evidence sources
+
+For meaning, prefer appropriate authoritative dictionaries, learner dictionaries, specialized dictionaries, corpus-backed lexical resources, and English Profile/EVP where applicable.
+
+For pronunciation, prefer reputable dictionaries or other reliable lexical resources that document the actual lexical item and pronunciation variant.
+
+## Relationship to the canonical rules
+
+The complete rules for extraction, normalization, lexical classification, examples, patterns, provenance, CEFR, question linkage, challenge construction, copyright boundaries, and quality gates are defined only in:
+
+`docs/learning-material-principles.md`
+
+If this file and the canonical document ever appear to conflict, the canonical document governs.
