@@ -25,24 +25,147 @@ Không cần giải quyết hết một lần.
 # 1. Atom là gì?
 
 ### Vấn đề
-Không phải thông tin nào trong sách cũng nên biến thành một atom.
+Điểm quan trọng đầu tiên là phải xác định rõ **Knowledge Atom là đơn vị gì**.
 
-Ví dụ với `assume`:
+Tao và mày đang thống nhất theo hướng:
 
-- `assume` có nghĩa gì → kiến thức chính → có thể là atom.
-- `assume` thường đi với object → đặc điểm của atom → chưa chắc cần atom riêng.
-- `assume` là formal → đặc điểm của atom → chưa chắc cần atom riêng.
+> **Knowledge Atom là một đơn vị kiến thức có ý nghĩa riêng, có thể được xác định, học và đánh giá như một learning target riêng.**
 
-### Đề xuất của tao
-Tao nghiêng về nguyên tắc:
+Ở đây có một điểm rất quan trọng:
 
-> **Một atom là một mẩu kiến thức có ý nghĩa tương đối độc lập và có thể trở thành một learning target riêng.**
+### Knowledge Atoms là flat
 
-Không nhất thiết phải có một câu hỏi test riêng mới được coi là atom.
+Các atom **không tạo thành hierarchy**.
 
-Nhưng nếu tách một mẩu kiến thức ra mà nó không có giá trị học riêng, thì giữ nó làm property của atom khác.
+Tức là không có mô hình kiểu:
 
-**→ Cần mày xem và phản biện.**
+```text
+Present perfect
+├── present perfect + since
+└── present perfect + for
+```
+
+trong đó `present perfect + since` và `present perfect + for` là các atom con của `present perfect`.
+
+Thay vào đó, tất cả đều là những atom độc lập trong cùng một tập knowledge:
+
+```text
+present perfect
+present perfect + since
+present perfect + for
+present perfect + ever
+present perfect + never
+```
+
+Chúng có thể liên quan rất chặt với nhau, nhưng **quan hệ đó không tạo ra cấp bậc cha/con giữa các atom**.
+
+Nếu cần biểu diễn mối liên hệ, ta dùng **relation**:
+
+```text
+present perfect
+        │
+        ├── related_to → present perfect + since
+        └── related_to → present perfect + for
+```
+
+Relation ở đây chỉ mô tả mối liên hệ; nó không biến một atom thành parent của atom khác.
+
+### Vì sao flat lại quan trọng?
+
+Vì một knowledge unit có thể có **learning value riêng** dù nó liên quan hoặc phụ thuộc về mặt kiến thức vào atom khác.
+
+Ví dụ:
+
+```text
+present perfect + since
+present perfect + for
+```
+
+Hai cái này đều liên quan đến present perfect, nhưng người học vẫn cần biết riêng:
+
+- dùng `since` như thế nào;
+- dùng `for` như thế nào;
+- phân biệt chúng trong ngữ cảnh;
+- và có thể được kiểm tra riêng về mức độ thuần thục.
+
+Vì vậy, không nên nói:
+
+> “Nó chỉ là một đặc điểm của present perfect nên phải là property.”
+
+Chỉ vì một kiến thức liên quan đến atom khác **không có nghĩa nó không thể là một atom riêng**.
+
+### Atom không cần độc lập tuyệt đối
+
+Một atom có thể dựa trên hoặc liên quan đến kiến thức khác mà vẫn là một atom.
+
+Điều cần hỏi không phải là:
+
+> “Nó có hoàn toàn độc lập với các kiến thức khác không?”
+
+mà là:
+
+> **“Nó có phải là một learning target riêng mà ta muốn học và đánh giá riêng không?”**
+
+Nếu câu trả lời là có, nó có thể là một Knowledge Atom.
+
+Ví dụ:
+
+```text
+present perfect
+present perfect + since
+present perfect + for
+```
+
+cả ba đều có thể là atom.
+
+Chúng không cần nằm trong hierarchy để được xem là những đơn vị knowledge khác nhau.
+
+### Một atom có thể rất nhỏ
+
+Không nên đặt trước một giới hạn rằng atom phải là một “khối kiến thức lớn”.
+
+Một atom có thể là:
+
+```text
+assume
+
+present perfect + since
+
+present perfect + for
+
+một cách dùng cụ thể của một cấu trúc
+
+một quy tắc ngữ pháp cụ thể
+```
+
+Miễn là nó đại diện cho một knowledge target có ý nghĩa và đáng được học/đánh giá riêng.
+
+### Một atom cũng có thể liên quan đến nhiều atom khác
+
+Ví dụ:
+
+```text
+present perfect
+present perfect + since
+present perfect + for
+present perfect + duration
+```
+
+Không cần chọn một cái làm “cha” của những cái còn lại.
+
+Ta giữ chúng flat rồi biểu diễn quan hệ giữa chúng khi cần.
+
+### Nguyên tắc tạm thời
+
+Tao đề xuất dùng nguyên tắc này:
+
+> **Một Knowledge Atom là một đơn vị kiến thức có ý nghĩa riêng và có thể được xác định, học và đánh giá như một learning target riêng.**
+>
+> **Knowledge Atoms là flat: không có quan hệ hierarchy hoặc parent/child giữa các atom.**
+>
+> **Một atom có thể liên quan, phụ thuộc hoặc chồng lấn về mặt kiến thức với atom khác; điều đó không ngăn nó trở thành một atom riêng.**
+
+**→ Đây là định nghĩa tao và mày vừa thống nhất về hướng. Các phần còn lại của Step 3 vẫn chưa chốt.**
 
 ---
 
@@ -91,6 +214,8 @@ Mặc định:
 > **Thứ gì nối hai atom → relation.**
 
 Đây có lẽ là nguyên tắc quan trọng nhất để giữ cho ontology không bị rối.
+
+Tuy nhiên, phần 1 vừa làm rõ một điểm cần xem lại: **một thông tin có liên quan đến atom khác vẫn có thể là atom riêng nếu nó có learning value và cần được đánh giá riêng.** Vì vậy, ranh giới Atom vs Property cần được bàn tiếp, không nên hiểu property là “bất cứ thứ gì mô tả một atom khác”.
 
 **→ Cần mày xem và phản biện.**
 
