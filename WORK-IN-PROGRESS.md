@@ -11,8 +11,8 @@ Make the repository's **source layer, atom model, and schemas agree with each ot
 ### 1. Fix the source segmentation / Segment boundary
 - [x] Establish `Segment` as the canonical structural source boundary.
 - [x] Make the actual `sources/` structure agree with `docs/learning-material/principles/06-source-unit-boundary.md`.
-- [x] Define the roles of `raw/`, `segments/`, `segment-text/`, and `source-segments.yaml`.
-- [x] Preserve useful historical/intermediate evidence without making obsolete whole-book text or old Unit splitting the canonical extraction pipeline.
+- [x] Define the roles of `segments/`, `segment-text/`, and `source-segments.yaml`.
+- [x] Remove the obsolete `raw/` layer and the superseded whole-book text extraction artifact.
 
 The canonical source flow is:
 
@@ -28,7 +28,7 @@ Segment text
 Evidence discovery
 ```
 
-A Unit is a `type: unit` Segment. There is no separate canonical `units/` directory.
+A Unit is a `type: unit` Segment. There is no separate canonical `units/` directory and no `raw/` layer.
 
 ### 2. Align the extraction SOP
 - [ ] Update `docs/learning-material/procedures/source-extraction-sop.md` to match the final Segment-based source architecture.
