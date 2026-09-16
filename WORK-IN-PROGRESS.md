@@ -67,9 +67,9 @@ Source PDF → Segmentation → Segment validation → Evidence → Candidate at
 The SOP now treats the original source PDF as the source of truth, `source-segments.yaml` as the segmentation manifest, Segment PDFs as the canonical structural source artifacts, and `segment-text/` as derived machine-readable text. It no longer uses an obsolete whole-source text layer or separate `units/` / `sections/` layers.
 
 ### 3. Finalize atom taxonomy + structure
-- [ ] Make `docs/knowledge/atom-types.md` and `docs/knowledge/atom-structure.md` use one coherent taxonomy.
-- [ ] Confirm exactly what belongs in `type` vs `subtype` vs an atom's properties.
-- [ ] Preserve the common atom field structure:
+- [x] Make `docs/knowledge/atom-types.md` and `docs/knowledge/atom-structure.md` use one coherent taxonomy.
+- [x] Confirm exactly what belongs in `type` vs `subtype` vs an atom's properties.
+- [x] Preserve the common atom field structure:
 
 ```yaml
 id:
@@ -92,7 +92,17 @@ extra:
   notes:
 ```
 
-- [ ] Confirm semantic-ID rules (`<domain>.<concept>.<case>`, with the case omitted when unnecessary).
+- [x] Confirm semantic-ID rules (`<namespace>.<concept>.<case>`, with the case omitted when unnecessary; `lex` for vocabulary and `gram` for grammar).
+
+Step 3 decisions:
+
+- `domain` is currently `vocabulary` or `grammar`.
+- Vocabulary has explicit types: `lexical_sense`, `multiword_expression`, `phrasal_verb`, `idiom`, `collocation`, `word_formation`, and `morphological_form`.
+- Grammar uses `type: grammar` with `subtype`: `form`, `meaning`, `use`, `pattern`, `rule`, `constraint`, or `exception`.
+- Usage characteristics such as complementation, preposition patterns, register, and connotation are properties, not atom types.
+- Semantic relationships such as synonymy, near-synonymy, antonymy, and distinctions are relations, not atom types.
+- Source structure and assessment entities are not atom types.
+- Learner state is outside the atom model.
 
 ### 4. Rebuild the JSON schemas
 - [ ] Update candidate-atom schema to the finalized model.
