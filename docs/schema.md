@@ -43,11 +43,44 @@ A unique, stable identifier for the atom.
 
 The ID identifies the atom independently of its wording, source location, or learner state. It should remain stable when the explanatory content of the atom is edited.
 
-Example:
+Atom IDs should use semantic components rather than arbitrary sequential numbers whenever multiple atoms share the same core concept. The final component should be a short description of the specific **case** represented by the atom when such a discriminator is needed.
+
+General pattern:
+
+```text
+<domain>.<concept>.<case>
+```
+
+The `case` is not tied to a particular schema field such as `usage`. It is simply the semantic distinction that separates one atom from other atoms representing the same broader concept or situation.
+
+Examples:
+
+```yaml
+id: gram.present-perfect-continuous.duration
+```
+
+```yaml
+id: gram.present-perfect-continuous.continuing-activity
+```
+
+```yaml
+id: gram.present-perfect-continuous.recently-stopped-activity
+```
+
+For a concept represented by only one atom, the case component may be unnecessary:
+
+```yaml
+id: lex.compelling
+```
+
+Avoid arbitrary sequential identifiers such as:
 
 ```yaml
 id: gram.present-perfect-continuous.01
+id: gram.present-perfect-continuous.02
 ```
+
+The semantic case should describe the nature of the atom rather than its order in a source or exercise. Exercise numbers, source positions, and learner attempts should not be used as the semantic discriminator.
 
 ### `domain`
 
@@ -366,7 +399,8 @@ Similarly, generated questions and learner responses are not source evidence mer
 ## Domain and Type Examples
 
 ```yaml
-id: lex.assess.01
+id: lex.assess.evaluate
+
 domain: vocabulary
 type: lexical_sense
 subtype: verb
@@ -393,7 +427,8 @@ extra:
 ```
 
 ```yaml
-id: gram.present-perfect-continuous.01
+id: gram.present-perfect-continuous.duration
+
 domain: grammar
 type: grammar
 subtype: tense
