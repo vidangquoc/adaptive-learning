@@ -270,7 +270,7 @@ Tao chưa muốn chốt taxonomy này.
 
 # 4. Vocabulary taxonomy
 
-Hiện tại:
+Hiện tại vocabulary có:
 
 ```text
 lexical_sense
@@ -278,44 +278,82 @@ multiword_expression
 phrasal_verb
 idiom
 collocation
-word_formation
-morphological_form
 ```
 
-### Đề xuất của tao
-Tao nghiêng về việc mỗi atom có **một type chính**.
+### `multiword_expression` là fallback
 
-`multiword_expression` có thể là loại fallback:
+Tao và mày đồng ý theo hướng:
 
 ```text
-phrasal verb → phrasal_verb
-idiom → idiom
-collocation → collocation
+phrasal verb
+→ phrasal_verb
+
+idiom
+→ idiom
+
+collocation
+→ collocation
+
 không thuộc các loại trên nhưng vẫn là một lexical unit nhiều từ
 → multiword_expression
 ```
 
-Lý do: tao muốn tránh một atom phải có kiểu:
+Tức là `multiword_expression` đóng vai trò **fallback**, không phải là một nhãn cần cạnh tranh với `phrasal_verb`, `idiom` và `collocation` trong cùng một trường hợp.
+
+Mục đích là tránh phải ép một lexical unit nhiều từ vào một category cụ thể khi nó không thực sự phù hợp với các loại chuyên biệt hơn.
+
+Ví dụ:
 
 ```text
-type:
-  - idiom
-  - collocation
+phrasal verb
+→ phrasal_verb
+
+idiom
+→ idiom
+
+collocation
+→ collocation
+
+một lexical unit nhiều từ khác
+→ multiword_expression
 ```
 
-và sau đó phải xử lý hàng đống trường hợp chồng lấn.
+Mỗi atom vẫn có **một type chính**.
 
-Nhưng thứ tự ưu tiên giữa các loại vẫn cần xem bằng ví dụ thật.
-
-**→ Chưa chốt.**
+**→ Phần `multiword_expression` fallback đã thống nhất về hướng.**
 
 ---
 
 # 5. `word_formation` và `morphological_form`
 
-Đây là chỗ tao nghĩ cần giữ ranh giới rõ.
+Hai loại này **không thuộc Vocabulary domain**.
+
+Tao và mày thống nhất đưa chúng sang **Grammar domain**. Vấn đề chi tiết về ranh giới giữa chúng và các subtype grammar khác sẽ giải quyết sau.
+
+Vì vậy taxonomy hiện tại được hiểu là:
+
+```text
+Vocabulary
+├── lexical_sense
+├── multiword_expression
+├── phrasal_verb
+├── idiom
+└── collocation
+
+Grammar
+├── form
+├── meaning
+├── use
+├── pattern
+├── rule
+├── constraint
+├── exception
+├── word_formation
+└── morphological_form
+```
 
 ### `morphological_form`
+
 Nói về **các dạng của cùng một từ**.
 
 Ví dụ:
@@ -331,6 +369,7 @@ walk → walked
 ```
 
 ### `word_formation`
+
 Nói về **cách tạo lexical item mới**.
 
 Ví dụ:
@@ -339,7 +378,7 @@ Ví dụ:
 assume → assumption
 ```
 
-Nhưng tao nghĩ không phải cứ:
+Nhưng không phải cứ:
 
 ```text
 A → B
@@ -351,7 +390,7 @@ Nếu chỉ là quan hệ giữa hai từ thì có thể chỉ cần relation.
 
 Nếu có một pattern có thể học và áp dụng lại, ví dụ một quy tắc tạo từ, thì mới đáng cân nhắc `word_formation` atom.
 
-**→ Chưa chốt.**
+**→ Việc đưa `word_formation` và `morphological_form` sang Grammar đã thống nhất. Ranh giới chi tiết với các subtype Grammar khác sẽ bàn sau.**
 
 ---
 
@@ -527,6 +566,13 @@ Sau khi bốn chỗ này rõ thì những phần còn lại sẽ dễ hơn nhi�
 
 # Decision log
 
-Chưa có quyết định nào được chốt trong Step 3.
+Đã có một số điểm được thống nhất trong quá trình review, nhưng **Step 3 vẫn chưa hoàn thành**.
 
-> Mọi phần ghi là **Đề xuất của tao** chỉ là proposal để thảo luận. Chỉ khi tao và mày thống nhất thì mới cập nhật canonical docs và mới coi Step 3 là hoàn thành.
+Các điểm đã thống nhất/điều chỉnh trong phần đang review:
+
+- Knowledge Atoms là flat, không có hierarchy/parent-child.
+- Một knowledge unit vẫn có thể là atom riêng dù liên quan hoặc phụ thuộc vào atom khác, nếu nó là learning target riêng.
+- `multiword_expression` là fallback cho lexical unit nhiều từ không thuộc `phrasal_verb`, `idiom` hoặc `collocation`.
+- `word_formation` và `morphological_form` thuộc **Grammar domain**, không thuộc Vocabulary domain.
+
+> Mọi phần khác vẫn tiếp tục là nội dung để tao và mày thảo luận. Chỉ khi tao và mày thống nhất thì mới cập nhật canonical docs và mới coi Step 3 là hoàn thành.
