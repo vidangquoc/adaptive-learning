@@ -8,6 +8,32 @@ Make the repository's **source layer, atom model, and schemas agree with each ot
 
 ## Order of work
 
+### 0. Lock the source of truth
+- [x] Treat `docs/knowledge/overall.md` as the canonical conceptual model for knowledge atoms and their relationships.
+- [x] Treat `docs/knowledge/atom-structure.md` as the canonical common field structure and field semantics.
+- [x] Treat `docs/knowledge/atom-types.md` as the canonical atom taxonomy.
+- [x] Do not introduce a second atom model in other documentation or schemas; later schema work must conform to these three documents.
+
+The authority chain is:
+
+```text
+Knowledge model / concepts
+        ↓
+docs/knowledge/overall.md
+        ↓
+common structure
+        ↓
+docs/knowledge/atom-structure.md
+        ↓
+taxonomy
+        ↓
+docs/knowledge/atom-types.md
+        ↓
+schemas / data / extraction
+```
+
+Step 0 locks the locations of the authoritative definitions. It does not prevent those documents from being refined during their dedicated checklist steps.
+
 ### 1. Fix the source segmentation / Segment boundary
 - [x] Establish `Segment` as the canonical structural source boundary.
 - [x] Make the actual `sources/` structure agree with `docs/learning-material/principles/06-source-unit-boundary.md`.
