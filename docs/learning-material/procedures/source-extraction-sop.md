@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This document defines the operational procedure for extracting instructional books and similar structured learning sources into the PTNK knowledge pipeline.
+This document defines the operational procedure for extracting instructional books and similar structured learning sources into the Adaptive Learning knowledge pipeline.
 
-It is an implementation SOP, not a competing learning-material policy. The canonical learning-material principles remain in `docs/learning-material-principles.md`.
+It is an implementation SOP, not a competing learning-material policy. The canonical learning-material principles remain in `docs/learning-material/principles/`.
 
 ## Core rule
 
@@ -257,7 +257,7 @@ Before promoting extracted material, verify:
 
 - source checksum and provenance are recorded;
 - extraction is reproducible;
-- expected units/sections are present;
+- expected structural boundaries are present;
 - boundaries are validated;
 - unexpected cross-boundary leakage is absent or flagged;
 - question counts are plausible;
@@ -316,7 +316,7 @@ Scripts should:
 
 ## 16. Relationship to the canonical rulebook
 
-`docs/learning-material-principles.md` defines **what the learning system must preserve and why**.
+`docs/learning-material/principles/` defines **what the learning system must preserve and why**.
 
 This SOP defines **how source material is operationally extracted and moved into that system**.
 
