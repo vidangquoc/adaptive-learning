@@ -1,135 +1,36 @@
-# Knowledge Atom Design
+# Knowledge Model
 
-> Status: **design workspace / ontology discussion**
->
-> This document is the working place for defining what a `knowledge_atom` is, what belongs inside an atom, what must remain a separate entity, and how knowledge atoms connect to questions, competencies, and learner state.
+> Canonical conceptual model for knowledge atoms and their relationships. Formal field structure is defined in `atom-structure.md`; taxonomy is defined in `atom-types.md`; discovery and promotion are defined in `atom-pipeline.md`.
 
 ## 1. Purpose
 
-Adaptive Learning is building a knowledge system, not a vocabulary list. A knowledge atom should therefore represent a sufficiently small, identifiable unit of knowledge that can be:
+A knowledge atom is a stable, source-grounded unit of knowledge that is small enough to assess and relate independently, but complete enough to have a meaningful interpretation in the learning system.
+
+A knowledge atom may be:
 
 - grounded in source evidence;
 - referenced independently;
 - tested by one or more assessment items;
 - related to other knowledge;
-- associated with multiple mastery dimensions;
-- reused across modules and learning activities.
+- reused across competencies and learning activities.
 
-## 2. Working definition
-
-A **knowledge atom** is a stable, source-grounded unit of knowledge that is small enough to assess and relate independently, but complete enough to have a meaningful interpretation in the target learning system.
-
-The current working distinction is:
+## 2. Knowledge Atom versus Learner State
 
 ```text
 Knowledge Atom
     = stable knowledge representation
 
 Learning State
-    = what this learner currently knows about that knowledge
+    = current evidence-based state of one learner
 ```
 
-Learner-specific mastery must not be embedded in the knowledge atom itself.
+Learner-specific mastery never belongs in the static atom.
 
-## 3. What a knowledge atom is not
+## 3. Flat Atom Model
 
-A knowledge atom is not automatically:
+Knowledge atoms are flat and independent by default.
 
-- one orthographic word;
-- one exercise question;
-- one answer option;
-- one page or textbook entry;
-- one definition string;
-- one competency;
-- one learner state;
-- one difficulty score;
-- one intrinsic vocabulary-priority score.
-
-A lexical item remains potentially relevant according to the learning target and source evidence rather than an arbitrary historical frequency threshold.
-
-## 4. Candidate ontology families
-
-The initial ontology should support at least the following families without assuming that they all have identical internal structure:
-
-```text
-lexical
-├── word
-├── lexical_sense
-├── phrasal_verb
-├── idiom
-├── collocation
-└── fixed_expression
-
-grammatical
-├── grammatical_pattern
-├── construction
-└── transformation_pattern
-
-word_formation
-
-discourse_usage
-```
-
-These categories are provisional and require further design review.
-
-## 5. The word-versus-sense problem
-
-**Working decision: do not build a hierarchical word/sense ontology.**
-
-For a lexical item, each distinct teachable or assessable knowledge variant is treated as its **own knowledge atom**. We do not create parent/child/grandparent relationships merely to represent the fact that several atoms are related to the same surface lexical item.
-
-For example, instead of:
-
-```text
-take
-└── sense A
-    └── pattern
-        └── collocation
-```
-
-we can simply have separate atoms:
-
-```text
-Atom A: take — meaning/sense A
-Atom B: take — meaning/sense B
-Atom C: take responsibility
-Atom D: take something for granted
-```
-
-These are independent knowledge atoms. They may be related when the relationship is useful, but **relatedness does not imply hierarchy**.
-
-This deliberately avoids building a complicated ontology of lexical families, senses, sub-senses, components, descendants, and ancestors. The system should remain flat at the knowledge-atom level.
-
-### 5.1 What counts as a separate lexical atom?
-
-A separate atom is justified when the knowledge can reasonably have its own:
-
-- meaning or interpretation;
-- form or expression;
-- usage constraint;
-- assessment target;
-- mastery state;
-- source evidence;
-- or instructional value.
-
-Thus the following may all be separate atoms when the source supports them:
-
-```text
-word / lexical form
-word + distinct meaning
-phrasal verb
-idiom
-collocation
-fixed expression
-usage pattern
-word-formation item
-```
-
-The important point is not whether linguists would classify these as different theoretical levels. The important point is whether the learning system needs to **teach, test, track, or retrieve them independently**.
-
-### 5.2 No mandatory parent atom
-
-If several atoms share the same surface form, the system does **not** require a separate parent atom merely to group them.
+If distinct senses, constructions, patterns, expressions, or uses can be independently learned or assessed, they may be represented as separate atoms. A shared surface form does not require a parent atom.
 
 For example:
 
@@ -138,104 +39,46 @@ bank — financial institution
 bank — side of a river
 ```
 
-can simply be two independent atoms.
+can be two independent atoms.
 
-Likewise:
+Relatedness does not imply hierarchy or inherited mastery.
 
-```text
-stick to your guns
-stick — physical action
-stick — remain attached
-```
+## 4. Atom versus Property versus Relation
 
-may be represented as independent atoms without constructing a hierarchy between them.
-
-### 5.3 Relationships are optional, not ancestry
-
-If useful, atoms can have explicit typed relationships such as:
+The system distinguishes:
 
 ```text
-related_to
-contrasts_with
-confused_with
-used_in
-part_of_expression
-derived_from
-supports_competency
+knowledge atom
+property
+relation
+metadata
 ```
 
-But these relationships must not silently turn into a parent/child ontology.
+A property describes an existing atom; a relation connects independent atoms; metadata describes source or system context.
 
-The rule is:
+Synonymy, antonymy, near-synonymy, semantic distinctions, derivation, prerequisite relationships, and competency support are normally relations rather than additional atoms.
 
-> **Flat atoms first; explicit relationships only when they provide real learning or querying value.**
+Create an atom when the knowledge itself is independently meaningful and useful to teach, assess, track, or retrieve.
 
-### 5.4 Why this is intentional
-
-The flat model keeps the system simpler and makes adaptive learning easier to reason about:
-
-```text
-Knowledge Atom A
-Knowledge Atom B
-Knowledge Atom C
-        ↓
-independent learner states
-        ↓
-questions target whichever atom is actually weak
-```
-
-The system does not need to infer that mastery of one atom automatically implies mastery of another merely because they share a word form or lexical family.
-
-## 6. Source evidence versus canonical knowledge
-
-Extraction must preserve the distinction between:
-
-```text
-RAW SOURCE
-    ↓
-EVIDENCE
-    ↓
-DISCOVERED CANDIDATE
-    ↓
-VERIFIED KNOWLEDGE ATOM
-    ↓
-SEMANTIC ENRICHMENT
-```
-
-A discovered candidate is not automatically a canonical knowledge atom.
-
-Every promoted atom should retain provenance sufficient to trace it back to the exact source evidence.
-
-## 7. Knowledge atom versus question
+## 5. Knowledge versus Assessment
 
 Questions are assessment entities, not knowledge atoms.
 
-The relationship should be many-to-many:
+The relationship is many-to-many:
 
 ```text
-Knowledge Atom A ─┐
-Knowledge Atom B ─┼── Question Q
-Knowledge Atom C ─┘
+Atom A ─┐
+Atom B ─┼── Question Q
+Atom C ─┘
 ```
 
-and one atom can be tested by many questions:
+One atom may be tested by multiple questions, and one question may test multiple atoms.
 
-```text
-Atom A
-  ├── diagnostic question
-  ├── context-selection question
-  ├── collocation question
-  ├── discrimination question
-  └── transfer question
-```
+Assessment construction rules belong to `docs/learning-material/principles/04-assessment-and-learning-material.md`.
 
-Book exercises are canonical seed questions, while generated follow-up questions should add instructional value.
+## 6. Knowledge versus Competency
 
-## 8. Knowledge atom versus competency
-
-A competency describes a capability; a knowledge atom describes knowledge that may contribute to that capability.
-
-Example relationship:
+A competency describes a capability. A knowledge atom describes knowledge that may contribute to that capability.
 
 ```text
 knowledge atoms
@@ -245,137 +88,25 @@ competency
 assessment tasks
 ```
 
-A competency may depend on many atoms, and an atom may support multiple competencies.
+An atom may support multiple competencies, and a competency may depend on multiple atoms.
 
-## 9. Knowledge atom versus learner state
+## 7. Source Grounding
 
-The atom should be stable across learners.
+Canonical knowledge must remain traceable to source evidence. Source interpretation may distinguish sense, usage, construction, or other properties, but unsupported claims must not be introduced merely to complete a record.
 
-Learner state should live separately:
+Source-boundary and provenance rules belong to the learning-material principles; this document defines the conceptual role of provenance, not its extraction procedure.
 
-```text
-KnowledgeAtom
-    └── stable definition, form, relations, provenance
+## 8. Knowledge and Learner Independence
 
-LearningState
-    ├── recognition
-    ├── recall
-    ├── usage
-    ├── collocation
-    ├── discrimination
-    ├── transfer
-    ├── retention
-    └── review state
-```
+The same knowledge base should support multiple learners. Learner performance must not mutate the canonical meaning, source evidence, or ontology of an atom.
 
-This allows the same knowledge base to support multiple learners and prevents learner performance from contaminating source knowledge.
+Learner mastery dimensions and adaptive decisions belong to `docs/learner/learning-state.md`.
 
-## 10. Candidate relationships
+## 9. Design Constraints
 
-The ontology may need explicit relationships such as:
-
-- synonymy;
-- antonymy;
-- semantic_relatedness;
-- derivation / word-formation relation;
-- collocation relation;
-- constituent-of-expression;
-- prerequisite;
-- contrast / easily-confused-with;
-- broader-than / narrower-than;
-- tested-by;
-- supports-competency.
-
-Under the flat-atom decision in Section 5, these are **relationships between independent atoms**, not evidence that one atom must be a parent or child of another.
-
-Relationships should be explicit entities or typed references where this is necessary for reliable querying and adaptive learning.
-
-## 11. Mastery dimensions
-
-Mastery dimensions belong to learner state and assessment, not to the static definition of an atom.
-
-Potential dimensions include:
-
-- recognition;
-- recall;
-- usage;
-- collocation;
-- discrimination;
-- transfer;
-- retention.
-
-A learner can therefore know one dimension of an atom while remaining weak in another.
-
-Example:
-
-```text
-recognition:       strong
-recall:            strong
-collocation:       strong
-usage:             developing
-transformation:    weak
-```
-
-The adaptive engine should respond to this state rather than repeatedly reteaching the entire atom.
-
-## 12. Open design questions
-
-The following questions must be resolved before the final schema is treated as canonical:
-
-1. What is the minimum information required for an atom to be considered valid?
-2. Should patterns/collocations be atoms themselves or typed relationships/components of another atom? The current default is to allow them to be independent atoms when they are independently teachable/assessable.
-3. Which knowledge types require distinct schemas rather than one polymorphic schema?
-4. Which fields are source evidence, which are normalized canonical data, and which are derived metadata?
-5. How should conflicting source evidence be represented?
-6. How should grammar knowledge be represented alongside lexical knowledge?
-7. Which relationships should be first-class and queryable?
-8. Which fields are allowed to be unknown rather than inferred?
-9. What constitutes promotion from discovered candidate to verified atom?
-10. How should atom versioning work when the ontology evolves?
-
-The previous question about whether a lexical sense should be a parent entity has been resolved: **no parent lexical entity is required merely to organize related atoms**.
-
-## 13. Current non-negotiable constraints
-
-- Preserve provenance.
-- Preserve raw source evidence separately from normalized knowledge.
-- Never invent definitions, meanings, pronunciation, examples, proficiency labels, or relationships.
-- Preserve lexical distinctions.
-- Treat independently teachable/assessable lexical variants as independent atoms.
-- Do not require parent/child/grandparent hierarchies among lexical atoms.
-- Use explicit relationships only when they provide real learning or querying value.
-- Do not assign intrinsic priority to individual vocabulary items.
-- Do not confuse source authority with learner relevance.
-- Do not promote extraction candidates without validation.
-- Do not put learner-specific mastery state into the static knowledge atom.
-- Do not let question-bank structure dictate the underlying knowledge ontology.
-
-## 14. Current pipeline relationship
-
-```text
-Source content
-      ↓
-Evidence-specific discovery
-      ↓
-Candidate knowledge atoms
-      ↓
-Stratified validation
-      ↓
-Verified knowledge atoms
-      ↓
-Semantic enrichment
-      ↓
-Knowledge base
-      ↓
-Question ↔ atom ↔ competency graph
-      ↓
-Learner state
-      ↓
-Adaptive next-best activity
-```
-
-## 15. Status
-
-The current ontology decision for lexical knowledge is intentionally simple: **knowledge atoms are flat, independently assessable units; lexical relatedness is represented through optional explicit relationships rather than ancestry.**
-
-The next design work should focus on the remaining ontology questions before large-scale semantic enrichment or canonical promotion.
+- Preserve lexical and grammatical distinctions that matter for learning.
+- Do not require parent/child hierarchies merely to group related atoms.
+- Use explicit relationships when they provide real learning or querying value.
+- Do not confuse an assessment structure with the underlying knowledge ontology.
+- Do not assign learner mastery or adaptive priority to static knowledge.
+- Do not invent unsupported knowledge.
