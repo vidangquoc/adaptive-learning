@@ -48,7 +48,7 @@ Mastery is learner-state evidence, not a static property of the atom.
 
 ## Competency Mapping
 
-Knowledge and questions should ultimately be linkable to competencies and, where useful, PTNK skill/task categories.
+Knowledge and questions should ultimately be linkable to competencies and, where useful, target-domain skill/task categories.
 
 Do not force a competency label when evidence is insufficient.
 
