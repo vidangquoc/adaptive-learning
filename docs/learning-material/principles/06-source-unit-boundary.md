@@ -30,11 +30,12 @@ The canonical source structure is:
 
 ```text
 sources/destination-c1-c2/
-├── raw/
 ├── segments/
 ├── segment-text/
 └── source-segments.yaml
 ```
+
+The original source PDF lives at `sources/Destination_C1-C2.pdf` and remains the source of truth. There is no `raw/` layer in the canonical architecture.
 
 ## Source Segmentation Specification
 
@@ -193,11 +194,11 @@ Discovery output is evidence location and interpretation input, not canonical kn
 
 Exercises and questions inside a segment are source evidence for assessment. Answer choices, fill-in rows, generic exercise markers, and similar structural artifacts must not automatically become knowledge atoms.
 
-## Raw and Historical Artifacts
+## No `raw/` Layer
 
-`raw/` may contain intermediate or historical extraction artifacts, including the former whole-book text conversion.
+The previous `raw/` directory contained an obsolete whole-book text artifact from the superseded extraction workflow. It has been removed from the repository.
 
-The historical pipeline was:
+The old pipeline was:
 
 ```text
 Source PDF
@@ -209,9 +210,7 @@ attempted Unit splitting
 
 This approach is superseded by the segment-based pipeline defined above.
 
-Historical raw artifacts may be preserved for traceability or reproducibility, but they are not required canonical inputs for current evidence discovery.
-
-In particular, the current pipeline must not depend on a single whole-book TXT file or on the old attempt to split that TXT directly into Units.
+The current system must not recreate or depend on a whole-book TXT intermediate layer. The original source PDF, the reviewed segmentation manifest, the segment PDFs, and their derived segment text are sufficient for the canonical source pipeline.
 
 ## No `units/` Layer
 
