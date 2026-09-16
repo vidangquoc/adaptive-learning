@@ -1,18 +1,18 @@
-# C1 Book Bibliography
+# C1–C2 Book Bibliography
 
 ## Purpose
 
-This document records books that can support the PTNK Adaptive Preparation System at approximately C1 / C1–C2 level.
+This document records books that can support Adaptive Learning at approximately C1 / C1–C2 level.
 
-The list is a **source library, not a mandatory curriculum**. A learner should not be expected to complete every book. Selection is driven by diagnostic results, PTNK relevance, competency gaps, coverage, and marginal learning value.
+The list is a **source library, not a mandatory curriculum**. A learner should not be expected to complete every book. Selection is driven by diagnostic results, competency gaps, coverage, source quality, and marginal learning value.
 
 ## Source roles
 
-- `c1_candidate_lexicon` — lexical candidate-generation source. Extract selectively; do not equate the source with the official learner lexicon.
+- `candidate_lexicon` — lexical candidate-generation source. Extract selectively; do not equate the source with the official learner lexicon.
 - `grammar_reference` — grammar reference and practice source.
 - `competency_practice` — targeted competency practice, especially grammar, vocabulary, and Use of English.
-- `exam_coursebook` — integrated C1 exam-preparation source.
-- `assessment` — diagnostic, transfer, and mock-test source; not a curriculum source.
+- `coursebook` — integrated advanced coursebook covering multiple skills.
+- `assessment` — diagnostic, transfer, and mock-test source; not automatically a curriculum source.
 
 ## 1. Vocabulary
 
@@ -21,21 +21,17 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Authors:** Michael McCarthy & Felicity O'Dell
 - **Level:** C1–C2
 - **Publisher:** Cambridge University Press
-- **Role:** `c1_candidate_lexicon`
+- **Role:** `candidate_lexicon`
 - **Primary value:** Vocabulary, collocations, phrases, idiomatic language, word choice, usage.
-- **PTNK use:** Candidate generation for lexical precision and Language Use; use selectively after diagnostic filtering.
-- **Priority:** High
-- **Notes:** Strong lexical source, but not a PTNK syllabus and not a requirement to complete sequentially.
+- **Notes:** Strong lexical source; use selectively rather than as a mandatory sequential course.
 
 ### 1.2 Cambridge Vocabulary for Advanced
 
 - **Author:** Simon Haines
 - **Level:** C1
 - **Publisher:** Cambridge University Press
-- **Role:** `c1_candidate_lexicon`
-- **Primary value:** Exam-oriented vocabulary, word formation, collocations, phrasal verbs, idioms.
-- **PTNK use:** Candidate generation for advanced lexical selection and writing/use-of-English competencies.
-- **Priority:** High
+- **Role:** `candidate_lexicon`
+- **Primary value:** Advanced vocabulary, word formation, collocations, phrasal verbs, idioms.
 - **Notes:** Validate the current publisher edition and metadata before extraction.
 
 ### 1.3 Destination C1 & C2: Grammar & Vocabulary
@@ -45,9 +41,7 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Publisher:** Macmillan Education
 - **Role:** `competency_practice`
 - **Primary value:** Grammar, vocabulary, word formation and structured practice.
-- **PTNK use:** Targeted practice for grammar/vocabulary and word-formation competencies.
-- **Priority:** High
-- **Notes:** C1–C2 scope; use diagnostically rather than as a sequential course.
+- **Notes:** Use diagnostically rather than as a mandatory sequential course.
 
 ### 1.4 Test Your English Vocabulary in Use – Advanced
 
@@ -55,8 +49,6 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Publisher:** Cambridge University Press
 - **Role:** `assessment`
 - **Primary value:** Vocabulary testing and retrieval checks.
-- **PTNK use:** Diagnostic and delayed-retrieval checks for lexical knowledge.
-- **Priority:** Medium
 - **Notes:** Better treated as assessment than as a source of required curriculum.
 
 ## 2. Grammar
@@ -68,8 +60,6 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Publisher:** Cambridge University Press
 - **Role:** `grammar_reference`
 - **Primary value:** Advanced grammar reference, nuance, form and usage.
-- **PTNK use:** Grammar competency mapping and targeted remediation.
-- **Priority:** Very high
 - **Notes:** Use as a reference/practice bank; do not require full sequential completion.
 
 ### 2.2 Cambridge Grammar for Advanced
@@ -77,9 +67,7 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Level:** C1 / Cambridge C1 Advanced
 - **Publisher:** Cambridge University Press
 - **Role:** `competency_practice`
-- **Primary value:** Grammar instruction plus exam-oriented practice.
-- **PTNK use:** Targeted grammar and Use of English practice.
-- **Priority:** High
+- **Primary value:** Grammar instruction plus advanced exam-oriented practice.
 - **Notes:** Prefer verified current publisher metadata before acquisition/extraction.
 
 ### 2.3 Advanced Language Practice
@@ -89,50 +77,40 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Publisher:** Macmillan Education
 - **Role:** `competency_practice`
 - **Primary value:** Grammar, vocabulary, lexical grammar and Use of English practice.
-- **PTNK use:** High-value practice source for lexical-grammar integration, transformations and language-use precision.
-- **Priority:** Very high
-- **Notes:** Especially relevant to PTNK-style Language Use/Writing; exact CEFR labeling should be preserved as publisher metadata rather than forcing a C1-only label.
+- **Notes:** Particularly useful for lexical-grammar integration, transformations and language-use precision.
 
-## 3. Use of English / Integrated C1 Exam Preparation
+## 3. Integrated Advanced Coursebooks
 
 ### 3.1 Objective Advanced
 
 - **Level:** C1
 - **Publisher:** Cambridge University Press
-- **Role:** `exam_coursebook`
+- **Role:** `coursebook`
 - **Primary value:** Reading, Use of English, Writing, Listening, Speaking, grammar and vocabulary.
-- **PTNK use:** Integrated C1 competency source; selectively mine exercises matching diagnostic gaps.
-- **Priority:** Very high
-- **Notes:** Strong overall C1 exam-preparation source, but PTNK is not identical to C1 Advanced.
+- **Notes:** Select exercises according to diagnostic needs.
 
 ### 3.2 Complete Advanced – 3rd Edition
 
 - **Level:** C1
 - **Publisher:** Cambridge University Press
-- **Role:** `exam_coursebook`
-- **Primary value:** Full C1 exam preparation across Reading, Use of English, Writing, Listening and Speaking.
-- **PTNK use:** Competency and transfer practice, especially Reading/Use of English/Writing.
-- **Priority:** Very high
-- **Notes:** Use selectively based on the PTNK competency model.
+- **Role:** `coursebook`
+- **Primary value:** Full C1 preparation across Reading, Use of English, Writing, Listening and Speaking.
+- **Notes:** Use selectively according to the competency model.
 
 ### 3.3 Ready for Advanced – 3rd Edition
 
 - **Level:** C1
 - **Publisher:** Macmillan Education
-- **Role:** `exam_coursebook`
-- **Primary value:** C1 Advanced exam preparation, including Reading, Use of English, Writing, Listening and Speaking.
-- **PTNK use:** Supplemental competency and exam-strategy practice.
-- **Priority:** High
-- **Notes:** Do not assume Cambridge exam format equals PTNK format.
+- **Role:** `coursebook`
+- **Primary value:** C1 preparation across Reading, Use of English, Writing, Listening and Speaking.
+- **Notes:** Use as a supplementary competency and strategy source.
 
 ### 3.4 Expert Advanced
 
 - **Level:** C1
 - **Publisher:** Pearson
-- **Role:** `exam_coursebook`
-- **Primary value:** Grammar, vocabulary, Reading, Writing, Listening, Speaking and exam practice.
-- **PTNK use:** Supplementary competency source for high-achieving learners.
-- **Priority:** Medium
+- **Role:** `coursebook`
+- **Primary value:** Grammar, vocabulary, Reading, Writing, Listening, Speaking and advanced practice.
 - **Notes:** Use where it adds coverage not already supplied by stronger sources.
 
 ## 4. Collocation
@@ -142,11 +120,9 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Authors:** Michael McCarthy & Felicity O'Dell
 - **Level:** C1–C2
 - **Publisher:** Cambridge University Press
-- **Role:** `c1_candidate_lexicon`
+- **Role:** `candidate_lexicon`
 - **Primary value:** Collocations, lexical precision and academic-writing language.
-- **PTNK use:** Candidate generation for collocation, lexical selection and writing precision.
-- **Priority:** Very high
-- **Notes:** Strong source for the distinction between knowing individual words and knowing natural combinations.
+- **Notes:** Useful for the distinction between knowing individual words and knowing natural combinations.
 
 ## 5. Idioms
 
@@ -155,11 +131,9 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Authors:** Michael McCarthy & Felicity O'Dell
 - **Level:** C1–C2
 - **Publisher:** Cambridge University Press
-- **Role:** `c1_candidate_lexicon`
+- **Role:** `candidate_lexicon`
 - **Primary value:** Idioms and fixed expressions in context.
-- **PTNK use:** Candidate generation; prioritize expressions supported by PTNK evidence or strong competency value.
-- **Priority:** Medium-high
-- **Notes:** Do not treat all idioms as equally useful; breadth and marginal value gates apply.
+- **Notes:** Select expressions according to learning value and source evidence.
 
 ## 6. Phrasal Verbs
 
@@ -168,42 +142,20 @@ The list is a **source library, not a mandatory curriculum**. A learner should n
 - **Authors:** Michael McCarthy & Felicity O'Dell
 - **Level:** C1–C2
 - **Publisher:** Cambridge University Press
-- **Role:** `c1_candidate_lexicon`
+- **Role:** `candidate_lexicon`
 - **Primary value:** Phrasal verbs, meaning distinctions and usage.
-- **PTNK use:** Candidate generation for lexical discrimination and Use of English.
-- **Priority:** High
-- **Notes:** Especially useful for PTNK-style lexical selection; filter by relevance and learner state.
+- **Notes:** Useful for lexical discrimination and contextual usage.
 
 ## 7. Reading / Writing
 
-Reading and Writing are represented primarily by the integrated C1 coursebooks above rather than by a separate mandatory book stack.
+Reading and Writing are represented primarily by the integrated advanced coursebooks above rather than by a separate mandatory book stack.
 
-### Recommended sources
+Recommended sources include:
 
-- **Complete Advanced – 3rd Edition** — C1 Reading/Writing and integrated exam practice.
-- **Objective Advanced** — C1 Reading/Writing and integrated exam practice.
-- **Ready for Advanced – 3rd Edition** — C1 Reading/Writing and integrated exam practice.
+- **Complete Advanced – 3rd Edition** — C1 Reading/Writing and integrated practice.
+- **Objective Advanced** — C1 Reading/Writing and integrated practice.
+- **Ready for Advanced – 3rd Edition** — C1 Reading/Writing and integrated practice.
 - **Expert Advanced** — supplementary advanced Reading/Writing practice.
-
-### PTNK rule
-
-Do not equate Cambridge C1 Advanced tasks with PTNK tasks. Use these books to develop transferable competencies, then verify transfer with PTNK-specific tasks.
-
-Recommended flow:
-
-```text
-PTNK task
-    ↓
-competency diagnosis
-    ↓
-select relevant C1 exercise
-    ↓
-practice
-    ↓
-PTNK transfer task
-    ↓
-update learning state
-```
 
 ## 8. Mock Tests / Assessment
 
@@ -212,35 +164,30 @@ update learning state
 - **Level:** C1
 - **Publisher:** Cambridge University Press
 - **Role:** `assessment`
-- **Primary value:** Six full C1 Advanced practice tests; guided training in the first two and independent practice in later tests.
-- **PTNK use:** Diagnostic benchmarking, timed practice and transfer assessment.
-- **Priority:** Very high
-- **Notes:** Assessment source, not curriculum. Do not harvest it as a mandatory content list.
+- **Primary value:** Full C1 Advanced practice tests with guided and independent practice.
+- **Notes:** Assessment source, not a mandatory curriculum.
 
 ### 8.2 Cambridge C1 Advanced authentic/sample tests
 
 - **Level:** C1
 - **Publisher:** Cambridge English
 - **Role:** `assessment`
-- **Primary value:** Official sample tasks for Reading and Use of English, Writing, Listening and Speaking.
-- **PTNK use:** External C1 benchmark and transfer validation.
-- **Priority:** Very high
-- **Notes:** Prefer official sample material for assessment validity; use as evidence rather than as a replacement for PTNK papers.
+- **Primary value:** Authentic sample tasks for Reading and Use of English, Writing, Listening and Speaking.
+- **Notes:** Use as an external proficiency benchmark and assessment source.
 
-## Selection Rules for the PTNK System
+## Selection Rules
 
-1. **C1 level is a candidate filter, not a curriculum command.**
-2. **PTNK evidence outranks generic C1 exam relevance** when deciding what deserves priority.
-3. **Diagnostic state determines learner need.** Mastered competencies should be skipped or maintained.
-4. **Coverage prevents over-drilling.** After a competency is mastered, expand the learning frontier outward before deepening the same semantic neighborhood.
-5. **Assessment sources remain separate from learning sources.** A mock test measures transfer; it is not automatically a vocabulary syllabus.
-6. **C1–C2 books should not be mislabeled as C1-only.** Preserve the actual publisher scope.
-7. **Copyright and licensing constraints apply.** Store provenance, acquisition procedures and permitted raw artifacts; do not redistribute copyrighted book content without permission.
-8. **The bibliography is a source library.** Actual official learning data must be produced through the PTNK evidence + candidate-source + learner-state + coverage pipeline.
+1. **Proficiency level is a candidate filter, not a curriculum command.**
+2. **Diagnostic state determines learner need.** Mastered competencies should be skipped or maintained.
+3. **Coverage prevents over-drilling.** After a competency is mastered, expand the learning frontier outward before deepening the same semantic neighborhood.
+4. **Assessment sources remain separate from learning sources.** A mock test measures performance; it is not automatically a content syllabus.
+5. **C1–C2 books should not be mislabeled as C1-only.** Preserve the actual publisher scope.
+6. **Copyright and licensing constraints apply.** Store provenance, acquisition procedures and permitted raw artifacts; do not redistribute copyrighted book content without permission.
+7. **The bibliography is a source library.** Official learning data must be produced through evidence, candidate-source, learner-state, and coverage processes.
 
 ## Recommended Priority for Initial Acquisition
 
-If implementation capacity is limited, start with:
+If implementation capacity is limited, a reasonable starting set is:
 
 1. **English Vocabulary in Use – Advanced**
 2. **English Collocations in Use – Advanced**
