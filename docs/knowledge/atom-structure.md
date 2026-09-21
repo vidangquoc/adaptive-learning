@@ -47,31 +47,41 @@ This is the single common atom structure. Atom type must not cause a different t
 
 A unique, stable semantic identifier for the atom.
 
-General pattern:
+Base pattern:
 
 ```text
 <domain>.<type>.<name>
 ```
 
-The `name` component is a semantic identifier and may contain additional dot-separated components when needed to express a precise semantic distinction. This does not introduce a `subtype` layer.
+For `vocabulary.lexical_sense`, `part_of_speech` is part of the semantic identity and follows `name`:
+
+```text
+<domain>.lexical_sense.<name>.<part_of_speech>
+```
+
+If two `lexical_sense` atoms still cannot be distinguished by `name + part_of_speech`, append a short, stable form of `meaning` as the final semantic component.
 
 Examples:
 
 ```yaml
-id: vocabulary.lexical_sense.assume
-id: vocabulary.lexical_sense.compelling
+id: vocabulary.lexical_sense.assume.verb
+id: vocabulary.lexical_sense.compelling.adjective
+id: vocabulary.lexical_sense.run.verb.move_quickly
+id: vocabulary.lexical_sense.run.verb.operate_function
 id: vocabulary.collocation.strike_a_balance
-id: grammar.use.present_simple.current_habit
-id: grammar.use.present_perfect.past_to_present
-id: grammar.rule.present_perfect_continuous
+grammar.use.present_simple.current_habit
+grammar.use.present_perfect.past_to_present
+grammar.rule.present_perfect_continuous
 ```
 
 Rules:
 
 - IDs must be semantic rather than arbitrary sequence numbers;
 - `domain` and `type` are always the first two components;
-- `name` is the semantic identity of the specific knowledge object and may contain dot-separated components when necessary;
-- use the shortest stable name that remains unambiguous;
+- for `lexical_sense`, `part_of_speech` follows `name`;
+- for `lexical_sense`, append a short stable form of `meaning` only when `name + part_of_speech` is insufficient to distinguish the atom;
+- for other atom types, use `name` and additional semantic components only when needed to express a precise distinction;
+- use the shortest stable identity that remains unambiguous;
 - do not encode source page, exercise number, extraction order, or learner state into the canonical ID;
 - do not use `.01`, `.02`, etc. as semantic distinctions.
 
