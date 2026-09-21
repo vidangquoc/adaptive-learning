@@ -25,10 +25,8 @@ meaning:
 mother_says:
 explanation:
 structure:
-constraints:
 
 examples:
-related_atoms:
 
 extra:
   source:
@@ -142,11 +140,11 @@ Keep `meaning` concise. Further teaching detail belongs in `explanation`.
 
 ### `mother_says`
 
-The learner-facing Vietnamese rendering or explanation of the relevant meaning.
+The Vietnamese translation or mother-tongue rendering of `name`.
 
-This field is intentionally in the learner's mother tongue and is part of the common schema.
+This field is especially useful for vocabulary atoms, where the learner needs a direct translation of the lexical item or expression represented by `name`.
 
-For grammar atoms, use `null` when a concise Vietnamese rendering would not add useful semantic information or when the grammar atom is better explained through `meaning` and `explanation`.
+For grammar atoms, use `null` when a direct translation of `name` would not add useful information.
 
 Do not use this field for learner feedback, hints about a specific attempt, or learner-state information.
 
@@ -179,21 +177,9 @@ Keep `structure` focused on form/pattern, not on when or why the knowledge is us
 
 Restrictions, conditions, exceptions, contrasts, or limitations needed for accurate use.
 
-Examples include:
-
-- semantic restrictions;
-- grammatical restrictions;
-- transitivity or separability conditions;
-- fixedness or allowed variation;
-- source-supported exceptions.
-
-A constraint that merely describes an existing atom normally belongs here rather than becoming a separate atom.
-
-If a specific knowledge point represented by a constraint is directly tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than remaining merely a constraint of the original atom.
-
 ---
 
-## 4. Evidence and relationship fields
+## 4. Evidence fields
 
 ### `examples`
 
@@ -204,32 +190,6 @@ Examples may be source-derived or generated, but their provenance must remain di
 Do not treat every example sentence as an independent atom. An example becomes an atom only when it expresses independently meaningful knowledge supported by the taxonomy.
 
 Use `[]` when no example is available or appropriate.
-
-### `related_atoms`
-
-Explicit relationships to other independent knowledge atoms.
-
-Canonical conceptual form:
-
-```yaml
-related_atoms:
-  - id: lex.assume
-    relation: contrasts_with
-  - id: lex.infer
-    relation: related_to
-```
-
-A relationship:
-
-- connects independent atoms;
-- does not imply parent/child hierarchy;
-- does not imply inherited meaning;
-- does not imply inherited mastery;
-- must be supported by source evidence or an explicitly justified knowledge-model relation.
-
-Semantic relationships such as synonymy, near-synonymy, antonymy, semantic distinction, and derivation normally belong here rather than becoming separate atoms.
-
----
 
 ## 5. `extra` metadata
 
@@ -288,20 +248,20 @@ Do not use `notes` as a place to hide:
 
 The structure is shared, but fields are interpreted according to the atom taxonomy.
 
-| Type | `meaning` | `explanation` | `structure` | `constraints` |
+| Type | `meaning` | `explanation` | `structure` |
 |---|---|---|---|---|---|
-| `lexical_sense` | Specific lexical sense | Semantic nuance, boundaries, and relevant usage | Lexical/syntactic pattern when relevant | Semantic/syntactic/usage limits |
-| `multiword_expression` | Expression meaning/function | Meaning, conventional behavior, and relevant usage | Fixed or semi-fixed form | Variation/fixedness restrictions |
-| `phrasal_verb` | Combined meaning | Semantic behavior, distinctions, and relevant usage | Verb + particle/preposition | Transitivity/separability/register |
-| `idiom` | Idiomatic meaning | Figurative interpretation and relevant usage | Fixed/semi-fixed form | Fixedness/variation restrictions |
-| `collocation` | Meaning/function of combination | Why/how the combination is conventional and used | Lexical or syntactic pattern | Combination or grammatical restrictions |
-| `word_formation` | Meaning/function of formation | Formation behavior and relevant use | Morphological pattern | Formation/spelling/category restrictions |
-| `morphological_form` | Relevant lexical-form information | Form/function explanation and relevant use | Inflectional or irregular form | Form or distribution restrictions |
-| `rule` | Grammatical rule/relationship | How the rule works, including relevant contexts when needed | Grammatical form/pattern | Conditions/exceptions/contrasts |
-| `use` | Grammatical meaning/function | How the construction is used, including relevant contexts | Grammatical form/pattern when relevant | Conditions/exceptions/contrasts |
-| `exception` | Exceptional grammatical behavior | Why it differs from the general rule and where it applies | Exceptional form/pattern | Scope/conditions of the exception |
-| `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern | Productive/contextual use | Formation/spelling/category restrictions |
-| `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form | Context/use | Form or distribution restrictions |
+| `lexical_sense` | Specific lexical sense | Semantic nuance, boundaries, and relevant usage | Lexical/syntactic pattern when relevant |
+| `multiword_expression` | Expression meaning/function | Meaning, conventional behavior, and relevant usage | Fixed or semi-fixed form |
+| `phrasal_verb` | Combined meaning | Semantic behavior, distinctions, and relevant usage | Verb + particle/preposition |
+| `idiom` | Idiomatic meaning | Figurative interpretation and relevant usage | Fixed/semi-fixed form |
+| `collocation` | Meaning/function of combination | Why/how the combination is conventional and used | Lexical or syntactic pattern |
+| `word_formation` | Meaning/function of formation | Formation behavior and relevant use | Morphological pattern |
+| `morphological_form` | Relevant lexical-form information | Form/function explanation and relevant use | Inflectional or irregular form |
+| `rule` | Grammatical rule/relationship | How the rule works, including relevant contexts when needed | Grammatical form/pattern |
+| `use` | Grammatical meaning/function | How the construction is used, including relevant contexts | Grammatical form/pattern when relevant |
+| `exception` | Exceptional grammatical behavior | Why it differs from the general rule and where it applies | Exceptional form/pattern |
+| `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern |
+| `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form |
 
 The taxonomy document determines whether a record is valid as one of these types. This table does not create additional types.
 
@@ -327,9 +287,9 @@ explicit connection between independent atoms
 
 Properties are descriptive information about an atom; they are not Knowledge Atoms themselves.
 
-When a knowledge point represented by a Property or Constraint is directly tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than as a Property/Constraint of the original atom.
+When a knowledge point represented only as descriptive information is directly tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than remaining merely descriptive information about the original atom.
 
-Likewise, a Relation describes a connection between independent atoms. If the learning material directly tests a knowledge point about that connection, the tested knowledge point is represented as a separate Knowledge Atom.
+Relations connect independent atoms. A relation itself is not stored as a field on the atom. If the learning material directly teaches and tests knowledge about a relation between atoms, that knowledge point is represented as a separate Knowledge Atom.
 
 Examples:
 
@@ -364,8 +324,8 @@ This boundary prevents both atom inflation and the loss of independently useful 
 3. `type` describes the knowledge ontology, not the source or learner.
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
-6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If a knowledge point represented by a Property or Constraint is directly tested in the learning material, that knowledge point is represented as a separate Atom.
-7. Relations connect independent atoms; they are not disguised parent/child records.
+6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If descriptive information is directly taught and tested as an independent knowledge point, that knowledge point is represented as a separate Atom.
+7. Relations connect independent atoms; they are not stored as an atom field. If knowledge about a relation is directly taught and tested, that knowledge point is represented as a separate Atom.
 8. Source provenance remains recoverable for every official atom.
 9. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
 10. Learner mastery, attempts, confidence, retention, review state, and progress never belong in the atom.
