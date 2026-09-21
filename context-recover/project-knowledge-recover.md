@@ -20,10 +20,12 @@ To understand the project:
 2. Read `docs/data/architecture.md` for the authoritative data architecture and domain boundaries.
 3. Read the relevant documents under `docs/` for the specific subsystem involved in the current task.
 4. Read `docs/knowledge/overall.md` for the conceptual knowledge model when the task involves knowledge representation.
-5. Read `docs/learner/learning-state.md` for learner-state concepts when the task involves adaptive learner behavior.
-6. Read relevant implementation files for the behavior currently implemented.
-7. Inspect Git history when the task depends on why a design or rule exists.
-8. Use the current repository state rather than relying on remembered project knowledge.
+5. Read `docs/knowledge/atom-types.md` and `docs/knowledge/atom-structure.md` when the task involves Knowledge Atom taxonomy or structure.
+6. Read `docs/knowledge/step-3-review.md` when the task involves the current Step 3 review; this is the working discussion and decision log, not the canonical model.
+7. Read `docs/learner/learning-state.md` for learner-state concepts when the task involves adaptive learner behavior.
+8. Read relevant implementation files for the behavior currently implemented.
+9. Inspect Git history when the task depends on why a design or rule exists.
+10. Use the current repository state rather than relying on remembered project knowledge.
 
 Do not reconstruct project knowledge from this file. Use it only to locate and prioritize authoritative sources.
 
@@ -44,6 +46,18 @@ To understand what learning materials and knowledge data currently exist:
 11. Read `docs/knowledge/atom-pipeline.md` for knowledge-atom discovery, validation, and promotion workflow.
 12. Read `docs/data/architecture.md` when interpreting the relationship between source, knowledge, assessment, and learner data.
 13. Use the actual repository data for current inventories, counts, structures, and values.
+
+### Current Step 3 recovery note
+
+When recovering the current Step 3 discussion:
+
+- Treat docs/knowledge/overall.md, docs/knowledge/atom-types.md, and docs/knowledge/atom-structure.md as canonical knowledge-model sources.
+- Treat docs/knowledge/step-3-review.md as the working review/discussion source.
+- Do not treat review proposals as canonical unless explicitly adopted and reflected in the canonical docs.
+- multiword_expression is currently being treated as a fallback for multi-word lexical units that are not phrasal_verb, idiom, or collocation.
+- word_formation and morphological_form have been moved to the Grammar domain; their detailed boundary with other Grammar subtypes remains open.
+- A grammar rule may itself be an Atom when it is a learning target; this does not imply a dedicated rule field in the common Atom structure.
+- Step 3 remains open.
 
 Do not infer current knowledge inventories, atom counts, source contents, or other data from conversation memory or from this recovery file.
 
