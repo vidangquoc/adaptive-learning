@@ -25,7 +25,6 @@ meaning:
 mother_says:
 explanation:
 structure:
-usage:
 constraints:
 
 examples:
@@ -176,14 +175,6 @@ Use `null` when no meaningful structural representation applies.
 
 Keep `structure` focused on form/pattern, not on when or why the knowledge is used.
 
-### `usage`
-
-The contexts, situations, functions, register conditions, or other use information needed to use the knowledge appropriately.
-
-`usage` describes the knowledge, not the frequency with which a learner has used it.
-
-Do not turn every usage condition into a separate atom. Create a separate atom only when the usage itself is independently meaningful and diagnosable and the taxonomy supports it.
-
 ### `constraints`
 
 Restrictions, conditions, exceptions, contrasts, or limitations needed for accurate use.
@@ -297,18 +288,18 @@ Do not use `notes` as a place to hide:
 
 The structure is shared, but fields are interpreted according to the atom taxonomy.
 
-| Type | `meaning` | `explanation` | `structure` | `usage` | `constraints` |
+| Type | `meaning` | `explanation` | `structure` | `constraints` |
 |---|---|---|---|---|---|
-| `lexical_sense` | Specific lexical sense | Semantic nuance and boundaries | Lexical/syntactic pattern when relevant | Context/functions/register | Semantic/syntactic/usage limits |
-| `multiword_expression` | Expression meaning/function | Meaning and conventional behavior | Fixed or semi-fixed form | Context/register | Variation/fixedness restrictions |
-| `phrasal_verb` | Combined meaning | Semantic behavior and distinctions | Verb + particle/preposition | Context/functions | Transitivity/separability/register |
-| `idiom` | Idiomatic meaning | Figurative interpretation | Fixed/semi-fixed form | Context/register | Fixedness/variation restrictions |
-| `collocation` | Meaning/function of combination | Why/how the combination is conventional | Lexical or syntactic pattern | Context/register | Combination or grammatical restrictions |
-| `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern | Productive/contextual use | Formation/spelling/category restrictions |
-| `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form | Context/use | Form or distribution restrictions |
-| `rule` | Grammatical rule/relationship | How the rule works | Grammatical form/pattern | Relevant contexts | Conditions/exceptions/contrasts |
-| `use` | Grammatical meaning/function | How the construction is used | Grammatical form/pattern when relevant | Situations/functions | Conditions/exceptions/contrasts |
-| `exception` | Exceptional grammatical behavior | Why it differs from the general rule | Exceptional form/pattern | Relevant contexts | Scope/conditions of the exception |
+| `lexical_sense` | Specific lexical sense | Semantic nuance, boundaries, and relevant usage | Lexical/syntactic pattern when relevant | Semantic/syntactic/usage limits |
+| `multiword_expression` | Expression meaning/function | Meaning, conventional behavior, and relevant usage | Fixed or semi-fixed form | Variation/fixedness restrictions |
+| `phrasal_verb` | Combined meaning | Semantic behavior, distinctions, and relevant usage | Verb + particle/preposition | Transitivity/separability/register |
+| `idiom` | Idiomatic meaning | Figurative interpretation and relevant usage | Fixed/semi-fixed form | Fixedness/variation restrictions |
+| `collocation` | Meaning/function of combination | Why/how the combination is conventional and used | Lexical or syntactic pattern | Combination or grammatical restrictions |
+| `word_formation` | Meaning/function of formation | Formation behavior and relevant use | Morphological pattern | Formation/spelling/category restrictions |
+| `morphological_form` | Relevant lexical-form information | Form/function explanation and relevant use | Inflectional or irregular form | Form or distribution restrictions |
+| `rule` | Grammatical rule/relationship | How the rule works, including relevant contexts when needed | Grammatical form/pattern | Conditions/exceptions/contrasts |
+| `use` | Grammatical meaning/function | How the construction is used, including relevant contexts | Grammatical form/pattern when relevant | Conditions/exceptions/contrasts |
+| `exception` | Exceptional grammatical behavior | Why it differs from the general rule and where it applies | Exceptional form/pattern | Scope/conditions of the exception |
 | `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern | Productive/contextual use | Formation/spelling/category restrictions |
 | `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form | Context/use | Form or distribution restrictions |
 
