@@ -125,6 +125,26 @@ Examples:
 
 `name` identifies the learning object; it is not a definition or explanation.
 
+### Lexical-sense-specific properties
+
+The following properties apply only to atoms with `domain: vocabulary` and `type: lexical_sense`. They are not part of the common atom schema.
+
+```yaml
+name:
+part_of_speech:
+pronunciation:
+
+meaning:
+mother_says:
+explanation:
+structure:
+```
+
+- `part_of_speech`: the part of speech of the lexical sense, such as `noun`, `verb`, or `adjective`.
+- `pronunciation`: the pronunciation transcription of the lexical sense, normally represented using IPA when available.
+
+These are descriptive properties of the lexical sense; they are not separate Knowledge Atoms.
+
 ### `meaning`
 
 A concise statement of the relevant meaning or grammatical function.
