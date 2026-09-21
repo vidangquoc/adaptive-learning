@@ -54,8 +54,8 @@ Current canonical types are:
 | `vocabulary` | `phrasal_verb` | A verb + particle/preposition functioning as a lexical unit |
 | `vocabulary` | `idiom` | A fixed or semi-fixed expression with non-compositional or strongly conventional meaning |
 | `vocabulary` | `collocation` | A conventional word combination whose natural use is independently learnable |
-| `vocabulary` | `word_formation` | Knowledge of a productive or source-supported morphological formation pattern |
-| `vocabulary` | `morphological_form` | A lexical inflectional or irregular form that is independently useful to represent |
+| `grammar` | `word_formation` | Knowledge of a productive or source-supported morphological formation pattern |
+| `grammar` | `morphological_form` | A grammatical/inflectional form of a lexical item that is independently useful to represent |
 | `grammar` | `grammar` | A grammatical construction, form, meaning, use, pattern, rule, or exception |
 
 ### `subtype`
@@ -147,7 +147,7 @@ A collocation should become an atom only when the source supports it as meaningf
 
 ### 2.6. `word_formation`
 
-Knowledge about a morphological relationship or formation pattern that is independently useful to learn.
+**Grammar subtype:** knowledge about a morphological relationship or formation pattern that is independently useful to learn.
 
 Examples:
 
@@ -159,10 +159,11 @@ The related lexical forms remain lexical knowledge. A word-formation atom repres
 
 ### 2.7. `morphological_form`
 
-A grammatical or inflectional form of a lexical item that is independently useful to represent, especially an irregular or otherwise explicitly taught form.
+**Grammar subtype:** a grammatical or inflectional form of a lexical item that is independently useful to represent, especially an explicitly taught form.
 
 Examples:
 
+- `love` → `loved`, `loves`, `loving`
 - `think` → `thought`
 - `write` → `written`
 
@@ -173,6 +174,8 @@ Do not create a separate atom for every ordinary inflection. Use this type when 
 ## 3. Grammar knowledge
 
 All grammar atoms use `type: grammar`. The `subtype` identifies the kind of grammatical knowledge represented.
+
+The canonical grammar subtype set currently includes the general grammatical subtypes below plus `word_formation` and `morphological_form`, which were intentionally moved here from the Vocabulary domain.
 
 ### 3.1. `form`
 
