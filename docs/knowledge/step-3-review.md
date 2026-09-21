@@ -147,26 +147,41 @@ Trong đó:
 
 **Đang mở.**
 
-Cấu trúc đang xem xét và tạm thời sử dụng:
+Cấu trúc cơ sở:
 
 ```text
 <domain>.<type>.<name>
 ```
 
+Riêng với `vocabulary.lexical_sense`, `part_of_speech` là một phần của semantic identity và đứng sau `name`:
+
+```text
+<domain>.lexical_sense.<name>.<part_of_speech>
+```
+
+Nếu `name + part_of_speech` vẫn chưa phân biệt được hai lexical-sense atoms, thêm một component cuối là **dạng rút gọn, ổn định của `meaning`**.
+
 Ví dụ:
 
 ```text
-vocabulary.lexical_sense.assume
+vocabulary.lexical_sense.assume.verb
+vocabulary.lexical_sense.compelling.adjective
+vocabulary.lexical_sense.run.verb.move_quickly
+vocabulary.lexical_sense.run.verb.operate_function
 vocabulary.collocation.strike_a_balance
 grammar.use.present_simple.current_habit
 grammar.use.present_perfect.past_to_present
 ```
 
-Đã đồng ý rằng `name` là semantic identifier của knowledge object và có thể chứa thêm các component phân cách bằng `.` khi cần biểu diễn semantic distinction. Điều này **không tạo ra tầng `subtype`**.
+Đã chốt:
 
-Tuy nhiên, Semantic ID **chưa được chốt** vì cần làm rõ trước cách xác định semantic identity của `lexical_sense`, đặc biệt là ranh giới giữa các lexical senses và cách đặt `name` cho chúng.
+- `name` là semantic identifier của knowledge object;
+- không có tầng `subtype`;
+- với `lexical_sense`, `part_of_speech` đứng sau `name` trong Semantic ID;
+- chỉ khi `name + part_of_speech` chưa đủ phân biệt lexical senses mới thêm dạng rút gọn ổn định của `meaning`;
+- Semantic ID vẫn được xem là **OPEN ở cấp độ tổng thể** cho đến khi các quy ước chi tiết về lexical-sense identity và cách chuẩn hóa meaning-slug được hoàn thiện.
 
-**→ Tạm thời để OPEN.**
+**→ Quy tắc cấu trúc đã chốt; quy ước chuẩn hóa chi tiết vẫn OPEN.**
 
 ---
 
