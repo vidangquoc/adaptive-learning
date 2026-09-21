@@ -245,11 +245,24 @@ Do not use source provenance to encode learner history.
 
 A boolean indicating whether the source explicitly tests or practises the atom.
 
+An atom is `true` as soon as that atom is directly tested/practised, regardless of how many atoms the same exercise, question, task, or assessment tests at the same time.
+
 This is **source-level evidence** only. It is not learner mastery, confidence, correctness, or frequency.
 
 ### `extra.test_evidence`
 
-The source exercise, question, task, or other assessment/practice evidence supporting `is_tested`.
+Locations in the learning material that provide evidence that the atom is tested/practised.
+
+Each entry is a simple location reference, for example:
+
+```yaml
+test_evidence:
+  - "Exercise A, item 5, line 100"
+```
+
+The location should contain enough information to find and verify the relevant exercise, item, task, or other practice/testing evidence. `line` identifies the starting line of the evidence in the relevant segment text when available.
+
+Multiple atoms may point to the same `test_evidence` location when one exercise tests several atoms.
 
 Use `[]` when the source does not explicitly test or practise the atom.
 
