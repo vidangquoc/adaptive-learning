@@ -26,6 +26,10 @@ That file contains prompts for the user to start recovery and prompts for the us
 
 Recover enough current conversation context and repository understanding to continue the user's present task accurately.
 
+The current work is a review of Step 3 — Knowledge Atom Taxonomy + Structure. The review is still open and must not be marked complete unless the user explicitly decides to do so.
+
+The working discussion is in docs/knowledge/step-3-review.md. It is a review/discussion document, not the canonical source of truth.
+
 ### Current objective
 
 Keep four distinct layers separate:
@@ -36,6 +40,18 @@ Keep four distinct layers separate:
 4. **User prompts** — prompts used to start recovery and to test whether recovery succeeded.
 
 ### Current decisions
+
+For the current Step 3 review, the following points have been agreed in the conversation so far:
+
+- Knowledge atoms are flat; there is no parent/child hierarchy between atoms.
+- A knowledge unit may still be its own atom even when it relates to, depends on, or overlaps with another atom, when it is a distinct learning target.
+- multiword_expression is the fallback for a multi-word lexical unit that is not a phrasal_verb, idiom, or collocation.
+- word_formation and morphological_form belong to the Grammar domain, not Vocabulary. Their detailed boundary with other Grammar subtypes remains open.
+- A grammar rule can itself be a Knowledge Atom when it is a learning target. The common Atom structure does not therefore need a dedicated rule property.
+- The current Atom structure has no rule field; existing fields such as structure, usage, and constraints can describe aspects of an atom when appropriate.
+- Step 3 remains open.
+
+These are current conversation/review decisions. Do not silently promote them to canonical project rules; check the authoritative docs and the review file.
 
 - `context-recover/context-recover.md` contains instructions for recovering current conversation context.
 - `context-recover/project-knowledge-recover.md` contains instructions for recovering project knowledge, learning-material / knowledge data, and learner / user learning data.
@@ -97,6 +113,8 @@ context-recover/
 ```
 
 ### Immediate next step
+
+For the current task, continue the Step 3 review from docs/knowledge/step-3-review.md after reading the canonical knowledge-model files. Do not restart the discussion from scratch and do not mark Step 3 complete.
 
 After context has been recovered, the user may use the **Prompt kiểm tra** section in `context-recover/context-recovery-prompt.md` to test whether the recovery is sufficient and correct. If a question exposes a gap, inspect the relevant authoritative documentation/data and recover the missing context before continuing.
 
