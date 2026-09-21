@@ -55,11 +55,10 @@ Current canonical types are:
 | `vocabulary` | `collocation` | A conventional word combination whose natural use is independently learnable |
 | `grammar` | `word_formation` | Knowledge of a productive or source-supported morphological formation pattern |
 | `grammar` | `morphological_form` | A grammatical/inflectional form of a lexical item that is independently useful to represent |
-| `grammar` | `grammar` | A grammatical construction or grammatical knowledge object |
 
 ### Taxonomy level
 
-There is intentionally no `subtype` layer. If a distinction is important enough to represent as an independently meaningful kind of knowledge, it should be represented as an atom type or as the content of an atom's properties, not as an additional taxonomy level.
+There is intentionally no `subtype` layer. If a distinction is important enough to represent as an independently meaningful kind of knowledge, it should be represented as an atom type or as the content of an atom, not as an additional taxonomy level.
 
 The two taxonomy questions are deliberately simple:
 
@@ -166,7 +165,7 @@ Do not create a separate atom for every ordinary inflection. Use this type when 
 
 All grammar atoms use `domain: grammar`. The `subtype` identifies the kind of grammatical knowledge represented.
 
-The currently agreed grammar subtype set is:
+The currently agreed grammar type set is:
 
 ### 3.1. `rule`
 
@@ -217,7 +216,6 @@ Examples:
 - `think` → `thought`
 - `write` → `written`
 
-`constraint` is not currently a grammar subtype. Restrictions and conditions are normally represented in the `constraints` property of the relevant atom.
 
 ---
 
@@ -225,44 +223,11 @@ Examples:
 
 Several useful kinds of information are deliberately represented as **properties or relations**, not as additional atom types.
 
-### Usage and syntactic behavior
+### Descriptive information and relationships
 
-These normally belong in `structure`, `usage`, or `constraints` of an existing atom:
+Descriptive information about an existing atom is not a separate atom type. If such information is independently meaningful knowledge and is directly taught and tested, represent that knowledge point as a separate atom.
 
-- complementation;
-- preposition patterns;
-- argument structure;
-- lexical restrictions;
-- transitivity;
-- separability;
-- register;
-- connotation;
-- fixedness or allowed variation.
-
-For example, `avoid + V-ing` does not require a separate `complementation` type if it is a property of the relevant lexical or grammar atom.
-
-### Semantic relationships
-
-These normally belong in `related_atoms`:
-
-- synonymy;
-- near-synonymy;
-- antonymy;
-- semantic distinction;
-- derivational relationship;
-- prerequisite or support relationships when the knowledge model explicitly needs them.
-
-Examples:
-
-```yaml
-related_atoms:
-  - id: lex.assume
-    relation: contrasts_with
-  - id: lex.evaluate
-    relation: near_synonym_of
-```
-
-A relation connects independent atoms. It is not itself a learner-state object and does not imply inheritance or a parent-child hierarchy.
+A relation connects independent atoms. It is not stored as a field on the atom and is not itself automatically an atom. If the learning material directly teaches and tests knowledge about a relation, represent that knowledge point as a separate atom using an appropriate grammar type when the knowledge is grammatical.
 
 ### Assessment
 
@@ -311,7 +276,7 @@ This prevents both atom inflation and loss of independently useful distinctions.
 1. **Source evidence comes first.** Do not invent definitions, patterns, collocations, restrictions, distinctions, or exceptions from intuition.
 2. **One lexical sense = one atom by default.** Split distinct senses when the source supports them.
 3. **Do not turn every example sentence into an atom.** An example is evidence unless it teaches an independently reusable pattern or knowledge object.
-4. **Do not turn every semantic relationship into an atom.** Relations connect atoms.
+4. **Do not turn every semantic relationship into an atom.** Relations connect atoms. A relation becomes a knowledge atom only when the learning material directly teaches and tests knowledge about that relation.
 5. **Do not infer unsupported grammar.** A generated question or model intuition is not evidence for a grammatical pattern.
 6. **Do not encode learner state in taxonomy.** Mastery, attempts, confidence, retention, review status, and learning progress belong to the learner layer.
 7. **Do not encode source structure in taxonomy.** Segment, Unit, exercise, page, and source identifiers belong to provenance and assessment structures.
