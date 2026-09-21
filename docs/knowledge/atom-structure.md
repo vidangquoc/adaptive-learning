@@ -6,6 +6,8 @@ This document defines the canonical common structure for all knowledge atoms in 
 
 All knowledge atoms use the same top-level fields. A field that does not apply to a particular atom remains present and uses the appropriate empty value, normally `null` or `[]`, rather than introducing a second atom schema.
 
+The core schema contains knowledge content and descriptive metadata only. It does not use dedicated fields for `usage`, `constraints`, or `related_atoms`. Usage restrictions that constitute independently meaningful knowledge are represented as separate atoms; otherwise they do not require a dedicated atom field. Relations connect independent atoms but are not stored as a `related_atoms` field. If the learning material directly teaches and tests knowledge about a relation, that knowledge point is represented as a separate atom.
+
 The taxonomy of valid `domain` and `type` combinations is defined in `atom-types.md`.
 
 Learner mastery, attempts, confidence, retention, review state, and other learner-specific state do not belong in a knowledge atom.
@@ -112,7 +114,7 @@ Examples include:
 
 `type` describes what the knowledge is. It must not encode assessment format, source location, learner performance, or pedagogical activity.
 
-There is no `subtype` field. A further distinction must be represented through the atom's content/properties or, if it is independently meaningful knowledge, through a separate atom type approved by the taxonomy.
+There is no `subtype` field. A further distinction must be represented through the atom's content or, if it is independently meaningful knowledge, through a separate `type` approved by the taxonomy.
 
 ---
 
@@ -184,6 +186,8 @@ Restrictions, conditions, exceptions, contrasts, or limitations needed for accur
 ### `examples`
 
 Examples that demonstrate the knowledge represented by the atom.
+
+The meaning of this field is intentionally simple: it contains concrete examples of the knowledge represented by the atom.
 
 Examples may be source-derived or generated, but their provenance must remain distinguishable.
 
@@ -304,13 +308,19 @@ assess ↔ evaluate
 → relation
 
 assume ↔ infer
-→ semantic-distinction / contrast relation
+→ relation
 
 present simple
 → atom
 
 present simple + habitual actions
-→ separate atom when the corresponding knowledge point is directly tested
+→ separate atom when the corresponding knowledge point is directly taught and tested
+
+present simple ↔ present continuous
+→ relation
+
+present simple vs present continuous for a particular distinction
+→ separate grammar atom when the distinction itself is directly taught and tested
 ```
 
 This boundary prevents both atom inflation and the loss of independently useful distinctions.
