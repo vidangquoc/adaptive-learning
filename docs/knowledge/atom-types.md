@@ -56,22 +56,26 @@ Current canonical types are:
 | `vocabulary` | `collocation` | A conventional word combination whose natural use is independently learnable |
 | `grammar` | `word_formation` | Knowledge of a productive or source-supported morphological formation pattern |
 | `grammar` | `morphological_form` | A grammatical/inflectional form of a lexical item that is independently useful to represent |
-| `grammar` | `grammar` | A grammatical construction, form, meaning, use, pattern, rule, or exception |
+| `grammar` | `grammar` | A grammatical construction or grammatical knowledge object |
 
 ### `subtype`
 
 `subtype` refines a `type` only when the distinction is useful, stable, and supported by the source.
 
-For `type: grammar`, the canonical subtypes are:
+For `type: grammar`, the currently agreed subtypes are:
 
-- `form`
-- `meaning`
-- `use`
-- `pattern`
 - `rule`
+- `use`
 - `exception`
+- `word_formation`
+- `morphological_form`
 
-> **Provisional:** `constraint` is intentionally not a grammar subtype for now. The `constraints` field remains available as a property of an atom. If later source-grounded analysis shows that `constraint` represents a distinct and independently useful kind of grammatical knowledge, it may be restored as a subtype.
+The following distinctions are intentionally not separate grammar subtypes for now:
+
+- `form` is treated as part of `rule`.
+- `pattern` is treated as part of `rule`.
+- `meaning` is treated as part of `use` for now. It remains a candidate for a separate subtype and should only be separated if source-grounded atoms show that some grammatical knowledge cannot be represented adequately through `use`.
+- `constraint` is not a grammar subtype. Restrictions and conditions remain properties of atoms through the `constraints` field.
 
 For the current vocabulary types, `subtype` is normally `null` unless a later source-grounded distinction is explicitly needed.
 
@@ -175,59 +179,58 @@ Do not create a separate atom for every ordinary inflection. Use this type when 
 
 All grammar atoms use `type: grammar`. The `subtype` identifies the kind of grammatical knowledge represented.
 
-The canonical grammar subtype set currently includes the general grammatical subtypes below plus `word_formation` and `morphological_form`, which were intentionally moved here from the Vocabulary domain.
+The currently agreed grammar subtype set is:
 
-### 3.1. `form`
+### 3.1. `rule`
 
-The formal structure used to construct a grammatical expression.
+A fixed or systematic grammatical relationship, transformation, formation principle, or structural rule governing how grammar is formed or operates.
 
-Example:
+This includes knowledge that might otherwise be described as `form` or `pattern`; those are not separate subtypes for now.
 
+Examples:
+
+- `I/you/we/they → do`; `he/she/it → does`
 - present perfect → `have/has + past participle`
 
-### 3.2. `meaning`
+### 3.2. `use`
 
-The grammatical meaning or function conveyed by a construction.
+Knowledge about when, in what context, or for what communicative purpose a grammatical construction is used.
 
-Example:
-
-- present perfect can connect a past event with present relevance
-
-### 3.3. `use`
-
-Knowledge about when or why a grammatical form is used.
+For now, grammatical meaning is also represented through `use` when it can be expressed adequately this way.
 
 Examples:
 
 - present continuous for a temporary activity
 - present simple for habitual or general situations
+- a construction used to express a particular meaning in a given context
 
-### 3.4. `pattern`
+### 3.3. `exception`
 
-A recurring grammatical construction or syntactic pattern that is independently learnable or assessable.
-
-Examples:
-
-- `suggest + V-ing`
-- `suggest + that-clause`
-- `consider + noun`
-- `consider + V-ing`
-
-### 3.5. `rule`
-
-An explicit rule governing grammatical form or use.
-
-Example:
-
-- stative verbs are not normally used in continuous forms
-
-### 3.6. `exception`
-
-An explicitly documented exception to a general grammatical rule or constraint.
+Knowledge about a case that does not follow an established general grammatical rule in its default form, or a special case that must be learned separately.
 
 Exceptions must be supported by source evidence; they must not be invented from generated examples or model intuition.
 
-`constraint` is not currently a grammar subtype. Restrictions and conditions are normally represented in the `constraints` property of the relevant atom. If a future source-grounded review establishes `constraint` as a distinct learning target with a meaning not adequately captured by the existing subtypes, it may be reintroduced.
+### 3.4. `word_formation`
+
+Knowledge about forming a new lexical item from another lexical item or morphological unit, including derivation, compounding, conversion, or other source-supported formation processes.
+
+Examples:
+
+- `assume` → `assumption`
+- `infer` → `inference`
+- `accurate` → `accuracy`
+
+### 3.5. `morphological_form`
+
+Knowledge about a grammatical or inflectional form of a lexical item that is independently useful to represent, especially an explicitly taught form.
+
+Examples:
+
+- `love` → `loved`, `loves`, `loving`
+- `think` → `thought`
+- `write` → `written`
+
+`constraint` is not currently a grammar subtype. Restrictions and conditions are normally represented in the `constraints` property of the relevant atom.
 
 ---
 
