@@ -61,7 +61,18 @@ Nếu trong `explanation` xuất hiện một kiến thức có identity riêng 
 
 ### `structure`
 
-**Nó được cấu tạo như thế nào?**
+**Đã chốt:** cấu trúc / hình thức mà knowledge được tạo thành hoặc biểu hiện.
+
+Nó trả lời câu hỏi: **Nó được tạo thành / cấu trúc như thế nào?**
+
+Ví dụ:
+
+- vocabulary: `assess + noun`
+- multiword expression: `strike + a + balance`
+- grammar: `have/has + been + V-ing`
+- word formation: mẫu hình thái học tạo từ
+
+`structure` tập trung vào **form/pattern**, không phải khi nào hay trong hoàn cảnh nào kiến thức được dùng.
 
 ### `usage`
 
@@ -79,7 +90,7 @@ usage       → dùng như thế nào / khi nào?
 constraints → có giới hạn gì?
 ```
 
-**→ Chưa chốt.**
+**→ Đã chốt `structure`.**
 
 ---
 
