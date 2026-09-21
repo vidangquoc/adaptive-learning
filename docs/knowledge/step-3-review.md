@@ -80,8 +80,6 @@ Ví dụ:
 
 Một câu ví dụ có thể minh họa nhiều atom cùng lúc. Nếu câu ví dụ chứa một learning target khác thì learning target đó nên được extract riêng, thay vì biến cả câu thành atom.
 
-
-
 ---
 
 # 3. `extra.source`
@@ -97,13 +95,61 @@ Một câu ví dụ có thể minh họa nhiều atom cùng lúc. Nếu câu ví
 - `source` chỉ là provenance, không chứa knowledge content, learner state, hay definition/explanation được normalize vào Atom;
 - `source` không thay thế `extra.test_evidence`.
 
-Cấu trúc machine-readable cụ thể của provenance chưa chốt; sẽ xử lý ở bước schema sau.
+**Cấu trúc machine-readable đã chốt:**
 
-**→ Đã chốt semantic contract; serialization chưa chốt.**
+```yaml
+source:
+  origin:
+    - source_id:
+      segment_id:
+      location:
+        page:
+        section:
+        line:
+  atom_decision:
+    - source_id:
+      segment_id:
+      location:
+        page:
+        section:
+        line:
+```
+
+Trong đó:
+
+- `origin` = nơi knowledge point xuất phát từ learning material;
+- `atom_decision` = source evidence làm căn cứ quyết định knowledge point đó trở thành Knowledge Atom;
+- cả hai là arrays vì một Atom có thể có nhiều source records;
+- `location.line` là **starting line** của evidence trong Segment text, không phải line range;
+- các thành phần của `location` là optional khi source không có độ chính xác tương ứng;
+- `atom_decision` không nhất thiết phải là exercise/test; nó là evidence cho quyết định atomization nói chung.
 
 ---
 
 # 4. Semantic ID
+
+**Đang mở.**
+
+Cấu trúc đang xem xét và tạm thời sử dụng:
+
+```text
+<domain>.<type>.<name>
+```
+
+Ví dụ:
+
+```text
+vocabulary.lexical_sense.assume
+vocabulary.collocation.strike_a_balance
+grammar.use.present_simple.current_habit
+grammar.use.present_perfect.past_to_present
+```
+
+Đã đồng ý rằng `name` là semantic identifier của knowledge object và có thể chứa thêm các component phân cách bằng `.` khi cần biểu diễn semantic distinction. Điều này **không tạo ra tầng `subtype`**.
+
+Tuy nhiên, Semantic ID **chưa được chốt** vì cần làm rõ trước cách xác định semantic identity của `lexical_sense`, đặc biệt là ranh giới giữa các lexical senses và cách đặt `name` cho chúng.
+
+**→ Tạm thời để OPEN.**
 
 ---
 
