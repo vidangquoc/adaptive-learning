@@ -23,7 +23,6 @@ Schema hiện tại:
 id:
 domain:
 type:
-subtype:
 
 name:
 
