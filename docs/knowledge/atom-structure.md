@@ -109,8 +109,6 @@ Examples include:
 - `rule`
 - `use`
 - `exception`
-- `word_formation`
-- `morphological_form`
 
 `type` describes what the knowledge is. It must not encode assessment format, source location, learner performance, or pedagogical activity.
 
@@ -174,10 +172,6 @@ Examples:
 Use `null` when no meaningful structural representation applies.
 
 Keep `structure` focused on form/pattern, not on when or why the knowledge is used.
-
-### `constraints`
-
-Restrictions, conditions, exceptions, contrasts, or limitations needed for accurate use.
 
 ---
 
@@ -253,7 +247,7 @@ Do not use `notes` as a place to hide:
 The structure is shared, but fields are interpreted according to the atom taxonomy.
 
 | Type | `meaning` | `explanation` | `structure` |
-|---|---|---|---|---|---|
+|---|---|---|---|
 | `lexical_sense` | Specific lexical sense | Semantic nuance, boundaries, and relevant usage | Lexical/syntactic pattern when relevant |
 | `multiword_expression` | Expression meaning/function | Meaning, conventional behavior, and relevant usage | Fixed or semi-fixed form |
 | `phrasal_verb` | Combined meaning | Semantic behavior, distinctions, and relevant usage | Verb + particle/preposition |
@@ -264,8 +258,6 @@ The structure is shared, but fields are interpreted according to the atom taxono
 | `rule` | Grammatical rule/relationship | How the rule works, including relevant contexts when needed | Grammatical form/pattern |
 | `use` | Grammatical meaning/function | How the construction is used, including relevant contexts | Grammatical form/pattern when relevant |
 | `exception` | Exceptional grammatical behavior | Why it differs from the general rule and where it applies | Exceptional form/pattern |
-| `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern |
-| `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form |
 
 The taxonomy document determines whether a record is valid as one of these types. This table does not create additional types.
 
