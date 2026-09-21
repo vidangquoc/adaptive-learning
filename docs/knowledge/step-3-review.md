@@ -43,7 +43,7 @@ Cần xem từng field, không nên chốt cả schema một lúc.
 
 ### `meaning`
 
-Tạm thời xem đây là **ý nghĩa / chức năng cốt lõi của kiến thức**.
+**Đã chốt:** ý nghĩa hoặc chức năng cốt lõi của knowledge represented by atom. Với vocabulary, đây là lexical sense cụ thể; với grammar, đây là grammatical meaning/function.
 
 ### `mother_says`
 
@@ -51,7 +51,7 @@ Tạm thời xem đây là **ý nghĩa / chức năng cốt lõi của kiến th
 
 ### `explanation`
 
-Dùng cho **phần giải thích thêm**, nhưng không được biến thành cái thùng chứa mọi thứ.
+**Đã chốt:** phần giải thích đầy đủ hơn khi `meaning` chưa đủ để hiểu, dạy, phân biệt, hoặc chẩn đoán atom. Không được biến thành cái thùng chứa mọi thứ.
 
 Nếu trong `explanation` xuất hiện một kiến thức có identity riêng thì phải xem nó có cần trở thành atom hay không.
 
