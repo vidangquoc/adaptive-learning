@@ -56,7 +56,7 @@ Current canonical types are:
 | `vocabulary` | `collocation` | A conventional word combination whose natural use is independently learnable |
 | `vocabulary` | `word_formation` | Knowledge of a productive or source-supported morphological formation pattern |
 | `vocabulary` | `morphological_form` | A lexical inflectional or irregular form that is independently useful to represent |
-| `grammar` | `grammar` | A grammatical construction, form, meaning, use, pattern, rule, constraint, or exception |
+| `grammar` | `grammar` | A grammatical construction, form, meaning, use, pattern, rule, or exception |
 
 ### `subtype`
 
@@ -69,8 +69,9 @@ For `type: grammar`, the canonical subtypes are:
 - `use`
 - `pattern`
 - `rule`
-- `constraint`
 - `exception`
+
+> **Provisional:** `constraint` is intentionally not a grammar subtype for now. The `constraints` field remains available as a property of an atom. If later source-grounded analysis shows that `constraint` represents a distinct and independently useful kind of grammatical knowledge, it may be restored as a subtype.
 
 For the current vocabulary types, `subtype` is normally `null` unless a later source-grounded distinction is explicitly needed.
 
@@ -217,19 +218,13 @@ Example:
 
 - stative verbs are not normally used in continuous forms
 
-### 3.6. `constraint`
-
-A restriction or condition on where or how a grammatical structure can be used.
-
-Example:
-
-- a normally stative verb does not normally occur in a continuous form
-
-### 3.7. `exception`
+### 3.6. `exception`
 
 An explicitly documented exception to a general grammatical rule or constraint.
 
 Exceptions must be supported by source evidence; they must not be invented from generated examples or model intuition.
+
+`constraint` is not currently a grammar subtype. Restrictions and conditions are normally represented in the `constraints` property of the relevant atom. If a future source-grounded review establishes `constraint` as a distinct learning target with a meaning not adequately captured by the existing subtypes, it may be reintroduced.
 
 ---
 
