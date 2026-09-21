@@ -199,6 +199,8 @@ Examples include:
 
 A constraint that merely describes an existing atom normally belongs here rather than becoming a separate atom.
 
+If a specific knowledge point represented by a constraint is directly tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than remaining merely a constraint of the original atom.
+
 ---
 
 ## 4. Evidence and relationship fields
@@ -320,7 +322,7 @@ knowledge independently meaningful and independently diagnosable
         ↓
       atom
 
-characteristic of an existing atom
+characteristic used only to describe an existing atom
         ↓
      property
 
@@ -329,6 +331,12 @@ explicit connection between independent atoms
      relation
 ```
 
+Properties are descriptive information about an atom; they are not Knowledge Atoms themselves.
+
+When a knowledge point represented by a Property or Constraint is directly tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than as a Property/Constraint of the original atom.
+
+Likewise, a Relation describes a connection between independent atoms. If the learning material directly tests a knowledge point about that connection, the tested knowledge point is represented as a separate Knowledge Atom.
+
 Examples:
 
 ```text
@@ -336,13 +344,19 @@ assess
 → lexical_sense atom
 
 formal
-→ property of an existing atom when supported
+→ property of an existing atom
 
 assess ↔ evaluate
 → relation
 
 assume ↔ infer
 → semantic-distinction / contrast relation
+
+present simple
+→ atom
+
+present simple + habitual actions
+→ separate atom when the corresponding knowledge point is directly tested
 ```
 
 This boundary prevents both atom inflation and the loss of independently useful distinctions.
@@ -356,7 +370,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 3. `type` and `subtype` describe the knowledge ontology, not the source or learner.
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
-6. Properties describe existing atoms; they are not silently promoted to atom types.
+6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If a knowledge point represented by a Property or Constraint is directly tested in the learning material, that knowledge point is represented as a separate Atom.
 7. Relations connect independent atoms; they are not disguised parent/child records.
 8. Source provenance remains recoverable for every official atom.
 9. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
