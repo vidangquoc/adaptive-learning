@@ -204,20 +204,35 @@ assume → related_to → presume
 assume → contrasts_with → suppose
 ```
 
-### Đề xuất của tao
-Mặc định:
+### Nguyên tắc đã thống nhất
 
-> **Thứ gì tự nó là learning target → atom.**
+> **Property chỉ dùng để mô tả một Atom; bản thân Property không phải là Knowledge Atom.**
 >
-> **Thứ gì chỉ mô tả atom khác → property.**
+> **Nếu một knowledge point được biểu diễn dưới dạng Property hoặc Constraint được trực tiếp kiểm tra trong learning material, knowledge point đó phải được biểu diễn thành một Knowledge Atom riêng thay vì chỉ tồn tại như Property/Constraint của Atom khác.**
 >
-> **Thứ gì nối hai atom → relation.**
+> **Relation dùng để biểu diễn mối quan hệ giữa các Atom. Relation không tự trở thành Atom chỉ vì nó được mô tả; nếu learning material trực tiếp kiểm tra một knowledge point về mối quan hệ đó, knowledge point được kiểm tra phải được biểu diễn thành một Atom riêng.**
 
-Đây có lẽ là nguyên tắc quan trọng nhất để giữ cho ontology không bị rối.
+Điểm này bổ sung cho nguyên tắc ở mục 1: một Atom có thể liên quan hoặc phụ thuộc vào Atom khác mà vẫn là Atom riêng.
 
-Tuy nhiên, phần 1 vừa làm rõ một điểm cần xem lại: **một thông tin có liên quan đến atom khác vẫn có thể là atom riêng nếu nó có learning value và cần được đánh giá riêng.** Vì vậy, ranh giới Atom vs Property cần được bàn tiếp, không nên hiểu property là “bất cứ thứ gì mô tả một atom khác”.
+Ví dụ:
 
-**→ Cần mày xem và phản biện.**
+```text
+Atom: Present simple
+
+Properties:
+- form
+- meaning
+- usage
+- constraints
+```
+
+Các Property trên chỉ mô tả Atom `Present simple`; chúng không phải là các Atom khác.
+
+Nếu learning material trực tiếp kiểm tra knowledge point “Present simple được dùng cho habitual actions”, thì knowledge point đó được biểu diễn thành một Atom riêng, ví dụ `Present simple for habitual actions`, thay vì biến Property `usage` thành Atom.
+
+Tương tự, `constraints` là một Property/field mô tả Atom. Khi một constraint cụ thể được trực tiếp kiểm tra trong material, knowledge point của constraint đó được biểu diễn thành một Atom riêng.
+
+**→ Phần này đã thống nhất.**
 
 ---
 
@@ -572,6 +587,9 @@ Các điểm đã thống nhất/điều chỉnh trong phần đang review:
 
 - Knowledge Atoms là flat, không có hierarchy/parent-child.
 - Một knowledge unit vẫn có thể là atom riêng dù liên quan hoặc phụ thuộc vào atom khác, nếu nó là learning target riêng.
+- Property chỉ dùng để mô tả Atom; bản thân Property không phải là Atom.
+- Nếu knowledge point được biểu diễn dưới dạng Property hoặc Constraint được trực tiếp kiểm tra trong learning material, knowledge point đó được biểu diễn thành một Atom riêng.
+- Relation dùng để biểu diễn mối quan hệ giữa các Atom; nếu learning material trực tiếp kiểm tra một knowledge point về relation đó, knowledge point được kiểm tra được biểu diễn thành một Atom riêng.
 - `multiword_expression` là fallback cho lexical unit nhiều từ không thuộc `phrasal_verb`, `idiom` hoặc `collocation`.
 - `word_formation` và `morphological_form` thuộc **Grammar domain**, không thuộc Vocabulary domain.
 
