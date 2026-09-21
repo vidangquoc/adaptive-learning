@@ -195,9 +195,15 @@ Use `[]` when no example is available or appropriate.
 
 ### `extra.source`
 
-The provenance record needed to trace the atom back to its supporting source evidence.
+The provenance of the atom: information that allows the atom to be traced back to the source evidence that supports it.
 
-At minimum, provenance should identify the source and the relevant Segment/location when available. It should make the following chain recoverable:
+`source` must make it possible to recover, at minimum when the information is available:
+
+- the source artifact;
+- the canonical Segment containing the evidence;
+- the precise location or span of the supporting evidence within that Segment.
+
+The intended provenance chain is:
 
 ```text
 source PDF
@@ -213,7 +219,13 @@ evidence
 atom
 ```
 
-The exact machine-readable provenance shape is finalized by the later schema step; this document defines the semantic requirement, not every serialization detail.
+An atom may have multiple provenance records when multiple source evidence items support the same atom.
+
+`source` is provenance, not knowledge content. It must not be used to store the atom's definition, explanation, learner state, or other normalized knowledge merely because that information appears in the source.
+
+`source` does not replace assessment evidence such as `extra.test_evidence`.
+
+The exact machine-readable provenance shape is finalized by the later schema step; this document defines the semantic contract, not every serialization detail.
 
 Do not use source provenance to encode learner history.
 
