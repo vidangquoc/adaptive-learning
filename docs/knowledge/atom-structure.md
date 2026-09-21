@@ -6,7 +6,7 @@ This document defines the canonical common structure for all knowledge atoms in 
 
 All knowledge atoms use the same top-level fields. A field that does not apply to a particular atom remains present and uses the appropriate empty value, normally `null` or `[]`, rather than introducing a second atom schema.
 
-The taxonomy of valid `domain`, `type`, and `subtype` combinations is defined in `atom-types.md`.
+The taxonomy of valid `domain` and `type` combinations is defined in `atom-types.md`.
 
 Learner mastery, attempts, confidence, retention, review state, and other learner-specific state do not belong in a knowledge atom.
 
@@ -18,7 +18,6 @@ Learner mastery, attempts, confidence, retention, review state, and other learne
 id:
 domain:
 type:
-subtype:
 
 name:
 
@@ -93,7 +92,7 @@ Canonical values:
 - `vocabulary`
 - `grammar`
 
-The valid domain/type/subtype combinations are controlled by `atom-types.md`.
+The valid domain/type combinations are controlled by `atom-types.md`.
 
 ### `type`
 
@@ -112,15 +111,7 @@ Examples include:
 
 `type` describes what the knowledge is. It must not encode assessment format, source location, learner performance, or pedagogical activity.
 
-### `subtype`
-
-An optional refinement of `type`.
-
-For `type: grammar`, the canonical subtypes are defined by `atom-types.md` and currently include `form`, `meaning`, `use`, `pattern`, `rule`, `constraint`, and `exception`.
-
-For vocabulary types, `subtype` is normally `null` unless a source-grounded refinement is explicitly needed.
-
-Do not use `subtype` as a miscellaneous tag field. Information that belongs in `usage`, `constraints`, `structure`, or another property must stay there.
+There is no `subtype` field. A further distinction must be represented through the atom's content/properties or, if it is independently meaningful knowledge, through a separate atom type approved by the taxonomy.
 
 ---
 
@@ -366,7 +357,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 ## 8. Representation invariants
 
 1. Every atom uses the same top-level field structure.
-2. `domain`, `type`, and `subtype` must conform to the canonical taxonomy.
+2. `domain` and `type` must conform to the canonical taxonomy.
 3. `type` and `subtype` describe the knowledge ontology, not the source or learner.
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
