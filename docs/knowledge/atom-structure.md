@@ -161,7 +161,9 @@ Do not use it to hide unsupported claims or learner state.
 
 ### `structure`
 
-The formal, structural, or pattern representation of the knowledge.
+The structural or formal representation of how the knowledge is formed or expressed.
+
+It answers: **How is this knowledge formed or structured?**
 
 Examples:
 
@@ -171,6 +173,8 @@ Examples:
 - a morphological formation pattern.
 
 Use `null` when no meaningful structural representation applies.
+
+Keep `structure` focused on form/pattern, not on when or why the knowledge is used.
 
 ### `usage`
 
