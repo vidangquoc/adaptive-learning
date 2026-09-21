@@ -53,6 +53,23 @@ Cần xem từng field, không nên chốt cả schema một lúc.
 
 **Đã chốt:** phần giải thích đầy đủ hơn khi `meaning` chưa đủ để hiểu, dạy, phân biệt, hoặc chẩn đoán atom. Không được biến thành cái thùng chứa mọi thứ.
 
+### `part_of_speech` và `pronunciation` cho `lexical_sense`
+
+**Đã chốt:** đây là hai property chỉ dành cho `vocabulary.lexical_sense`, không thuộc common schema của mọi atom.
+
+Thứ tự trong representation của `lexical_sense` là:
+
+```yaml
+name:
+part_of_speech:
+pronunciation:
+```
+
+- `part_of_speech` = từ loại của lexical sense;
+- `pronunciation` = phiên âm/phát âm của lexical sense, thông thường dùng IPA khi có thể.
+
+Cả hai đều là descriptive properties của lexical sense, không phải Knowledge Atoms riêng.
+
 Nếu trong `explanation` xuất hiện một kiến thức có identity riêng thì phải xem nó có cần trở thành atom hay không.
 
 ### `structure`
