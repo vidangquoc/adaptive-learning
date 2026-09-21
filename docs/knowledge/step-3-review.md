@@ -7,9 +7,8 @@
 ## Các phần còn lại cần review
 
 1. Các field của atom
-2. `examples` và `related_atoms`
-3. Semantic ID
-4. Candidate / Official
+2. Semantic ID
+3. Candidate / Official
 
 Không cần giải quyết hết một lần.
 
@@ -30,10 +29,8 @@ meaning:
 mother_says:
 explanation:
 structure:
-constraints:
 
 examples:
-related_atoms:
 
 extra:
   source:
@@ -50,7 +47,7 @@ Tạm thời xem đây là **ý nghĩa / chức năng cốt lõi của kiến th
 
 ### `mother_says`
 
-Tạm thời xem đây là **cách giải thích bằng tiếng Việt cho người học**, tự nhiên và dễ hiểu hơn `meaning`.
+**Đã chốt:** đây là **bản dịch / cách diễn đạt của `name` bằng tiếng mẹ đẻ của learner**. Nó đặc biệt hữu ích với vocabulary.
 
 ### `explanation`
 
@@ -73,45 +70,17 @@ Ví dụ:
 
 `structure` tập trung vào **form/pattern**, không phải khi nào hay trong hoàn cảnh nào kiến thức được dùng.
 
-### `constraints`
-
-**Có giới hạn hay điều kiện gì?**
-
-Một cách nhớ đơn giản:
-
-```text
-structure   → nó được tạo như thế nào?
-usage       → dùng như thế nào / khi nào?
-constraints → có giới hạn gì?
-```
-
-**→ Đã chốt `structure`.**
-
 ---
 
-# 2. `examples` và `related_atoms`
+# 2. `examples`
 
 ### `examples`
 
-Cần xác định rõ example là **minh họa / evidence** đến mức nào và provenance của từng example được biểu diễn ra sao.
+**Đã chốt giữ field này.** Ý nghĩa của field đủ rõ: các ví dụ cụ thể minh họa knowledge represented by atom.
 
-Một câu ví dụ có thể minh họa nhiều atom cùng lúc.
+Một câu ví dụ có thể minh họa nhiều atom cùng lúc. Nếu câu ví dụ chứa một learning target khác thì learning target đó nên được extract riêng, thay vì biến cả câu thành atom.
 
-Nếu câu ví dụ chứa một learning target khác thì learning target đó nên được extract riêng, thay vì biến cả câu thành atom.
 
-### `related_atoms`
-
-Cần xác định chính xác field này dùng để biểu diễn những loại relation nào và relation được biểu diễn trực tiếp trong atom hay tách thành cấu trúc riêng.
-
-Ví dụ:
-
-```yaml
-related_atoms:
-  - id: lex.assume
-    relation: near_synonym_of
-```
-
-**→ Chưa chốt.**
 
 ---
 
