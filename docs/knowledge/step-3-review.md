@@ -179,9 +179,18 @@ grammar.use.present_perfect.past_to_present
 - không có tầng `subtype`;
 - với `lexical_sense`, `part_of_speech` đứng sau `name` trong Semantic ID;
 - chỉ khi `name + part_of_speech` chưa đủ phân biệt lexical senses mới thêm dạng rút gọn ổn định của `meaning`;
-- Semantic ID vẫn được xem là **OPEN ở cấp độ tổng thể** cho đến khi các quy ước chi tiết về lexical-sense identity và cách chuẩn hóa meaning-slug được hoàn thiện.
+- Không đặt ra một quy ước chuẩn hóa cứng cho meaning-slug. Khi cần phân biệt lexical senses, chỉ cần dùng một dạng rút gọn, dễ hiểu và ổn định của meaning; không kỳ vọng có thể chuẩn hóa hoàn toàn.
 
-**→ Quy tắc cấu trúc đã chốt; quy ước chuẩn hóa chi tiết vẫn OPEN.**
+Ví dụ:
+
+```text
+move_quickly
+operate_function
+make_a_decision
+have_a_particular_quality
+```
+
+**→ Quy tắc cấu trúc đã chốt; meaning-slug chỉ cần được đặt nhất quán và dễ hiểu qua từng trường hợp, không cần một thuật toán chuẩn hóa chung.**
 
 ---
 
