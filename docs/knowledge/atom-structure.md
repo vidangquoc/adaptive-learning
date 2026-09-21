@@ -107,7 +107,11 @@ Examples include:
 - `collocation`
 - `word_formation`
 - `morphological_form`
-- `grammar`
+- `rule`
+- `use`
+- `exception`
+- `word_formation`
+- `morphological_form`
 
 `type` describes what the knowledge is. It must not encode assessment format, source location, learner performance, or pedagogical activity.
 
@@ -298,7 +302,11 @@ The structure is shared, but fields are interpreted according to the atom taxono
 | `collocation` | Meaning/function of combination | Why/how the combination is conventional | Lexical or syntactic pattern | Context/register | Combination or grammatical restrictions |
 | `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern | Productive/contextual use | Formation/spelling/category restrictions |
 | `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form | Context/use | Form or distribution restrictions |
-| `grammar` | Grammatical meaning/function | How the construction works | Grammatical form/pattern | Situations/functions | Conditions/exceptions/contrasts |
+| `rule` | Grammatical rule/relationship | How the rule works | Grammatical form/pattern | Relevant contexts | Conditions/exceptions/contrasts |
+| `use` | Grammatical meaning/function | How the construction is used | Grammatical form/pattern when relevant | Situations/functions | Conditions/exceptions/contrasts |
+| `exception` | Exceptional grammatical behavior | Why it differs from the general rule | Exceptional form/pattern | Relevant contexts | Scope/conditions of the exception |
+| `word_formation` | Meaning/function of formation | Formation behavior | Morphological pattern | Productive/contextual use | Formation/spelling/category restrictions |
+| `morphological_form` | Relevant lexical-form information | Form/function explanation | Inflectional or irregular form | Context/use | Form or distribution restrictions |
 
 The taxonomy document determines whether a record is valid as one of these types. This table does not create additional types.
 
@@ -358,7 +366,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 
 1. Every atom uses the same top-level field structure.
 2. `domain` and `type` must conform to the canonical taxonomy.
-3. `type` and `subtype` describe the knowledge ontology, not the source or learner.
+3. `type` describes the knowledge ontology, not the source or learner.
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
 6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If a knowledge point represented by a Property or Constraint is directly tested in the learning material, that knowledge point is represented as a separate Atom.
