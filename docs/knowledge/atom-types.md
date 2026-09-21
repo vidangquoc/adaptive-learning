@@ -24,8 +24,7 @@ atom
 ├── domain
 │   ├── vocabulary
 │   └── grammar
-├── type
-└── subtype
+└── type
 ```
 
 ### `domain`
@@ -58,30 +57,18 @@ Current canonical types are:
 | `grammar` | `morphological_form` | A grammatical/inflectional form of a lexical item that is independently useful to represent |
 | `grammar` | `grammar` | A grammatical construction or grammatical knowledge object |
 
-### `subtype`
+### Taxonomy level
 
-`subtype` refines a `type` only when the distinction is useful, stable, and supported by the source.
+There is intentionally no `subtype` layer. If a distinction is important enough to represent as an independently meaningful kind of knowledge, it should be represented as an atom type or as the content of an atom's properties, not as an additional taxonomy level.
 
-For `type: grammar`, the currently agreed subtypes are:
+The two taxonomy questions are deliberately simple:
 
-- `rule`
-- `use`
-- `exception`
-- `word_formation`
-- `morphological_form`
+```text
+domain → knowledge belongs to which broad area?
+type   → what kind of knowledge is it?
+```
 
-The following distinctions are intentionally not separate grammar subtypes for now:
-
-- `form` is treated as part of `rule`.
-- `pattern` is treated as part of `rule`.
-- `meaning` is treated as part of `use` for now. It remains a candidate for a separate subtype and should only be separated if source-grounded atoms show that some grammatical knowledge cannot be represented adequately through `use`.
-- `constraint` is not a grammar subtype. Restrictions and conditions remain properties of atoms through the `constraints` field.
-
-For the current vocabulary types, `subtype` is normally `null` unless a later source-grounded distinction is explicitly needed.
-
-Do not use `subtype` to encode information that already belongs in a normal property such as `usage`, `constraints`, `structure`, `register`, or `connotation`.
-
-Do not create a subtype solely to produce a more detailed label. A subtype must represent a real taxonomy distinction.
+Do not use `type` to encode source location, exercise format, learner performance, pedagogical activity, or descriptive properties such as register or constraint.
 
 ---
 
@@ -151,7 +138,7 @@ A collocation should become an atom only when the source supports it as meaningf
 
 ### 2.6. `word_formation`
 
-**Grammar subtype:** knowledge about a morphological relationship or formation pattern that is independently useful to learn.
+knowledge about a morphological relationship or formation pattern that is independently useful to learn.
 
 Examples:
 
@@ -163,7 +150,7 @@ The related lexical forms remain lexical knowledge. A word-formation atom repres
 
 ### 2.7. `morphological_form`
 
-**Grammar subtype:** a grammatical or inflectional form of a lexical item that is independently useful to represent, especially an explicitly taught form.
+a grammatical or inflectional form of a lexical item that is independently useful to represent, especially an explicitly taught form.
 
 Examples:
 
@@ -177,7 +164,7 @@ Do not create a separate atom for every ordinary inflection. Use this type when 
 
 ## 3. Grammar knowledge
 
-All grammar atoms use `type: grammar`. The `subtype` identifies the kind of grammatical knowledge represented.
+All grammar atoms use `domain: grammar`. The `subtype` identifies the kind of grammatical knowledge represented.
 
 The currently agreed grammar subtype set is:
 
@@ -328,7 +315,7 @@ This prevents both atom inflation and loss of independently useful distinctions.
 5. **Do not infer unsupported grammar.** A generated question or model intuition is not evidence for a grammatical pattern.
 6. **Do not encode learner state in taxonomy.** Mastery, attempts, confidence, retention, review status, and learning progress belong to the learner layer.
 7. **Do not encode source structure in taxonomy.** Segment, Unit, exercise, page, and source identifiers belong to provenance and assessment structures.
-8. **Use `subtype` only for real refinements.** Do not use it as a miscellaneous label field.
+8. **Do not add taxonomy levels without a demonstrated need.** Keep the canonical model at `domain + type` unless source-grounded modeling work shows that another level is necessary.
 9. **Avoid overlapping types without a decision rule.** Use the most specific applicable vocabulary type; otherwise use `multiword_expression`.
 10. **Avoid atom inflation.** The goal is useful learning granularity, not the maximum number of records.
 11. **Preserve uncertainty.** Candidate knowledge that has not passed validation must not silently become official knowledge.
