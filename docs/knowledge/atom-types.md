@@ -163,7 +163,7 @@ Do not create a separate atom for every ordinary inflection. Use this type when 
 
 ## 3. Grammar knowledge
 
-All grammar atoms use `domain: grammar`. The `subtype` identifies the kind of grammatical knowledge represented.
+All grammar atoms use `domain: grammar`. The `type` identifies the kind of grammatical knowledge represented.
 
 The currently agreed grammar type set is:
 
