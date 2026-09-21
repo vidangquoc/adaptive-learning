@@ -37,7 +37,8 @@ Chỉ đọc thêm các tài liệu, data, source hoặc implementation liên qu
 Sau khi hoàn tất recovery, hãy báo cáo ngắn gọn:
 - context nào đã được khôi phục;
 - những nguồn chính đã được sử dụng;
-- những điểm nào còn thiếu, chưa chắc chắn hoặc cần xác minh thêm.
+- những điểm nào còn thiếu, chưa chắc chắn hoặc cần xác minh thêm;
+- task hiện tại đang dừng ở đâu và cần tiếp tục từ đâu.
 
 Không cần đọc `context-recovery-authoring-principles.md` trong quá trình recovery thông thường. File đó chỉ được sử dụng khi tạo, sửa, review hoặc thiết kế lại hệ thống recovery.
 ```
@@ -118,6 +119,24 @@ AI không được trộn lẫn kiến thức về project, dữ liệu về th�
 
 Kiểm tra khả năng truy nguyên nguồn và phát hiện những phần context mà AI đang giả định thay vì thực sự xác minh.
 
+## 2.6. Kiểm tra khả năng tiếp tục công việc đang review
+
+> Hãy cho biết công việc hiện tại đang ở bước nào, những quyết định nào đã được thống nhất, những điểm nào vẫn chưa chốt, và tôi nên tiếp tục từ đâu.
+
+**Mục đích kiểm tra:**
+
+AI phải phân biệt được quyết định đã thống nhất trong conversation/review với proposal chưa chốt và canonical project decisions trong authoritative docs.
+
+AI không được tự đánh dấu Step 3 hoàn thành chỉ vì đã có một số quyết định trung gian.
+
+## 2.7. Kiểm tra nguồn của quyết định
+
+> Với từng quyết định quan trọng được nói là đã thống nhất, hãy cho biết quyết định đó đang nằm ở đâu: conversation/review state hay canonical project documentation. Nếu chỉ có trong review/conversation thì không được trình bày nó như một canonical rule của project.
+
+**Mục đích kiểm tra:**
+
+Đảm bảo recovery không biến working discussion thành authoritative project knowledge.
+
 ## 2.6. Nguyên tắc đánh giá
 
 Khi đánh giá câu trả lời của AI:
@@ -129,6 +148,8 @@ Khi đánh giá câu trả lời của AI:
 5. **Số liệu phải có nguồn.** Những con số hoặc inventory cụ thể phải được lấy từ nguồn dữ liệu authoritative khi có thể.
 6. **Phân biệt fact và inference.** AI phải phân biệt thông tin đã xác minh với thông tin suy luận.
 7. **Phát hiện thiếu context.** Nếu câu trả lời cho thấy một phần context chưa được recover đầy đủ, cần quay lại recovery procedure và đọc thêm authoritative sources trước khi tiếp tục công việc.
+
+8. **Không tự chốt Step 3.** Step 3 chỉ hoàn thành khi người dùng và AI đã thống nhất và người dùng quyết định chốt.
 
 ### Điều kiện đạt
 
