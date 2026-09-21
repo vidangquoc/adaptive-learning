@@ -84,45 +84,30 @@ Một câu ví dụ có thể minh họa nhiều atom cùng lúc. Nếu câu ví
 
 ---
 
-# 3. Semantic ID
+# 3. `extra.source`
 
-Cần chốt quy tắc tạo ID sao cho ID nói về **knowledge**, không nói về nơi knowledge xuất hiện.
+`extra.source` là provenance của Atom, dùng để truy nguyên Atom về source evidence.
 
-Ví dụ:
+**Đã chốt semantic contract:**
 
-```text
-lex.assume
-lex.compelling
-```
+- phải truy nguyên được về source artifact;
+- phải xác định được canonical Segment chứa evidence;
+- phải xác định được precise location/span của supporting evidence trong Segment khi thông tin đó có sẵn;
+- một Atom có thể có nhiều provenance records nếu có nhiều source evidence cùng hỗ trợ Atom;
+- `source` chỉ là provenance, không chứa knowledge content, learner state, hay definition/explanation được normalize vào Atom;
+- `source` không thay thế `extra.test_evidence`.
 
-hoặc khi cần phân biệt:
+Cấu trúc machine-readable cụ thể của provenance chưa chốt; sẽ xử lý ở bước schema sau.
 
-```text
-gram.present-perfect-continuous.duration
-gram.present-perfect-continuous.recently-stopped-activity
-```
-
-Không nên có kiểu:
-
-```text
-atom-001
-page-37-assume
-unit1-exercise4
-```
-
-vì những thứ đó là provenance/source information, không phải identity của knowledge.
-
-Cần tiếp tục chốt:
-
-- khi nào cần thêm semantic case;
-- quy tắc đặt tên case;
-- mức độ ổn định cần có khi knowledge model thay đổi.
-
-**→ Chưa chốt.**
+**→ Đã chốt semantic contract; serialization chưa chốt.**
 
 ---
 
-# 4. Candidate / Official
+# 4. Semantic ID
+
+---
+
+# 5. Candidate / Official
 
 Cần xác định Candidate / Official là **trạng thái của knowledge trong pipeline** hay có ảnh hưởng đến canonical atom structure.
 
