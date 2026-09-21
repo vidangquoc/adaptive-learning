@@ -50,33 +50,28 @@ A unique, stable semantic identifier for the atom.
 General pattern:
 
 ```text
-<namespace>.<concept>.<case>
+<domain>.<type>.<name>
 ```
 
-The final `case` is optional and is used only when a semantic distinction is needed to separate atoms that would otherwise share the same concept name.
-
-The namespace is a compact semantic identifier for the domain:
-
-- `lex` for vocabulary knowledge;
-- `gram` for grammar knowledge.
+The `name` component is a semantic identifier and may contain additional dot-separated components when needed to express a precise semantic distinction. This does not introduce a `subtype` layer.
 
 Examples:
 
 ```yaml
-id: lex.compelling
-id: lex.assume
-id: gram.present-perfect-continuous.duration
-id: gram.present-perfect-continuous.continuing-activity
-id: gram.present-perfect-continuous.recently-stopped-activity
+id: vocabulary.lexical_sense.assume
+id: vocabulary.lexical_sense.compelling
+id: vocabulary.collocation.strike_a_balance
+id: grammar.use.present_simple.current_habit
+id: grammar.use.present_perfect.past_to_present
+id: grammar.rule.present_perfect_continuous
 ```
-
-The namespace is an ID convention; it does not replace the `domain` field.
 
 Rules:
 
 - IDs must be semantic rather than arbitrary sequence numbers;
-- use the shortest stable concept name that remains unambiguous;
-- add a semantic case only when necessary;
+- `domain` and `type` are always the first two components;
+- `name` is the semantic identity of the specific knowledge object and may contain dot-separated components when necessary;
+- use the shortest stable name that remains unambiguous;
 - do not encode source page, exercise number, extraction order, or learner state into the canonical ID;
 - do not use `.01`, `.02`, etc. as semantic distinctions.
 
