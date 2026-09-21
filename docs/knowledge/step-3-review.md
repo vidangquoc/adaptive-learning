@@ -30,7 +30,6 @@ meaning:
 mother_says:
 explanation:
 structure:
-usage:
 constraints:
 
 examples:
@@ -73,10 +72,6 @@ Ví dụ:
 - word formation: mẫu hình thái học tạo từ
 
 `structure` tập trung vào **form/pattern**, không phải khi nào hay trong hoàn cảnh nào kiến thức được dùng.
-
-### `usage`
-
-**Dùng khi nào / trong hoàn cảnh nào?**
 
 ### `constraints`
 
