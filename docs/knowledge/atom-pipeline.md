@@ -155,6 +155,16 @@ Path semantics:
 
 There is no additional `official/` or `candidates/` directory layer.
 
+### Official physical representation
+
+Official Atoms are persisted in `knowledge_atoms.md` as a Markdown collection of fenced YAML blocks. Each fenced YAML block is one complete Official Atom and must independently validate against `schemas/official-atom.schema.json`.
+
+There is no collection-level YAML wrapper such as `atoms:` and no second presentation-specific atom format. Official Atoms do not carry a lifecycle field such as `official_status`.
+
+Markdown headings may be used to make human review easier, but headings are organizational presentation and are not part of the Official Atom data.
+
+Candidate and Official stores therefore use the same physical atom representation, with the Candidate representation additionally carrying the top-level `review_status` field.
+
 ## 8. Validation
 
 Automated validation should check, as applicable:
