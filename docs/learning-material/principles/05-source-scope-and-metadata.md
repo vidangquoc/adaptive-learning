@@ -14,13 +14,11 @@ A source library is not a mandatory curriculum. Sources should be selected and c
 
 Do not construct a curriculum by reverse-engineering a frequency list from a single assessment source.
 
-## Domain and Specialist Context
+## Domain
 
-Domain describes meaningful subject/topic context when it adds useful information.
+In the canonical Knowledge Atom model, `domain` identifies the broad knowledge domain. The current canonical values are `vocabulary` and `grammar`.
 
-Do not force a specialized domain when the item is broadly transferable. If uncertain, leave the field pending.
-
-Domain does not determine proficiency level or learner priority.
+Do not use `domain` for specialist subject/topic context, proficiency level, learner priority, or other contextual metadata. The current atom schema does not provide a separate specialist/topic field.
 
 ## Proficiency and External Metadata
 
