@@ -127,9 +127,28 @@ Step 4 is complete. The `schemas/` directory now contains only the two canonical
 - [x] Treat the finalized atom model and future source-grounded extraction as the basis for subsequent work.
 
 ### 7. Establish the canonical atom destination
-- [ ] Decide where official atoms live under the target data architecture.
+- [x] Decide the physical destination for Official and Candidate Knowledge Atom stores.
 - [ ] Keep knowledge data separate from learner state.
 - [ ] Do not mix learner mastery/attempts into knowledge atoms.
+
+The agreed Knowledge Atom storage layout is:
+
+```text
+data/
+└── knowledge/
+    └── <source-id>/
+        └── <segment-id>/
+            └── <domain>/
+                ├── knowledge_atoms.md
+                └── knowledge_atom_candidates.md
+```
+
+- Official Store: `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atoms.md`
+- Candidate Store: `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atom_candidates.md`
+- `<source-id>` is the canonical Source Registry identifier.
+- `<segment-id>` is the canonical source-segmentation identifier.
+- The path is storage organization, not semantic atom identity.
+- No additional `official/` or `candidates/` directory layer.
 
 ## Definition of done
 
