@@ -194,49 +194,4 @@ Discovery output is evidence location and interpretation input, not canonical kn
 
 Exercises and questions inside a segment are source evidence for assessment. Answer choices, fill-in rows, generic exercise markers, and similar structural artifacts must not automatically become knowledge atoms.
 
-## No `raw/` Layer
 
-The previous `raw/` directory contained an obsolete whole-book text artifact from the superseded extraction workflow. It has been removed from the repository.
-
-The old pipeline was:
-
-```text
-Source PDF
-   ↓
-whole-book TXT
-   ↓
-attempted Unit splitting
-```
-
-This approach is superseded by the segment-based pipeline defined above.
-
-The current system must not recreate or depend on a whole-book TXT intermediate layer. The original source PDF, the reviewed segmentation manifest, the segment PDFs, and their derived segment text are sufficient for the canonical source pipeline.
-
-## No `units/` Layer
-
-There is no canonical `units/` directory.
-
-Do not:
-
-- create `sources/destination-c1-c2/units/` as a parallel source layer;
-- duplicate Unit content outside `segments/` and `segment-text/`;
-- treat Unit files as independent of the segment manifest;
-- define provenance from a Unit filename alone;
-- require a separate Unit manifest when `source-segments.yaml` already defines the segment boundary;
-- reintroduce the obsolete whole-book-TXT-to-Unit extraction pipeline.
-
-Units are represented as `type: unit` segments inside the canonical segment structure.
-
-## No `sections/` Layer
-
-The project does not use an extracted `sections/` directory or `MANIFEST.tsv` as a source-of-truth layer.
-
-Do not:
-
-- derive canonical segment boundaries from old section files;
-- use old section files as required inputs to discovery;
-- use section filenames as canonical provenance;
-- require a section manifest for current validation;
-- recreate the old section-based extraction pipeline.
-
-The current source boundary is defined by `source-segments.yaml` and represented by `segments/` plus its derived `segment-text/` layer.
