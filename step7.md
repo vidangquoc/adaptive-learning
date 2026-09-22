@@ -218,14 +218,46 @@ Status: FINALIZED
 
 ## 7.7 Scripts and pipeline integration
 
-After the storage model is settled, identify required changes to:
-- extraction scripts;
-- validation scripts;
-- candidate creation;
-- review/promotion;
-- officialization.
+### 7.7.1 Extraction and Candidate creation
 
-Do not change scripts before the underlying storage model is agreed.
+**Decision: FINALIZED**
+
+There is no extraction script that creates Candidate Knowledge Atoms. Candidate creation requires semantic interpretation of the source in context, so the AI reads each Segment and determines which knowledge points should become Atoms.
+
+The flow is:
+
+```text
+Source
+  ↓
+Segment
+  ↓
+AI reads and understands context
+  ↓
+Knowledge Atom identification and splitting
+  ↓
+Candidate Atoms
+  ↓
+YAML blocks
+  ↓
+knowledge_atom_candidates.md
+  ↓
+validation
+```
+
+Rules:
+- The AI is responsible for semantic extraction: identifying knowledge points, splitting or merging Atoms, assigning `domain` and `type`, creating semantic IDs, and populating the canonical Atom fields from source evidence.
+- The AI reads each Segment with sufficient surrounding context to avoid treating isolated text spans as independent knowledge by default.
+- A newly created Candidate has `review_status: pending`.
+- Candidate Atoms are persisted directly as fenced YAML blocks in `knowledge_atom_candidates.md`.
+- No intermediate extraction file or second Candidate representation is required.
+- Automated scripts are responsible for structural validation, not for deciding which knowledge points exist as Atoms.
+- Each Candidate YAML block is validated independently against `schemas/candidate-atom.schema.json`.
+
+Status: FINALIZED
+
+### 7.7.2 Validation and downstream integration
+
+Validation, human review, and officialization remain automated/manual pipeline responsibilities as defined by the canonical pipeline document. Detailed decisions for these stages are addressed only when needed.
 
 Status: OPEN
 
