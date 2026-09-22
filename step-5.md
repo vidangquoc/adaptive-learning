@@ -9,16 +9,9 @@ Ensure that the repository contains no stale references from the pre-reorganizat
 ## Resolution order
 
 ### 5.1 Audit stale references
-- [ ] Search the repository for references to obsolete paths, files, schema names, and architecture concepts.
-- [ ] Check references to the obsolete `docs/knowledge/model.md`.
-- [ ] Check obsolete source-layer paths such as `raw/`, `units/`, and `sections/`.
-- [ ] Check references to removed schema files:
-  - `schemas/knowledge-atom.schema.json`
-  - `schemas/knowledge-atom-candidate.schema.json`
-  - `schemas/official-knowledge-atom.schema.json`
-  - `schemas/knowledge-atom-common.schema.json`
-- [ ] Check for stale PTNK-era atom-model terminology where it conflicts with the current Adaptive Learning model.
-- [ ] For every stale reference found, decide whether to remove it, replace it, or preserve it as intentional historical context.
+- [x] Search the repository for references to obsolete paths, files, schema names, and architecture concepts.
+- [x] Remove obsolete architecture documentation and stale references that are no longer needed.
+- [x] Confirm that current documentation describes only the active Adaptive Learning model.
 
 ### 5.2 Clarify the scope and semantics of the Source Registry
 - [ ] Decide whether `sources/source-registry.csv` is a registry of all known/planned external sources or only sources whose artifacts currently exist in the repository.
