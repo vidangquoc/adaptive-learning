@@ -6,7 +6,7 @@ This document defines the canonical common structure for all knowledge atoms in 
 
 All knowledge atoms use the same top-level fields. A field that does not apply to a particular atom remains present and uses the appropriate empty value, normally `null` or `[]`, rather than introducing a second atom schema.
 
-The core schema contains knowledge content and descriptive metadata only. It does not use dedicated fields for `usage`, `constraints`, or `related_atoms`. Usage restrictions that constitute independently meaningful knowledge are represented as separate atoms; otherwise they do not require a dedicated atom field. Relations connect independent atoms but are not stored as a `related_atoms` field. If the learning material directly teaches and tests knowledge about a relation, that knowledge point is represented as a separate atom.
+The core schema contains knowledge content and descriptive metadata only. It does not use dedicated fields for `usage`, `constraints`, or `related_atoms`. Usage restrictions that constitute independently meaningful knowledge are represented as separate atoms; otherwise they do not require a dedicated atom field. Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
 
 The taxonomy of valid `domain` and `type` combinations is defined in `atom-types.md`.
 
@@ -334,61 +334,13 @@ The taxonomy document determines whether a record is valid as one of these types
 
 ---
 
-## 7. Atom versus property versus relation
-
-The conceptual boundary is:
-
-```text
-knowledge independently meaningful and independently diagnosable
-        ↓
-      atom
-
-characteristic used only to describe an existing atom
-        ↓
-     property
-
-explicit connection between independent atoms
-        ↓
-     relation
-```
+## 7. Atom versus property
 
 Properties are descriptive information about an atom; they are not Knowledge Atoms themselves.
 
-When a knowledge point represented only as descriptive information is directly tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than remaining merely descriptive information about the original atom.
-
-Relations connect independent atoms. A relation itself is not stored as a field on the atom. If the learning material directly teaches and tests knowledge about a relation between atoms, that knowledge point is represented as a separate Knowledge Atom.
-
-Examples:
-
-```text
-assess
-→ lexical_sense atom
-
-formal
-→ property of an existing atom
-
-assess ↔ evaluate
-→ relation
-
-assume ↔ infer
-→ relation
-
-present simple
-→ atom
-
-present simple + habitual actions
-→ separate atom when the corresponding knowledge point is directly taught and tested
-
-present simple ↔ present continuous
-→ relation
-
-present simple vs present continuous for a particular distinction
-→ separate grammar atom when the distinction itself is directly taught and tested
-```
+When a knowledge point represented only as descriptive information is directly taught and tested in the learning material, that knowledge point is represented as a separate Knowledge Atom rather than remaining merely descriptive information about the original atom.
 
 This boundary prevents both atom inflation and the loss of independently useful distinctions.
-
----
 
 ## 8. Representation invariants
 
@@ -398,7 +350,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
 6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If descriptive information is directly taught and tested as an independent knowledge point, that knowledge point is represented as a separate Atom.
-7. Relations connect independent atoms; they are not stored as an atom field. If knowledge about a relation is directly taught and tested, that knowledge point is represented as a separate Atom.
+7. Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
 8. Source provenance remains recoverable for every official atom.
 9. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
 10. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
@@ -411,8 +363,8 @@ This boundary prevents both atom inflation and the loss of independently useful 
 17. A newly created Candidate starts as `pending`; a reviewer may leave it `pending` or change it to `approved` or `rejected`.
 18. Officialization processes only Candidates with `review_status: approved`, writes the resulting Official Atom with the same semantic ID to the Official Store, and deletes the Candidate from the Candidate Store.
 19. A rejected Candidate may be reviewed again; an Official Atom does not return to Candidate/rejected lifecycle states.
-18. An Official Atom may be corrected or refined while retaining the same semantic identity.
-19. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
-20. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
-21. Canonical atom meaning remains independent of learner state.
-22. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
+20. An Official Atom may be corrected or refined while retaining the same semantic identity.
+21. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
+22. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
+23. Canonical atom meaning remains independent of learner state.
+24. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
