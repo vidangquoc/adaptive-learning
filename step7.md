@@ -161,14 +161,36 @@ Status: FINALIZED
 
 ## 7.6 Data format and validation strategy
 
-Decide the implementation conventions for persisted data:
-- YAML vs JSON vs other formats;
-- schema validation scope;
-- whether every stored atom must validate independently;
-- how collections are validated;
-- naming conventions for files.
+### 7.6.1 Persisted data format
 
-Status: OPEN
+**Decision: FINALIZED**
+
+YAML is the persistence format for the project's structured persisted data, including Knowledge Atoms and learner review data.
+
+### 7.6.2 Schema validation scope
+
+**Decision: FINALIZED**
+
+Learner review data has its own JSON Schema:
+
+`schemas/review-data.schema.json`
+
+The schema defines `review-data.yaml` as a top-level YAML sequence. Each item is one learner review record containing exactly:
+- `atom_id`
+- `total_review_times`
+- `effective_review_times`
+- `last_review_date`
+- `next_review_date`
+
+The schema enforces:
+- no additional fields in a review record;
+- non-negative integer review counts;
+- `last_review_date` as `date-time`;
+- `next_review_date` as `date`.
+
+The semantic integrity rule `effective_review_times <= total_review_times` remains a data-integrity rule and is not encoded using non-standard JSON Schema features.
+
+Status: PARTIALLY FINALIZED
 
 ## 7.7 Scripts and pipeline integration
 
