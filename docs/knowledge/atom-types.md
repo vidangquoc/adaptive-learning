@@ -36,7 +36,7 @@ Current canonical values:
 - `vocabulary`
 - `grammar`
 
-A new domain must not be introduced merely because a property or relation is inconvenient to represent. It requires an explicit taxonomy decision.
+A new domain must not be introduced merely because existing knowledge is inconvenient to represent. It requires an explicit taxonomy decision.
 
 ### `type`
 
@@ -87,7 +87,7 @@ One independently meaningful sense should normally be one atom.
 
 If the source teaches distinct senses of the same surface form, represent them as separate atoms when they can be independently understood or assessed.
 
-Semantic distinctions between senses belong in the atom content and/or explicit relations; they do not require a parent atom.
+Semantic distinctions between senses belong in the atom content; they do not require a parent atom.
 
 ### 2.2. `multiword_expression`
 
@@ -239,35 +239,25 @@ Units, reviews, tests, page ranges, Segment IDs, and other source structure are 
 
 ---
 
-## 5. Atom versus property versus relation
+## 5. Atom versus property
 
 Use the following decision rule:
 
 ```text
-Is the knowledge independently meaningful and independently diagnosable?
-        │
-       yes
-        ↓
-     atom
-
-Does it mainly describe an existing atom?
+Does it describe an existing atom?
         │
        yes
         ↓
     property
 
-Does it connect two independently meaningful atoms?
+Is it independently meaningful knowledge that the source directly teaches/tests?
         │
        yes
         ↓
-    relation
+      atom
 ```
 
-The guiding principle is:
-
-> Create an atom when the knowledge itself is independently meaningful and useful to teach, assess, track, or retrieve. Use properties for characteristics of an existing atom and relations for explicit connections between independent atoms.
-
-This prevents both atom inflation and loss of independently useful distinctions.
+Properties describe existing atoms; they are not Knowledge Atoms themselves. If a knowledge point represented by descriptive information is directly taught and tested, represent that knowledge point as a separate Knowledge Atom.
 
 ---
 
@@ -276,12 +266,12 @@ This prevents both atom inflation and loss of independently useful distinctions.
 1. **Source evidence comes first.** Do not invent definitions, patterns, collocations, restrictions, distinctions, or exceptions from intuition.
 2. **One lexical sense = one atom by default.** Split distinct senses when the source supports them.
 3. **Do not turn every example sentence into an atom.** An example is evidence unless it teaches an independently reusable pattern or knowledge object.
-4. **Do not turn every semantic relationship into an atom.** Relations connect atoms. A relation becomes a knowledge atom only when the learning material directly teaches and tests knowledge about that relation.
+4. **Do not turn every descriptive detail into an atom.** A knowledge point becomes a separate atom when the learning material directly teaches and tests it as an independent target.
 5. **Do not infer unsupported grammar.** A generated question or model intuition is not evidence for a grammatical pattern.
 6. **Do not encode learner state in taxonomy.** Mastery, attempts, confidence, retention, review status, and learning progress belong to the learner layer.
 7. **Do not encode source structure in taxonomy.** Segment, Unit, exercise, page, and source identifiers belong to provenance and assessment structures.
 8. **Do not add taxonomy levels without a demonstrated need.** Keep the canonical model at `domain + type` unless source-grounded modeling work shows that another level is necessary.
 9. **Avoid overlapping types without a decision rule.** Use the most specific applicable vocabulary type; otherwise use `multiword_expression`.
 10. **Avoid atom inflation.** The goal is useful learning granularity, not the maximum number of records.
-11. **Preserve uncertainty.** Candidate knowledge that has not passed validation must not silently become official knowledge.
+11. **Preserve uncertainty.** Candidate knowledge that has not passed human review must not silently become official knowledge.
 12. **Preserve provenance.** Every official atom must remain traceable to its supporting source evidence.
