@@ -115,10 +115,11 @@ Step 4 is complete. The `schemas/` directory now contains only the two canonical
 - `schemas/official-atom.schema.json`
 
 ### 5. Clean stale references and verify source registry
-- [ ] Remove stale references such as `docs/knowledge/model.md`.
-- [ ] Search for other obsolete pre-reorganization paths.
-- [ ] Verify `source-registry.csv`, `source-registry.md`, source files, and source metadata agree on source identity/version.
-- [ ] Search the repository for `PTNK` and confirm no unwanted docs/schema references remain.
+- [x] Remove stale references and obsolete pre-reorganization paths.
+- [x] Finalize the Source Registry as `sources/source-registry.yaml`, containing only source artifacts that actually exist in the repository.
+- [x] Verify source identity and artifact-path consistency across the registry, source manifest, Segment metadata, and available downstream references.
+- [x] Confirm that no obsolete schema names or legacy registry references remain.
+- [x] Confirm that `books.md` is treated only as a bibliography/reference list, not as a source-identity authority.
 
 ### 6. Revalidate the Unit 1 test extraction
 - [ ] Keep `unit-1-sources/test-atoms.md` as a working/historical extraction, not the canonical schema.
