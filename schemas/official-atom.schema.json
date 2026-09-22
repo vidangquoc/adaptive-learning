@@ -6,6 +6,7 @@
     "id",
     "domain",
     "type",
+    "relation_type",
     "name",
     "part_of_speech",
     "pronunciation",
@@ -42,6 +43,12 @@
         "usage",
         "exception",
         "relation"
+      ]
+    },
+    "relation_type": {
+      "type": [
+        "string",
+        "null"
       ]
     },
     "name": {
@@ -244,6 +251,29 @@
             ]
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "relation"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "relation_type": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "relation_type"
+        ]
       }
     }
   ],
