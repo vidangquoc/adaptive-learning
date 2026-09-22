@@ -32,10 +32,10 @@ Ensure that the repository contains no stale references from the pre-reorganizat
 - [x] Verify source version/edition metadata where the repository contains a concrete source artifact; no canonical version/edition metadata is part of the current Source Registry model.
 
 ### 5.5 Final Step 5 verification
-- [ ] Re-run the stale-reference audit after all fixes.
-- [ ] Re-run source-registry consistency checks.
-- [ ] Confirm that no unresolved Step 5 issues remain.
-- [ ] Mark Step 5 complete in `WORK-IN-PROGRESS.md`.
+- [x] Re-run the stale-reference audit after all fixes.
+- [x] Re-run source-registry consistency checks.
+- [x] Confirm that no unresolved Step 5 issues remain.
+- [x] Mark Step 5 complete in `WORK-IN-PROGRESS.md`.
 
 ## Working rule
 
