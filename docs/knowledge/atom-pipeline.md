@@ -118,7 +118,36 @@ A Candidate does not use a separate `candidate_id`, temporary ID, or tracking ID
 
 No field should be populated solely because the schema permits it.
 
-## 7. Validation
+## 7. Physical Store Layout
+
+Candidate and Official Atoms are stored under the same source/segment/domain hierarchy, while lifecycle is represented by the file name:
+
+```text
+data/
+└── knowledge/
+    └── <source-id>/
+        └── <segment-id>/
+            └── <domain>/
+                ├── knowledge_atoms.md
+                └── knowledge_atom_candidates.md
+```
+
+The stores are:
+
+- Official Store: `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atoms.md`
+- Candidate Store: `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atom_candidates.md`
+
+Path semantics:
+
+- `<source-id>` is the canonical `source_id` from the Source Registry.
+- `<segment-id>` is the canonical `segment_id` from source segmentation.
+- `<domain>` is the Knowledge Atom domain.
+- The storage path is an organizational location, not the semantic identity of an atom.
+- Atom semantic IDs remain independent of their storage path.
+
+There is no additional `official/` or `candidates/` directory layer.
+
+## 8. Validation
 
 Automated validation should check, as applicable:
 
@@ -136,7 +165,7 @@ Automated validation should check, as applicable:
 
 Validation is a gate, not a replacement for human approval.
 
-## 8. Human Review and Officialization
+## 9. Human Review and Officialization
 
 After validation, Candidates enter human review. Review status has exactly three values:
 
@@ -159,11 +188,11 @@ Officialization is a storage transition:
 
 There is no `officialized` review status. Pending and rejected Candidates are not affected by officialization. An Official Atom does not return to the Candidate/rejected lifecycle.
 
-## 9. Official Atom Correction
+## 10. Official Atom Correction
 
 An Official Atom may be corrected or refined while retaining the same semantic ID when the knowledge identity remains unchanged. A change that creates a genuinely different knowledge identity must be handled as a semantic-identity change rather than as ordinary correction.
 
-## 10. Fail-Closed Behavior
+## 11. Fail-Closed Behavior
 
 ```text
 PASS → continue
@@ -173,7 +202,7 @@ FAIL → stop / preserve evidence / require review
 
 If source structure, provenance, context, semantics, or atom identity cannot be established sufficiently, do not promote.
 
-## 11. Reproducibility and Preservation
+## 12. Reproducibility and Preservation
 
 Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting raw evidence.
 
