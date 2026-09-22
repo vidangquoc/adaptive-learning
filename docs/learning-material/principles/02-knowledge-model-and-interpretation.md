@@ -36,7 +36,7 @@ Do not impose hierarchies such as:
 
 ```text
 word → sense → pattern → expression
-grammar heading → grammar use → example
+grammar heading → grammar usage → example
 ```
 
 Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
@@ -106,7 +106,7 @@ one evidence span → no atom
 
 Split when the source supports a knowledge distinction and the corresponding knowledge point is directly tested or practised as a distinct target.
 
-Merge evidence only when it supports the same underlying knowledge item and the same sense/use.
+Merge evidence only when it supports the same underlying knowledge item and the same sense/usage.
 
 Do not merge merely because forms are identical or similar, meanings overlap, items share a word family, or one expression contains another.
 
