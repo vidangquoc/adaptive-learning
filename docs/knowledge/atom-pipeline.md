@@ -96,6 +96,35 @@ False deduplication is more damaging than controlled redundancy.
 
 A Candidate is a complete Knowledge Atom, not a partial proposal schema.
 
+### Candidate creation is semantic, not scripted extraction
+
+There is no extraction script that creates Candidate Knowledge Atoms. Candidate creation requires understanding the source in context. The AI reads each Segment with sufficient surrounding context, identifies the knowledge points that should become Atoms, and creates the Candidate Atoms from that interpretation.
+
+The extraction/creation flow is:
+
+```text
+Source
+  ↓
+Segment
+  ↓
+AI reads and understands context
+  ↓
+Knowledge Atom identification and splitting
+  ↓
+Candidate Atoms
+  ↓
+YAML blocks
+  ↓
+knowledge_atom_candidates.md
+  ↓
+validation
+```
+
+Automated scripts do not decide which knowledge points exist as Atoms. They may validate the resulting YAML blocks structurally. No intermediate extraction file or second Candidate representation is required.
+
+A newly created Candidate starts with `review_status: pending`.
+
+
 Candidate output uses the canonical atom structure defined in `atom-structure.md`, with the additional lifecycle field:
 
 ```yaml
