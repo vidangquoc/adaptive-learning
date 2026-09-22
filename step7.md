@@ -25,8 +25,6 @@ Rules:
 - The path is storage organization, not semantic atom identity.
 - No additional `official/` or `candidates/` directory layer.
 
-
-
 ## 7.2 Physical representation of Candidate Atoms
 
 **Decision: FINALIZED — Option A**
@@ -42,36 +40,6 @@ Rules:
 - A newly created Candidate starts with `review_status: pending`.
 - The YAML content of each block must validate as one Candidate Atom against `schemas/candidate-atom.schema.json`.
 - Markdown headings may identify or separate atoms for human review, but they are not part of the atom data and are not an alternative schema.
-
-Example:
-
-```markdown
-## vocabulary.lexical_sense.assume.verb
-
-```yaml
-id: vocabulary.lexical_sense.assume.verb
-domain: vocabulary
-type: lexical_sense
-name: assume
-part_of_speech: verb
-pronunciation: /əˈsuːm/
-meaning: ...
-mother_says: giả định
-explanation: ...
-structure: ...
-examples: []
-extra:
-  source:
-    origin: []
-    atom_decision: []
-  is_tested: false
-  test_evidence: []
-  notes: null
-review_status: pending
-```
-```
-
-This representation keeps Candidate data human-reviewable while preserving a direct machine-validation boundary at the individual atom block.
 
 ## 7.3 Physical representation of Official Atoms
 
@@ -108,18 +76,48 @@ Status: FINALIZED
 
 ## 7.4 Source provenance and evidence in stored atoms
 
-Confirm how the existing canonical fields are physically persisted:
-- `extra.source.origin`
-- `extra.source.atom_decision`
-- `extra.is_tested`
-- `extra.test_evidence`
+**Decision: FINALIZED**
 
-Questions:
-- Are these stored directly in every atom?
-- What repository-relative paths or IDs are referenced?
-- How are missing/not-applicable values represented?
+The canonical provenance and assessment fields are persisted directly in every stored atom, using the common atom structure.
 
-Status: OPEN
+The persisted structure is:
+
+```yaml
+extra:
+  source:
+    origin:
+      - source_id: destination-c1-c2
+        segment_id: <segment-id>
+        location:
+          page: <page>
+          section: <section>
+          line: <line>
+    atom_decision:
+      - source_id: destination-c1-c2
+        segment_id: <segment-id>
+        location:
+          page: <page>
+          section: <section>
+          line: <line>
+  is_tested: true
+  test_evidence:
+    - "Exercise A, item 5, line 100"
+  notes: null
+```
+
+Rules:
+- `extra.source.origin` records where the knowledge point originates.
+- `extra.source.atom_decision` records the source evidence supporting the decision to represent the knowledge point as a Knowledge Atom.
+- Each provenance entry references the canonical `source_id` and `segment_id`; location fields are optional.
+- `source_id` is resolved through the Source Registry. The atom does not store a repository path to the source artifact.
+- `extra.is_tested` is `true` when the Atom is directly tested or practised in the learning material, and `false` otherwise.
+- An exercise may test multiple Atoms; each directly tested Atom may therefore have `is_tested: true` and may reference the same test location.
+- `extra.test_evidence` records locations in the learning material where the Atom is directly tested or practised.
+- `source.origin`, `source.atom_decision`, `is_tested`, and `test_evidence` are provenance/assessment metadata, not knowledge content and do not affect semantic identity.
+- When a collection is structurally required but there is no applicable evidence, use an empty array `[]`; do not omit the field.
+- `notes` may be `null` when there is no note.
+
+Status: FINALIZED
 
 ## 7.5 Learner state boundary
 
