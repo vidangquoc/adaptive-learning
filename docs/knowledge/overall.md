@@ -1,6 +1,6 @@
 # Knowledge Model
 
-> Canonical conceptual model for knowledge atoms and their relationships. Formal field structure is defined in `atom-structure.md`; taxonomy is defined in `atom-types.md`; discovery and promotion are defined in `atom-pipeline.md`.
+> Canonical conceptual model for knowledge atoms. Formal field structure is defined in `atom-structure.md`; taxonomy is defined in `atom-types.md`; discovery and promotion are defined in `atom-pipeline.md`.
 
 ## 1. Purpose
 
@@ -14,7 +14,6 @@ A knowledge atom may be:
 - identified as a distinct learning target;
 - learned independently as a target;
 - assessed independently or together with other atoms;
-- related to other knowledge;
 - reused across competencies and learning activities.
 
 ## 2. Knowledge Atom versus Learner State
@@ -73,7 +72,7 @@ The practical question for deciding whether something should be an atom is:
 
 If yes, it can be a separate atom even when another atom is closely related to it.
 
-## 4. Atom versus Property versus Relation
+## 4. Atom versus Property versus Metadata
 
 The system distinguishes:
 
@@ -87,26 +86,20 @@ A **property** is information that describes an existing atom. By itself, a prop
 
 If a knowledge point represented by a property is **directly tested or practised in the learning material**, that knowledge point is represented as a separate Knowledge Atom. Otherwise, it remains descriptive information about the existing atom.
 
-For example, the form `have/has + past participle` may be recorded as a property of the `present perfect` atom. If the learning material directly tests or practises that form as a knowledge point, the form itself is represented as a separate atom as well.
-
-The existence of a property therefore does not automatically create another atom. The trigger for separate representation is source-level direct testing/practice of that knowledge point.
-
 **Metadata** describes source, provenance, system, or other contextual information. It is not part of the knowledge itself.
 
-Therefore, the practical distinction is:
+The important distinction is therefore:
 
 ```text
-Does it describe an existing atom?
+Describes an existing atom
     → Property
 
-Can it itself be a meaningful learning target?
-    → It may be an Atom
+Directly taught/tested as an independent knowledge point
+    → Knowledge Atom
 
-Does it describe source/system context?
+Describes source/system context
     → Metadata
 ```
-
-The important point is that **Property versus Atom is not decided only by whether the information describes another atom**. The same knowledge may be a property in one context and a separately represented atom when source evidence shows that it is a distinct learning target worth assessing separately.
 
 ## 5. Knowledge versus Assessment
 
