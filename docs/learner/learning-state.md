@@ -73,6 +73,14 @@ The calendar date on which the Atom is scheduled to be reviewed next.
 
 This field is a date only; it does not specify a time.
 
+### 3.6 Schema
+
+`review-data.yaml` is validated against `schemas/review-data.schema.json`.
+
+The file is a top-level YAML sequence, and each item is one review record containing exactly the five fields defined above. The schema enforces non-negative integer review counters, `last_review_date` as `date-time`, `next_review_date` as `date`, and no additional properties.
+
+The integrity rule `effective_review_times ≤ total_review_times` remains a semantic data-integrity rule in addition to schema validation.
+
 ## 4. Review update rules
 
 When an Atom is reviewed:
