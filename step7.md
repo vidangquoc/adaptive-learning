@@ -106,33 +106,7 @@ Candidate and Official physical representations are therefore the same except th
 
 Status: FINALIZED
 
-## 7.4 Relations between Knowledge Atoms
-
-Decide where and how relations are stored.
-
-Questions:
-- Separate relation store or another structure?
-- What identifies the source and target atoms?
-- How are relation types represented?
-- Are relations global or grouped by domain?
-- How does this interact with the flat atom model?
-
-Status: OPEN
-
-## 7.4 Relations between Knowledge Atoms
-
-Decide where and how relations are stored.
-
-Questions:
-- Separate relation store or another structure?
-- What identifies the source and target atoms?
-- How are relation types represented?
-- Are relations global or grouped by domain?
-- How does this interact with the flat atom model?
-
-Status: BLOCKED BY 7.2
-
-## 7.5 Source provenance and evidence in stored atoms
+## 7.4 Source provenance and evidence in stored atoms
 
 Confirm how the existing canonical fields are physically persisted:
 - `extra.source.origin`
@@ -147,7 +121,7 @@ Questions:
 
 Status: OPEN
 
-## 7.6 Learner state boundary
+## 7.5 Learner state boundary
 
 Define the physical boundary between static knowledge and learner-specific state.
 
@@ -159,7 +133,7 @@ Questions:
 
 Status: OPEN
 
-## 7.7 Data format and validation strategy
+## 7.6 Data format and validation strategy
 
 Decide the implementation conventions for persisted data:
 - YAML vs JSON vs other formats;
@@ -170,7 +144,7 @@ Decide the implementation conventions for persisted data:
 
 Status: OPEN
 
-## 7.8 Scripts and pipeline integration
+## 7.7 Scripts and pipeline integration
 
 After the storage model is settled, identify required changes to:
 - extraction scripts;
@@ -183,7 +157,7 @@ Do not change scripts before the underlying storage model is agreed.
 
 Status: OPEN
 
-## 7.9 Documentation synchronization
+## 7.8 Documentation synchronization
 
 After decisions are finalized, update only the canonical documents that are actually affected.
 
@@ -198,7 +172,7 @@ Potential documents:
 
 Status: OPEN
 
-## 7.10 Final Step 7 verification
+## 7.9 Final Step 7 verification
 
 Verify:
 - physical stores match the agreed architecture;
