@@ -154,6 +154,9 @@ Rules:
 - Attempts and historical review records are outside the scope of `review-data.yaml`.
 - Review data is learner-specific and may change as the learner performs reviews.
 
+
+- A Knowledge Atom is reviewed as one unit: the review checks whether the learner remembers the Atom; no separate recognition, recall, usage, collocation, discrimination, transfer, or retention dimensions are stored for an Atom.
+
 Status: FINALIZED
 
 ## 7.6 Data format and validation strategy
