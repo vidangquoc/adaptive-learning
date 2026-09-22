@@ -51,8 +51,6 @@ sources/
 
 `segments/` contains structural source PDFs. `segment-text/` contains derived machine-readable text for those same segments. Neither layer replaces the original source PDF.
 
-Do not introduce `raw/`, a whole-source TXT intermediate layer, a separate `units/` directory, or a separate `sections/` directory into the current pipeline.
-
 ## 1. Register the source
 
 Before extraction:
