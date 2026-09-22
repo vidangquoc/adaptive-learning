@@ -80,7 +80,6 @@ The system distinguishes:
 ```text
 knowledge atom
 property
-relation
 metadata
 ```
 
@@ -91,19 +90,6 @@ If a knowledge point represented by a property is **directly tested or practised
 For example, the form `have/has + past participle` may be recorded as a property of the `present perfect` atom. If the learning material directly tests or practises that form as a knowledge point, the form itself is represented as a separate atom as well.
 
 The existence of a property therefore does not automatically create another atom. The trigger for separate representation is source-level direct testing/practice of that knowledge point.
-
-A **relation** connects knowledge atoms. It does not turn one atom into a parent or child of another.
-
-For example:
-
-```text
-present perfect
-        │
-        ├── related_to → present perfect with have
-        └── related_to → present perfect with has
-```
-
-The relation records how the atoms are connected; it is not itself a knowledge atom.
 
 **Metadata** describes source, provenance, system, or other contextual information. It is not part of the knowledge itself.
 
@@ -116,16 +102,11 @@ Does it describe an existing atom?
 Can it itself be a meaningful learning target?
     → It may be an Atom
 
-Does it describe a connection between atoms?
-    → Relation
-
 Does it describe source/system context?
     → Metadata
 ```
 
 The important point is that **Property versus Atom is not decided only by whether the information describes another atom**. The same knowledge may be a property in one context and a separately represented atom when source evidence shows that it is a distinct learning target worth assessing separately.
-
-Synonymy, antonymy, near-synonymy, semantic distinctions, derivation, prerequisite relationships, and competency support are normally relations rather than additional atoms.
 
 ## 5. Knowledge versus Assessment
 
@@ -172,9 +153,9 @@ Learner mastery dimensions and adaptive decisions belong to `docs/learner/learni
 ## 9. Design Constraints
 
 - Knowledge atoms are flat; do not create parent/child hierarchies between atoms.
+- Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
 - Preserve lexical and grammatical distinctions that matter for learning.
 - Do not require hierarchy merely to group related or overlapping atoms.
-- Use explicit relationships when they provide real learning or querying value.
 - Do not confuse an assessment structure with the underlying knowledge ontology.
 - Do not assign learner mastery or adaptive priority to static knowledge.
 - Do not invent unsupported knowledge.
