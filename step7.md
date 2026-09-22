@@ -257,7 +257,24 @@ Status: FINALIZED
 
 ### 7.7.2 Validation and downstream integration
 
-Validation, human review, and officialization remain automated/manual pipeline responsibilities as defined by the canonical pipeline document. Detailed decisions for these stages are addressed only when needed.
+#### 7.7.2.1 Candidate validation
+
+**Decision: FINALIZED**
+
+A separate validation script is not required for Candidate creation at this stage.
+
+Rules:
+- Candidate Atoms are created by AI through contextual semantic analysis.
+- Human review is the primary quality gate before a Candidate can be approved.
+- The JSON Schema remains the canonical structural contract for Candidate Atoms even though there is no dedicated Candidate-validation script.
+- The absence of a validation script does not change the required Candidate structure or schema.
+- Automated validation may be introduced later if the repository gains scripts or workflows that create, transform, or persist Knowledge Atom data programmatically.
+
+Status: FINALIZED
+
+#### 7.7.2.2 Review and promotion
+
+Human review, approval, and officialization remain to be defined.
 
 Status: OPEN
 
