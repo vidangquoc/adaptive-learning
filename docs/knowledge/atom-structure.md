@@ -10,7 +10,7 @@ The core schema contains knowledge content and descriptive metadata only. It doe
 
 The taxonomy of valid `domain` and `type` combinations is defined in `atom-types.md`.
 
-Learner mastery, attempts, confidence, retention, and other learner-specific state do not belong in a knowledge atom. Candidate/Official is a pipeline lifecycle distinction; it is not an additional ontology field or atom type.
+Learner mastery, attempts, confidence, retention, and other learner-specific state do not belong in a knowledge atom. Candidate/Official is a pipeline lifecycle distinction and is stored in separate stores. It is not an additional ontology field or atom type.
 
 ---
 
@@ -295,18 +295,17 @@ Use `[]` when the source does not explicitly test or practise the atom.
 
 ### Candidate review status
 
-Candidate review lifecycle uses exactly four values:
+Candidate review lifecycle uses exactly three values:
 
 - `pending`: the Candidate has not received a review decision, or the reviewer leaves it unchanged;
 - `approved`: the reviewer has accepted the Candidate for officialization, but it is still a Candidate until the officialization step runs;
-- `rejected`: the reviewer has rejected the Candidate; it may be reviewed again later;
-- `officialized`: the Candidate has been converted into an Official Atom by the officialization step.
+- `rejected`: the reviewer has rejected the Candidate; it may be reviewed again later.
 
 Reviewers may leave a Candidate in `pending`, or explicitly change it to `approved` or `rejected`.
 
-The officialization operation considers **only Candidates whose `review_status` is `approved`**. Those Candidates are converted to Official Atoms and their status changes to `officialized`. Candidates that are `pending` or `rejected` are not affected by officialization.
+The officialization operation considers **only Candidates whose `review_status` is `approved`**. Each approved Candidate is copied to the separate Official Store with the same semantic ID and then deleted from the Candidate Store. Candidates that are `pending` or `rejected` are not affected by officialization.
 
-`officialized` is a lifecycle result of the officialization operation, not a reviewer decision. An officialized atom does not return to Candidate/rejected lifecycle states.
+There is no `officialized` review status in the Candidate Store because an officialized Candidate no longer exists there. Officialization is a storage transition, not a fourth review status.
 
 ### `extra.notes`
 
@@ -400,7 +399,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 
 ## 8. Representation invariants
 
-1. Every atom uses the same top-level field structure.
+1. Every Candidate and Official Atom uses the same canonical top-level knowledge field structure; a Candidate additionally carries `review_status` as lifecycle metadata.
 2. `domain` and `type` must conform to the canonical taxonomy.
 3. `type` describes the knowledge ontology, not the source or learner.
 4. One lexical sense is one atom by default when the source supports that distinction.
@@ -413,10 +412,12 @@ This boundary prevents both atom inflation and the loss of independently useful 
 11. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
 12. Canonical atom meaning remains independent of learner state.
 13. Candidate and Official use the same semantic `id`; officialization does not create a new atom identity.
-14. Candidate review uses exactly `pending`, `approved`, `rejected`, and `officialized`.
-15. A newly created Candidate starts as `pending`; a reviewer may leave it `pending` or change it to `approved` or `rejected`.
-16. Officialization processes only Candidates with `review_status: approved` and changes them to `officialized`.
-17. A rejected Candidate may be reviewed again; once officialized, an atom does not return to Candidate/rejected lifecycle states.
+14. Candidate and Official are stored separately; Candidate Store contains Candidates and Official Store contains Official Atoms.
+15. A Candidate has the same complete canonical atom structure as an Official Atom, with only the additional `review_status` lifecycle field.
+16. Candidate review uses exactly `pending`, `approved`, and `rejected`.
+17. A newly created Candidate starts as `pending`; a reviewer may leave it `pending` or change it to `approved` or `rejected`.
+18. Officialization processes only Candidates with `review_status: approved`, writes the resulting Official Atom with the same semantic ID to the Official Store, and deletes the Candidate from the Candidate Store.
+19. A rejected Candidate may be reviewed again; an Official Atom does not return to Candidate/rejected lifecycle states.
 18. An Official Atom may be corrected or refined while retaining the same semantic identity.
 19. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
 20. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
