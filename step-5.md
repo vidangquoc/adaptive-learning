@@ -21,9 +21,9 @@ Ensure that the repository contains no stale references from the pre-reorganizat
 - [x] Update the related documentation to reflect the new registry scope and structure.
 
 ### 5.3 Synchronize Source Registry metadata
-- [ ] Compare `sources/source-registry.yaml` against `docs/learning-material/sources/source-registry.md`.
-- [ ] Verify that every registry value conforms to the documented field semantics.
-- [ ] Resolve any remaining source identity or metadata mismatches.
+- [x] Compare `sources/source-registry.yaml` against `docs/learning-material/sources/source-registry.md`.
+- [x] Verify that every registry value conforms to the documented field semantics.
+- [x] Resolve any remaining source identity or metadata mismatches.
 
 ### 5.4 Verify source identity and artifact paths
 - [ ] Verify that each source artifact currently present in the repository has a corresponding registry entry.
