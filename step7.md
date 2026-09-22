@@ -274,9 +274,21 @@ Status: FINALIZED
 
 #### 7.7.2.2 Review and promotion
 
-Human review, approval, and officialization remain to be defined.
+**Decision: FINALIZED**
 
-Status: OPEN
+Review and officialization are separate steps.
+
+Rules:
+- **Review** is the human evaluation of a Candidate Atom.
+- Review can result in `pending`, `approved`, or `rejected`.
+- **Officialization** is the storage transition that moves an approved Candidate into the Official Store.
+- Only Candidates with `review_status: approved` can be officialized.
+- Officialization writes the Official Atom with the same semantic `id` to the Official Store and then deletes the Candidate from the Candidate Store.
+- `approved` does not itself make a Candidate an Official Atom; officialization is required.
+- Review and officialization remain conceptually separate even if a future implementation performs them through one user-facing operation.
+- No separate automated review or officialization script is required at this stage.
+
+Status: FINALIZED
 
 ## 7.8 Documentation synchronization
 
