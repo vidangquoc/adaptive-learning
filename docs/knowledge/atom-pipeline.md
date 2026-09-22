@@ -120,7 +120,7 @@ knowledge_atom_candidates.md
 validation
 ```
 
-Automated scripts do not decide which knowledge points exist as Atoms. They may validate the resulting YAML blocks structurally. No intermediate extraction file or second Candidate representation is required.
+Automated scripts do not decide which knowledge points exist as Atoms. No dedicated Candidate-validation script is required at Candidate creation. No intermediate extraction file or second Candidate representation is required.
 
 A newly created Candidate starts with `review_status: pending`.
 
@@ -237,26 +237,17 @@ Rules:
 - When a structurally required collection has no applicable evidence, use an empty array `[]`; do not omit the field.
 - `notes` may be `null` when there is no note.
 
-## 8. Validation
+## 8. Validation and review
 
-Automated validation should check, as applicable:
+Source extraction and structural validation remain automated where appropriate, but Candidate creation does not require a dedicated validation script.
 
-1. source structure and boundary validity;
-2. exact source-span correspondence;
-3. provenance completeness;
-4. supported atom type and canonical form;
-5. source-grounded meaning and part of speech;
-6. unsupported definitions, pronunciation, examples, patterns, proficiency, or domain claims;
-7. evidence for splitting/merging decisions;
-8. duplicate or near-duplicate proposals;
-10. ambiguous or competing interpretations;
-11. schema validity of each persisted Knowledge Atom against the schema corresponding to its store.
+Candidate quality is primarily controlled through contextual AI interpretation followed by human review. The JSON Schema remains the canonical structural contract for Candidate Atoms, but no separate Candidate-validation script is required at this stage.
 
-Validation is a gate, not a replacement for human approval.
+Human review is not replaced by structural validation. Schema correctness cannot determine whether the AI identified the right knowledge points, split or merged them correctly, or interpreted the source context correctly.
 
-### Persistence and schema validation
+### Persistence representation and schema contract
 
-Knowledge Atom collection files are Markdown documents containing fenced YAML blocks. Validation extracts the fenced YAML blocks and validates each block independently against the schema for its store. The collection Markdown file is not validated as one YAML document. Each fenced YAML block is parsed and validated independently, and the collection passes only when every extracted Atom block passes its store-specific schema validation.
+Knowledge Atom collection files are Markdown documents containing fenced YAML blocks. Each fenced YAML block is one complete Atom and is defined by the schema corresponding to its store. The collection Markdown file is not itself an Atom/YAML document.
 
 ## 9. Human Review and Officialization
 
