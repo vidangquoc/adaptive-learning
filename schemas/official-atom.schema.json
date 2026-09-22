@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vidangquoc/adaptive-learning/schema/official-atom",
+  "title": "Official Knowledge Atom",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "domain",
+    "type",
+    "name",
+    "part_of_speech",
+    "pronunciation",
+    "meaning",
+    "mother_says",
+    "explanation",
+    "structure",
+    "examples",
+    "extra"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "vocabulary",
+        "grammar"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "lexical_sense",
+        "multiword_expression",
+        "phrasal_verb",
+        "idiom",
+        "collocation",
+        "word_formation",
+        "morphological_form",
+        "rule",
+        "use",
+        "exception"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "part_of_speech": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pronunciation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "meaning": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mother_says": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "explanation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "structure": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extra": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "is_tested",
+        "test_evidence",
+        "notes"
+      ],
+      "properties": {
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "origin",
+            "atom_decision"
+          ],
+          "properties": {
+            "origin": {
+              "$ref": "#/$defs/sourceRecords"
+            },
+            "atom_decision": {
+              "$ref": "#/$defs/sourceRecords"
+            }
+          }
+        },
+        "is_tested": {
+          "type": "boolean"
+        },
+        "test_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "domain": {
+            "const": "vocabulary"
+          },
+          "type": {
+            "const": "lexical_sense"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "part_of_speech": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pronunciation": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "not": {
+          "properties": {
+            "domain": {
+              "const": "vocabulary"
+            },
+            "type": {
+              "const": "lexical_sense"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "part_of_speech": {
+            "type": "null"
+          },
+          "pronunciation": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "domain": {
+            "const": "vocabulary"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "enum": [
+              "lexical_sense",
+              "multiword_expression",
+              "phrasal_verb",
+              "idiom",
+              "collocation",
+              "word_formation",
+              "morphological_form"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "domain": {
+            "const": "grammar"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type": {
+            "enum": [
+              "rule",
+              "use",
+              "exception",
+              "word_formation",
+              "morphological_form"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sourceRecords": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "segment_id",
+          "location"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "segment_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "page",
+              "section",
+              "line"
+            ],
+            "properties": {
+              "page": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "section": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "line": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
