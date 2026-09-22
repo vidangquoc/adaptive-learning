@@ -43,6 +43,7 @@ Updated learner state
 - `data/` — curated knowledge and evidence datasets
 - `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atoms.md` — Official Knowledge Atom store
 - `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atom_candidates.md` — Candidate Knowledge Atom store
+- `data/learners/<learner-id>/review-data.yaml` — current review data for one learner; one file per learner
 - `sources/` — source material and provenance
 - `analysis/` — evidence and research analysis
 - `flashcards/` — learner-facing exports and experiments
