@@ -153,8 +153,6 @@ Rules:
 - `last_review_date` is a datetime; `next_review_date` is a date only.
 - Attempts and historical review records are outside the scope of `review-data.yaml`.
 - Review data is learner-specific and may change as the learner performs reviews.
-
-
 - A Knowledge Atom is reviewed as one unit: the review checks whether the learner remembers the Atom; no separate recognition, recall, usage, collocation, discrimination, transfer, or retention dimensions are stored for an Atom.
 
 Status: FINALIZED
@@ -272,7 +270,7 @@ Rules:
 
 Status: FINALIZED
 
-#### 7.7.2.2 Review and promotion
+#### 7.7.2.2 Review and officialization
 
 **Decision: FINALIZED**
 
@@ -292,26 +290,34 @@ Status: FINALIZED
 
 ## 7.8 Documentation synchronization
 
-After decisions are finalized, update only the canonical documents that are actually affected.
+**Decision: FINALIZED**
 
-Potential documents:
+The canonical documents affected by Step 7 have been synchronized with the finalized decisions.
+
+Synchronized documents include:
 - `docs/knowledge/overall.md`
-- `docs/knowledge/atom-structure.md`
 - `docs/knowledge/atom-pipeline.md`
 - `docs/knowledge/atom-types.md`
 - `docs/learner/learning-state.md`
-- relevant learning-material principles/procedures
+- `docs/learning-material/procedures/source-extraction-sop.md`
 - `README.md`
 
-Status: OPEN
+No additional canonical document changes are required by the finalized Step 7 decisions.
+
+Status: FINALIZED
 
 ## 7.9 Final Step 7 verification
 
-Verify:
-- physical stores match the agreed architecture;
-- schemas match stored data;
-- pipeline references are consistent;
-- no obsolete paths or structures remain;
-- canonical documentation is synchronized.
+**Decision: FINALIZED**
 
-Status: OPEN
+Verification completed:
+
+- **Physical architecture:** the agreed Candidate and Official store paths are consistently documented. No conflicting `official/` or `candidates/` directory layer was found. The physical stores are not populated yet, so there is no stored Atom collection to validate at this stage.
+- **Schemas:** Candidate and Official representations match their respective schemas, and learner review data matches `schemas/review-data.schema.json`. The previously obsolete schema paths are absent.
+- **Pipeline consistency:** Candidate creation is AI semantic analysis, followed by human review and officialization. No extraction script or dedicated Candidate-validation script is required by the finalized model.
+- **Documentation:** the canonical documents were synchronized. Atom-to-Atom relationships are not persisted; learner review data is documented separately from the Atom pipeline; review/officialization terminology is consistent.
+- **Repository cleanup:** obsolete Knowledge Atom schema files are absent, and no obsolete physical Knowledge Atom store paths were found.
+
+Step 7 is complete.
+
+Status: FINALIZED
