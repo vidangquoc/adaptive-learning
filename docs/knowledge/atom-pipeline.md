@@ -110,6 +110,8 @@ There is no collection-level YAML wrapper such as `candidates:` and no second pr
 
 Markdown headings may be used to make human review easier, but headings are organizational presentation and are not part of the Candidate Atom data.
 
+Persisted Candidate Atom data uses YAML. Each fenced YAML block is validated independently against `schemas/candidate-atom.schema.json`.
+
 The Candidate must preserve, where applicable:
 
 - semantic ID;
@@ -161,6 +163,8 @@ Official Atoms are persisted in `knowledge_atoms.md` as a Markdown collection of
 There is no collection-level YAML wrapper such as `atoms:` and no second presentation-specific atom format. Official Atoms do not carry a lifecycle field such as `official_status`.
 
 Markdown headings may be used to make human review easier, but headings are organizational presentation and are not part of the Official Atom data.
+
+Persisted Official Atom data uses YAML. Each fenced YAML block is validated independently against `schemas/official-atom.schema.json`.
 
 Candidate and Official stores therefore use the same physical atom representation, with the Candidate representation additionally carrying the top-level `review_status` field.
 
@@ -217,9 +221,13 @@ Automated validation should check, as applicable:
 7. evidence for splitting/merging decisions;
 8. duplicate or near-duplicate proposals;
 10. ambiguous or competing interpretations;
-11. schema validity.
+11. schema validity of each persisted Knowledge Atom against the schema corresponding to its store.
 
 Validation is a gate, not a replacement for human approval.
+
+### Persistence and schema validation
+
+Knowledge Atom collection files are Markdown documents containing fenced YAML blocks. Validation extracts the fenced YAML blocks and validates each block independently against the schema for its store. The collection Markdown file is not validated as one YAML document. Learner `review-data.yaml` is instead validated as a whole against `schemas/review-data.schema.json`.
 
 ## 9. Human Review and Officialization
 
