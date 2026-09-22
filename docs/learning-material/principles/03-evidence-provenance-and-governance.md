@@ -14,7 +14,7 @@ The detailed Unit-boundary rules are owned by `06-source-unit-boundary.md`.
 
 ## Candidate and Official Stores
 
-Discovery and officialization are different stages of the knowledge pipeline.
+Discovery, review, and officialization are distinct stages of the knowledge pipeline.
 
 A **Candidate** is a complete Knowledge Atom stored in the Candidate Store. It is not official knowledge yet. Candidate and Official use the same semantic ID and the same canonical atom structure; Candidate additionally carries the lifecycle field `review_status`.
 
@@ -34,7 +34,7 @@ OFFICIAL STORE
 
 Candidate and Official are stored separately. Officialization is a storage transition, not a new ontology type and not a reviewer decision.
 
-Automated discovery and analysis are advisory. They may locate evidence, analyze linguistic/semantic properties, calculate confidence, and flag warnings, but they do not independently promote knowledge.
+Automated discovery and analysis are advisory. They may locate evidence and analyze linguistic/semantic properties, but any tool-generated confidence scores or warnings are advisory tooling output and are not persisted Atom fields. They do not independently officialize Candidates.
 
 ## Human Review Is the Officialization Gate
 
@@ -89,7 +89,7 @@ Gates should cover applicable structural validity, provenance, semantic plausibi
 
 If evidence is insufficient or competing interpretations remain unresolved:
 
-> **Do not promote. Preserve the candidate and mark it for review.**
+> **Do not officialize. Preserve the Candidate and mark it for review.**
 
 ## Pipeline Governance
 
@@ -108,4 +108,4 @@ learning design
 learner state
 ```
 
-Implementation details for discovering, validating, and promoting atoms belong in `docs/knowledge/atom-pipeline.md`.
+Implementation details for discovering, validating, reviewing, and officializing atoms belong in `docs/knowledge/atom-pipeline.md`.
