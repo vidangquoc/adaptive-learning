@@ -87,6 +87,8 @@ Rules:
 
 Changing an atom's semantic identity is a model change, not a formatting change.
 
+Candidate / Official lifecycle state is not part of the canonical semantic ID. A Candidate may use a temporary/tracking identity during extraction and review; the canonical semantic ID is assigned independently when the atom's semantic identity is established.
+
 ### `domain`
 
 The broad knowledge domain.
