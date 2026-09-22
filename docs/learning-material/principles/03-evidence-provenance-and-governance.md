@@ -12,62 +12,62 @@ External evidence such as proficiency frameworks must remain distinguishable fro
 
 The detailed Unit-boundary rules are owned by `06-source-unit-boundary.md`.
 
-## Candidate and Promotion States
+## Candidate and Official Stores
 
-Discovery and promotion are different states.
+Discovery and officialization are different stages of the knowledge pipeline.
 
-A **candidate** is an evidence-backed hypothesis about possible canonical knowledge. It is not official knowledge. Candidate data must remain reviewable so analysis, review, and promotion are traceable and reproducible.
+A **Candidate** is a complete Knowledge Atom stored in the Candidate Store. It is not official knowledge yet. Candidate and Official use the same semantic ID and the same canonical atom structure; Candidate additionally carries the lifecycle field `review_status`.
 
 ```text
 SOURCE EVIDENCE
       ↓
-CANDIDATE
+CANDIDATE STORE
       ↓
 HUMAN REVIEW
       ↓
-APPROVED
+approved Candidate
       ↓
-PROMOTION
+OFFICIALIZE
       ↓
-OFFICIAL KNOWLEDGE
+OFFICIAL STORE
 ```
+
+Candidate and Official are stored separately. Officialization is a storage transition, not a new ontology type and not a reviewer decision.
 
 Automated discovery and analysis are advisory. They may locate evidence, analyze linguistic/semantic properties, calculate confidence, and flag warnings, but they do not independently promote knowledge.
 
-## Human Review Is the Promotion Gate
+## Human Review Is the Officialization Gate
 
-A candidate becomes eligible for official learning material only after explicit human approval.
-
-```text
-APPROVE
-REJECT
-HOLD
-```
-
-The human decision and rationale must be preserved with provenance.
-
-A candidate may be reviewed again later. Promotion always reads the current review status:
+Candidate review status has exactly three values:
 
 ```text
-APPROVED → eligible for promotion
-anything else → do nothing
+pending
+approved
+rejected
 ```
+
+- `pending`: newly created Candidate or unchanged by reviewer;
+- `approved`: accepted for officialization, but still a Candidate;
+- `rejected`: rejected by reviewer and still reviewable later.
+
+The reviewer may leave `pending`, set `approved`, or set `rejected`. There is no `hold` state.
 
 > **Machine proposes. Human decides.**
 
 ## Officialization
 
-Official knowledge is a promoted representation of approved candidate knowledge.
+Officialization processes only Candidates whose current status is `approved`.
 
-Promotion must:
+For each approved Candidate:
 
-1. select candidates whose current status is `APPROVED`;
-2. skip candidates already officialized;
-3. create the official representation without destroying the candidate record;
-4. preserve links to candidate and source evidence;
-5. never promote `REJECTED`, `HOLD`, `PENDING`, or other non-approved candidates.
+1. write the Official Atom to the separate Official Store;
+2. keep the same semantic ID;
+3. preserve the canonical atom content and provenance;
+4. delete the Candidate from the Candidate Store.
 
-The exact official atom structure is defined by the knowledge-layer schema documentation.
+Therefore the Candidate Store has no `officialized` status. Candidates that are `pending` or `rejected` are not affected.
+
+A rejected Candidate may be reviewed again. An Official Atom does not return to Candidate/rejected lifecycle states.
 
 ## Knowledge Admission Is Independent of Learner State
 
