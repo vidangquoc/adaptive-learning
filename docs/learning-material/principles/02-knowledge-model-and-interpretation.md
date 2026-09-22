@@ -28,9 +28,9 @@ The taxonomy document determines which categories are available; this document d
 
 A knowledge atom is an independently useful, source-grounded unit of knowledge.
 
-Knowledge atoms are flat and independent by default. If several meanings, senses, constructions, patterns, or usages can be independently learned or assessed, they should be represented as separate atoms.
+Knowledge atoms are flat and independent by default. If several meanings, senses, constructions, patterns, or usages are directly tested or practised as distinct knowledge points in the source, they should be represented as separate atoms.
 
-One lexical sense is one atom by default. The same principle applies to independently useful grammatical uses, constructions, rules, constraints, or contrasts.
+One lexical sense is one atom by default. For other knowledge distinctions, direct source-level testing/practice is the trigger for separate atom representation.
 
 Do not impose hierarchies such as:
 
@@ -104,7 +104,7 @@ multiple evidence spans → one atom
 one evidence span → no atom
 ```
 
-Split when distinctions are independently useful for learning, assessment, querying, or learner-state tracking and the source supports the distinction.
+Split when the source supports a knowledge distinction and the corresponding knowledge point is directly tested or practised as a distinct target.
 
 Merge evidence only when it supports the same underlying knowledge item and the same sense/use.
 
@@ -116,7 +116,7 @@ False deduplication is more damaging than controlled redundancy.
 
 For lexical knowledge, consider sense, lexicalization, idiomaticity, syntactic behavior, patterns, derivation, register, semantic contrasts, and restrictions where the source supports them.
 
-For grammar, consider form, meaning, function, discourse context, constraints, and contrasts. Do not create a grammar atom merely because a textbook heading exists; the independently useful rule, use, construction, or contrast is the relevant knowledge unit when supported by evidence.
+For grammar, consider form, meaning, function, discourse context, constraints, and contrasts. Do not create a grammar atom merely because a textbook heading exists. Represent a grammatical knowledge point as a separate atom when the source directly tests or practises that point as a distinct target.
 
 ## Accuracy over Completeness
 
