@@ -10,7 +10,7 @@ The core schema contains knowledge content and descriptive metadata only. It doe
 
 The taxonomy of valid `domain` and `type` combinations is defined in `atom-types.md`.
 
-Learner mastery, attempts, confidence, retention, review state, and other learner-specific state do not belong in a knowledge atom.
+Learner mastery, attempts, confidence, retention, and other learner-specific state do not belong in a knowledge atom. Candidate/Official is a pipeline lifecycle distinction; it is not an additional ontology field or atom type.
 
 ---
 
@@ -87,7 +87,7 @@ Rules:
 
 Changing an atom's semantic identity is a model change, not a formatting change.
 
-Candidate / Official lifecycle state is not part of the canonical semantic ID. A Candidate may use a temporary/tracking identity during extraction and review; the canonical semantic ID is assigned independently when the atom's semantic identity is established.
+Candidate and its resulting Official Atom use the same canonical semantic `id`. The semantic ID is created when the Candidate is created; it is not replaced or regenerated during officialization. A Candidate does not use a separate `candidate_id` or temporary ID in place of the canonical semantic ID. A Candidate rejected and later reviewed again keeps the same semantic ID. Once officialized, it does not return to Candidate/rejected lifecycle states. Review state is separate from identity.
 
 ### `domain`
 
@@ -394,7 +394,13 @@ This boundary prevents both atom inflation and the loss of independently useful 
 7. Relations connect independent atoms; they are not stored as an atom field. If knowledge about a relation is directly taught and tested, that knowledge point is represented as a separate Atom.
 8. Source provenance remains recoverable for every official atom.
 9. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
-10. Learner mastery, attempts, confidence, retention, review state, and progress never belong in the atom.
+10. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
 11. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
 12. Canonical atom meaning remains independent of learner state.
-13. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
+13. Candidate and Official use the same semantic `id`; officialization does not create a new atom identity.
+14. A Candidate may move between `pending` and `rejected` during review, but once officialized it does not return to Candidate/rejected state.
+15. An Official Atom may be corrected or refined while retaining the same semantic identity.
+16. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
+17. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
+18. Canonical atom meaning remains independent of learner state.
+19. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
