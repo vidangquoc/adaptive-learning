@@ -26,10 +26,10 @@ Ensure that the repository contains no stale references from the pre-reorganizat
 - [x] Resolve any remaining source identity or metadata mismatches.
 
 ### 5.4 Verify source identity and artifact paths
-- [ ] Verify that each source artifact currently present in the repository has a corresponding registry entry.
-- [ ] Verify that each `artifact` path recorded in the registry actually exists.
-- [ ] Verify `source_id` consistency between the registry, source files, `source-segments.yaml`, Segment metadata, and downstream references.
-- [ ] Verify source version/edition metadata where the repository contains a concrete source artifact.
+- [x] Verify that each source artifact currently present in the repository has a corresponding registry entry.
+- [x] Verify that each `artifact` path recorded in the registry actually exists.
+- [x] Verify `source_id` consistency between the registry, source files, `source-segments.yaml`, Segment metadata, and downstream references; no downstream atom data currently exists to validate.
+- [x] Verify source version/edition metadata where the repository contains a concrete source artifact; no canonical version/edition metadata is part of the current Source Registry model.
 
 ### 5.5 Final Step 5 verification
 - [ ] Re-run the stale-reference audit after all fixes.
