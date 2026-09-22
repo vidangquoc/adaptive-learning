@@ -103,6 +103,14 @@ Candidate output uses the canonical atom structure defined in `atom-structure.md
 review_status: pending
 ```
 
+### Candidate physical representation
+
+Candidates are persisted in `knowledge_atom_candidates.md` as a Markdown collection of fenced YAML blocks. Each fenced YAML block is one complete Candidate Atom and must independently validate against `schemas/candidate-atom.schema.json`.
+
+There is no collection-level YAML wrapper such as `candidates:` and no second presentation-specific atom format. `review_status` remains a top-level lifecycle field in each Candidate and is not part of `extra`.
+
+Markdown headings may be used to make human review easier, but headings are organizational presentation and are not part of the Candidate Atom data.
+
 The Candidate must preserve, where applicable:
 
 - semantic ID;
