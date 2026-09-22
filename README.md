@@ -47,7 +47,7 @@ Updated learner state
 - `sources/` — source material and provenance
 - `analysis/` — evidence and research analysis
 - `flashcards/` — learner-facing exports and experiments
-- `schemas/` — machine-readable data contracts
+- `schemas/` — machine-readable data contracts, including `candidate-atom.schema.json`, `official-atom.schema.json`, and `review-data.schema.json`
 - `scripts/` — extraction, validation, and transformation tooling
 - `docs/` — methodology, architecture, rules, and recovery documentation
 
@@ -60,5 +60,6 @@ Updated learner state
 - Static knowledge and learner state are separate layers.
 - Knowledge atoms are flat and independently diagnosable.
 - Human review remains the promotion gate where required.
+- Persisted structured data uses YAML; Knowledge Atom collection Markdown files contain independently validated fenced YAML blocks.
 
 PTNK-specific files and paths retain their `ptnk-*` naming because they represent PTNK evidence, not because PTNK is the repository's project identity.
