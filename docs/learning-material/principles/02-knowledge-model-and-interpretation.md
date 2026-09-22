@@ -39,7 +39,7 @@ word → sense → pattern → expression
 grammar heading → grammar use → example
 ```
 
-Explicit relationships may connect atoms when they provide real learning, assessment, or querying value. A relationship is not ancestry or inherited mastery.
+Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
 
 ## Evidence versus Interpretation
 
@@ -123,12 +123,6 @@ For grammar, consider form, meaning, function, discourse context, constraints, a
 Never fill a field merely because a representation allows it. Unsupported definitions, pronunciation, examples, patterns, proficiency labels, domains, or relationships remain unresolved.
 
 > **Do not optimize for filled records. Optimize for trustworthy knowledge.**
-
-## Relationships
-
-Synonymy, near-synonymy, antonymy, semantic distinction, derivation, collocation, constituent relationships, prerequisite relationships, and competency support are normally relationships between independent knowledge atoms rather than separate atoms themselves.
-
-Use an explicit relationship when it provides real learning or querying value. Do not infer relationships merely from similar spelling, proximity in the source, or intuition.
 
 ## Learning-State Boundary
 
