@@ -11,7 +11,7 @@
 3. Candidate / Official
 4. Review status
 
-Không cần giải quyết hết một lần.
+Các phần Candidate / Official và Review status bên dưới đã được chốt; chỉ các vấn đề còn lại của Step 3 mới tiếp tục mở.
 
 ---
 
@@ -197,96 +197,81 @@ have_a_particular_quality
 
 # 5. Candidate / Official
 
-**Đã chốt:** Candidate / Official là **lifecycle state của Knowledge Atom trong knowledge pipeline**, không phải một phần của atom ontology và không phải một `domain`, `type`, hay semantic property của atom.
-
-Mô hình:
+**Đã chốt:** Candidate và Official là cùng một Knowledge Atom ở hai giai đoạn khác nhau của knowledge pipeline, nhưng **được lưu ở hai nơi khác nhau**.
 
 ```text
 Learning Material
        ↓
-   Extraction
-       ↓
-Candidate Knowledge Atom
+Candidate Store
        ↓
      Review
        ↓
-Official Knowledge Atom
+Officialize
+       ↓
+Official Store
 ```
 
 ### Candidate
 
-Candidate là một **proposed Knowledge Atom**: hệ thống đã xác định một knowledge point và đề xuất nó như một atom, nhưng chưa được review để xác nhận là canonical/official.
+Candidate là một Knowledge Atom hoàn chỉnh đã được hệ thống xác định và đưa vào Candidate Store để review.
 
-Candidate vẫn là Knowledge Atom về mặt ontology; Candidate không phải một loại atom khác và không có `type` riêng.
+**Đã chốt:** Candidate sử dụng **đầy đủ canonical atom schema giống Official**, chỉ thêm một field lifecycle là `review_status`.
 
-**Đã chốt:** Candidate có **canonical semantic `id` ngay từ khi được tạo**. Không có `candidate_id` riêng và không dùng temporary/tracking ID thay cho semantic ID.
-
-Ví dụ:
-
-```text
-id: vocabulary.lexical_sense.run.verb.move_quickly
-review_status: pending
-```
-
-Khi Candidate bị reject rồi review lại, **giữ nguyên semantic ID**.
+Candidate không có schema knowledge riêng, không có `candidate_id`, và không có temporary/tracking ID. Semantic ID được tạo đúng ngay khi Candidate được tạo.
 
 ### Official
 
-Official là một Knowledge Atom đã được review và chấp nhận là canonical knowledge của hệ thống.
+Official là Knowledge Atom đã được officialize và được lưu trong Official Store.
 
-**Đã chốt:** khi Candidate được officialize, **không tạo semantic ID mới**. Official sử dụng chính semantic ID đã được tạo cho Candidate.
+Official sử dụng chính canonical atom schema, không có `review_status` và không có các field review/lifecycle riêng như `candidate_id`, `approved_by`, hoặc `approved_at`.
 
-Ví dụ:
+Candidate và Official dùng **cùng semantic ID**. Officialization không tạo identity mới.
 
-```text
-Candidate
-id = vocabulary.lexical_sense.run.verb.move_quickly
-        ↓
-officialize
-        ↓
-Official
-id = vocabulary.lexical_sense.run.verb.move_quickly
+### Officialization
+
+Bước `officialize` chỉ xử lý Candidate có:
+
+```yaml
+review_status: approved
 ```
 
-Official sử dụng canonical atom structure. Không thêm các field như `status: official`, `approved_by`, hoặc `approved_at` vào canonical schema chỉ để biểu diễn lifecycle state.
+Với mỗi Candidate phù hợp:
+
+1. ghi Official Atom vào Official Store;
+2. giữ nguyên semantic ID;
+3. xóa Candidate khỏi Candidate Store.
+
+Candidate `pending` và `rejected` không bị tác động.
+
+Do Candidate được xóa sau khi officialize, Candidate Store **không có trạng thái `officialized`**.
 
 ### Lifecycle direction
-
-Candidate có thể được review nhiều lần. Khi được tạo, Candidate bắt đầu ở `pending`:
 
 ```text
 pending
    │
    ├────→ rejected ────→ review lại ────→ pending / approved / rejected
    │
-   └────→ approved ────→ officialize ────→ officialized
+   └────→ approved ────→ officialize ────→ Official Store
 ```
 
-Khi reviewer xem xét một Candidate:
-
-- có thể chọn `approved`;
-- có thể chọn `rejected`;
-- hoặc không thay đổi status, khi đó vẫn là `pending`.
-
-`approved` **chưa phải Official**. Nó chỉ có nghĩa Candidate đã được reviewer chấp thuận và đang chờ bước officialization.
-
-Khi thực hiện **officialize**, hệ thống **chỉ quan tâm đến các Candidate có `review_status: approved`**. Những Candidate này được chuyển thành Official Atom và status chuyển thành `officialized`.
-
-Các Candidate đang `pending` hoặc `rejected` không bị officialize và không bị thay đổi bởi bước này.
-
-Một Candidate đã officialize thì **không quay lại Candidate và không bị reject trở lại**.
-
-Không cần lưu review history để biểu diễn lifecycle này. Chỉ cần trạng thái hiện tại của Candidate và semantic ID cố định của atom.
+- Candidate mới tạo luôn bắt đầu ở `pending`.
+- Reviewer có thể giữ `pending`, chọn `approved`, hoặc chọn `rejected`.
+- `approved` chưa phải Official; nó chỉ là trạng thái chờ officialization.
+- `rejected` có thể được review lại.
+- Sau khi officialize, Candidate bị xóa khỏi Candidate Store và Official Atom tồn tại ở Official Store.
+- Official Atom không quay lại Candidate/rejected lifecycle.
+- Không cần lưu review history.
 
 ### Official correction
 
-Một Official Atom có thể được sửa đổi hoặc refine để làm knowledge chính xác hơn.
+Official Atom có thể được sửa đổi hoặc refine để tăng độ chính xác.
 
 Các thay đổi như sửa `meaning`, `explanation`, `structure`, `examples`, hoặc provenance không tự động tạo lifecycle state mới và không làm thay đổi semantic ID nếu knowledge identity vẫn là cùng một knowledge point.
 
-Nếu một thay đổi làm knowledge identity thực sự thay đổi, đó là vấn đề về semantic identity và phải được xem xét riêng; không mặc định coi đó là một correction thông thường.
+Nếu thay đổi làm knowledge identity thực sự khác đi, đó là vấn đề về semantic identity và phải được xem xét riêng.
 
-**→ Candidate / Official identity và lifecycle direction đã chốt.**
+**→ Candidate / Official representation và lifecycle direction đã chốt.**
 
 ---
 
@@ -294,16 +279,17 @@ Nếu một thay đổi làm knowledge identity thực sự thay đổi, đó l�
 
 **Đã chốt.**
 
-`review_status` thuộc Candidate/review lifecycle, không thuộc knowledge ontology. Nó không tạo semantic identity mới.
+`review_status` chỉ tồn tại trên Candidate trong Candidate Store. Nó là lifecycle metadata, không phải knowledge ontology và không tham gia semantic identity.
 
 ### Giá trị chính thức
 
 | Giá trị | Ý nghĩa |
 |---|---|
-| `pending` | Candidate chưa có quyết định review; đây cũng là trạng thái mặc định khi Candidate được tạo. |
-| `approved` | Reviewer đã chấp thuận Candidate, nhưng Candidate chưa trở thành Official cho đến khi bước officialize được thực hiện. |
-| `rejected` | Reviewer từ chối Candidate; Candidate vẫn có thể được review lại sau này. |
-| `officialized` | Candidate đã được officialize thành Official Atom. Đây là kết quả của bước officialize, không phải reviewer decision. |
+| `pending` | Candidate mới tạo hoặc reviewer không thay đổi quyết định. |
+| `approved` | Reviewer chấp thuận Candidate, nhưng Candidate vẫn ở Candidate Store cho đến khi officialize. |
+| `rejected` | Reviewer từ chối Candidate; Candidate vẫn có thể được review lại. |
+
+Không có `officialized` trong `review_status`. Khi officialize, Candidate được ghi sang Official Store rồi xóa khỏi Candidate Store.
 
 ### Review behavior
 
@@ -313,7 +299,7 @@ Khi reviewer xem xét một Candidate, có ba khả năng:
 2. chọn `rejected`;
 3. không thay đổi gì, Candidate vẫn ở `pending`.
 
-Reviewer không chuyển Candidate trực tiếp sang `officialized`.
+Reviewer không chuyển Candidate trực tiếp thành Official.
 
 ### Officialization behavior
 
@@ -323,20 +309,17 @@ Bước **officialize** chỉ xử lý những Candidate có:
 review_status: approved
 ```
 
-Những Candidate đó được chuyển thành Official Atom và status chuyển thành:
+Candidate được chuyển thành Official Atom trong Official Store với cùng semantic ID, sau đó bị xóa khỏi Candidate Store.
 
-```yaml
-review_status: officialized
-```
-
-Candidate đang `pending` hoặc `rejected` không bị tác động bởi bước officialize.
+Candidate đang `pending` hoặc `rejected` không bị tác động.
 
 ### Lifecycle rule
 
-- Candidate có thể được review lại sau khi bị `rejected`.
-- Candidate có thể ở `pending` cho đến khi reviewer đưa ra quyết định.
+- Candidate có thể được review lại sau khi `rejected`.
 - `approved` là trạng thái chờ officialization, không phải Official.
-- `officialized` là trạng thái kết thúc của lifecycle Candidate/Official; không quay lại Candidate hoặc `rejected`.
-- Candidate và Official sử dụng cùng semantic ID trong toàn bộ lifecycle.
+- Officialization là storage transition, không phải reviewer decision.
+- Candidate và Official sử dụng cùng semantic ID.
+- Official Atom không quay lại Candidate hoặc `rejected`.
 
-**→ Danh sách status, ý nghĩa và behavior của review/officialization đã chốt.**
+**→ Danh sách status và behavior của review/officialization đã chốt.**
+
