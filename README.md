@@ -41,6 +41,8 @@ Updated learner state
 ## Repository structure
 
 - `data/` — curated knowledge and evidence datasets
+- `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atoms.md` — Official Knowledge Atom store
+- `data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atom_candidates.md` — Candidate Knowledge Atom store
 - `sources/` — source material and provenance
 - `analysis/` — evidence and research analysis
 - `flashcards/` — learner-facing exports and experiments
