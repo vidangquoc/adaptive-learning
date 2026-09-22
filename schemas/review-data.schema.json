@@ -35,17 +35,6 @@
         "type": "string",
         "format": "date"
       }
-    },
-    "allOf": [
-      {
-        "properties": {
-          "effective_review_times": {
-            "maximum": {
-              "$data": "1/total_review_times"
-            }
-          }
-        }
-      }
-    ]
+    }
   }
 }
