@@ -73,16 +73,51 @@ review_status: pending
 
 This representation keeps Candidate data human-reviewable while preserving a direct machine-validation boundary at the individual atom block.
 
-## 7.3 Physical representation of Official Atoms/
+## 7.3 Physical representation of Official Atoms
 
-Decide:
-- exact directory/file layout;
-- individual atom vs collection;
-- whether atoms are grouped by domain/type;
-- how Official Store is validated against `schemas/official-atom.schema.json`;
-- how officialization writes to this store.
+**Decision: FINALIZED — Option A**
 
-Status: BLOCKED BY 7.2
+`knowledge_atoms.md` is a Markdown collection containing multiple fenced YAML blocks. Each YAML block represents exactly one complete Official Atom and directly corresponds to `schemas/official-atom.schema.json`.
+
+Rules:
+- The file may contain multiple Official Atoms.
+- Each Official Atom is represented by one fenced YAML block.
+- Each YAML block contains the complete Official Atom; there is no partial or presentation-only representation.
+- There is no collection-level YAML wrapper such as `atoms:`.
+- Official Atoms have no lifecycle field such as `official_status`.
+- The YAML content of each block must validate as one Official Atom against `schemas/official-atom.schema.json`.
+- Markdown headings may identify or separate atoms for human review, but they are not part of the atom data and are not an alternative schema.
+- An Official Atom keeps the same semantic ID as the Candidate from which it was officialized.
+
+Officialization is a storage transition:
+
+```text
+Candidate YAML block
+        │
+        │ officialize
+        ▼
+Official YAML block
+        │
+        ▼
+knowledge_atoms.md
+```
+
+Candidate and Official physical representations are therefore the same except that a Candidate has the top-level `review_status` lifecycle field.
+
+Status: FINALIZED
+
+## 7.4 Relations between Knowledge Atoms
+
+Decide where and how relations are stored.
+
+Questions:
+- Separate relation store or another structure?
+- What identifies the source and target atoms?
+- How are relation types represented?
+- Are relations global or grouped by domain?
+- How does this interact with the flat atom model?
+
+Status: OPEN
 
 ## 7.4 Relations between Knowledge Atoms
 
