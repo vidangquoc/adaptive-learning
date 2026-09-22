@@ -196,23 +196,32 @@ have_a_particular_quality
 
 # 5. Candidate / Official
 
-Cần xác định Candidate / Official là **trạng thái của knowledge trong pipeline** hay có ảnh hưởng đến canonical atom structure.
+**Đã chốt:** Candidate / Official là **lifecycle state của Knowledge Atom trong knowledge pipeline**, không phải một phần của atom ontology và không phải một `domain`, `type`, hay semantic property của atom.
 
-Mô hình đang xem xét:
+Mô hình:
 
 ```text
-Evidence
-  ↓
-Candidate
-  ↓
-Review
-  ↓
-Official
+Learning Material
+       ↓
+   Extraction
+       ↓
+Candidate Knowledge Atom
+       ↓
+     Review
+       ↓
+Official Knowledge Atom
 ```
 
-Candidate có thể cần thông tin phục vụ review như:
+### Candidate
+
+Candidate là một **proposed Knowledge Atom**: hệ thống đã xác định một knowledge point và đề xuất nó như một atom, nhưng chưa được review để xác nhận là canonical/official.
+
+Candidate vẫn là Knowledge Atom về mặt ontology; Candidate không phải một loại atom khác và không có `type` riêng.
+
+Candidate có thể mang thêm metadata phục vụ extraction/review bên ngoài canonical atom schema, ví dụ:
 
 ```text
+candidate identity
 source span
 confidence
 warnings
@@ -220,11 +229,41 @@ validation status
 review notes
 ```
 
-Cần xác định:
+Các thông tin này phục vụ pipeline/review và không được biến thành các field của canonical atom chỉ vì Candidate cần chúng.
 
-- những thông tin nào thuộc candidate/review layer;
-- khi nào candidate trở thành official;
-- official atom có cần lưu trạng thái này hay không;
-- provenance và validation evidence được liên kết như thế nào.
+### Official
 
-**→ Chưa chốt.**
+Official là một Knowledge Atom đã được review và chấp nhận là canonical knowledge của hệ thống.
+
+Official sử dụng canonical atom structure. Không thêm các field như `status: official`, `approved_by`, hoặc `approved_at` vào canonical schema chỉ để biểu diễn lifecycle state, trừ khi sau này có nhu cầu governance rõ ràng.
+
+### Semantic identity
+
+Candidate và Official có thể cùng biểu diễn một knowledge point, nhưng identity dùng cho tracking trong pipeline không nhất thiết giống canonical semantic ID.
+
+Candidate có thể có một temporary/tracking identity trong quá trình extraction/review. Sau khi review, atom có thể được gán canonical semantic ID, ví dụ:
+
+```text
+candidate-847
+        ↓ review
+vocabulary.lexical_sense.run.verb.move_quickly
+```
+
+Candidate tracking ID không phải canonical `id` và không được đưa vào semantic ID.
+
+### Lifecycle outcomes
+
+Review một Candidate có thể dẫn đến nhiều kết quả:
+
+```text
+Candidate
+    ├──→ Official
+    ├──→ Rejected
+    └──→ Merged into another atom
+```
+
+Các lifecycle outcome này thuộc pipeline/review layer, không làm thay đổi ontology của Knowledge Atom.
+
+**→ Candidate / Official đã chốt về mặt conceptual model.**
+
+Chi tiết xử lý Candidate bị reject/merge, lịch sử review, và quan hệ giữa temporary tracking identity với canonical semantic ID sẽ được bàn tiếp ở phần lifecycle/governance, không mở rộng canonical atom schema ở bước này.
