@@ -1,12 +1,16 @@
 # Sources
 
-Store source metadata and provenance here.
+This directory contains source artifacts and source-processing data.
 
-Recommended layout:
+The source registry is stored in `source-registry.yaml`.
 
-- `ptnk-2024/`
-- `ptnk-2025/`
-- `ptnk-2026/`
-- later years as they become available
+Only source artifacts that actually exist in the repository are registered there.
 
-For each source, record the official URL/document reference, exam year, section, page/question range, and extraction notes.
+A source may have:
+
+- an original source artifact;
+- structural segmentation data;
+- derived segment PDFs;
+- derived segment text.
+
+See `docs/learning-material/sources/source-registry.md` for the registry definition and `docs/learning-material/procedures/source-extraction-sop.md` for the extraction procedure.
