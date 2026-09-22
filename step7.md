@@ -6,31 +6,36 @@ Step 7 will be resolved one issue at a time. This document records the questions
 
 ## 7.1 Physical location of Knowledge Atom stores
 
-Decide where the two atom stores live in the repository:
+**Decision: FINALIZED**
 
-- Candidate Store
-- Official Store
+Official:
+```text
+data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atoms.md
+```
 
-Questions to settle:
-- Should both live under `data/`?
-- Should they be separated by lifecycle (`candidates/` and `official/`)?
-- Should they be separated by domain/type, or remain flat?
-- What file format should the stores use?
-- Is one file per atom or a collection file more appropriate?
-- What is the canonical destination for Official Atoms?
+Candidates:
+```text
+data/knowledge/<source-id>/<segment-id>/<domain>/knowledge_atom_candidates.md
+```
 
-Status: OPEN
+Rules:
+- `<source-id>` is the canonical `source_id` from the Source Registry.
+- `<segment-id>` is the canonical `segment_id` from source segmentation.
+- `<domain>` is the Knowledge Atom domain.
+- The path is storage organization, not semantic atom identity.
+- No additional `official/` or `candidates/` directory layer.
+
+
 
 ## 7.2 Physical representation of Candidate Atoms
 
-After 7.1, decide:
-- exact directory/file layout;
-- whether Candidate Atoms are stored individually or in collections;
+Decide:
+- exact content structure of `knowledge_atom_candidates.md`;
+- how multiple Candidates are represented in one Markdown file;
 - how `review_status` is represented;
-- how candidate creation/update is performed;
 - validation requirements against `schemas/candidate-atom.schema.json`.
 
-Status: BLOCKED BY 7.1
+Status: OPEN
 
 ## 7.3 Physical representation of Official Atoms
 
@@ -41,7 +46,7 @@ Decide:
 - how Official Store is validated against `schemas/official-atom.schema.json`;
 - how officialization writes to this store.
 
-Status: BLOCKED BY 7.1
+Status: BLOCKED BY 7.2
 
 ## 7.4 Relations between Knowledge Atoms
 
