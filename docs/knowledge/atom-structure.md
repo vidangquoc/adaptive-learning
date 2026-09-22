@@ -71,8 +71,8 @@ id: vocabulary.lexical_sense.compelling.adjective
 id: vocabulary.lexical_sense.run.verb.move_quickly
 id: vocabulary.lexical_sense.run.verb.operate_function
 id: vocabulary.collocation.strike_a_balance
-grammar.use.present_simple.current_habit
-grammar.use.present_perfect.past_to_present
+grammar.usage.present_simple.current_habit
+grammar.usage.present_perfect.past_to_present
 grammar.rule.present_perfect_continuous
 ```
 
@@ -327,7 +327,7 @@ The structure is interpreted according to the atom taxonomy.
 | `word_formation` | Meaning/function of formation | Formation behavior and relevant use | Morphological pattern |
 | `morphological_form` | Relevant lexical-form information | Form/function explanation and relevant use | Inflectional or irregular form |
 | `rule` | Grammatical rule/relationship | How the rule works, including relevant contexts when needed | Grammatical form/pattern |
-| `use` | Grammatical meaning/function | How the construction is used, including relevant contexts | Grammatical form/pattern when relevant |
+| `usage` | Grammatical meaning/function | How the construction is used, including relevant contexts | Grammatical form/pattern when relevant |
 | `exception` | Exceptional grammatical behavior | Why it differs from the general rule and where it applies | Exceptional form/pattern |
 
 The taxonomy document determines whether a record is valid as one of these types. This table does not create additional types.
