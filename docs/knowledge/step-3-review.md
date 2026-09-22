@@ -9,6 +9,7 @@
 1. Các field của atom
 2. Semantic ID
 3. Candidate / Official
+4. Review status
 
 Không cần giải quyết hết một lần.
 
@@ -218,52 +219,74 @@ Candidate là một **proposed Knowledge Atom**: hệ thống đã xác định 
 
 Candidate vẫn là Knowledge Atom về mặt ontology; Candidate không phải một loại atom khác và không có `type` riêng.
 
-Candidate có thể mang thêm metadata phục vụ extraction/review bên ngoài canonical atom schema, ví dụ:
+**Đã chốt:** Candidate có **canonical semantic `id` ngay từ khi được tạo**. Không có `candidate_id` riêng và không dùng temporary/tracking ID thay cho semantic ID.
+
+Ví dụ:
 
 ```text
-candidate identity
-source span
-confidence
-warnings
-validation status
-review notes
+id: vocabulary.lexical_sense.run.verb.move_quickly
+review_status: pending
 ```
 
-Các thông tin này phục vụ pipeline/review và không được biến thành các field của canonical atom chỉ vì Candidate cần chúng.
+Khi Candidate bị reject rồi review lại, **giữ nguyên semantic ID**.
 
 ### Official
 
 Official là một Knowledge Atom đã được review và chấp nhận là canonical knowledge của hệ thống.
 
-Official sử dụng canonical atom structure. Không thêm các field như `status: official`, `approved_by`, hoặc `approved_at` vào canonical schema chỉ để biểu diễn lifecycle state, trừ khi sau này có nhu cầu governance rõ ràng.
+**Đã chốt:** khi Candidate được officialize, **không tạo semantic ID mới**. Official sử dụng chính semantic ID đã được tạo cho Candidate.
 
-### Semantic identity
-
-Candidate và Official có thể cùng biểu diễn một knowledge point, nhưng identity dùng cho tracking trong pipeline không nhất thiết giống canonical semantic ID.
-
-Candidate có thể có một temporary/tracking identity trong quá trình extraction/review. Sau khi review, atom có thể được gán canonical semantic ID, ví dụ:
-
-```text
-candidate-847
-        ↓ review
-vocabulary.lexical_sense.run.verb.move_quickly
-```
-
-Candidate tracking ID không phải canonical `id` và không được đưa vào semantic ID.
-
-### Lifecycle outcomes
-
-Review một Candidate có thể dẫn đến nhiều kết quả:
+Ví dụ:
 
 ```text
 Candidate
-    ├──→ Official
-    ├──→ Rejected
-    └──→ Merged into another atom
+id = vocabulary.lexical_sense.run.verb.move_quickly
+        ↓
+officialize
+        ↓
+Official
+id = vocabulary.lexical_sense.run.verb.move_quickly
 ```
 
-Các lifecycle outcome này thuộc pipeline/review layer, không làm thay đổi ontology của Knowledge Atom.
+Official sử dụng canonical atom structure. Không thêm các field như `status: official`, `approved_by`, hoặc `approved_at` vào canonical schema chỉ để biểu diễn lifecycle state.
 
-**→ Candidate / Official đã chốt về mặt conceptual model.**
+### Lifecycle direction
 
-Chi tiết xử lý Candidate bị reject/merge, lịch sử review, và quan hệ giữa temporary tracking identity với canonical semantic ID sẽ được bàn tiếp ở phần lifecycle/governance, không mở rộng canonical atom schema ở bước này.
+Candidate có thể được review nhiều lần:
+
+```text
+pending ↔ rejected
+        │
+        └────→ official
+```
+
+Một Candidate đã officialize thì **không quay lại Candidate và không bị reject trở lại**.
+
+Không cần lưu review history để biểu diễn lifecycle này. Chỉ cần trạng thái hiện tại của Candidate và semantic ID cố định của atom.
+
+### Official correction
+
+Một Official Atom có thể được sửa đổi hoặc refine để làm knowledge chính xác hơn.
+
+Các thay đổi như sửa `meaning`, `explanation`, `structure`, `examples`, hoặc provenance không tự động tạo lifecycle state mới và không làm thay đổi semantic ID nếu knowledge identity vẫn là cùng một knowledge point.
+
+Nếu một thay đổi làm knowledge identity thực sự thay đổi, đó là vấn đề về semantic identity và phải được xem xét riêng; không mặc định coi đó là một correction thông thường.
+
+**→ Candidate / Official identity và lifecycle direction đã chốt.**
+
+---
+
+# 6. Review status
+
+**Để mở và bàn riêng ở phần tiếp theo.**
+
+Hiện tại chỉ chốt được vai trò tổng quát:
+
+- `review_status` thuộc Candidate/review lifecycle, không thuộc knowledge ontology;
+- nó không tạo semantic identity mới;
+- Candidate phải có semantic ID trước khi review;
+- Candidate bị reject có thể được review lại;
+- Candidate đã officialize thì không quay lại trạng thái Candidate/rejected;
+- chưa chốt danh sách giá trị chính thức, transition rules chi tiết, hay cách representation cụ thể của `review_status`.
+
+Đây là phần tiếp theo cần đào sâu.
