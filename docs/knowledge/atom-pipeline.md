@@ -164,6 +164,46 @@ Markdown headings may be used to make human review easier, but headings are orga
 
 Candidate and Official stores therefore use the same physical atom representation, with the Candidate representation additionally carrying the top-level `review_status` field.
 
+### Provenance and assessment metadata
+
+Every stored Atom persists the canonical provenance and assessment fields directly in its `extra` object:
+
+```yaml
+extra:
+  source:
+    origin:
+      - source_id: destination-c1-c2
+        segment_id: <segment-id>
+        location:
+          page: <page>
+          section: <section>
+          line: <line>
+    atom_decision:
+      - source_id: destination-c1-c2
+        segment_id: <segment-id>
+        location:
+          page: <page>
+          section: <section>
+          line: <line>
+  is_tested: true
+  test_evidence:
+    - "Exercise A, item 5, line 100"
+  notes: null
+```
+
+Rules:
+
+- `extra.source.origin` records where the knowledge point originates.
+- `extra.source.atom_decision` records the source evidence supporting the decision to represent the knowledge point as a Knowledge Atom.
+- Each provenance entry references the canonical `source_id` and `segment_id`; location fields are optional.
+- `source_id` is resolved through the Source Registry. The Atom does not store a repository path to the source artifact.
+- `extra.is_tested` is `true` when the Atom is directly tested or practised in the learning material, and `false` otherwise.
+- An exercise may test multiple Atoms; each directly tested Atom may therefore have `is_tested: true` and may reference the same test location.
+- `extra.test_evidence` records locations in the learning material where the Atom is directly tested or practised.
+- `source.origin`, `source.atom_decision`, `is_tested`, and `test_evidence` are provenance/assessment metadata, not knowledge content and do not affect semantic identity.
+- When a structurally required collection has no applicable evidence, use an empty array `[]`; do not omit the field.
+- `notes` may be `null` when there is no note.
+
 ## 8. Validation
 
 Automated validation should check, as applicable:
