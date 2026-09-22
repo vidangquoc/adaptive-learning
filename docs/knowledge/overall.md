@@ -86,26 +86,11 @@ metadata
 
 A **property** is information that describes an existing atom. By itself, a property does not create another atom.
 
-However, being a property does not permanently prevent the same knowledge from also being represented as a separate atom. If the knowledge can function as a meaningful learning target that should be assessed separately, it may become its own atom.
+If a knowledge point represented by a property is **directly tested or practised in the learning material**, that knowledge point is represented as a separate Knowledge Atom. Otherwise, it remains descriptive information about the existing atom.
 
-For example, the form `have/has + past participle` can be recorded as a property of the `present perfect` atom:
+For example, the form `have/has + past participle` may be recorded as a property of the `present perfect` atom. If the learning material directly tests or practises that form as a knowledge point, the form itself is represented as a separate atom as well.
 
-```text
-Atom: present perfect
-Property:
-    form = have/has + past participle
-```
-
-If the source material provides evidence that the form is taught or tested as a distinct target, it may also justify separate atoms such as:
-
-```text
-present perfect with have
-present perfect with has
-```
-
-The existence of the property does not prevent these from being separate atoms. The atom decision should be grounded in the source material rather than by automatically turning every property into an atom.
-
-In particular, **assessment evidence in the source is an important signal for deciding atom granularity**. If the original material explicitly teaches, exercises, contrasts, or tests a piece of knowledge as a separate learning target, that evidence can justify representing it as a separate atom. If it only functions as descriptive information about another atom and there is no evidence that it is a separately targeted piece of knowledge, it can remain a property.
+The existence of a property therefore does not automatically create another atom. The trigger for separate representation is source-level direct testing/practice of that knowledge point.
 
 A **relation** connects knowledge atoms. It does not turn one atom into a parent or child of another.
 
