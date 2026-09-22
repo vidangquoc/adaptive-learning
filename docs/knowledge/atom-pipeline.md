@@ -227,7 +227,7 @@ Validation is a gate, not a replacement for human approval.
 
 ### Persistence and schema validation
 
-Knowledge Atom collection files are Markdown documents containing fenced YAML blocks. Validation extracts the fenced YAML blocks and validates each block independently against the schema for its store. The collection Markdown file is not validated as one YAML document. Learner `review-data.yaml` is instead validated as a whole against `schemas/review-data.schema.json`.
+Knowledge Atom collection files are Markdown documents containing fenced YAML blocks. Validation extracts the fenced YAML blocks and validates each block independently against the schema for its store. The collection Markdown file is not validated as one YAML document. Each fenced YAML block is parsed and validated independently, and the collection passes only when every extracted Atom block passes its store-specific schema validation.
 
 ## 9. Human Review and Officialization
 
