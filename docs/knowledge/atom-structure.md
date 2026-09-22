@@ -6,7 +6,7 @@ This document defines the canonical common structure for all knowledge atoms in 
 
 All knowledge atoms use the same top-level fields. A field that does not apply to a particular atom remains present and uses the appropriate empty value, normally `null` or `[]`, rather than introducing a second atom schema.
 
-The core schema contains knowledge content and descriptive metadata only. It does not use dedicated fields for `usage`, `constraints`, or `related_atoms`. Usage restrictions that constitute independently meaningful knowledge are represented as separate atoms; otherwise they do not require a dedicated atom field. Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
+The core schema contains knowledge content and descriptive metadata only. It does not use dedicated fields for `usage`, `constraints`, or `related_atoms`. Usage restrictions that constitute independently meaningful knowledge are represented as separate atoms; otherwise they do not require a dedicated atom field. Raw structural relationships between atoms are not persisted merely for graph purposes. When knowledge about a relationship between independent Knowledge Atoms is itself a learning target, that knowledge is represented as a `relation` atom.
 
 The taxonomy of valid `domain` and `type` combinations is defined in `atom-types.md`.
 
@@ -116,8 +116,9 @@ Examples include:
 - `word_formation`
 - `morphological_form`
 - `rule`
-- `use`
+- `usage`
 - `exception`
+- `relation`
 
 `type` describes what the knowledge is. It must not encode assessment format, source location, learner performance, or pedagogical activity.
 
@@ -350,7 +351,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
 6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If descriptive information is directly taught and tested as an independent knowledge point, that knowledge point is represented as a separate Atom.
-7. Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
+7. Raw structural relationships between atoms are not persisted merely for graph purposes. Knowledge about a relationship between two or more independent Knowledge Atoms may be represented as a `relation` atom when the relationship itself is an independently learnable or testable target.
 8. Source provenance remains recoverable for every official atom.
 9. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
 10. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
