@@ -1,0 +1,5 @@
+sources:
+  - id: destination-c1-c2
+    name: Destination C1 & C2
+    type: book
+    artifact: sources/Destination_C1-C2.pdf
