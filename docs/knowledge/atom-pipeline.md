@@ -61,7 +61,6 @@ The analysis may determine or propose:
 - syntactic or usage pattern;
 - word-formation relationship;
 - lexical or grammatical contrast;
-- relationships to other independent atoms.
 
 Use the evidence hierarchy:
 
@@ -177,7 +176,6 @@ Automated validation should check, as applicable:
 6. unsupported definitions, pronunciation, examples, patterns, proficiency, or domain claims;
 7. evidence for splitting/merging decisions;
 8. duplicate or near-duplicate proposals;
-9. relationship references;
 10. ambiguous or competing interpretations;
 11. schema validity.
 
