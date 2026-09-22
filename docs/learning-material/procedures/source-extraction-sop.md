@@ -31,7 +31,7 @@ evidence discovery
     ↓
 candidate atoms
     ↓
-validation / promotion gate
+human review / officialization
     ↓
 official atoms
 ```
@@ -265,9 +265,9 @@ At this stage:
 
 The canonical atom structure, taxonomy, and semantic-ID rules are defined separately in `docs/knowledge/`.
 
-## 12. Run validation and promotion gates
+## 12. Review and officialize Candidates
 
-Before a candidate atom becomes official, verify at minimum:
+Before a Candidate becomes Official, human review is the primary quality gate. Review should verify at minimum:
 
 - source identity and provenance are recorded;
 - Segment identity and source location are recoverable;
@@ -278,9 +278,11 @@ Before a candidate atom becomes official, verify at minimum:
 - assessment relationships are justified;
 - unresolved extraction or interpretation problems are explicitly marked;
 - no unsupported content was invented to repair gaps;
-- the candidate conforms to the canonical atom taxonomy and structure.
+- the Candidate conforms to the canonical atom taxonomy and structure.
 
-Promotion is a controlled state transition, not an automatic consequence of successful text extraction or candidate generation.
+The JSON Schema remains the structural contract for Candidate Atoms, but no dedicated Candidate-validation script is required at this stage.
+
+Officialization is a controlled state transition, not an automatic consequence of successful text extraction or Candidate creation.
 
 ## 13. Officialize Approved Candidates
 
