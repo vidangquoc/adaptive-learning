@@ -252,19 +252,21 @@ Do not infer a relationship merely because a word or construction appears somewh
 
 Question-to-knowledge relationships must remain traceable back to the source evidence that justified the relationship.
 
-## 11. Create candidate atoms
+## 11. Create Candidate Atoms
 
-Validated evidence may be synthesized into candidate knowledge atoms.
+Validated evidence may be synthesized into complete Candidate Atoms.
 
-Candidate creation is an interpretation step. The candidate must retain its supporting evidence and provenance so that another reviewer or later process can reconstruct why the candidate exists.
+Candidate creation is an interpretation step. Each Candidate must retain its supporting evidence and provenance so that another reviewer or later process can reconstruct why it exists.
 
 At this stage:
 
-- do not treat candidates as official knowledge;
+- the Candidate is not Official;
+- create the canonical semantic ID immediately; do not create a separate `candidate_id` or temporary ID;
+- use the canonical atom structure, with `review_status: pending`;
 - do not invent unsupported meanings, constraints, or examples;
 - do not silently merge distinct concepts merely because they are related;
 - do not put learner mastery or attempt history into the atom;
-- do not finalize fields beyond what the evidence supports.
+- do not populate fields beyond what the evidence supports.
 
 The canonical atom structure, taxonomy, and semantic-ID rules are defined separately in `docs/knowledge/`.
 
@@ -285,25 +287,29 @@ Before a candidate atom becomes official, verify at minimum:
 
 Promotion is a controlled state transition, not an automatic consequence of successful text extraction or candidate generation.
 
-## 13. Promote validated candidates to official atoms
+## 13. Officialize Approved Candidates
 
-Only candidates that pass the required validation gate may enter the official knowledge layer.
+Only Candidates with `review_status: approved` may be officialized.
 
 The conceptual transition is:
 
 ```text
 validated Segment evidence
         ↓
-candidate atom
+Candidate Store
         ↓
-validation / review
+validation / human review
         ↓
-official atom
+approved Candidate
+        ↓
+officialize
+        ↓
+Official Store
 ```
 
-Official atoms must retain source provenance. Officialization must not erase the evidence or turn the atom into an unexplained standalone assertion.
+Officialization writes the Official Atom with the same semantic ID, preserves source provenance, and then deletes the Candidate from the Candidate Store.
 
-Learner mastery, attempts, review state, and other learner-specific information belong to the learner-state layer, not to the knowledge atom itself.
+Learner mastery, attempts, and other learner-specific information belong to the learner-state layer, not to the knowledge atom. Review status belongs only to Candidates.
 
 ## 14. Source-specific adaptation
 
