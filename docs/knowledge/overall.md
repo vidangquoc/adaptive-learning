@@ -146,7 +146,7 @@ Learner mastery dimensions and adaptive decisions belong to `docs/learner/learni
 ## 9. Design Constraints
 
 - Knowledge atoms are flat; do not create parent/child hierarchies between atoms.
-- Raw structural relationships between atoms are not persisted merely for graph purposes. A relationship becomes a `relation` atom only when the relationship between independent Knowledge Atoms is itself an independently learnable or testable knowledge target.
+- Raw structural relationships between atoms are not persisted merely for graph purposes. A relationship becomes a `relation` atom only when the relationship between independent Knowledge Atoms is itself an independently learnable or testable knowledge target. Every `relation` atom specifies `relation_type`; non-relation atoms use `relation_type: null`.
 - Preserve lexical and grammatical distinctions that matter for learning.
 - Do not require hierarchy merely to group related or overlapping atoms.
 - Do not confuse an assessment structure with the underlying knowledge ontology.
