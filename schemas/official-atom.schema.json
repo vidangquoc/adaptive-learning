@@ -39,7 +39,7 @@
         "word_formation",
         "morphological_form",
         "rule",
-        "use",
+        "usage",
         "exception"
       ]
     },
@@ -235,7 +235,7 @@
           "type": {
             "enum": [
               "rule",
-              "use",
+              "usage",
               "exception",
               "word_formation",
               "morphological_form"
