@@ -178,11 +178,11 @@ Examples:
 - `I/you/we/they → do`; `he/she/it → does`
 - present perfect → `have/has + past participle`
 
-### 3.2. `use`
+### 3.2. `usage`
 
 Knowledge about when, in what context, or for what communicative purpose a grammatical construction is used.
 
-For now, grammatical meaning is also represented through `use` when it can be expressed adequately this way.
+For now, grammatical meaning is also represented through `usage` when it can be expressed adequately this way.
 
 Examples:
 
