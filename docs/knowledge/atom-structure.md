@@ -125,7 +125,7 @@ Examples include:
 
 ### `relation_type`
 
-The semantic kind of relationship represented by a `relation` atom. It is required for `type: relation` and is `null` for other atom types.
+The semantic kind of relationship represented by a `relation` atom. For an Official Atom, it is required and non-empty for `type: relation`; it is `null` for other atom types. A Candidate Atom may temporarily leave it as `null` while the relation type is being determined.
 
 `relation_type` describes the relationship itself, not the participating atoms. It is not a subtype and must not be used for structural relationships between grammatical components inside a single Atom.
 
