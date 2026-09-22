@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vidangquoc/adaptive-learning/schema/review-data",
+  "title": "Learner Review Data",
+  "description": "Schema for the latest review state of a learner's Knowledge Atoms.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "unevaluatedProperties": false,
+    "required": [
+      "atom_id",
+      "total_review_times",
+      "effective_review_times",
+      "last_review_date",
+      "next_review_date"
+    ],
+    "properties": {
+      "atom_id": {
+        "type": "string",
+        "minLength": 1
+      },
+      "total_review_times": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "effective_review_times": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "last_review_date": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "next_review_date": {
+        "type": "string",
+        "format": "date"
+      }
+    },
+    "allOf": [
+      {
+        "properties": {
+          "effective_review_times": {
+            "maximum": {
+              "$data": "1/total_review_times"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
