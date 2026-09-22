@@ -35,7 +35,7 @@ sources/destination-c1-c2/
 └── source-segments.yaml
 ```
 
-The original source PDF lives at `sources/Destination_C1-C2.pdf` and remains the source of truth. There is no `raw/` layer in the canonical architecture.
+The original source PDF lives at `sources/Destination_C1-C2.pdf` and remains the source of truth.
 
 ## Source Segmentation Specification
 
