@@ -22,6 +22,8 @@ domain:
 type:
 
 name:
+part_of_speech:
+pronunciation:
 
 meaning:
 mother_says:
@@ -137,25 +139,14 @@ Examples:
 
 `name` identifies the learning object; it is not a definition or explanation.
 
-### Lexical-sense-specific properties
+### `part_of_speech` and `pronunciation`
 
-The following properties apply only to atoms with `domain: vocabulary` and `type: lexical_sense`. They are not part of the common atom schema.
-
-```yaml
-name:
-part_of_speech:
-pronunciation:
-
-meaning:
-mother_says:
-explanation:
-structure:
-```
+These fields are part of the canonical common atom structure, but they apply only to atoms with `domain: vocabulary` and `type: lexical_sense`. For all other atom types, they remain present and use `null`.
 
 - `part_of_speech`: the part of speech of the lexical sense, such as `noun`, `verb`, or `adjective`.
 - `pronunciation`: the pronunciation transcription of the lexical sense, normally represented using IPA when available.
 
-These are descriptive properties of the lexical sense; they are not separate Knowledge Atoms.
+Both are descriptive properties of the lexical sense; they are not separate Knowledge Atoms.
 
 ### `meaning`
 
@@ -322,7 +313,9 @@ Do not use `notes` as a place to hide:
 
 ## 6. Type-specific interpretation
 
-The structure is shared, but fields are interpreted according to the atom taxonomy.
+The structure is shared, but some fields have type-specific applicability. In particular, `part_of_speech` and `pronunciation` apply only to `vocabulary.lexical_sense`; for other atom types they remain present as `null`.
+
+The structure is interpreted according to the atom taxonomy.
 
 | Type | `meaning` | `explanation` | `structure` |
 |---|---|---|---|
