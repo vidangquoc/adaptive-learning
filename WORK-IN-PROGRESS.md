@@ -68,23 +68,21 @@ The SOP now treats the original source PDF as the source of truth, `source-segme
 
 ### 3. Finalize atom taxonomy + structure
 - [x] Make `docs/knowledge/atom-types.md` and `docs/knowledge/atom-structure.md` use one coherent taxonomy.
-- [x] Confirm exactly what belongs in `type` vs `subtype` vs an atom's properties.
-- [x] Preserve the common atom field structure:
+- [x] Confirm exactly what belongs in `type` vs an atom's properties.
+- [x] Preserve the finalized common atom field structure:
 
 ```yaml
 id:
 domain:
 type:
-subtype:
 name:
+part_of_speech:
+pronunciation:
 meaning:
 mother_says:
 explanation:
 structure:
-usage:
-constraints:
 examples:
-related_atoms:
 extra:
   source:
   is_tested:
@@ -92,24 +90,29 @@ extra:
   notes:
 ```
 
-- [x] Confirm semantic-ID rules (`<namespace>.<concept>.<case>`, with the case omitted when unnecessary; `lex` for vocabulary and `gram` for grammar).
+- [x] Confirm semantic-ID rules (`<domain>.<type>.<name>`, with the part-of-speech / meaning slug added for lexical senses when needed).
 
 Step 3 decisions:
 
 - `domain` is currently `vocabulary` or `grammar`.
 - Vocabulary has explicit types: `lexical_sense`, `multiword_expression`, `phrasal_verb`, `idiom`, `collocation`, `word_formation`, and `morphological_form`.
-- Grammar uses `type: grammar` with `subtype`: `form`, `meaning`, `use`, `pattern`, `rule`, `constraint`, or `exception`.
-- Usage characteristics such as complementation, preposition patterns, register, and connotation are properties, not atom types.
-- Semantic relationships such as synonymy, near-synonymy, antonymy, and distinctions are relations, not atom types.
+- Grammar has explicit types: `rule`, `use`, `exception`, `word_formation`, and `morphological_form`.
+- `part_of_speech` and `pronunciation` are common fields but apply only to `vocabulary.lexical_sense`.
+- Descriptive properties are not atoms unless the knowledge point is directly taught/tested and therefore needs its own atom.
+- Semantic relationships are relations, not atom fields or atom types.
 - Source structure and assessment entities are not atom types.
 - Learner state is outside the atom model.
 
 ### 4. Rebuild the JSON schemas
-- [x] Update candidate-atom schema to the finalized model.
-- [x] Update official-atom schema to the finalized model.
-- [x] Update/remove obsolete `knowledge-atom.schema.json` if it conflicts with the new candidate/official model.
-- [x] Remove all obsolete PTNK naming/fields from schemas.
-- [x] Ensure schemas do not silently introduce a second atom model.
+- [x] Update `candidate-atom.schema.json` to the finalized model.
+- [x] Update `official-atom.schema.json` to the finalized model.
+- [x] Remove obsolete legacy/PTNK schemas and fields.
+- [x] Inline the complete atom schema into both Candidate and Official schemas so neither depends on a shared common schema.
+- [x] Ensure Candidate adds only the lifecycle-specific `review_status` field.
+
+Step 4 is complete. The `schemas/` directory now contains only the two canonical schemas:
+- `schemas/candidate-atom.schema.json`
+- `schemas/official-atom.schema.json`
 
 ### 5. Clean stale references and verify source registry
 - [ ] Remove stale references such as `docs/knowledge/model.md`.
