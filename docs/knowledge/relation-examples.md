@@ -9,7 +9,7 @@ This document is a design experiment for evaluating whether different kinds of r
 
 Each example represents **knowledge about a relationship**, not the raw relationship itself.
 
-The examples intentionally use the same common atom structure and do not introduce a relation-specific subtype field. The goal is to test whether `relation` is broad enough to represent materially different relational knowledge while remaining understandable.
+The examples use the same common atom structure and include `relation_type`. `relation_type` identifies the semantic nature of the relationship; it is not a subtype and does not identify participating atoms.
 
 ---
 
@@ -19,6 +19,7 @@ The examples intentionally use the same common atom structure and do not introdu
 id: grammar.relation.present_simple.present_continuous_contrast
 domain: grammar
 type: relation
+relation_type: contrast
 
 name: present simple vs present continuous
 part_of_speech: null
@@ -49,6 +50,7 @@ extra:
 id: grammar.relation.modal_verb.bare_infinitive
 domain: grammar
 type: relation
+relation_type: dependency
 
 name: modal verb + bare infinitive
 part_of_speech: null
@@ -80,6 +82,7 @@ extra:
 id: grammar.relation.subject.verb_agreement
 domain: grammar
 type: relation
+relation_type: agreement
 
 name: subject–verb agreement
 part_of_speech: null
@@ -111,6 +114,7 @@ extra:
 id: grammar.relation.negation.auxiliary
 domain: grammar
 type: relation
+relation_type: dependency
 
 name: negation with auxiliary
 part_of_speech: null
@@ -142,6 +146,7 @@ extra:
 id: grammar.relation.question.auxiliary_subject_inversion
 domain: grammar
 type: relation
+relation_type: ordering
 
 name: auxiliary–subject inversion in questions
 part_of_speech: null
@@ -173,6 +178,7 @@ extra:
 id: grammar.relation.present_perfect.since
 domain: grammar
 type: relation
+relation_type: compatibility
 
 name: present perfect with since
 part_of_speech: null
@@ -204,6 +210,7 @@ extra:
 id: grammar.relation.comparative.than
 domain: grammar
 type: relation
+relation_type: compatibility
 
 name: comparative + than
 part_of_speech: null
@@ -235,6 +242,7 @@ extra:
 id: grammar.relation.conditional.consequence
 domain: grammar
 type: relation
+relation_type: dependency
 
 name: conditional clause and consequence
 part_of_speech: null
@@ -266,6 +274,7 @@ extra:
 id: grammar.relation.subject.pronoun_agreement
 domain: grammar
 type: relation
+relation_type: selection
 
 name: subject pronoun and verb-form selection
 part_of_speech: null
@@ -298,6 +307,7 @@ extra:
 id: grammar.relation.coordinate_clauses.and
 domain: grammar
 type: relation
+relation_type: combination
 
 name: coordinated clauses with and
 part_of_speech: null
@@ -324,6 +334,9 @@ extra:
 ---
 
 ## Observation target
+
+> Note: the `relation_type` values in this experimental file are provisional examples only. The canonical set of allowed values has not yet been finalized.
+
 
 These examples deliberately cover different relational behaviors:
 
