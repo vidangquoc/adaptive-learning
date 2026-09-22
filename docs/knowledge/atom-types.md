@@ -219,6 +219,16 @@ Examples:
 
 ---
 
+### 3.6. `relation`
+
+Knowledge about a relationship between two or more independent Knowledge Atoms when the relationship itself is an independently learnable or testable target.
+
+A relation is not created merely because a grammar construction contains multiple components. Components such as subject, verb, modal verb, auxiliary, and bare infinitive are structural components of a grammar Atom, not Knowledge Atoms for the purpose of creating a relation.
+
+For example, subject–verb agreement and modal verb + bare infinitive are rules when they describe how a grammar construction is formed or operates. By contrast, a contrast between two independently represented grammar Atoms may be a relation when the contrast itself is the knowledge being learned or tested.
+
+A relation describes knowledge about the relationship; it does not imply that the participating Atoms form a parent/child hierarchy.
+
 ## 4. What is not an atom type
 
 Several useful kinds of information are deliberately represented as **properties or relations**, not as additional atom types.
@@ -227,7 +237,7 @@ Several useful kinds of information are deliberately represented as **properties
 
 Descriptive information about an existing atom is not a separate atom type. If such information is independently meaningful knowledge and is directly taught and tested, represent that knowledge point as a separate atom.
 
-Atom-to-atom relationships are not persisted in the current system. If the learning material directly teaches and tests knowledge about a relationship as an independent knowledge point, represent that knowledge point as a separate atom using an appropriate type.
+Raw structural relationships between atoms are not persisted merely for graph purposes. If the learning material directly teaches and tests knowledge about a relationship between two or more independent Knowledge Atoms as an independent knowledge point, represent that knowledge point as a `relation` atom.
 
 ### Assessment
 
