@@ -190,7 +190,7 @@ The schema enforces:
 
 The semantic integrity rule `effective_review_times <= total_review_times` remains a data-integrity rule and is not encoded using non-standard JSON Schema features.
 
-Status: PARTIALLY FINALIZED
+Status: FINALIZED
 
 ### 7.6.3 Independent validation of stored Knowledge Atoms
 
@@ -201,6 +201,18 @@ Each Knowledge Atom stored in a collection must be validated independently again
 - Official Atom → `schemas/official-atom.schema.json`
 
 A collection file such as `knowledge_atoms.md` is not itself validated as one Atom or one YAML document. Its individual YAML blocks are extracted and validated one by one.
+
+### 7.6.4 Collection validation procedure
+
+**Decision: FINALIZED**
+
+For a Knowledge Atom collection Markdown file, validation must:
+1. identify the fenced YAML blocks in the Markdown file;
+2. parse each YAML block independently;
+3. validate each parsed Atom against the schema corresponding to the store;
+4. fail validation if any YAML block is malformed or any Atom fails schema validation.
+
+The collection passes only when every extracted Atom block passes validation.
 
 Status: FINALIZED
 
