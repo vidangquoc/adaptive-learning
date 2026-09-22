@@ -1,10 +1,10 @@
 # Knowledge Atom Discovery and Promotion Pipeline
 
-> Implementation specification for converting validated source evidence into reviewable knowledge-atom proposals and then official knowledge. Conceptual ontology belongs to `model.md`; formal structure belongs to `atom-structure.md`; governance policy belongs to `docs/learning-material/principles/03-evidence-provenance-and-governance.md`.
+> Implementation specification for converting validated source evidence into Candidates and then Official Atoms. Conceptual ontology belongs to `overall.md`; formal structure belongs to `atom-structure.md`; taxonomy belongs to `atom-types.md`; governance policy belongs to `docs/learning-material/principles/03-evidence-provenance-and-governance.md`.
 
 ## 1. Purpose
 
-The pipeline locates source evidence, analyzes it in context, produces reviewable atom proposals, validates them, and promotes approved proposals into official knowledge.
+The pipeline locates source evidence, analyzes it in context, creates complete Candidate Atoms, validates and reviews them, and officializes approved Candidates into the separate Official Store.
 
 ```text
 validated source
@@ -13,13 +13,17 @@ evidence discovery
       ↓
 contextual analysis
       ↓
-atom proposal
+Candidate Store
       ↓
 validation
       ↓
 human review
       ↓
-official knowledge
+approved Candidate
+      ↓
+officialize
+      ↓
+Official Store
 ```
 
 The pipeline does not treat parser output as knowledge.
@@ -89,22 +93,28 @@ Do not merge merely because forms are similar, meanings overlap, items share a w
 
 False deduplication is more damaging than controlled redundancy.
 
-## 6. Proposal Output
+## 6. Candidate Output
 
-A reviewable proposal should preserve, where applicable:
+A Candidate is a complete Knowledge Atom, not a partial proposal schema.
 
-- stable proposal ID;
+Candidate output uses the canonical atom structure defined in `atom-structure.md`, with the additional lifecycle field:
+
+```yaml
+review_status: pending
+```
+
+The Candidate must preserve, where applicable:
+
+- semantic ID;
 - source identity and boundary;
 - precise source location;
-- exact source span;
+- exact source evidence;
 - relevant context/evidence references;
-- proposed atom type;
-- proposed knowledge fields;
+- atom type and canonical knowledge fields;
 - source-stated versus inferred attributes;
-- confidence;
-- warnings/anomalies;
-- supported relationships;
-- validation status.
+- confidence or warnings when supported by the implementation.
+
+A Candidate does not use a separate `candidate_id`, temporary ID, or tracking ID. Its semantic ID is created correctly when the Candidate is created.
 
 No field should be populated solely because the schema permits it.
 
@@ -126,19 +136,34 @@ Automated validation should check, as applicable:
 
 Validation is a gate, not a replacement for human approval.
 
-## 8. Human Review and Promotion
+## 8. Human Review and Officialization
 
-After validation, proposals enter human review. Promotion follows the governance policy in `03-evidence-provenance-and-governance.md`.
+After validation, Candidates enter human review. Review status has exactly three values:
 
 ```text
-APPROVE → eligible for promotion
-REJECT  → do not promote
-HOLD    → do not promote
+pending
+approved
+rejected
 ```
 
-The implementation must preserve the review decision and provenance and must not destroy the proposal record when creating official knowledge.
+- A newly created Candidate starts as `pending`.
+- The reviewer may leave it `pending`, change it to `approved`, or change it to `rejected`.
+- A rejected Candidate remains in the Candidate Store and may be reviewed again.
+- `approved` means eligible for officialization; it is not yet Official.
 
-## 9. Fail-Closed Behavior
+Officialization is a storage transition:
+
+1. select Candidates with `review_status: approved`;
+2. write each Official Atom to the separate Official Store with the same semantic ID;
+3. delete the corresponding Candidate from the Candidate Store.
+
+There is no `officialized` review status. Pending and rejected Candidates are not affected by officialization. An Official Atom does not return to the Candidate/rejected lifecycle.
+
+## 9. Official Atom Correction
+
+An Official Atom may be corrected or refined while retaining the same semantic ID when the knowledge identity remains unchanged. A change that creates a genuinely different knowledge identity must be handled as a semantic-identity change rather than as ordinary correction.
+
+## 10. Fail-Closed Behavior
 
 ```text
 PASS → continue
@@ -148,7 +173,7 @@ FAIL → stop / preserve evidence / require review
 
 If source structure, provenance, context, semantics, or atom identity cannot be established sufficiently, do not promote.
 
-## 10. Reproducibility and Preservation
+## 11. Reproducibility and Preservation
 
 Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting raw evidence.
 
