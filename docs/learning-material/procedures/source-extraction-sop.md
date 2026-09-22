@@ -55,14 +55,11 @@ sources/
 
 Before extraction:
 
-1. assign a stable `source_id`;
-2. record title and edition/year when known;
-3. record source type and acquisition method;
-4. preserve canonical URL/reference when available;
-5. record retrieval/acquisition timestamp;
-6. compute and record a checksum for the acquired source file;
-7. record license and usage restrictions;
-8. record the extraction method intended for the source.
+1. assign a stable source `id`;
+2. record the source name;
+3. record the source type;
+4. register the existing source artifact in `sources/source-registry.yaml`;
+5. record the artifact path used by the extraction pipeline.
 
 Do not begin segmentation or evidence discovery before source registration is complete.
 
