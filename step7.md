@@ -29,15 +29,51 @@ Rules:
 
 ## 7.2 Physical representation of Candidate Atoms
 
-Decide:
-- exact content structure of `knowledge_atom_candidates.md`;
-- how multiple Candidates are represented in one Markdown file;
-- how `review_status` is represented;
-- validation requirements against `schemas/candidate-atom.schema.json`.
+**Decision: FINALIZED — Option A**
 
-Status: OPEN
+`knowledge_atom_candidates.md` is a Markdown collection containing multiple fenced YAML blocks. Each YAML block represents exactly one complete Candidate Atom and directly corresponds to `schemas/candidate-atom.schema.json`.
 
-## 7.3 Physical representation of Official Atoms
+Rules:
+- The file may contain multiple Candidate Atoms.
+- Each Candidate Atom is represented by one fenced YAML block.
+- Each YAML block contains the complete Candidate Atom; there is no partial or presentation-only representation.
+- There is no collection-level YAML wrapper such as `candidates:`.
+- `review_status` is a top-level lifecycle field in each Candidate Atom and is not placed under `extra`.
+- A newly created Candidate starts with `review_status: pending`.
+- The YAML content of each block must validate as one Candidate Atom against `schemas/candidate-atom.schema.json`.
+- Markdown headings may identify or separate atoms for human review, but they are not part of the atom data and are not an alternative schema.
+
+Example:
+
+```markdown
+## vocabulary.lexical_sense.assume.verb
+
+```yaml
+id: vocabulary.lexical_sense.assume.verb
+domain: vocabulary
+type: lexical_sense
+name: assume
+part_of_speech: verb
+pronunciation: /əˈsuːm/
+meaning: ...
+mother_says: giả định
+explanation: ...
+structure: ...
+examples: []
+extra:
+  source:
+    origin: []
+    atom_decision: []
+  is_tested: false
+  test_evidence: []
+  notes: null
+review_status: pending
+```
+```
+
+This representation keeps Candidate data human-reviewable while preserving a direct machine-validation boundary at the individual atom block.
+
+## 7.3 Physical representation of Official Atoms/
 
 Decide:
 - exact directory/file layout;
@@ -59,7 +95,7 @@ Questions:
 - Are relations global or grouped by domain?
 - How does this interact with the flat atom model?
 
-Status: BLOCKED BY 7.1
+Status: BLOCKED BY 7.2
 
 ## 7.5 Source provenance and evidence in stored atoms
 
@@ -74,7 +110,7 @@ Questions:
 - What repository-relative paths or IDs are referenced?
 - How are missing/not-applicable values represented?
 
-Status: BLOCKED BY 7.1
+Status: OPEN
 
 ## 7.6 Learner state boundary
 
@@ -86,7 +122,7 @@ Questions:
 - whether review queue belongs under learner data;
 - whether learner state references atom IDs only.
 
-Status: BLOCKED BY 7.1
+Status: OPEN
 
 ## 7.7 Data format and validation strategy
 
@@ -97,7 +133,7 @@ Decide the implementation conventions for persisted data:
 - how collections are validated;
 - naming conventions for files.
 
-Status: BLOCKED BY 7.1
+Status: OPEN
 
 ## 7.8 Scripts and pipeline integration
 
@@ -110,7 +146,7 @@ After the storage model is settled, identify required changes to:
 
 Do not change scripts before the underlying storage model is agreed.
 
-Status: BLOCKED BY 7.1
+Status: OPEN
 
 ## 7.9 Documentation synchronization
 
@@ -125,7 +161,7 @@ Potential documents:
 - relevant learning-material principles/procedures
 - `README.md`
 
-Status: BLOCKED BY 7.1
+Status: OPEN
 
 ## 7.10 Final Step 7 verification
 
@@ -136,4 +172,4 @@ Verify:
 - no obsolete paths or structures remain;
 - canonical documentation is synchronized.
 
-Status: BLOCKED BY 7.1
+Status: OPEN
