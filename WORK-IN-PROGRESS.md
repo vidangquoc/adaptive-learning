@@ -9,7 +9,7 @@ Make the repository's **source layer, atom model, and schemas agree with each ot
 ## Order of work
 
 ### 0. Lock the source of truth
-- [x] Treat `docs/knowledge/overall.md` as the canonical conceptual model for knowledge atoms and their relationships.
+- [x] Treat `docs/knowledge/overall.md` as the canonical conceptual model for knowledge atoms.
 - [x] Treat `docs/knowledge/atom-structure.md` as the canonical common field structure and field semantics.
 - [x] Treat `docs/knowledge/atom-types.md` as the canonical atom taxonomy.
 - [x] Do not introduce a second atom model in other documentation or schemas; later schema work must conform to these three documents.
@@ -58,11 +58,7 @@ A Unit is a `type: unit` Segment. There is no separate canonical `units/` direct
 
 ### 2. Align the extraction SOP
 - [x] Update `docs/learning-material/procedures/source-extraction-sop.md` to match the final Segment-based source architecture.
-- [x] Ensure the pipeline is unambiguous:
-
-```text
-Source PDF → Segmentation → Segment validation → Evidence → Candidate atoms → Validation → Official atoms
-```
+- [x] Ensure the pipeline is unambiguous.
 
 The SOP now treats the original source PDF as the source of truth, `source-segments.yaml` as the segmentation manifest, Segment PDFs as the canonical structural source artifacts, and `segment-text/` as derived machine-readable text. It no longer uses an obsolete whole-source text layer or separate `units/` / `sections/` layers.
 
@@ -99,7 +95,7 @@ Step 3 decisions:
 - Grammar has explicit types: `rule`, `use`, `exception`, `word_formation`, and `morphological_form`.
 - `part_of_speech` and `pronunciation` are common fields but apply only to `vocabulary.lexical_sense`.
 - Descriptive properties are not atoms unless the knowledge point is directly taught/tested and therefore needs its own atom.
-- Semantic relationships are relations, not atom fields or atom types.
+- Semantic relationships are not persisted because they are not used by the Adaptive Learning system.
 - Source structure and assessment entities are not atom types.
 - Learner state is outside the atom model.
 
@@ -110,9 +106,10 @@ Step 3 decisions:
 - [x] Inline the complete atom schema into both Candidate and Official schemas so neither depends on a shared common schema.
 - [x] Ensure Candidate adds only the lifecycle-specific `review_status` field.
 
-Step 4 is complete. The `schemas/` directory now contains only the two canonical schemas:
+Step 4 is complete. The `schemas/` directory contains the canonical Candidate, Official, and learner review schemas:
 - `schemas/candidate-atom.schema.json`
 - `schemas/official-atom.schema.json`
+- `schemas/review-data.schema.json`
 
 ### 5. Clean stale references and verify source registry
 - [x] Remove stale references and obsolete pre-reorganization paths.
@@ -128,8 +125,13 @@ Step 4 is complete. The `schemas/` directory now contains only the two canonical
 
 ### 7. Establish the canonical atom destination
 - [x] Decide the physical destination for Official and Candidate Knowledge Atom stores.
-- [ ] Keep knowledge data separate from learner state.
-- [ ] Do not mix learner mastery/attempts into knowledge atoms.
+- [x] Keep knowledge data separate from learner state.
+- [x] Do not mix learner mastery/attempts into knowledge atoms.
+- [x] Define Candidate and Official physical representation as Markdown collections of independently validated fenced YAML blocks.
+- [x] Define learner review data as the latest state only in `data/learners/<learner-id>/review-data.yaml`.
+- [x] Finalize the Candidate creation, human review, and officialization flow.
+- [x] Synchronize affected canonical documentation.
+- [x] Complete final Step 7 verification.
 
 The agreed Knowledge Atom storage layout is:
 
@@ -161,9 +163,10 @@ Before large-scale atom extraction, all of the following should be true:
 - No obsolete PTNK/schema/path references remain where they should not.
 - The obsolete Unit 1 experimental extraction is no longer a prerequisite or source of truth.
 - Canonical destination for official atoms is known.
+- Learner review data is separated from Knowledge Atom data.
 
 ## Current rule
 
 **Do not start large-scale knowledge-atom extraction until the Definition of Done above is satisfied.**
 
-We solve the checklist **one item at a time**, starting from **1. Fix the source segmentation / Segment boundary**.
+We solve the checklist **one item at a time**. Steps 0–7 above are now complete.
