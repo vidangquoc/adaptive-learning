@@ -122,10 +122,9 @@ Step 4 is complete. The `schemas/` directory now contains only the two canonical
 - [x] Confirm that `books.md` is treated only as a bibliography/reference list, not as a source-identity authority.
 
 ### 6. Revalidate the Unit 1 test extraction
-- [ ] Keep `unit-1-sources/test-atoms.md` as a working/historical extraction, not the canonical schema.
-- [ ] Recheck Unit 1 scope: **Grammar — Present time**.
-- [ ] Map its useful extraction evidence into the finalized atom structure.
-- [ ] Resolve any atom-boundary decisions exposed by the test extraction.
+- [x] Close this step without revalidation: `unit-1-sources/test-atoms.md` was only an experimental extraction and is no longer a valid project artifact or source of evidence.
+- [x] Do not use the experimental extraction to define Unit 1 scope, atom structure, or atom boundaries.
+- [x] Treat the finalized atom model and future source-grounded extraction as the basis for subsequent work.
 
 ### 7. Establish the canonical atom destination
 - [ ] Decide where official atoms live under the target data architecture.
@@ -141,7 +140,7 @@ Before large-scale atom extraction, all of the following should be true:
 - Atom taxonomy and structure agree.
 - Candidate and official schemas agree with the documented atom model.
 - No obsolete PTNK/schema/path references remain where they should not.
-- Unit 1 test extraction has been reconciled with the final model.
+- The obsolete Unit 1 experimental extraction is no longer a prerequisite or source of truth.
 - Canonical destination for official atoms is known.
 
 ## Current rule
