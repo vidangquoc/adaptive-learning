@@ -223,6 +223,10 @@ Examples:
 
 Knowledge about a relationship between two or more independent Knowledge Atoms when the relationship itself is an independently learnable or testable target.
 
+Every `relation` atom must specify `relation_type`. `relation_type` describes the semantic nature of the relationship being learned; it is a relation-specific field, not a taxonomy level or subtype. It does not identify the participating atoms.
+
+`relation_type` applies only to relationships between independent Knowledge Atoms. It must not be used to model structural relationships between grammatical components inside a single Atom.
+
 A relation is not created merely because a grammar construction contains multiple components. Components such as subject, verb, modal verb, auxiliary, and bare infinitive are structural components of a grammar Atom, not Knowledge Atoms for the purpose of creating a relation.
 
 For example, subject–verb agreement and modal verb + bare infinitive are rules when they describe how a grammar construction is formed or operates. By contrast, a contrast between two independently represented grammar Atoms may be a relation when the contrast itself is the knowledge being learned or tested.
