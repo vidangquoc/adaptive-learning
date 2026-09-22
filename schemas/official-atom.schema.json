@@ -40,7 +40,8 @@
         "morphological_form",
         "rule",
         "usage",
-        "exception"
+        "exception",
+        "relation"
       ]
     },
     "name": {
@@ -238,7 +239,8 @@
               "usage",
               "exception",
               "word_formation",
-              "morphological_form"
+              "morphological_form",
+              "relation"
             ]
           }
         }
