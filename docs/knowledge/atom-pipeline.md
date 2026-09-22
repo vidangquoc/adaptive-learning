@@ -1,4 +1,4 @@
-# Knowledge Atom Discovery and Promotion Pipeline
+# Knowledge Atom Discovery and Officialization Pipeline
 
 > Implementation specification for converting validated source evidence into Candidates and then Official Atoms. Conceptual ontology belongs to `overall.md`; formal structure belongs to `atom-structure.md`; taxonomy belongs to `atom-types.md`; governance policy belongs to `docs/learning-material/principles/03-evidence-provenance-and-governance.md`.
 
@@ -146,11 +146,9 @@ The Candidate must preserve, where applicable:
 - semantic ID;
 - source identity and boundary;
 - precise source location;
-- exact source evidence;
-- relevant context/evidence references;
+- source evidence represented through the canonical provenance fields;
 - atom type and canonical knowledge fields;
 - source-stated versus inferred attributes;
-- confidence or warnings when supported by the implementation.
 
 A Candidate does not use a separate `candidate_id`, temporary ID, or tracking ID. Its semantic ID is created correctly when the Candidate is created.
 
@@ -284,7 +282,7 @@ WARN → continue only when explicitly acceptable
 FAIL → stop / preserve evidence / require review
 ```
 
-If source structure, provenance, context, semantics, or atom identity cannot be established sufficiently, do not promote.
+If source structure, provenance, context, semantics, or atom identity cannot be established sufficiently, do not officialize.
 
 ## 12. Reproducibility and Preservation
 
