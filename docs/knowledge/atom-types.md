@@ -227,7 +227,7 @@ Several useful kinds of information are deliberately represented as **properties
 
 Descriptive information about an existing atom is not a separate atom type. If such information is independently meaningful knowledge and is directly taught and tested, represent that knowledge point as a separate atom.
 
-A relation connects independent atoms. It is not stored as a field on the atom and is not itself automatically an atom. If the learning material directly teaches and tests knowledge about a relation, represent that knowledge point as a separate atom using an appropriate grammar type when the knowledge is grammatical.
+Atom-to-atom relationships are not persisted in the current system. If the learning material directly teaches and tests knowledge about a relationship as an independent knowledge point, represent that knowledge point as a separate atom using an appropriate type.
 
 ### Assessment
 
