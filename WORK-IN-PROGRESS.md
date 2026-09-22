@@ -105,11 +105,11 @@ Step 3 decisions:
 - Learner state is outside the atom model.
 
 ### 4. Rebuild the JSON schemas
-- [ ] Update candidate-atom schema to the finalized model.
-- [ ] Update official-atom schema to the finalized model.
-- [ ] Update/remove obsolete `knowledge-atom.schema.json` if it conflicts with the new candidate/official model.
-- [ ] Remove all obsolete PTNK naming/fields from schemas.
-- [ ] Ensure schemas do not silently introduce a second atom model.
+- [x] Update candidate-atom schema to the finalized model.
+- [x] Update official-atom schema to the finalized model.
+- [x] Update/remove obsolete `knowledge-atom.schema.json` if it conflicts with the new candidate/official model.
+- [x] Remove all obsolete PTNK naming/fields from schemas.
+- [x] Ensure schemas do not silently introduce a second atom model.
 
 ### 5. Clean stale references and verify source registry
 - [ ] Remove stale references such as `docs/knowledge/model.md`.
