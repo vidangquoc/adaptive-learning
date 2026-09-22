@@ -32,7 +32,7 @@ Learner-specific mastery never belongs in the static atom.
 
 **Knowledge atoms are flat. There is no parent/child hierarchy between atoms.**
 
-An atom may be related to another atom, depend on another atom, overlap with another atom, or be more specific in content, but these relationships do not create an atom hierarchy and do not make one atom the parent of another.
+An atom may be related to another atom, depend on another atom, overlap with another atom, or be more specific in content, but these relationships do not create an atom hierarchy and do not make one atom the parent of another. If knowledge about a relationship between two or more independent atoms is itself a learning target, that knowledge may be represented as a `relation` atom.
 
 For example, the following are separate atoms in the same flat knowledge set:
 
@@ -46,7 +46,7 @@ present perfect + never
 
 The fact that `present perfect + since` is related to `present perfect` does **not** mean that it is a child atom of `present perfect`.
 
-The relationship can instead be represented explicitly:
+The relationship can be described explicitly when useful, but a raw relationship is not itself persisted merely as graph metadata. When the relationship itself is independently learned or tested, it is represented as a `relation` atom:
 
 ```text
 present perfect
@@ -146,7 +146,7 @@ Learner mastery dimensions and adaptive decisions belong to `docs/learner/learni
 ## 9. Design Constraints
 
 - Knowledge atoms are flat; do not create parent/child hierarchies between atoms.
-- Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
+- Raw structural relationships between atoms are not persisted merely for graph purposes. A relationship becomes a `relation` atom only when the relationship between independent Knowledge Atoms is itself an independently learnable or testable knowledge target.
 - Preserve lexical and grammatical distinctions that matter for learning.
 - Do not require hierarchy merely to group related or overlapping atoms.
 - Do not confuse an assessment structure with the underlying knowledge ontology.
