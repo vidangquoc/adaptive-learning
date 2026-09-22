@@ -119,17 +119,42 @@ Rules:
 
 Status: FINALIZED
 
-## 7.5 Learner state boundary
+## 7.5 Learner review data
 
-Define the physical boundary between static knowledge and learner-specific state.
+**Decision: FINALIZED**
 
-Questions:
-- exact location of learner-state data;
-- relationship between Official Store and learner state;
-- whether review queue belongs under learner data;
-- whether learner state references atom IDs only.
+Each learner has exactly one review-data file:
 
-Status: OPEN
+```text
+data/learners/<learner-id>/review-data.yaml
+```
+
+`review-data.yaml` contains only the learner's **latest review state**. It does not store attempts or review history.
+
+Each review record contains exactly these fields:
+
+```yaml
+- atom_id:
+  total_review_times:
+  effective_review_times:
+  last_review_date:
+  next_review_date:
+```
+
+Field semantics:
+- `atom_id` identifies the Knowledge Atom being tracked.
+- `total_review_times` is the total number of times the learner has reviewed the Atom, regardless of whether the learner answered correctly or incorrectly.
+- `effective_review_times` is the number of times the learner answered the question correctly when that question was presented to test the Atom.
+- `last_review_date` stores the date and time of the learner's most recent review.
+- `next_review_date` stores the calendar date on which the Atom is scheduled for its next review.
+
+Rules:
+- Review data references Knowledge Atoms by `atom_id`; it does not copy Atom content.
+- `last_review_date` is a datetime; `next_review_date` is a date only.
+- Attempts and historical review records are outside the scope of `review-data.yaml`.
+- Review data is learner-specific and may change as the learner performs reviews.
+
+Status: FINALIZED
 
 ## 7.6 Data format and validation strategy
 
