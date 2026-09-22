@@ -252,13 +252,27 @@ Official sử dụng canonical atom structure. Không thêm các field như `sta
 
 ### Lifecycle direction
 
-Candidate có thể được review nhiều lần:
+Candidate có thể được review nhiều lần. Khi được tạo, Candidate bắt đầu ở `pending`:
 
 ```text
-pending ↔ rejected
-        │
-        └────→ official
+pending
+   │
+   ├────→ rejected ────→ review lại ────→ pending / approved / rejected
+   │
+   └────→ approved ────→ officialize ────→ officialized
 ```
+
+Khi reviewer xem xét một Candidate:
+
+- có thể chọn `approved`;
+- có thể chọn `rejected`;
+- hoặc không thay đổi status, khi đó vẫn là `pending`.
+
+`approved` **chưa phải Official**. Nó chỉ có nghĩa Candidate đã được reviewer chấp thuận và đang chờ bước officialization.
+
+Khi thực hiện **officialize**, hệ thống **chỉ quan tâm đến các Candidate có `review_status: approved`**. Những Candidate này được chuyển thành Official Atom và status chuyển thành `officialized`.
+
+Các Candidate đang `pending` hoặc `rejected` không bị officialize và không bị thay đổi bởi bước này.
 
 Một Candidate đã officialize thì **không quay lại Candidate và không bị reject trở lại**.
 
@@ -278,15 +292,51 @@ Nếu một thay đổi làm knowledge identity thực sự thay đổi, đó l�
 
 # 6. Review status
 
-**Để mở và bàn riêng ở phần tiếp theo.**
+**Đã chốt.**
 
-Hiện tại chỉ chốt được vai trò tổng quát:
+`review_status` thuộc Candidate/review lifecycle, không thuộc knowledge ontology. Nó không tạo semantic identity mới.
 
-- `review_status` thuộc Candidate/review lifecycle, không thuộc knowledge ontology;
-- nó không tạo semantic identity mới;
-- Candidate phải có semantic ID trước khi review;
-- Candidate bị reject có thể được review lại;
-- Candidate đã officialize thì không quay lại trạng thái Candidate/rejected;
-- chưa chốt danh sách giá trị chính thức, transition rules chi tiết, hay cách representation cụ thể của `review_status`.
+### Giá trị chính thức
 
-Đây là phần tiếp theo cần đào sâu.
+| Giá trị | Ý nghĩa |
+|---|---|
+| `pending` | Candidate chưa có quyết định review; đây cũng là trạng thái mặc định khi Candidate được tạo. |
+| `approved` | Reviewer đã chấp thuận Candidate, nhưng Candidate chưa trở thành Official cho đến khi bước officialize được thực hiện. |
+| `rejected` | Reviewer từ chối Candidate; Candidate vẫn có thể được review lại sau này. |
+| `officialized` | Candidate đã được officialize thành Official Atom. Đây là kết quả của bước officialize, không phải reviewer decision. |
+
+### Review behavior
+
+Khi reviewer xem xét một Candidate, có ba khả năng:
+
+1. chọn `approved`;
+2. chọn `rejected`;
+3. không thay đổi gì, Candidate vẫn ở `pending`.
+
+Reviewer không chuyển Candidate trực tiếp sang `officialized`.
+
+### Officialization behavior
+
+Bước **officialize** chỉ xử lý những Candidate có:
+
+```yaml
+review_status: approved
+```
+
+Những Candidate đó được chuyển thành Official Atom và status chuyển thành:
+
+```yaml
+review_status: officialized
+```
+
+Candidate đang `pending` hoặc `rejected` không bị tác động bởi bước officialize.
+
+### Lifecycle rule
+
+- Candidate có thể được review lại sau khi bị `rejected`.
+- Candidate có thể ở `pending` cho đến khi reviewer đưa ra quyết định.
+- `approved` là trạng thái chờ officialization, không phải Official.
+- `officialized` là trạng thái kết thúc của lifecycle Candidate/Official; không quay lại Candidate hoặc `rejected`.
+- Candidate và Official sử dụng cùng semantic ID trong toàn bộ lifecycle.
+
+**→ Danh sách status, ý nghĩa và behavior của review/officialization đã chốt.**
