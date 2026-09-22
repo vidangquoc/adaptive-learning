@@ -20,6 +20,7 @@ Learner mastery, attempts, confidence, retention, and other learner-specific sta
 id:
 domain:
 type:
+relation_type:
 
 name:
 part_of_speech:
@@ -121,6 +122,12 @@ Examples include:
 - `relation`
 
 `type` describes what the knowledge is. It must not encode assessment format, source location, learner performance, or pedagogical activity.
+
+### `relation_type`
+
+The semantic kind of relationship represented by a `relation` atom. It is required for `type: relation` and is `null` for other atom types.
+
+`relation_type` describes the relationship itself, not the participating atoms. It is not a subtype and must not be used for structural relationships between grammatical components inside a single Atom.
 
 There is no `subtype` field. A further distinction must be represented through the atom's content or, if it is independently meaningful knowledge, through a separate `type` approved by the taxonomy.
 
@@ -352,20 +359,21 @@ This boundary prevents both atom inflation and the loss of independently useful 
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
 6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If descriptive information is directly taught and tested as an independent knowledge point, that knowledge point is represented as a separate Atom.
 7. Raw structural relationships between atoms are not persisted merely for graph purposes. Knowledge about a relationship between two or more independent Knowledge Atoms may be represented as a `relation` atom when the relationship itself is an independently learnable or testable target.
-8. Source provenance remains recoverable for every official atom.
-9. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
-10. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
-11. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
-12. Canonical atom meaning remains independent of learner state.
-13. Candidate and Official use the same semantic `id`; officialization does not create a new atom identity.
-14. Candidate and Official are stored separately; Candidate Store contains Candidates and Official Store contains Official Atoms.
-15. A Candidate has the same complete canonical atom structure as an Official Atom, with only the additional `review_status` lifecycle field.
-16. Candidate review uses exactly `pending`, `approved`, and `rejected`.
-17. A newly created Candidate starts as `pending`; a reviewer may leave it `pending` or change it to `approved` or `rejected`.
-18. Officialization processes only Candidates with `review_status: approved`, writes the resulting Official Atom with the same semantic ID to the Official Store, and deletes the Candidate from the Candidate Store.
-19. A rejected Candidate may be reviewed again; an Official Atom does not return to Candidate/rejected lifecycle states.
-20. An Official Atom may be corrected or refined while retaining the same semantic identity.
-21. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
-22. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
-23. Canonical atom meaning remains independent of learner state.
-24. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
+8. A `relation` atom has a non-null `relation_type`; all non-relation atoms have `relation_type: null`.
+9. Source provenance remains recoverable for every official atom.
+10. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
+11. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
+12. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
+13. Canonical atom meaning remains independent of learner state.
+14. Candidate and Official use the same semantic `id`; officialization does not create a new atom identity.
+15. Candidate and Official are stored separately; Candidate Store contains Candidates and Official Store contains Official Atoms.
+16. A Candidate has the same complete canonical atom structure as an Official Atom, with only the additional `review_status` lifecycle field.
+17. Candidate review uses exactly `pending`, `approved`, and `rejected`.
+18. A newly created Candidate starts as `pending`; a reviewer may leave it `pending` or change it to `approved` or `rejected`.
+19. Officialization processes only Candidates with `review_status: approved`, writes the resulting Official Atom with the same semantic ID to the Official Store, and deletes the Candidate from the Candidate Store.
+20. A rejected Candidate may be reviewed again; an Official Atom does not return to Candidate/rejected lifecycle states.
+21. An Official Atom may be corrected or refined while retaining the same semantic identity.
+22. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
+23. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
+24. Canonical atom meaning remains independent of learner state.
+25. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
