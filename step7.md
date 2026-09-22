@@ -192,6 +192,18 @@ The semantic integrity rule `effective_review_times <= total_review_times` remai
 
 Status: PARTIALLY FINALIZED
 
+### 7.6.3 Independent validation of stored Knowledge Atoms
+
+**Decision: FINALIZED**
+
+Each Knowledge Atom stored in a collection must be validated independently against the schema corresponding to its store:
+- Candidate Atom → `schemas/candidate-atom.schema.json`
+- Official Atom → `schemas/official-atom.schema.json`
+
+A collection file such as `knowledge_atoms.md` is not itself validated as one Atom or one YAML document. Its individual YAML blocks are extracted and validated one by one.
+
+Status: FINALIZED
+
 ## 7.7 Scripts and pipeline integration
 
 After the storage model is settled, identify required changes to:
