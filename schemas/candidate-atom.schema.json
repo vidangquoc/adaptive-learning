@@ -2,27 +2,23 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/vidangquoc/adaptive-learning/schema/candidate-atom",
   "title": "Candidate Knowledge Atom",
-  "type": "object",
   "allOf": [
     {
-      "$ref": "./official-atom.schema.json"
-    },
-    {
-      "type": "object",
-      "required": [
-        "review_status"
-      ],
-      "properties": {
-        "review_status": {
-          "type": "string",
-          "enum": [
-            "pending",
-            "approved",
-            "rejected"
-          ]
-        }
-      }
+      "$ref": "./knowledge-atom-common.schema.json"
     }
   ],
-  "additionalProperties": false
+  "properties": {
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    }
+  },
+  "required": [
+    "review_status"
+  ],
+  "unevaluatedProperties": false
 }
