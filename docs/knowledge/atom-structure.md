@@ -293,6 +293,21 @@ Multiple atoms may point to the same `test_evidence` location when one exercise 
 
 Use `[]` when the source does not explicitly test or practise the atom.
 
+### Candidate review status
+
+Candidate review lifecycle uses exactly four values:
+
+- `pending`: the Candidate has not received a review decision, or the reviewer leaves it unchanged;
+- `approved`: the reviewer has accepted the Candidate for officialization, but it is still a Candidate until the officialization step runs;
+- `rejected`: the reviewer has rejected the Candidate; it may be reviewed again later;
+- `officialized`: the Candidate has been converted into an Official Atom by the officialization step.
+
+Reviewers may leave a Candidate in `pending`, or explicitly change it to `approved` or `rejected`.
+
+The officialization operation considers **only Candidates whose `review_status` is `approved`**. Those Candidates are converted to Official Atoms and their status changes to `officialized`. Candidates that are `pending` or `rejected` are not affected by officialization.
+
+`officialized` is a lifecycle result of the officialization operation, not a reviewer decision. An officialized atom does not return to Candidate/rejected lifecycle states.
+
 ### `extra.notes`
 
 Maintenance or extraction notes that do not belong in the core knowledge fields.
@@ -398,9 +413,12 @@ This boundary prevents both atom inflation and the loss of independently useful 
 11. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
 12. Canonical atom meaning remains independent of learner state.
 13. Candidate and Official use the same semantic `id`; officialization does not create a new atom identity.
-14. A Candidate may move between `pending` and `rejected` during review, but once officialized it does not return to Candidate/rejected state.
-15. An Official Atom may be corrected or refined while retaining the same semantic identity.
-16. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
-17. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
-18. Canonical atom meaning remains independent of learner state.
-19. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
+14. Candidate review uses exactly `pending`, `approved`, `rejected`, and `officialized`.
+15. A newly created Candidate starts as `pending`; a reviewer may leave it `pending` or change it to `approved` or `rejected`.
+16. Officialization processes only Candidates with `review_status: approved` and changes them to `officialized`.
+17. A rejected Candidate may be reviewed again; once officialized, an atom does not return to Candidate/rejected lifecycle states.
+18. An Official Atom may be corrected or refined while retaining the same semantic identity.
+19. Learner mastery, attempts, confidence, retention, and progress never belong in the atom.
+20. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
+21. Canonical atom meaning remains independent of learner state.
+22. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
