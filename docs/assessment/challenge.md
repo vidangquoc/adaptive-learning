@@ -12,7 +12,7 @@ The detailed internal structure of a Challenge is defined separately in `challen
 
 Each Challenge targets exactly one Knowledge Atom.
 
-```
+```text
 Knowledge Atom
       │
       │ assessed by
@@ -51,13 +51,13 @@ Its identity is therefore tied to the source location from which it was extracte
 
 The canonical ID format for a source-derived Challenge is:
 
-```
+```text
 <source-id>_<segment-id>_<exercise>_<item-number>
 ```
 
 For example:
 
-```
+```text
 destination-c1-c2_unit-1_exercise-3_2
 ```
 
@@ -125,9 +125,9 @@ The Knowledge Atom remains the authoritative representation of the knowledge.
 
 ## Source
 
-A Challenge is currently extracted from a specific source occurrence in learning material.
+A source-derived Challenge is traceable to a specific source occurrence.
 
-The source information is therefore part of the Challenge's identity through its ID, while provenance information may also be preserved in `extra`.
+The source occurrence is encoded in the Challenge ID, while explicit machine-readable provenance is preserved in `extra.source`.
 
 For example:
 
@@ -135,14 +135,45 @@ For example:
 extra:
   source:
     source_id: destination-c1-c2
+    page_number: 42
     segment_id: unit-1
-    exercise_id: exercise-3
-    item_id: 2
+    exercise_name: "Exercise 3"
+    item_number: 2
 ```
 
-The source-derived ID is the canonical identity for extracted Challenges. The provenance fields provide explicit source metadata but do not replace the ID.
+The provenance fields supplement the ID and do not replace it.
 
-System-generated or otherwise source-independent Challenges are outside the current source-derived extraction identity model and require a separate identity decision before they are persisted as official Challenges.
+Source-independent Challenges are outside the current source-derived extraction identity model and require a separate identity decision before they are persisted as official Challenges.
+
+## Source preservation and fail-closed extraction
+
+Challenge extraction is explicitly fail-closed.
+
+The extractor MUST NOT silently invent, repair, normalize, or infer away missing essential assessment content, including:
+
+- instruction/task wording;
+- prompt content;
+- explicit options required by the source task;
+- learner response elements;
+- exercise/item boundaries;
+- target Atom;
+- expected answer.
+
+Source evidence is authoritative. Canonical Challenge fields may be derived from source evidence, but extraction must preserve the source assessment faithfully and must not silently alter wording or structure in a way that changes the task presented to the learner.
+
+If an essential element cannot be established sufficiently from the available source evidence, the occurrence must be represented as incomplete, unresolved, or skipped rather than emitted as a normal valid Challenge Candidate.
+
+This applies even when the source contains a numbered item, blank, answer line, or other superficial exercise formatting. Such formatting alone does not establish that a complete Challenge can be extracted.
+
+### Reproducibility
+
+Challenge extraction is reproducible under a fixed extraction context.
+
+Given the same source evidence, contextual inputs, and extraction rules/version, the extraction process should produce the same structural result.
+
+An intentional change to extraction rules, contextual interpretation, or another extraction input is a process/model change and must be treated as such rather than being presented as if it were the same extraction result.
+
+The reproducibility requirement does not prevent later human review, correction, or officialization. It governs the extraction result produced from a fixed input and rule set.
 
 ## Challenge and learner response
 
@@ -150,7 +181,7 @@ A Challenge produces an opportunity for the learner to demonstrate the targeted 
 
 Conceptually:
 
-```
+```text
 Knowledge Atom
       ↓
   Challenge
@@ -172,7 +203,7 @@ A Challenge may produce different outcomes for different learners, and the adapt
 
 Challenge Candidates are reviewed and then either approved or rejected.
 
-```
+```text
 Challenge Candidate
        ↓
 human review
@@ -194,7 +225,7 @@ An Official Challenge may be corrected or refined while preserving its identity 
 
 Challenges are organized by source and Source Segment:
 
-```
+```text
 data/
 └── challenges/
     └── <source-id>/
@@ -211,7 +242,7 @@ Challenges provide the concrete assessment mechanism used by the adaptive learni
 
 A simplified flow is:
 
-```
+```text
 Knowledge Atom
       ↓
 Select Challenge
@@ -233,12 +264,15 @@ Challenge selection is an adaptive-system concern and is not defined by the Chal
 
 This document defines the conceptual model and boundaries of a Challenge.
 
-It does not yet define:
+It does not define:
 
-- the complete Challenge schema;
-- the detailed internal Challenge structure;
-- reusable Challenge templates or generators;
 - learner attempt storage;
 - assessment-result storage;
 - adaptive Challenge selection algorithms;
 - operational Challenge statistics.
+
+The canonical Challenge structure and Candidate/Official schemas are defined in:
+
+- `challenge-extraction/challenge-structure.md`;
+- `schemas/candidate-challenge.schema.json`;
+- `schemas/official-challenge.schema.json`.
