@@ -23,7 +23,7 @@ Challenge
 
 The canonical structure separates:
 
-- semantic identity (id);
+- source-occurrence identity (id);
 - what the learner is asked to do (instruction);
 - the concrete material the learner acts on (prompt);
 - optional finite choices (options);
@@ -72,25 +72,44 @@ A Challenge may therefore be classified as a particular exercise style by a UI, 
 
 ## 3. id
 
-id is the stable semantic identifier of the Challenge.
+`id` is the stable identifier of the Challenge source occurrence.
 
-It identifies the concrete assessment task, not its source occurrence.
+For source-derived Challenges, the canonical ID format is:
 
-The following do not define Challenge identity:
+```
+<source-id>_<segment-id>_<exercise>_<item-number>
+```
 
-- source;
-- source page or location;
-- exercise number;
-- item number;
+Example:
+
+```
+destination-c1-c2_unit-1_exercise-3_2
+```
+
+The components identify:
+
+- `source-id`: the source registered in the source registry;
+- `segment-id`: the Source Segment containing the exercise;
+- `exercise`: the exercise identifier within the segment;
+- `item-number`: the item number within that exercise.
+
+This ID identifies a specific assessment occurrence in the source material. It is intentionally traceable and deterministic.
+
+Candidate and Official representations of the same source occurrence use the same ID.
+
+The following do not independently define Challenge identity:
+
 - extraction order;
 - Candidate/Official status;
 - learner attempts;
 - learner performance;
 - adaptive selection state.
 
-Candidate and Official representations of the same id use the same ID.
+Source location is therefore not merely provenance for a source-derived Challenge; it is encoded in the Challenge ID.
 
-If a modification changes the assessment task semantically, the modified task requires a new Challenge ID.
+If two source occurrences happen to contain semantically identical assessment tasks, they still have different source-occurrence IDs. Rare duplicate or special cases are expected to be handled by human review rather than by automatic ID-level deduplication.
+
+If the source occurrence itself changes in a way that changes the assessment task or its source identity, a new Challenge ID is required.
 
 ## 4. instruction
 
@@ -146,7 +165,7 @@ The prompt is not the expected answer.
 
 ## 6. options
 
-options is optional and is present when the learner must choose from a finite set of explicitly provided alternatives.
+`options` is optional and is present when the learner must choose from a finite set of explicitly provided alternatives.
 
 For example:
 
@@ -185,7 +204,7 @@ If a Challenge does not require finite choices, options is omitted.
 
 ## 7. target_atom_id
 
-target_atom_id identifies the single Knowledge Atom assessed by the Challenge.
+`target_atom_id` identifies the single Knowledge Atom assessed by the Challenge.
 
 It is mandatory for a valid Challenge.
 
@@ -207,7 +226,7 @@ Structural relationships among components of a grammar construction remain part 
 
 ## 8. answer
 
-answer contains the specific expected outcome for the Challenge.
+`answer` contains the specific expected outcome for the Challenge.
 
 The answer is intrinsic to the current Challenge model because a supported Challenge must have a specific expected answer.
 
@@ -254,21 +273,23 @@ The extractor must not invent an answer. If source evidence is insufficient to e
 
 ## 9. extra
 
-extra contains metadata that is not part of the Challenge's semantic assessment task.
+`extra` contains metadata that is not part of the Challenge's semantic assessment task.
 
 At minimum, it may contain provenance and maintenance information.
 
-A source-derived Challenge may use:
+For a source-derived Challenge, provenance may be represented as:
 
 ```yaml
 extra:
   source:
     source_id: destination-c1-c2
-    segment_id: ...
-    exercise_id: ...
-    item_id: ...
+    segment_id: unit-1
+    exercise_id: exercise-3
+    item_id: 2
   notes: ...
 ```
+
+The source fields duplicate information encoded in the ID for explicit machine-readable provenance. They do not replace the ID.
 
 The exact provenance structure remains to be finalized separately.
 
@@ -285,7 +306,7 @@ extra must not contain learner/runtime state such as:
 
 ## 10. Candidate and Official representation
 
-Candidate and Official Challenges share the same semantic structure and ID.
+Candidate and Official Challenges share the same canonical structure and ID.
 
 A Candidate additionally carries review lifecycle information.
 
@@ -315,31 +336,30 @@ Challenge Candidate
 Official Challenge
 ```
 
-The semantic Challenge ID remains unchanged during this transition.
+The Challenge ID remains unchanged during this transition.
 
 ## 11. Structural invariants
 
 A valid Challenge must satisfy these invariants:
 
 1. It has exactly one stable id.
-2. It has a concrete instruction.
-3. It has a concrete prompt.
-4. It has exactly one target_atom_id.
-5. target_atom_id identifies a Knowledge Atom.
-6. options is optional and, when present, contains the finite semantic choices presented to the learner.
-7. A supported valid Challenge has a specific answer.
-8. For a multiple-choice Challenge, answer identifies one of the values in options.
-9. Source provenance, when present, is metadata and does not define identity.
-10. Learner/runtime data is outside the Challenge structure.
-11. Candidate and Official representations use the same semantic Challenge ID.
-12. A semantic change to the assessment task requires a new Challenge identity.
+2. For a source-derived Challenge, the id follows the canonical source-occurrence format.
+3. It has a concrete instruction.
+4. It has a concrete prompt.
+5. It has exactly one target_atom_id.
+6. target_atom_id identifies a Knowledge Atom.
+7. options is optional and, when present, contains the finite semantic choices presented to the learner.
+8. A supported valid Challenge has a specific answer.
+9. For a multiple-choice Challenge, answer identifies one of the values in options.
+10. Source provenance, when present, is metadata that supplements the ID.
+11. Learner/runtime data is outside the Challenge structure.
+12. Candidate and Official representations use the same Challenge ID.
 13. No persisted form field is required by the canonical Challenge structure.
+14. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
 
-## 12. Source occurrence versus Challenge identity
+## 12. Source occurrence and Challenge identity
 
-A source occurrence is evidence from which a Challenge Candidate is extracted.
-
-It is not the Challenge itself.
+For source-derived Challenges, the source occurrence is the identity anchor of the Challenge.
 
 The distinction is:
 
@@ -348,14 +368,14 @@ Source occurrence
       ↓
 Challenge Candidate
       ↓
-semantic Challenge
+Challenge with source-occurrence ID
 ```
 
-Multiple source occurrences may later be recognized as the same semantic Challenge. In that case, provenance may retain multiple origins while the Challenge continues to have one semantic ID.
+The source occurrence is encoded directly into the Challenge ID through source, segment, exercise, and item identifiers.
 
-Conversely, two source occurrences that are similar but represent semantically different assessment tasks must remain different Challenges.
+Two different source occurrences therefore normally produce two different Challenge IDs, even when their visible tasks are semantically identical.
 
-Deduplication and reuse are therefore separate processes from extraction.
+This deliberately favors deterministic extraction, source traceability, and simple lifecycle management over automatic semantic deduplication.
 
 ## 13. Relationship to extraction
 
@@ -415,7 +435,6 @@ The following are deliberately outside the canonical Challenge structure:
 - adaptive selection priority;
 - reusable templates;
 - generators;
-- source occurrence as semantic identity;
 - presentation-only labels such as A/B/C;
 - a Challenge Form taxonomy used only to classify exercise styles.
 
@@ -441,4 +460,3 @@ This structure is the basis for the Candidate and Official Challenge schemas.
 The schema should be derived from this structure rather than introducing a separate form taxonomy.
 
 Future work may refine the internal representation of prompt, options, answer, and provenance where real source material demonstrates a genuine structural need. Such refinement should not introduce a Challenge Form field unless there is a clear semantic requirement that cannot be represented by the existing structure.
-```
