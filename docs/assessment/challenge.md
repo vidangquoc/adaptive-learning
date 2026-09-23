@@ -4,6 +4,8 @@ A Challenge is a concrete task presented to a learner to assess one Knowledge At
 
 A Challenge is an assessment mechanism. It is not itself knowledge, and it is not limited to a linguistic question.
 
+The detailed internal structure of a Challenge is defined separately in `challenge-extraction/challenge-structure.md`. This document focuses on the conceptual model, boundaries, and lifecycle of Challenges.
+
 ## Core principles
 
 ### One Challenge assesses one Knowledge Atom
@@ -20,7 +22,7 @@ Knowledge Atom
 
 If a Challenge appears to require knowledge of multiple independent knowledge points, the knowledge being assessed must be represented by a single Knowledge Atom.
 
-If the Challenge assesses knowledge about a relationship between independent Knowledge Atoms, that relationship is represented as a `relation` Atom. The Challenge then targets that relation Atom.
+If the Challenge assesses knowledge about a relationship between independent Knowledge Atoms, that relationship is represented by a `relation` Atom. The Challenge then targets that relation Atom.
 
 ### Challenge is not Question
 
@@ -31,7 +33,6 @@ A Challenge is any concrete exercise or task used to obtain evidence about a Kno
 - multiple choice;
 - fill in the blank;
 - sentence completion;
-- matching;
 - error correction;
 - sentence transformation;
 - sentence reordering;
@@ -56,31 +57,22 @@ I ___ to school yesterday.
 
 is a concrete Challenge.
 
-A general pattern for generating fill-in-the-blank exercises is a separate concern and is not part of the Challenge concept itself.
+A general pattern for generating exercises is a separate concern and is not part of the Challenge concept itself.
 
 ### Challenge contains a specific expected answer
 
 A supported Challenge contains the information needed to present the task and identify its expected answer.
 
-Conceptually:
+The specific representation of the task, available alternatives, and expected answer is defined in `challenge-extraction/challenge-structure.md`.
 
-```
-Challenge
-├── task
-├── form
-├── target_atom_id
-└── answer
-```
+The `answer` is a specific expected answer. It may be represented as structured data when the concrete task requires it.
 
-The `answer` is a specific expected answer. It may be represented as structured data according to the Challenge form rather than as a single string.
+Examples include:
 
-Examples:
-
-- a selected option for multiple choice;
+- a selected option for a multiple-choice task;
 - a specific word or form for a fill-in-the-blank task;
-- a specific sentence for sentence transformation;
-- a specific arrangement for sentence reordering;
-- a specific set of pairings for matching.
+- a specific sentence for a sentence transformation;
+- a specific arrangement for sentence reordering.
 
 Evaluation of a learner response is a separate assessment/runtime concern. The Challenge provides the expected answer; the assessment process determines the result of comparing a learner response with that answer.
 
@@ -93,7 +85,7 @@ It does not copy the Atom's definition, explanation, pronunciation, or other kno
 For example:
 
 ```yaml
-atom_id: past-simple-go
+target_atom_id: past-simple-go
 ```
 
 The Knowledge Atom remains the authoritative representation of the knowledge.
@@ -202,7 +194,7 @@ Update Learner State
 Select next activity
 ```
 
-Multiple Challenges may target the same Knowledge Atom, allowing the system to assess that Atom through different task forms and contexts.
+Multiple Challenges may target the same Knowledge Atom, allowing the system to assess that Atom through different task presentations and contexts.
 
 Challenge selection is an adaptive-system concern and is not defined by the Challenge model itself.
 
@@ -213,7 +205,7 @@ This document defines the conceptual model and boundaries of a Challenge.
 It does not yet define:
 
 - the complete Challenge schema;
-- the complete set of Challenge forms;
+- the detailed internal Challenge structure;
 - reusable Challenge templates or generators;
 - learner attempt storage;
 - assessment-result storage;
