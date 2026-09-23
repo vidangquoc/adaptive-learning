@@ -35,11 +35,12 @@ A Challenge is any concrete exercise or task used to obtain evidence about a Kno
 - error correction;
 - sentence transformation;
 - sentence reordering;
-- translation;
 - word formation;
 - cloze tasks.
 
 The learner may answer a Challenge, but a Challenge does not have to be phrased as a question.
+
+The current Challenge model supports tasks with a specific expected answer. Speaking and open-ended free-response tasks are outside the current model.
 
 ### Challenge is a concrete instance
 
@@ -57,19 +58,31 @@ is a concrete Challenge.
 
 A general pattern for generating fill-in-the-blank exercises is a separate concern and is not part of the Challenge concept itself.
 
-### Challenge contains what is needed for evaluation
+### Challenge contains a specific expected answer
 
-A Challenge should contain the information required to present the task and evaluate the learner's response.
+A supported Challenge contains the information needed to present the task and identify its expected answer.
 
-This may include:
+Conceptually:
 
-- the task or prompt;
-- the Challenge form;
-- answer or expected-response information;
-- evaluation information required for the Challenge;
-- the ID of the Knowledge Atom being assessed.
+```
+Challenge
+├── task
+├── form
+├── target_atom_id
+└── answer
+```
 
-The exact schema and evaluation model are to be defined separately.
+The `answer` is a specific expected answer. It may be represented as structured data according to the Challenge form rather than as a single string.
+
+Examples:
+
+- a selected option for multiple choice;
+- a specific word or form for a fill-in-the-blank task;
+- a specific sentence for sentence transformation;
+- a specific arrangement for sentence reordering;
+- a specific set of pairings for matching.
+
+Evaluation of a learner response is a separate assessment/runtime concern. The Challenge provides the expected answer; the assessment process determines the result of comparing a learner response with that answer.
 
 ### Challenge references, rather than copies, its Knowledge Atom
 
@@ -106,6 +119,8 @@ Therefore:
 - source-derived Challenges should preserve source provenance;
 - system-generated or otherwise source-independent Challenges may have no source.
 
+Source provenance does not define Challenge semantic identity. A reusable Challenge may retain provenance from one or more source occurrences.
+
 ## Challenge and learner response
 
 A Challenge produces an opportunity for the learner to demonstrate the targeted knowledge.
@@ -130,6 +145,43 @@ The Challenge model does not define a `difficulty` concept.
 
 A Challenge may produce different outcomes for different learners, and the adaptive system can use learner performance and other evidence without treating difficulty as an intrinsic Challenge property.
 
+## Challenge lifecycle
+
+Challenge Candidates are reviewed and then either approved or rejected.
+
+```
+Challenge Candidate
+       ↓
+human review
+       ├── rejected
+       └── approved
+                ↓
+            officialize
+                ↓
+       Official Challenge
+                ↓
+             retired
+```
+
+Officialization is a storage transition from Candidate to Official Challenge.
+
+An Official Challenge may be corrected or refined while preserving its identity when the assessment task remains semantically the same. If a change makes it a different assessment task, a new Challenge identity is required.
+
+## Challenge storage
+
+Challenges are organized by source and Source Segment:
+
+```
+data/
+└── challenges/
+    └── <source-id>/
+        └── <segment-id>/
+            ├── challenges.md
+            └── challenge_candidates.md
+```
+
+This is an organizational storage structure, not the semantic identity of a Challenge.
+
 ## Challenge and Adaptive Learning
 
 Challenges provide the concrete assessment mechanism used by the adaptive learning system.
@@ -152,6 +204,8 @@ Select next activity
 
 Multiple Challenges may target the same Knowledge Atom, allowing the system to assess that Atom through different task forms and contexts.
 
+Challenge selection is an adaptive-system concern and is not defined by the Challenge model itself.
+
 ## Scope
 
 This document defines the conceptual model and boundaries of a Challenge.
@@ -159,9 +213,9 @@ This document defines the conceptual model and boundaries of a Challenge.
 It does not yet define:
 
 - the complete Challenge schema;
-- the complete set of Challenge types;
+- the complete set of Challenge forms;
 - reusable Challenge templates or generators;
-- answer/evaluation schemas;
 - learner attempt storage;
+- assessment-result storage;
 - adaptive Challenge selection algorithms;
 - operational Challenge statistics.
