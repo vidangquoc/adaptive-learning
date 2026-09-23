@@ -29,7 +29,7 @@ The canonical structure separates:
 - the concrete material the learner acts on (prompt);
 - optional finite choices (options);
 - the expected outcome (answer);
-- metadata and provenance (extra).
+- metadata and source information (extra).
 
 There is deliberately no form field.
 
@@ -105,7 +105,7 @@ The following do not independently define Challenge identity:
 - learner performance;
 - adaptive selection state.
 
-Source location is therefore not merely provenance for a source-derived Challenge; it is encoded in the Challenge ID.
+Source location is therefore not merely source metadata for a source-derived Challenge; it is encoded in the Challenge ID.
 
 If two source occurrences happen to contain semantically identical assessment tasks, they still have different source-occurrence IDs. Rare duplicate or special cases are expected to be handled by human review rather than by automatic ID-level deduplication.
 
@@ -153,7 +153,7 @@ instruction: "Rewrite the sentence using 'used to'."
 
 The instruction is part of the concrete Challenge because changing it can change what the learner is being asked to demonstrate.
 
-It should contain only the learner-facing task direction. Source provenance, answer-key information, and learner/runtime state do not belong here.
+It should contain only the learner-facing task direction. Source information, answer-key information, and learner/runtime state do not belong here.
 
 ## 6. prompt
 
@@ -275,13 +275,13 @@ The extractor must not invent an answer. If source evidence is insufficient to e
 
 `extra` contains metadata that is not part of the Challenge's semantic assessment task.
 
-At minimum, it may contain provenance and maintenance information.
+At minimum, it may contain source information and maintenance information.
 
-For a source-derived Challenge, provenance is represented as:
+For a source-derived Challenge, source information is represented as:
 
 ```yaml
 extra:
-  provenance:
+  source:
     source_id: destination-c1-c2
     page_number: 42
     segment_id: unit-1
@@ -290,11 +290,11 @@ extra:
   notes: ...
 ```
 
-The provenance fields duplicate information encoded in the ID for explicit machine-readable provenance. They do not replace the ID.
+The source fields duplicate information encoded in the ID for explicit machine-readable source information. They do not replace the ID.
 
-### 9.1 Provenance fields
+### 9.1 Source fields
 
-The canonical provenance fields are:
+The canonical source fields are:
 
 - `source_id`: the source registered in the source registry.
 - `page_number`: the page number in the original source artifact, not a page number relative to the Source Segment or a PDF viewer's zero/one-based page index.
@@ -306,9 +306,9 @@ The canonical provenance fields are:
 
 `exercise_name` preserves the source exercise's name or label rather than introducing a system-generated exercise identity.
 
-`item_number` identifies the item within the exercise for provenance purposes; it is not a separately persisted Challenge entity.
+`item_number` identifies the item within the exercise for source information purposes; it is not a separately persisted Challenge entity.
 
-The provenance structure is explicit machine-readable origin metadata. It does not define a second identity for the Challenge.
+The source structure is explicit machine-readable origin information. It does not define a second identity for the Challenge.
 
 ## 10. Candidate and Official representation
 
@@ -357,7 +357,7 @@ A valid Challenge must satisfy these invariants:
 7. options is optional and, when present, contains the finite semantic choices presented to the learner.
 8. A supported valid Challenge has a specific answer.
 9. For a multiple-choice Challenge, answer identifies one of the values in options.
-10. Source provenance, when present, is metadata that supplements the ID.
+10. Source information, when present, is metadata that supplements the ID.
 11. Learner/runtime data is outside the Challenge structure.
 12. Candidate and Official representations use the same Challenge ID.
 13. No persisted form field is required by the canonical Challenge structure.
@@ -446,4 +446,4 @@ This structure is the basis for the Candidate and Official Challenge schemas.
 
 The schema should be derived from this structure rather than introducing a separate form taxonomy.
 
-Future work may refine the internal representation of prompt, options, answer, and provenance where real source material demonstrates a genuine structural need. Such refinement should not introduce a Challenge Form field unless there is a clear semantic requirement that cannot be represented by the existing structure.
+Future work may refine the internal representation of prompt, options, answer, and source information where real source material demonstrates a genuine structural need. Such refinement should not introduce a Challenge Form field unless there is a clear semantic requirement that cannot be represented by the existing structure.
