@@ -325,6 +325,24 @@ Challenge semantics should represent the assessment task, while provenance and e
 
 What checks can determine that the extracted Challenge Candidate faithfully represents the assessment task in the source?
 
+**Decision**
+
+Extraction quality is validated by checking that each Challenge Candidate **faithfully represents a concrete assessment occurrence in the source**.
+
+Validation should check:
+- the assessment occurrence;
+- the assessment boundary;
+- completeness of the extracted task;
+- absence of invented source content;
+- preservation of the assessment structure;
+- answer information when available;
+- provenance; and
+- compliance with the defined extraction scope.
+
+Validation may include both **structural checks** and **source-faithfulness checks**.
+
+The detailed validation mechanisms and review process are outside the scope of this decision.
+
 ### Q18. What should be preserved as extraction evidence?
 
 When a Candidate is reviewed later, what evidence should be retained so that a reviewer can determine why and how the Candidate was extracted from the source?
