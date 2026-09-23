@@ -64,7 +64,7 @@ The extraction should not include unrelated surrounding material merely because 
 
 Answer information may be preserved as assessment data, but it is distinct from the learner-facing task.
 
-Long integrated exercises, especially long Cloze passages used to assess multiple pieces of knowledge together, should **not** be split into Atom-level Challenges. Such an exercise may instead be retained separately as an integrated or composite Challenge when the system needs that kind of assessment.
+Long integrated exercises, especially long Cloze passages used to assess multiple pieces of knowledge together, should **not** be split into Atom-level Challenges. Such exercises are outside the current Atom-level Challenge Extraction scope. A separate extraction process may support integrated or composite Challenges in the future.
 
 ### Q3. How should different exercise forms be recognized?
 
@@ -110,7 +110,7 @@ A task containing multiple blanks or multiple interdependent parts should not be
 
 In particular, long Cloze passages or similar integrated exercises that assess multiple pieces of knowledge together should not be decomposed into Atom-level Challenges.
 
-Such an exercise may be retained as an integrated or composite Challenge for holistic assessment, but it is outside the purpose of Atom-level Challenge extraction.
+Such an exercise is outside the current Atom-level Challenge Extraction scope. A separate extraction process may support integrated or composite Challenges in the future.
 
 ### Q5. How much should extraction normalize the source?
 
@@ -187,7 +187,7 @@ This is a deliberate scope limitation, not a claim that such exercises are inval
 
 During extraction, skipped exercises of this kind must be **reported** so that the system records that an extractable-looking assessment task was encountered but intentionally not extracted.
 
-The same reporting principle applies to **Cloze exercises** that are excluded from Atom-level Challenge extraction.
+The same reporting principle applies to **Cloze exercises** that are excluded from the current Atom-level Challenge Extraction scope.
 
 The detailed format and schema of the extraction report are handled separately.
 
@@ -340,6 +340,8 @@ Validation should check:
 - compliance with the defined extraction scope.
 
 Validation may include both **structural checks** and **source-faithfulness checks**.
+
+Validation determines whether the extracted Candidate faithfully represents the source assessment task; it does not replace the separate Candidate review and approval process.
 
 The detailed validation mechanisms and review process are outside the scope of this decision.
 
