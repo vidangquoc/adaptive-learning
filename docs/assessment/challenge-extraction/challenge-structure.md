@@ -2,40 +2,77 @@
 
 This document defines the canonical structural model of a Challenge.
 
-It complements [Challenge](../challenge.md), which defines the conceptual model. This document focuses on what information a Challenge must contain and how the fields relate to one another.
+It complements [Challenge](../challenge.md), which defines the conceptual model. This document focuses on the information every Challenge needs and on the relationship between those fields.
 
 ## 1. Canonical structure
 
 A Challenge is a concrete assessment task that targets exactly one Knowledge Atom and has a specific expected answer.
 
-Conceptually:
+The current model does not require a Challenge Form taxonomy. The different exercise styles observed in learning material can be represented by the same small set of structural fields.
 
-\`\`\`text
+```text
 Challenge
 ├── id
-├── task
-├── form
+├── instruction
+├── prompt
+├── options?
 ├── target_atom_id
 ├── answer
 └── extra
-\`\`\`
+```
 
-The canonical structure deliberately separates:
+The canonical structure separates:
 
-- **semantic identity** (\`id\`);
-- **learner-facing assessment content** (\`task\`);
-- **assessment form** (\`form\`);
-- **the knowledge being assessed** (\`target_atom_id\`);
-- **the expected outcome** (\`answer\`);
-- **metadata and provenance** (\`extra\`).
+- semantic identity (id);
+- what the learner is asked to do (instruction);
+- the concrete material the learner acts on (prompt);
+- optional finite choices (options);
+- the knowledge being assessed (target_atom_id);
+- the expected outcome (answer);
+- metadata and provenance (extra).
 
-This document defines the structure, not the JSON Schema. The schema should be derived only after the structural decisions here are stable.
+There is deliberately no form field.
 
-## 2. Field definitions
+## 2. Why a separate Challenge Form is not required
 
-### 2.1 \`id\`
+The exercise forms examined so far can all be expressed using the same core structure:
 
-\`id\` is the stable semantic identifier of the Challenge.
+```text
+Challenge
+├── instruction
+├── prompt
+├── options?
+└── answer
+```
+
+For example:
+
+- a fill-in-the-blank task provides an instruction, a prompt containing the missing material, and an expected answer;
+- a sentence transformation task provides an instruction, a source sentence or other prompt, and an expected transformed answer;
+- a sentence reordering task provides an instruction, a prompt containing the supplied words or chunks, and an expected ordering;
+- a word-formation task provides an instruction, a prompt containing the lexical context and base word, and the expected derived form;
+- an error-correction task provides an instruction, a prompt containing the erroneous language, and the expected correction;
+- a short-answer task provides an instruction and prompt without finite options, together with a specific expected answer;
+- a multiple-choice task additionally provides options, with answer identifying the selected option by its content.
+
+These differences are differences in the content and interpretation of the same fields, rather than evidence that the Challenge ontology needs a persisted form taxonomy.
+
+True/False is likewise not a separate concept. It can be represented as:
+
+```yaml
+options:
+  - true
+  - false
+answer: true
+```
+
+The presentation labels A/B/C, radio buttons, numbering, or other UI details are not part of the semantic answer.
+
+A Challenge may therefore be classified as a particular exercise style by a UI, extractor, generator, or analysis process when useful, without making that classification part of the canonical Challenge identity or structure.
+
+## 3. id
+
+id is the stable semantic identifier of the Challenge.
 
 It identifies the concrete assessment task, not its source occurrence.
 
@@ -51,126 +88,179 @@ The following do not define Challenge identity:
 - learner performance;
 - adaptive selection state.
 
-Candidate and Official representations of the same Challenge use the same \`id\`.
+Candidate and Official representations of the same id use the same ID.
 
 If a modification changes the assessment task semantically, the modified task requires a new Challenge ID.
 
-### 2.2 \`task\`
+## 4. instruction
 
-\`task\` contains the learner-facing assessment task.
+instruction tells the learner what to do.
 
-It should contain enough information to reconstruct what the learner is expected to do, including when applicable:
+Examples:
 
-- instructions;
-- prompt;
-- necessary context;
-- answer options;
-- response elements;
-- other information that is part of the concrete task.
+```yaml
+instruction: "Choose the correct answer."
+```
 
-\`task\` must not contain information that belongs only to the answer key or internal provenance.
+```yaml
+instruction: "Complete the sentence."
+```
 
-The exact internal structure of \`task\` may depend on the Challenge \`form\`.
+```yaml
+instruction: "Rewrite the sentence using 'used to'."
+```
 
-For example, a multiple-choice task may need:
+The instruction is part of the concrete Challenge because changing it can change what the learner is being asked to demonstrate.
 
-\`\`\`yaml
-task:
-  instruction: "Choose the correct answer."
-  prompt: "Darren ___ home at eight yesterday."
-  options:
-    - "gets"
-    - "got"
-    - "has got"
-\`\`\`
+It should contain only the learner-facing task direction. Source provenance, answer-key information, and learner/runtime state do not belong here.
 
-A fill-in-the-blank task may instead contain a prompt and one or more response elements.
+## 5. prompt
 
-The examples are illustrative; the complete form-specific task structures remain to be defined by the Challenge Form taxonomy.
+prompt contains the concrete material on which the learner performs the Challenge.
 
-### 2.3 \`form\`
+It may be a string or structured data when the task requires more than one component.
 
-\`form\` identifies the kind of assessment task represented by the Challenge.
+Examples:
 
-Examples include:
+```yaml
+prompt: "Darren ___ home at eight yesterday."
+```
 
-- multiple choice;
-- fill in the blank;
-- sentence completion;
-- matching;
-- error correction;
-- sentence transformation;
-- sentence reordering;
-- word formation;
-- cloze.
+```yaml
+prompt:
+  sentence: "I lived in London when I was a child."
+```
 
-The canonical taxonomy and exact values are not finalized by this document.
+```yaml
+prompt:
+  words:
+    - yesterday
+    - home
+    - went
+    - I
+```
 
-A Challenge should use a defined form whenever the task can be classified reliably. If no defined form is appropriate, the extraction process must preserve the task as unresolved/unclassified rather than inventing a misleading form.
+The prompt may contain blanks, supplied words, a source sentence, a base word, an erroneous sentence, or other concrete task material.
 
-### 2.4 \`target_atom_id\`
+The prompt is not the expected answer.
 
-\`target_atom_id\` identifies the single Knowledge Atom assessed by the Challenge.
+## 6. options
+
+options is optional and is present when the learner must choose from a finite set of explicitly provided alternatives.
+
+For example:
+
+```yaml
+instruction: "Choose the correct answer."
+prompt: "Darren ___ home at eight yesterday."
+options:
+  - gets
+  - got
+  - has got
+answer: got
+```
+
+The options are semantic values, not presentation labels.
+
+The UI may display them as A/B/C, 1/2/3, radio buttons, or another presentation format. Those presentation details do not belong to the Challenge's semantic structure.
+
+The answer for a multiple-choice Challenge must correspond to an option by its content:
+
+```text
+answer ∈ options
+```
+
+For True/False:
+
+```yaml
+options:
+  - true
+  - false
+answer: true
+```
+
+No separate true_false form is required.
+
+If a Challenge does not require finite choices, options is omitted.
+
+## 7. target_atom_id
+
+target_atom_id identifies the single Knowledge Atom assessed by the Challenge.
 
 It is mandatory for a valid Challenge.
 
-\`\`\`text
+```text
 Challenge
     │
     │ target_atom_id
     ▼
 Knowledge Atom
-\`\`\`
+```
 
 The field contains an Atom ID, not a copy of Atom content.
 
 A Challenge must not contain a list of independent target Atom IDs.
 
-If the assessment concerns a relationship between independent Knowledge Atoms, the relationship itself must be represented as a \`relation\` Knowledge Atom, and \`target_atom_id\` points to that relation Atom.
+If the assessment concerns a relationship between independent Knowledge Atoms, the relationship itself must be represented as a relation Knowledge Atom, and target_atom_id points to that relation Atom.
 
 Structural relationships among components of a grammar construction remain part of the relevant grammar rule and do not become relation targets merely because a Challenge tests them.
 
-### 2.5 \`answer\`
+## 8. answer
 
-\`answer\` contains the specific expected answer for the Challenge.
+answer contains the specific expected outcome for the Challenge.
 
-The answer is intrinsic to the current Challenge model because a supported Challenge must have a specific expected outcome.
+The answer is intrinsic to the current Challenge model because a supported Challenge must have a specific expected answer.
 
-It is distinct from learner-facing task content:
-
-\`\`\`text
-task
-  ↓
-what the learner is asked to do
-
-answer
-  ↓
-the expected outcome used to assess the response
-\`\`\`
-
-The representation may be scalar or structured according to the Challenge \`form\`.
+The answer may be a scalar value or structured data when the Challenge contains multiple response elements.
 
 Examples:
 
-- multiple choice → selected option;
-- fill in the blank → expected word/form;
-- sentence transformation → expected transformed sentence;
-- sentence reordering → expected ordering;
-- matching → expected set of pairings.
+```yaml
+# Multiple choice
+answer: got
+```
 
-When a Challenge contains multiple response elements, \`answer\` may contain the corresponding structured set of expected outcomes.
+```yaml
+# Fill in the blank
+answer: got
+```
+
+```yaml
+# Sentence transformation
+answer: "I used to live in London when I was a child."
+```
+
+```yaml
+# Sentence reordering
+answer:
+  - I
+  - went
+  - home
+  - yesterday
+```
+
+```yaml
+# Multiple response elements
+answer:
+  - got
+  - home
+```
+
+The exact shape of answer is determined by the concrete task content rather than by a separate Challenge Form taxonomy.
+
+For multiple-choice Challenges, the answer must identify one of the provided option values.
 
 The extractor must not invent an answer. If source evidence is insufficient to establish a specific expected answer, the occurrence is incomplete/unresolved and must not be treated as a fully valid Challenge Candidate.
 
-### 2.6 \`extra\`
+## 9. extra
 
-\`extra\` contains metadata that is not part of the Challenge's semantic assessment task.
+extra contains metadata that is not part of the Challenge's semantic assessment task.
 
 At minimum, it may contain provenance and maintenance information.
 
 A source-derived Challenge may use:
 
-\`\`\`yaml
+```yaml
 extra:
   source:
     source_id: destination-c1-c2
@@ -178,11 +268,11 @@ extra:
     exercise_id: ...
     item_id: ...
   notes: ...
-\`\`\`
+```
 
 The exact provenance structure remains to be finalized separately.
 
-\`extra\` must not contain learner/runtime state such as:
+extra must not contain learner/runtime state such as:
 
 - learner responses;
 - attempts;
@@ -193,7 +283,7 @@ The exact provenance structure remains to be finalized separately.
 - aggregate performance statistics;
 - adaptive selection state.
 
-## 3. Candidate and Official representation
+## 10. Candidate and Official representation
 
 Candidate and Official Challenges share the same semantic structure and ID.
 
@@ -201,48 +291,51 @@ A Candidate additionally carries review lifecycle information.
 
 Conceptually:
 
-\`\`\`text
+```text
 Candidate Challenge
 ├── canonical Challenge fields
 └── review_status
-\`\`\`
+```
 
 where:
 
-\`\`\`text
+```text
 review_status ∈ { pending, approved, rejected }
-\`\`\`
+```
 
 Official Challenges do not carry Candidate review status.
 
 Officialization is a storage transition:
 
-\`\`\`text
+```text
 Challenge Candidate
       │
       │ approved + officialize
       ▼
 Official Challenge
-\`\`\`
+```
 
 The semantic Challenge ID remains unchanged during this transition.
 
-## 4. Structural invariants
+## 11. Structural invariants
 
 A valid Challenge must satisfy these invariants:
 
-1. It has exactly one stable \`id\`.
-2. It has exactly one \`target_atom_id\`.
-3. \`target_atom_id\` identifies a Knowledge Atom.
-4. It has a concrete \`task\`.
-5. It has a defined \`form\`, or is explicitly preserved as unresolved/unclassified during extraction.
-6. A supported valid Challenge has a specific \`answer\`.
-7. Source provenance, when present, is metadata and does not define identity.
-8. Learner/runtime data is outside the Challenge structure.
-9. Candidate and Official representations use the same semantic Challenge ID.
-10. A semantic change to the assessment task requires a new Challenge identity.
+1. It has exactly one stable id.
+2. It has a concrete instruction.
+3. It has a concrete prompt.
+4. It has exactly one target_atom_id.
+5. target_atom_id identifies a Knowledge Atom.
+6. options is optional and, when present, contains the finite semantic choices presented to the learner.
+7. A supported valid Challenge has a specific answer.
+8. For a multiple-choice Challenge, answer identifies one of the values in options.
+9. Source provenance, when present, is metadata and does not define identity.
+10. Learner/runtime data is outside the Challenge structure.
+11. Candidate and Official representations use the same semantic Challenge ID.
+12. A semantic change to the assessment task requires a new Challenge identity.
+13. No persisted form field is required by the canonical Challenge structure.
 
-## 5. Source occurrence versus Challenge identity
+## 12. Source occurrence versus Challenge identity
 
 A source occurrence is evidence from which a Challenge Candidate is extracted.
 
@@ -250,13 +343,13 @@ It is not the Challenge itself.
 
 The distinction is:
 
-\`\`\`text
+```text
 Source occurrence
       ↓
 Challenge Candidate
       ↓
 semantic Challenge
-\`\`\`
+```
 
 Multiple source occurrences may later be recognized as the same semantic Challenge. In that case, provenance may retain multiple origins while the Challenge continues to have one semantic ID.
 
@@ -264,13 +357,13 @@ Conversely, two source occurrences that are similar but represent semantically d
 
 Deduplication and reuse are therefore separate processes from extraction.
 
-## 6. Relationship to extraction
+## 13. Relationship to extraction
 
 Challenge extraction and Knowledge Atom extraction use the same contextual analysis of a Source Segment.
 
 The extractor should determine the target Atom while determining the Challenge itself.
 
-\`\`\`text
+```text
 Source Segment
       ↓
 Contextual Analysis
@@ -278,7 +371,7 @@ Contextual Analysis
       └── Challenge Candidates
                  │
                  └── target_atom_id
-\`\`\`
+```
 
 The target Atom may be:
 
@@ -288,44 +381,17 @@ The target Atom may be:
 
 A later post-extraction step must not be required to guess which Atom a Challenge assesses.
 
-## 7. Form-specific structure
+The same extraction analysis also determines the concrete instruction, prompt, optional options, and answer from the source evidence.
 
-This document intentionally does not freeze the detailed structure of every Challenge form.
-
-Form-specific definitions should determine, as necessary:
-
-- the shape of \`task\`;
-- the shape of \`answer\`;
-- required response elements;
-- constraints needed to interpret the response;
-- how source answer information maps to the canonical answer.
-
-For example:
-
-\`\`\`text
-multiple choice
-    task.options
-    answer.selected_option
-
-matching
-    task.items + task.matches
-    answer.pairings
-
-sentence transformation
-    task.original_sentence + instruction
-    answer.transformed_sentence
-\`\`\`
-
-These are structural examples, not the final schema.
-
-## 8. Source preservation and fail-closed behavior
+## 14. Source preservation and fail-closed behavior
 
 Challenge structure must preserve source evidence faithfully.
 
 Extraction must not silently invent or repair:
 
-- missing task text;
-- missing options;
+- missing instruction;
+- missing prompt;
+- missing options when the source requires explicit options;
 - missing response elements;
 - exercise/item boundaries;
 - target Atom;
@@ -333,7 +399,9 @@ Extraction must not silently invent or repair:
 
 If an essential structural element cannot be established from the source, the extraction result must explicitly represent the uncertainty or omission rather than silently producing a normal valid Challenge.
 
-## 9. What does not belong in the structure
+In particular, extraction must not create a Challenge merely because an exercise contains a blank or a numbered item. Contextual analysis must establish that the occurrence is an independent evaluable task and that its required structural information can be established.
+
+## 15. What does not belong in the structure
 
 The following are deliberately outside the canonical Challenge structure:
 
@@ -347,19 +415,30 @@ The following are deliberately outside the canonical Challenge structure:
 - adaptive selection priority;
 - reusable templates;
 - generators;
-- source occurrence as semantic identity.
+- source occurrence as semantic identity;
+- presentation-only labels such as A/B/C;
+- a Challenge Form taxonomy used only to classify exercise styles.
 
-These belong to assessment runtime, learner state, adaptive-system data, extraction metadata, or implementation mechanisms as appropriate.
+These belong to assessment runtime, learner state, adaptive-system data, extraction metadata, UI presentation, or implementation mechanisms as appropriate.
 
-## 10. Status of unresolved details
+## 16. Status of the structure
 
-This document establishes the canonical conceptual structure but does not yet finalize:
+The canonical Challenge structure is now intentionally small:
 
-- the complete Challenge Form taxonomy;
-- the exact form-specific \`task\` structures;
-- the exact form-specific \`answer\` structures;
-- the complete provenance structure;
-- the final Challenge ID generation algorithm;
-- the Candidate and Official JSON Schemas.
+```text
+Challenge
+├── id
+├── instruction
+├── prompt
+├── options?
+├── target_atom_id
+├── answer
+└── extra
+```
 
-Those decisions should be resolved before the corresponding schemas are finalized.
+This structure is the basis for the Candidate and Official Challenge schemas.
+
+The schema should be derived from this structure rather than introducing a separate form taxonomy.
+
+Future work may refine the internal representation of prompt, options, answer, and provenance where real source material demonstrates a genuine structural need. Such refinement should not introduce a Challenge Form field unless there is a clear semantic requirement that cannot be represented by the existing structure.
+```
