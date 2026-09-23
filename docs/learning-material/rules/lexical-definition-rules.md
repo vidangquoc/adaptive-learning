@@ -27,7 +27,7 @@ For pronunciation, prefer reputable dictionaries or other reliable lexical resou
 
 ## Relationship to the canonical rules
 
-The complete rules for extraction, normalization, lexical classification, examples, patterns, provenance, proficiency metadata, question linkage, challenge construction, copyright boundaries, and quality gates are defined in:
+The complete rules for extraction, normalization, lexical classification, examples, patterns, provenance, proficiency metadata, Challenge linkage, challenge construction, copyright boundaries, and quality gates are defined in:
 
 `docs/learning-material/principles/`
 
