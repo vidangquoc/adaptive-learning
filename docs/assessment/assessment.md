@@ -18,7 +18,7 @@ A Challenge is the concrete task through which assessment evidence is obtained.
 
 One Challenge assesses exactly one Knowledge Atom. Multiple Challenges may assess the same Knowledge Atom in different ways.
 
-Challenge design is described separately in [Questions About Challenges](design/questions-about-challenge.md).
+The conceptual Challenge model is described in [Challenge](challenge.md), and its canonical structure is defined in [Challenge Structure](challenge-extraction/challenge-structure.md).
 
 ## Assessment Evidence
 
@@ -26,7 +26,7 @@ Assessment is based on evidence produced when a learner responds to a Challenge.
 
 At a conceptual level:
 
-```
+```text
 Knowledge Atom
       │
       │ is assessed
@@ -51,7 +51,7 @@ The details of Challenges, learner responses, evaluation, and assessment results
 
 Assessment is part of the adaptive learning loop:
 
-```
+```text
 Knowledge
     ↓
 Assessment
@@ -71,8 +71,6 @@ This document provides an overall conceptual view of Assessment.
 
 It does not define:
 
-- Challenge schemas or Challenge types;
-- answer or evaluation models;
 - learner performance storage;
 - review scheduling;
 - difficulty models;
