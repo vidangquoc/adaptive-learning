@@ -68,7 +68,9 @@ If an exercise item cannot be treated as a Challenge, it must be explicitly repo
 Extract only a concrete assessment task that:
 
 - is expected to be performed by the learner; and
-- produces a response or outcome that can be evaluated.
+- produces a response or outcome that can be evaluated against a specific expected answer.
+
+Speaking and open-ended free-response tasks are outside the current Challenge model.
 
 Examples, demonstrations, explanations, headings, answer keys, and teacher notes are not Challenges.
 
@@ -114,13 +116,15 @@ The Challenge-form taxonomy may evolve as new task types are encountered.
 
 ## Answer Information
 
-When the source provides answer information, extract it together with the Challenge Candidate.
+A supported Challenge has a specific expected answer.
 
-Answer information is conceptually distinct from the learner-facing task content.
+When the source provides answer information, extract that answer together with the Challenge Candidate.
 
-A Candidate may still be extracted when the source provides no answer information.
+The answer is conceptually distinct from the learner-facing task content, but it is intrinsic to the supported Challenge model.
 
-The detailed answer and evaluation model is outside this specification.
+The answer may be structured according to the Challenge form rather than represented as a single string.
+
+A Candidate may still be reported as incomplete or unresolved when the source does not provide enough information to establish its specific expected answer. The extractor must not invent an answer.
 
 ## Shared Context
 
@@ -155,8 +159,6 @@ The Candidate must preserve enough provenance to identify the specific occurrenc
 
 Provenance describes origin, not Challenge semantics. It may include source identity, source location, original exercise/item identifiers, and other source-specific information.
 
-The detailed provenance schema is defined separately.
-
 ## Repeated Occurrences
 
 Each occurrence of an assessment task in the source is extracted as a separate Challenge Candidate.
@@ -185,7 +187,7 @@ At minimum, extraction should preserve:
 - information required to perform the task;
 - applicable instructions or context;
 - the target Knowledge Atom;
-- answer information when available;
+- the specific expected answer when it is available from the source;
 - source provenance;
 - the Challenge form when identifiable.
 
@@ -199,6 +201,7 @@ Extraction evidence must preserve enough information for later review to determi
 - where it came from;
 - what source material or context was used;
 - what Knowledge Atom was identified as the assessment target;
+- what expected answer was identified, when available;
 - and, where relevant, what limitations or uncertainties existed.
 
 Evidence is source-specific and is not part of intrinsic Challenge semantics.
@@ -215,7 +218,7 @@ Validation should check:
 - target Knowledge Atom;
 - absence of invented source content;
 - preservation of assessment structure;
-- answer information when available;
+- specific expected answer when available or required by the extraction result;
 - provenance;
 - compliance with extraction scope;
 - and, when an exercise item is not emitted, the explicit reason for omission.
