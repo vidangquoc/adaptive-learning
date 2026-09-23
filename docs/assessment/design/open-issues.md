@@ -152,20 +152,21 @@ Need to specify:
 - when the assessed knowledge is a relationship between independent Atoms, that relationship must first be represented as a `relation` Knowledge Atom and the Challenge targets that relation Atom;
 - structural relationships among grammar components remain part of the relevant grammar Atom/rule rather than becoming relation targets.
 
-## 8. Standardize the target Atom field name
+## 8. Standardize the target Atom field name — Resolved
 
-Current documentation uses both `target_atom_id` and `atom_id` in different places.
+The canonical field name is `target_atom_id`.
 
-Need to choose one canonical field name and use it consistently across:
+A Challenge assesses exactly one Knowledge Atom, and `target_atom_id` stores the ID of that Atom.
 
-- Challenge docs;
-- extraction docs;
-- examples;
-- Candidate schema;
-- Official schema;
-- implementation.
+The canonical name and semantics are now defined consistently across the Challenge model:
 
-The intended semantics are the Knowledge Atom that the Challenge assesses.
+- `target_atom_id` is a required scalar Atom ID;
+- it is not a list and there is no plural `target_atom_ids` field;
+- it identifies the single Knowledge Atom assessed by the Challenge;
+- a Challenge testing a relationship between independent Atoms targets the corresponding `relation` Atom through `target_atom_id`;
+- Candidate and Official Challenge representations use the same field name.
+
+Therefore no separate `atom_id` field should be introduced for the Challenge target.
 
 ## 9. Define Candidate and Official physical representation
 
