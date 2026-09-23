@@ -13,7 +13,7 @@ A knowledge atom may be:
 - grounded in source evidence;
 - identified as a distinct learning target;
 - learned independently as a target;
-- assessed independently or together with other atoms;
+- assessed through one or more Challenges;
 - reused across competencies and learning activities.
 
 ## 2. Knowledge Atom versus Learner State
@@ -103,19 +103,28 @@ Describes source/system context
 
 ## 5. Knowledge versus Assessment
 
-Questions are assessment entities, not knowledge atoms.
+Challenges are assessment entities, not knowledge atoms.
 
-The relationship is many-to-many:
+A Challenge is a concrete assessment task that targets exactly one Knowledge Atom:
 
 ```text
-Atom A ─┐
-Atom B ─┼── Question Q
-Atom C ─┘
+Knowledge Atom
+      │
+      │ assessed by
+      ▼
+  Challenge
 ```
 
-One atom may be tested by multiple questions, and one question may test multiple atoms.
+The cardinality is:
 
-Assessment construction rules belong to `docs/learning-material/principles/04-assessment-and-learning-material.md`.
+```text
+One Challenge → exactly one Knowledge Atom
+One Knowledge Atom → zero or many Challenges
+```
+
+If a Challenge tests knowledge about a relationship between independent Knowledge Atoms, that relationship is represented as a `relation` Atom and the Challenge targets that relation Atom. The Challenge does not directly target multiple independent Atoms.
+
+Assessment construction rules belong to `docs/assessment/assessment.md` and the Challenge documentation.
 
 ## 6. Knowledge versus Competency
 
