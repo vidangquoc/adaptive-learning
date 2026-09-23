@@ -13,10 +13,10 @@ The current model does not require a Challenge Form taxonomy. The different exer
 ```text
 Challenge
 ├── id
+├── target_atom_id
 ├── instruction
 ├── prompt
 ├── options?
-├── target_atom_id
 ├── answer
 └── extra
 ```
@@ -24,10 +24,10 @@ Challenge
 The canonical structure separates:
 
 - source-occurrence identity (id);
+- the knowledge being assessed (target_atom_id);
 - what the learner is asked to do (instruction);
 - the concrete material the learner acts on (prompt);
 - optional finite choices (options);
-- the knowledge being assessed (target_atom_id);
 - the expected outcome (answer);
 - metadata and provenance (extra).
 
@@ -111,7 +111,29 @@ If two source occurrences happen to contain semantically identical assessment ta
 
 If the source occurrence itself changes in a way that changes the assessment task or its source identity, a new Challenge ID is required.
 
-## 4. instruction
+## 4. target_atom_id
+
+`target_atom_id` identifies the single Knowledge Atom assessed by the Challenge.
+
+It is mandatory for a valid Challenge.
+
+```text
+Challenge
+    │
+    │ target_atom_id
+    ▼
+Knowledge Atom
+```
+
+The field contains an Atom ID, not a copy of Atom content.
+
+A Challenge must not contain a list of independent target Atom IDs.
+
+If the assessment concerns a relationship between independent Knowledge Atoms, the relationship itself must be represented as a relation Knowledge Atom, and target_atom_id points to that relation Atom.
+
+Structural relationships among components of a grammar construction remain part of the relevant grammar rule and do not become relation targets merely because a Challenge tests them.
+
+## 5. instruction
 
 instruction tells the learner what to do.
 
@@ -133,7 +155,7 @@ The instruction is part of the concrete Challenge because changing it can change
 
 It should contain only the learner-facing task direction. Source provenance, answer-key information, and learner/runtime state do not belong here.
 
-## 5. prompt
+## 6. prompt
 
 prompt contains the concrete material on which the learner performs the Challenge.
 
@@ -163,7 +185,7 @@ The prompt may contain blanks, supplied words, a source sentence, a base word, a
 
 The prompt is not the expected answer.
 
-## 6. options
+## 7. options
 
 `options` is optional and is present when the learner must choose from a finite set of explicitly provided alternatives.
 
@@ -201,28 +223,6 @@ answer: true
 No separate true_false form is required.
 
 If a Challenge does not require finite choices, options is omitted.
-
-## 7. target_atom_id
-
-`target_atom_id` identifies the single Knowledge Atom assessed by the Challenge.
-
-It is mandatory for a valid Challenge.
-
-```text
-Challenge
-    │
-    │ target_atom_id
-    ▼
-Knowledge Atom
-```
-
-The field contains an Atom ID, not a copy of Atom content.
-
-A Challenge must not contain a list of independent target Atom IDs.
-
-If the assessment concerns a relationship between independent Knowledge Atoms, the relationship itself must be represented as a relation Knowledge Atom, and target_atom_id points to that relation Atom.
-
-Structural relationships among components of a grammar construction remain part of the relevant grammar rule and do not become relation targets merely because a Challenge tests them.
 
 ## 8. answer
 
@@ -293,17 +293,6 @@ The source fields duplicate information encoded in the ID for explicit machine-r
 
 The exact provenance structure remains to be finalized separately.
 
-extra must not contain learner/runtime state such as:
-
-- learner responses;
-- attempts;
-- correctness history;
-- mastery;
-- review state;
-- review scheduling;
-- aggregate performance statistics;
-- adaptive selection state.
-
 ## 10. Candidate and Official representation
 
 Candidate and Official Challenges share the same canonical structure and ID.
@@ -344,10 +333,10 @@ A valid Challenge must satisfy these invariants:
 
 1. It has exactly one stable id.
 2. For a source-derived Challenge, the id follows the canonical source-occurrence format.
-3. It has a concrete instruction.
-4. It has a concrete prompt.
-5. It has exactly one target_atom_id.
-6. target_atom_id identifies a Knowledge Atom.
+3. It has exactly one target_atom_id.
+4. target_atom_id identifies a Knowledge Atom.
+5. It has a concrete instruction.
+6. It has a concrete prompt.
 7. options is optional and, when present, contains the finite semantic choices presented to the learner.
 8. A supported valid Challenge has a specific answer.
 9. For a multiple-choice Challenge, answer identifies one of the values in options.
@@ -421,36 +410,17 @@ If an essential structural element cannot be established from the source, the ex
 
 In particular, extraction must not create a Challenge merely because an exercise contains a blank or a numbered item. Contextual analysis must establish that the occurrence is an independent evaluable task and that its required structural information can be established.
 
-## 15. What does not belong in the structure
-
-The following are deliberately outside the canonical Challenge structure:
-
-- learner attempts;
-- learner responses;
-- assessment results;
-- review history;
-- learner mastery or ability;
-- review scheduling;
-- aggregate Challenge statistics;
-- adaptive selection priority;
-- reusable templates;
-- generators;
-- presentation-only labels such as A/B/C;
-- a Challenge Form taxonomy used only to classify exercise styles.
-
-These belong to assessment runtime, learner state, adaptive-system data, extraction metadata, UI presentation, or implementation mechanisms as appropriate.
-
-## 16. Status of the structure
+## 15. Status of the structure
 
 The canonical Challenge structure is now intentionally small:
 
 ```text
 Challenge
 ├── id
+├── target_atom_id
 ├── instruction
 ├── prompt
 ├── options?
-├── target_atom_id
 ├── answer
 └── extra
 ```
