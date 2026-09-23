@@ -271,7 +271,7 @@ Do not use source provenance to encode learner history.
 
 A boolean indicating whether the source explicitly tests or practises the atom.
 
-An atom is `true` as soon as that atom is directly tested/practised, regardless of how many atoms the same exercise, question, task, or assessment tests at the same time.
+An atom is `true` as soon as that atom is directly tested/practised, regardless of how many atoms the same exercise, Challenge, task, or assessment tests at the same time.
 
 This is **source-level evidence** only. It is not learner mastery, confidence, correctness, or frequency.
 
