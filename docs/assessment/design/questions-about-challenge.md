@@ -18,18 +18,6 @@ This document collects unresolved design questions about Challenges in the Adapt
 
 ## Questions
 
-### Q1. What makes a Challenge valid for a Knowledge Atom?
-
-What criteria determine whether an extracted Challenge genuinely assesses its target Atom rather than merely mentioning or using it?
-
-### Q2. How should Challenges be extracted from source exercises?
-
-How should concrete assessment tasks in source exercises be identified and transformed into Challenge Candidates while preserving the information needed for later validation and review?
-
-### Q3. What is a Challenge Candidate?
-
-What is produced during Challenge extraction, and what must be reviewed before a Challenge becomes usable by the learning system?
-
 ### Q4. What is the lifecycle of a Challenge?
 
 How should Challenge Candidates be reviewed, approved, rejected, corrected, replaced, or retired?
@@ -54,17 +42,9 @@ For example, response counts, accuracy, discrimination, or other item-level stat
 
 How should the system choose among multiple Challenges targeting the same Knowledge Atom?
 
-### Q10. What makes an extracted Challenge safe and appropriate?
-
-What validation is needed to prevent ambiguity, accidental testing of another Atom, unsupported assumptions, or responses that cannot be reliably evaluated?
-
 ### Q11. What is the role of a Challenge Template or generator?
 
 A Challenge is a concrete instance rather than a template. Should reusable generation patterns or generators be represented as a separate concept, or remain implementation mechanisms outside the Challenge model?
-
-### Q12. What happens when a source exercise contains an assessment task that does not provide enough information to form a valid Challenge?
-
-Should the information be retained as extraction evidence, ignored, or handled through another structure?
 
 ### Q13. What is the identity of a Challenge?
 
