@@ -12,6 +12,20 @@ An Atom-level Challenge is a short assessment task focused on assessing one Know
 
 Long integrated or composite exercises, including long Cloze exercises that assess multiple pieces of knowledge together, are outside the current scope. A separate extraction process may support integrated or composite Challenges in the future.
 
+## Assessment Item as Strong Evidence
+
+The strongest source evidence that an assessment occurrence is a Challenge is that it is an **item within an exercise**.
+
+When a source exercise is composed of multiple smaller items, each item should be treated as a Challenge candidate by default.
+
+This rule takes precedence over superficial formatting such as blanks, answer spaces, or other presentational units. An item may contain multiple blanks, actions, or response elements and still constitute one Challenge.
+
+An item should not be treated as a Challenge only when contextual analysis determines that it does not represent an independent, evaluable learner task or is otherwise outside the current extraction scope.
+
+When an exercise item is not emitted as a Challenge, the extraction process must report the reason.
+
+This makes omission explicit rather than silently losing source assessment evidence.
+
 ## Shared Contextual Analysis
 
 Challenge Extraction and Knowledge Atom Extraction are not independent processes.
@@ -45,7 +59,9 @@ The extraction unit is not defined by source formatting such as:
 - an option;
 - or another presentational unit.
 
-A numbered item normally produces one Candidate when it represents one independent task. Multiple actions or blanks do not automatically create multiple Candidates; the boundary is determined by task independence.
+In a multi-item exercise, the exercise item is the primary candidate boundary. Within an item, multiple actions or blanks do not automatically create multiple Candidates; the item remains one Challenge when those elements form one independent task.
+
+If an exercise item cannot be treated as a Challenge, it must be explicitly reported with the reason.
 
 ## Assessment Task
 
@@ -201,7 +217,8 @@ Validation should check:
 - preservation of assessment structure;
 - answer information when available;
 - provenance;
-- compliance with extraction scope.
+- compliance with extraction scope;
+- and, when an exercise item is not emitted, the explicit reason for omission.
 
 Validation may include structural checks, source-faithfulness checks, and consistency checks between the Challenge and its target Atom.
 
