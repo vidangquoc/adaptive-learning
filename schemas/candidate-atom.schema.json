@@ -283,6 +283,27 @@
           }
         }
       }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "not": {
+              "const": "relation"
+            }
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "relation_type": {
+            "type": "null"
+          }
+        }
+      }
     }
   ],
   "$defs": {
