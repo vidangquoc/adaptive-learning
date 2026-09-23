@@ -1,8 +1,8 @@
 # Challenge Forms
 
-This document defines the common forms of Challenges used to assess Knowledge Atoms.
+This document defines the current forms of Challenges used to assess Knowledge Atoms.
 
-Its purpose is to establish the Challenge Form taxonomy before finalizing the canonical Challenge structure. Form-specific analysis will determine what information a Challenge must contain in its task and answer fields.
+Its purpose is to establish the Challenge Form taxonomy before finalizing the canonical Challenge structure. Form-specific analysis will determine what information a Challenge must contain in its task, options, and answer fields.
 
 A Challenge Form describes how the learner performs an assessment task. It does not identify the Knowledge Atom being assessed.
 
@@ -16,7 +16,7 @@ A form answers:
 
 It does not answer what knowledge is being tested. That is identified by target_atom_id.
 
-The same Knowledge Atom may be assessed through different forms, such as multiple choice and fill in the blank.
+The same Knowledge Atom may be assessed through different forms.
 
 ### 1.2 Form does not determine the target Atom
 
@@ -25,42 +25,39 @@ A form is independent of the knowledge domain.
 For example:
 - multiple choice may assess vocabulary or grammar;
 - fill in the blank may assess vocabulary or grammar;
-- matching may assess a vocabulary relation or a grammar distinction.
+- word formation may assess morphological or lexical knowledge.
 
 ### 1.3 One Challenge may contain multiple response elements
 
-A form may involve multiple blanks, matches, corrections, or other response elements while still constituting one Challenge.
+A form may involve multiple blanks, corrections, or other response elements while still constituting one Challenge.
 
 The number of response elements does not by itself determine the number of Challenges.
 
-## 2. Initial Form Taxonomy
+## 2. Current Form Taxonomy
 
-The following forms are common in English-learning materials and are suitable candidates for the initial taxonomy.
+The current working set contains eight forms:
 
-Challenge Form
-├── selected_response
-│   ├── multiple_choice
-│   ├── true_false
-│   └── matching
-│
-├── constructed_response
-│   ├── fill_in_blank
-│   ├── sentence_completion
-│   ├── short_answer
-│   ├── error_correction
-│   ├── sentence_transformation
-│   ├── sentence_reordering
-│   ├── word_formation
-│   └── translation
-│
-└── cloze
-    └── cloze
+1. multiple_choice
+2. fill_in_blank
+3. sentence_completion
+4. short_answer
+5. error_correction
+6. sentence_transformation
+7. sentence_reordering
+8. word_formation
 
-This is an initial working taxonomy. The grouping is conceptual; canonical stored form values may later use a flatter representation.
+The following forms have been explicitly excluded:
+
+- true_false — represented as a special case of multiple_choice;
+- matching — excluded from the current model;
+- translation — excluded from the current model;
+- cloze — excluded from the current model.
 
 ## 3. Multiple Choice
 
 The learner selects one answer from a finite set of explicitly provided options.
+
+True/False is treated as a special case of Multiple Choice in which the available options are True and False. It is not a separate Challenge Form.
 
 Example:
 
@@ -68,53 +65,35 @@ Choose the correct answer.
 
 Darren ___ home at eight yesterday.
 
-A. gets
-B. got
+A. gets  
+B. got  
 C. has got
 
-Expected outcome: B.
+The canonical answer is the **content of the selected option**, not its presentation label.
+
+Therefore:
+
+- options = [gets, got, has got]
+- answer = got
+
+The labels A, B, C are presentation details and do not define the answer.
+
+A True/False Challenge is therefore conceptually:
+
+- options = [true, false]
+- answer = true
+
+The fundamental invariant is:
+
+> The answer must identify an option by its semantic content, not by its display label or position.
 
 Characteristics:
 - finite explicit options;
 - learner selects rather than constructs the answer;
-- distractors are part of the task.
+- distractors are part of the task;
+- the answer is one of the option values.
 
-Whether the selected option should be identified by stable option ID, position, or value is a separate structural decision.
-
-## 4. True / False
-
-The learner classifies a statement into one of two explicitly defined alternatives, normally True or False.
-
-Example:
-
-Darren got home at eight yesterday. True / False
-
-Expected outcome: True.
-
-This is structurally similar to multiple choice. Whether it should remain a separate canonical form or be represented as a constrained multiple-choice form remains open.
-
-## 5. Matching
-
-The learner associates items from one set with corresponding items from another set.
-
-Example:
-
-Match the words with their meanings.
-
-1. acquire
-2. obtain
-
-a. get
-b. learn or gain
-
-Expected outcome:
-
-1 → b
-2 → a
-
-Matching usually contains multiple response elements, and its answer is inherently structured as a set of pairings.
-
-## 6. Fill in the Blank
+## 4. Fill in the Blank
 
 The learner supplies missing material in an incomplete expression, sentence, or other bounded context.
 
@@ -128,7 +107,7 @@ A single Challenge may contain multiple blanks when they form one independent as
 
 A blank is a response element, not necessarily a Challenge.
 
-## 7. Sentence Completion
+## 5. Sentence Completion
 
 The learner completes a sentence or sentence frame so that it satisfies the task requirements.
 
@@ -138,9 +117,9 @@ If I had known about the problem, I __________.
 
 Expected answer: would have helped.
 
-This overlaps with fill in the blank. The distinction should remain pragmatic rather than being based only on typography. It may eventually be unnecessary if both forms use the same structural model.
+This overlaps with Fill in the Blank. The distinction should remain pragmatic rather than being based only on typography. It may eventually be unnecessary if both forms use the same structural model.
 
-## 8. Short Answer
+## 6. Short Answer
 
 The learner produces a short, bounded response without being given a finite list of options.
 
@@ -154,7 +133,7 @@ The response is constructed, but the expected answer remains sufficiently specif
 
 Open-ended essay, speaking, or free-form composition is outside the current Challenge model when a specific expected answer cannot be established.
 
-## 9. Error Correction
+## 7. Error Correction
 
 The learner identifies and/or corrects an error in provided language.
 
@@ -170,7 +149,7 @@ Darren went home at eight yesterday.
 
 Some exercises ask the learner to identify the erroneous part, while others ask for the corrected sentence. These may require different answer structures or may later become distinct forms.
 
-## 10. Sentence Transformation
+## 8. Sentence Transformation
 
 The learner transforms a given sentence according to a specified instruction while preserving the required meaning or satisfying a grammatical transformation.
 
@@ -186,7 +165,7 @@ I used to live in London when I was a child.
 
 The original sentence and transformation instruction are part of the task; the transformed sentence is the expected outcome.
 
-## 11. Sentence Reordering
+## 9. Sentence Reordering
 
 The learner rearranges supplied words or chunks into the required order.
 
@@ -202,7 +181,7 @@ I went home yesterday.
 
 The supplied tokens/chunks are part of the task. The answer may eventually be represented as an ordered sequence rather than only as a string.
 
-## 12. Word Formation
+## 10. Word Formation
 
 The learner derives the required word form from a supplied base word or lexical context.
 
@@ -215,131 +194,103 @@ Expected answer: contribution.
 
 This Challenge Form must not be confused with the Knowledge Atom type word_formation. The Form describes the assessment task; the target Atom describes the knowledge being assessed.
 
-## 13. Translation
+## 11. Excluded Forms
 
-The learner translates a supplied expression from one language into another.
+### 11.1 True / False
 
-Example:
+True/False is not a separate form.
 
-Translate into English:
+It is represented by multiple_choice with exactly two options:
 
-Tôi đã về nhà lúc tám giờ hôm qua.
+- true
+- false
 
-Expected answer:
+The expected answer is the selected option content.
 
-I went home at eight yesterday.
+### 11.2 Matching
 
-Translation can become open-ended very quickly. Under the current Challenge model, a translation Challenge is supported only when a sufficiently specific expected answer can be established.
+Matching is excluded from the current Challenge model.
 
-A task with many equally acceptable translations may require a richer evaluation model and is therefore not automatically a valid supported Challenge.
+It is therefore not part of the current canonical Form taxonomy.
 
-## 14. Cloze
+### 11.3 Translation
 
-The learner supplies missing words or forms in a continuous passage or larger connected text.
+Translation is excluded from the current Challenge model.
 
-Example:
+It is therefore not part of the current canonical Form taxonomy.
 
-When I arrived home, Darren ___ already ___ dinner.
+### 11.4 Cloze
 
-The answer is generally a set or sequence of missing values.
+Cloze is excluded from the current Challenge model.
 
-Long integrated Cloze exercises are currently outside the main Challenge extraction scope. Therefore, cloze remains a recognized Form, but long multi-item Cloze exercises should not automatically be decomposed into Challenges by the current extraction pipeline.
+Long integrated Cloze exercises are not decomposed into Challenges by the current extraction model.
 
-## 15. Possible Later Forms
+## 12. Common High-Level Structure
 
-The initial taxonomy may later need forms such as:
+The examples examined so far suggest that most current forms can be described using a common high-level structure:
 
-- listening discrimination;
-- listening comprehension;
-- reading comprehension;
-- pronunciation production;
-- dictation;
-- substitution;
-- gap-fill with word bank;
-- selection from a word bank;
-- information-gap tasks;
-- dialogue completion;
-- categorization;
-- sequencing;
-- identifying an error;
-- identifying a correct form;
-- odd-one-out;
-- paraphrasing.
+Challenge
+├── instruction
+├── prompt
+├── options? 
+└── answer
 
-They should be added when the Challenge model can represent their task, expected outcome, and evaluation semantics clearly.
+The optional options component is primarily associated with multiple_choice.
 
-## 16. Form versus Task Mechanics
-
-Some distinctions are merely mechanics inside a form rather than distinct forms.
+The major observation is that the current forms do not necessarily require a completely different top-level Challenge structure. Instead, the form may determine the internal structure or interpretation of prompt and answer.
 
 For example:
-- one blank versus three blanks;
-- four options versus five options;
-- vertical versus horizontal option layout;
-- source exercise numbering;
-- number of lines provided for writing.
-
-These should not automatically become separate Challenge Forms.
-
-A Form should represent a meaningful difference in the nature of the learner's assessment task.
-
-## 17. Form-Specific Structure
-
-Each form can impose different requirements on the eventual Challenge structure.
-
-Conceptually:
-
-form
-↓
-determines
-- task structure
-- response structure
-- answer structure
-
-Illustrative examples:
 
 multiple_choice
-- task: instruction, prompt, options
-- answer: selected option
+- instruction
+- prompt
+- options
+- answer
 
 fill_in_blank
-- task: prompt, response elements
-- answer: values
-
-matching
-- task: left items, right items
-- answer: pairings
+- instruction
+- prompt
+- answer
 
 sentence_transformation
-- task: instruction, original sentence
-- answer: transformed sentence
+- instruction
+- prompt
+- answer
 
-These are not schemas. They expose structural differences that the canonical Challenge structure must accommodate.
+sentence_reordering
+- instruction
+- prompt
+- answer
 
-## 18. Open Questions
+word_formation
+- instruction
+- prompt
+- answer
 
-Before finalizing the Challenge structure and schemas, resolve:
+This observation is one of the reasons the Challenge structure should be designed only after the Challenge Form analysis is sufficiently stable.
 
-1. Should true_false be a separate Form or a constrained multiple_choice?
-2. Should fill_in_blank and sentence_completion remain separate Forms?
-3. Should error_correction distinguish identifying an error from producing a correction?
-4. Should short_answer remain broad or be split by response semantics?
-5. Should translation support only exact translations or a set of acceptable answers?
-6. Should cloze remain a Form even though long Cloze extraction is currently out of scope?
-7. Which forms require structured answers rather than strings?
+## 13. Open Questions
+
+The following questions remain for further analysis:
+
+1. Should fill_in_blank and sentence_completion remain separate forms?
+2. Should error_correction distinguish identifying an error from producing a correction?
+3. Should short_answer remain a broad form or be split by response semantics?
+4. Which forms require structured prompt values rather than a simple string?
+5. Which forms require structured answer values rather than a simple string?
+6. Are some apparent forms actually variations of the same underlying task?
+7. Should the canonical form field use a flat taxonomy?
 8. Which task mechanics are structural enough to affect Form identity?
-9. Should the canonical form field use a flat taxonomy or hierarchical categories?
-10. Are some apparent Forms actually reusable task mechanics shared by several Forms?
 
 These questions should be resolved through comparison with real source exercises before the Challenge structure is frozen.
 
-## 19. Relationship to Challenge Structure
+## 14. Relationship to Challenge Structure
 
 The design order is intentional:
 
 Challenge Forms
 ↓
-form-specific task/response/answer structures
+form-specific prompt/answer structures
 ↓
 canonical Challenge Structure
 ↓
