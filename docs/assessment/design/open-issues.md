@@ -220,23 +220,27 @@ The schemas are derived from the canonical Challenge structure and enforce the C
 
 The exact structural semantics of `prompt`, `options`, and `answer` remain defined by `challenge-structure.md`; the schemas validate their canonical representations without introducing a separate Challenge Form taxonomy.
 
-## 11. Strengthen fail-closed and source-preservation rules
+## 11. Strengthen fail-closed and source-preservation rules — Resolved
 
-Knowledge Atom pipeline documentation explicitly defines fail-closed behavior, immutable source evidence, and reproducibility requirements. Challenge extraction currently expresses the same principles more informally.
+Challenge extraction now explicitly follows a fail-closed, source-preserving, and reproducible extraction model.
 
-Need to formalize that extraction must not silently repair or invent:
+The extraction process MUST NOT silently invent, repair, normalize, or infer away missing essential assessment content, including:
 
-- task wording;
-- missing options;
-- missing response elements;
+- task/instruction wording;
+- prompt content;
+- explicit options required by the source task;
+- learner response elements;
 - exercise/item boundaries;
 - target Atom;
-- expected answer;
-- other essential assessment content.
+- expected answer.
 
-If the task, boundary, target Atom, or expected answer cannot be established sufficiently from source evidence, the occurrence should become an explicit incomplete/unresolved/skip result rather than a normal valid Challenge Candidate.
+When an essential element cannot be established sufficiently from source evidence, the extraction result MUST be represented as incomplete, unresolved, or skipped rather than emitted as a normal valid Challenge Candidate.
 
-Challenge extraction should also adopt explicit reproducibility and source-preservation rules comparable to the Knowledge Atom pipeline.
+Source evidence is authoritative and must be preserved faithfully. Extraction may derive canonical fields from the source, but it must not silently alter source wording or source structure in a way that changes the assessment task.
+
+Challenge extraction is reproducible: given the same source evidence, the same contextual inputs, and the same extraction rules/version, the extraction process should produce the same structural result. Any intentional change in extraction rules or interpretation is a model/process change and must not be hidden as if it were the same extraction.
+
+The corresponding fail-closed and source-preservation rules are documented in `challenge-extraction/challenge-structure.md`.
 
 ## 12. Resolve source-independent Challenge storage
 
