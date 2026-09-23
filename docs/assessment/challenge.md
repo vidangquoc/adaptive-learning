@@ -20,7 +20,7 @@ Knowledge Atom
   Challenge
 ```
 
-If a Challenge appears to require knowledge of multiple independent knowledge points, the knowledge being assessed must be represented by a single Knowledge Atom.
+If a Challenge appears to involve multiple independent knowledge points, the current model still requires exactly one target Knowledge Atom. Contextual analysis must establish which single knowledge target the Challenge assesses. If that cannot be established, the occurrence is unresolved/incomplete rather than a multi-target Challenge.
 
 If the Challenge assesses knowledge about a relationship between independent Knowledge Atoms, that relationship is represented by a `relation` Atom. The Challenge then targets that relation Atom.
 
