@@ -168,11 +168,11 @@ The canonical name and semantics are now defined consistently across the Challen
 
 Therefore no separate `atom_id` field should be introduced for the Challenge target.
 
-## 9. Define Candidate and Official physical representation
+## 9. Define Candidate and Official physical representation — Resolved
 
-Knowledge Atom documentation specifies that Candidate and Official stores contain Markdown collections of fenced YAML blocks, with each block independently validating against its corresponding schema.
+The physical representation is now defined consistently with the Challenge lifecycle and the Knowledge Atom storage model.
 
-Challenge storage currently specifies:
+Challenges are stored per source and Source Segment:
 
 ```text
 data/
@@ -183,15 +183,19 @@ data/
             └── challenge_candidates.md
 ```
 
-Need to explicitly define:
+The representation is:
 
-- `challenges.md` as the Official Challenge collection;
-- `challenge_candidates.md` as the Candidate Challenge collection;
-- one fenced YAML block per Challenge;
-- Candidate `review_status`;
-- Candidate/Official shared semantic ID;
-- schema validation of individual blocks;
-- absence of an additional `official/` or `candidates/` directory layer.
+- `challenges.md` contains the Official Challenge collection;
+- `challenge_candidates.md` contains the Candidate Challenge collection;
+- each Challenge is represented as an independently parseable fenced YAML block;
+- Candidate Challenges carry `review_status`;
+- Candidate and Official representations of the same Challenge use the same Challenge ID;
+- officialization is a storage transition from Candidate to Official and does not change the ID;
+- there is no additional `official/` or `candidates/` directory layer.
+
+This issue is therefore resolved at the physical-storage/model level.
+
+The corresponding Candidate and Official JSON Schemas remain a separate concern covered by Issue 10.
 
 ## 10. Define Challenge Candidate and Official schemas
 
