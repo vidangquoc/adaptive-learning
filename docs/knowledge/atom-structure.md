@@ -374,6 +374,3 @@ This boundary prevents both atom inflation and the loss of independently useful 
 20. A rejected Candidate may be reviewed again; an Official Atom does not return to Candidate/rejected lifecycle states.
 21. An Official Atom may be corrected or refined while retaining the same semantic identity.
 22. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
-23. Source Segment IDs, page locations, exercise IDs, and extraction details are provenance/assessment data, not semantic identity.
-24. Canonical atom meaning remains independent of learner state.
-25. The formal JSON schema may constrain representation details later, but it must not introduce a second conceptual model.
