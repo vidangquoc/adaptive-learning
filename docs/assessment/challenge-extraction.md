@@ -292,6 +292,18 @@ What should happen when an exercise spans multiple Segments, or when a Segment c
 
 Should Challenge Extraction operate on individual Segments or on larger source structures when necessary?
 
+**Decision**
+
+Challenge Extraction operates within individual Source Segments.
+
+A Challenge Candidate must belong entirely to **one Segment**. A Challenge must not span multiple Segments.
+
+If an assessment task appears to span two or more Segments and therefore cannot be extracted as a complete Challenge from a single Segment:
+- it should not be extracted as a Challenge Candidate;
+- the occurrence should be reported as skipped/incomplete.
+
+A Segment may contain zero, one, or multiple Challenge Candidates. Segment boundaries therefore do not determine the number of Challenges, but they do determine whether an individual Challenge can be extracted.
+
 ### Q16. What should remain source-specific?
 
 Which information should remain as source provenance or extraction evidence rather than becoming intrinsic Challenge data?
