@@ -45,31 +45,6 @@ Need to document the relationship between:
 
 In particular, multiple source occurrences may provide provenance for one reusable semantic Challenge without making source location part of its identity.
 
-## 16. Update Knowledge Atom documentation to use Challenge terminology
-
-The Knowledge Atom documentation still contains an outdated assessment model describing Questions as assessment entities and showing a Question as potentially related to multiple Atoms.
-
-The current Challenge model has replaced that design.
-
-The outdated section should be updated so that it reflects:
-
-```text
-Knowledge Atom
-      │
-      │ assessed by
-      ▼
-Challenge
-```
-
-and:
-
-```text
-One Challenge → exactly one Knowledge Atom
-One Knowledge Atom → zero or many Challenges
-```
-
-This update should also preserve the relation-Atom rule: a Challenge testing a relationship between independent Atoms targets the corresponding relation Atom rather than directly targeting multiple Atoms.
-
 ## 17. Keep Challenge and Knowledge Atom boundaries aligned
 
 The Challenge model should remain consistent with the established Knowledge Atom model.
