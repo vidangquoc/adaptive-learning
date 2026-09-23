@@ -37,21 +37,24 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "string"
+        "type": "string",
+        "pattern": "^(?!.*[^\\\\S ])(?!.*  )(?! )(?!.* $).+$"
       }
     },
     "answer": {
       "oneOf": [
         {
           "type": "string",
-          "minLength": 1
+          "minLength": 1,
+          "pattern": "^(?!.*[^\\\\S ])(?!.*  )(?! )(?!.* $).+$"
         },
         {
           "type": "array",
           "minItems": 2,
           "items": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^(?!.*[^\\\\S ])(?!.*  )(?! )(?!.* $).+$"
           }
         }
       ]
