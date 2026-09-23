@@ -277,21 +277,38 @@ The extractor must not invent an answer. If source evidence is insufficient to e
 
 At minimum, it may contain provenance and maintenance information.
 
-For a source-derived Challenge, provenance may be represented as:
+For a source-derived Challenge, provenance is represented as:
 
 ```yaml
 extra:
-  source:
+  provenance:
     source_id: destination-c1-c2
+    page_number: 42
     segment_id: unit-1
-    exercise_id: exercise-3
-    item_id: 2
+    exercise_name: "Exercise 3"
+    item_number: 2
   notes: ...
 ```
 
-The source fields duplicate information encoded in the ID for explicit machine-readable provenance. They do not replace the ID.
+The provenance fields duplicate information encoded in the ID for explicit machine-readable provenance. They do not replace the ID.
 
-The exact provenance structure remains to be finalized separately.
+### 9.1 Provenance fields
+
+The canonical provenance fields are:
+
+- `source_id`: the source registered in the source registry.
+- `page_number`: the page number in the original source artifact, not a page number relative to the Source Segment or a PDF viewer's zero/one-based page index.
+- `segment_id`: the Source Segment containing the Challenge occurrence.
+- `exercise_name`: the name or label of the exercise as it appears in the source material.
+- `item_number`: the item number or label within the exercise.
+
+`page_number` refers to the page numbering of the original source itself. If the source artifact is a scanned or paginated book, this means the printed/book page number when one exists, rather than the technical page index of the digital artifact.
+
+`exercise_name` preserves the source exercise's name or label rather than introducing a system-generated exercise identity.
+
+`item_number` identifies the item within the exercise for provenance purposes; it is not a separately persisted Challenge entity.
+
+The provenance structure is explicit machine-readable origin metadata. It does not define a second identity for the Challenge.
 
 ## 10. Candidate and Official representation
 
