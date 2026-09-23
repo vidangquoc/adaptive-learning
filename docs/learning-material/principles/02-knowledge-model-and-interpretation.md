@@ -39,7 +39,7 @@ word → sense → pattern → expression
 grammar heading → grammar use → example
 ```
 
-Atom-to-atom relationships are not persisted because they are not used by the Adaptive Learning system.
+Raw Atom-to-Atom relationships are not persisted merely as graph edges. When knowledge about a relationship between independent Knowledge Atoms is itself an independently learnable or testable target, that knowledge is represented as a `relation` Atom.
 
 ## Evidence versus Interpretation
 
