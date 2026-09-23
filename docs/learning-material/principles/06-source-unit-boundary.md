@@ -192,6 +192,6 @@ Discovery may identify vocabulary, phrases, patterns, collocations, idioms, phra
 
 Discovery output is evidence location and interpretation input, not canonical knowledge. Knowledge interpretation and atomization are defined elsewhere.
 
-Exercises and questions inside a segment are source evidence for assessment. Answer choices, fill-in rows, generic exercise markers, and similar structural artifacts must not automatically become knowledge atoms.
+Exercises and Challenges inside a segment are source evidence for assessment. Answer choices, fill-in rows, generic exercise markers, and similar structural artifacts must not automatically become knowledge atoms.
 
 
