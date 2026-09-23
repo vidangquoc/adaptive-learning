@@ -245,11 +245,11 @@ Raw structural relationships between atoms are not persisted merely for graph pu
 
 ### Assessment
 
-Questions, exercises, attempts, answer records, and assessment quality are not atom types. They belong to the assessment/learner layers and may reference atoms.
+Challenges, exercises, attempts, answer records, and assessment quality are not atom types. They belong to the assessment/learner layers and may reference atoms.
 
 ### Source organization
 
-Units, reviews, tests, page ranges, Segment IDs, and other source structure are provenance or source metadata, not atom types.
+Units, reviews, assessment tasks, page ranges, Segment IDs, and other source structure are provenance or source metadata, not atom types.
 
 ---
 
