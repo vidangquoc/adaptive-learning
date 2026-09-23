@@ -2,7 +2,7 @@
 
 Challenge Extraction produces Challenge Candidates from assessment tasks found in source learning material.
 
-This document defines the principles that govern Atom-level Challenge Extraction. It is derived from the design decisions recorded during the development of the extraction process.
+This document defines the principles that govern Atom-level Challenge Extraction. It is derived from the design decisions established during the development of the extraction process.
 
 ## Scope
 
@@ -11,6 +11,28 @@ The current process extracts **Atom-level Challenges**.
 An Atom-level Challenge is a short assessment task focused on assessing one Knowledge Atom.
 
 Long integrated or composite exercises, including long Cloze exercises that assess multiple pieces of knowledge together, are outside the current scope. A separate extraction process may support integrated or composite Challenges in the future.
+
+## Shared Contextual Analysis
+
+Challenge Extraction and Knowledge Atom Extraction are not independent processes.
+
+Both are derived from the same contextual analysis of a Source Segment. The analysis must identify the knowledge represented in the segment and the assessment tasks that provide evidence about that knowledge.
+
+When a Challenge Candidate is created, the extraction process must also identify the **Knowledge Atom being assessed**.
+
+The target Atom may be:
+
+- an existing Knowledge Atom Candidate identified earlier;
+- an existing Official Knowledge Atom; or
+- a Knowledge Atom identified or created during the same contextual analysis.
+
+A Challenge must not be emitted with an unresolved target Atom when the source provides enough evidence to identify the knowledge being assessed.
+
+A Challenge may also provide evidence for discovering a Knowledge Atom. Assessment task wording, expected answers, or other assessment evidence may reveal a knowledge point that is not sufficiently explicit elsewhere in the source.
+
+If a Challenge assesses a relationship between independent Knowledge Atoms, that relationship must itself be represented as a relation Knowledge Atom, and the Challenge targets that relation Atom.
+
+Structural relationships among components inside one grammatical construction are not relation Atoms; they remain part of the relevant grammar rule or other Atom representation.
 
 ## Extraction Unit
 
@@ -139,13 +161,14 @@ Extraction should prefer explicit uncertainty or omission over invention.
 
 ## Candidate Completeness
 
-A Candidate must contain enough information to reconstruct and understand the original assessment task and to support later review and conversion into a Challenge.
+A Candidate must contain enough information to reconstruct and understand the original assessment task, identify the Knowledge Atom being assessed, and support later review and conversion into a Challenge.
 
 At minimum, extraction should preserve:
 
 - the task or prompt;
 - information required to perform the task;
 - applicable instructions or context;
+- the target Knowledge Atom;
 - answer information when available;
 - source provenance;
 - the Challenge form when identifiable.
@@ -159,25 +182,27 @@ Extraction evidence must preserve enough information for later review to determi
 - what was extracted;
 - where it came from;
 - what source material or context was used;
+- what Knowledge Atom was identified as the assessment target;
 - and, where relevant, what limitations or uncertainties existed.
 
 Evidence is source-specific and is not part of intrinsic Challenge semantics.
 
 ## Validation
 
-Every extracted Candidate should be validated for faithful representation of a concrete assessment occurrence in the source.
+Every extracted Candidate should be validated for faithful representation of a concrete assessment occurrence in the source and for correct identification of the Knowledge Atom being assessed.
 
 Validation should check:
 
 - assessment occurrence;
 - assessment boundary;
 - completeness;
+- target Knowledge Atom;
 - absence of invented source content;
 - preservation of assessment structure;
 - answer information when available;
 - provenance;
 - compliance with extraction scope.
 
-Validation may include structural checks and source-faithfulness checks.
+Validation may include structural checks, source-faithfulness checks, and consistency checks between the Challenge and its target Atom.
 
 Validation does not replace the separate Candidate review and approval process.
