@@ -259,6 +259,11 @@ The options are semantic values, not presentation labels.
 
 The UI may display them as A/B/C, 1/2/3, radio buttons, or another presentation format. Those presentation details do not belong to the Challenge's semantic structure.
 
+Every option string MUST:
+- have no leading or trailing whitespace;
+- use exactly one ASCII space (U+0020) between words when multiple words are present;
+- contain no tabs, line breaks, or other whitespace characters.
+
 The answer for a multiple-choice Challenge must correspond to an option by its content:
 
 ```text
@@ -339,7 +344,14 @@ answer: "I used to live in London when I was a child."
 
 A sentence containing many words is still one input if the learner is required to provide one complete sentence.
 
-The answer does not describe how the learner response is evaluated. Case, whitespace, punctuation, alternative valid responses, normalization, and other equivalence rules belong to evaluation and are outside the Expected Answer model.
+Every answer string MUST:
+- have no leading or trailing whitespace;
+- use exactly one ASCII space (U+0020) between words when multiple words are present;
+- contain no tabs, line breaks, or other whitespace characters.
+
+For an answer array, these rules apply independently to every answer string.
+
+The Challenge model does not define learner-response evaluation or equivalence rules.
 
 For multiple-choice Challenges, the answer must identify one of the provided option values by content, and therefore:
 
@@ -440,7 +452,7 @@ A valid Challenge must satisfy these invariants:
 12. If the Challenge requires multiple inputs, answer is an array of strings whose elements correspond to the inputs in order.
 13. The number of answer values MUST equal the number of inputs required by the Challenge.
 14. For a multiple-choice Challenge, answer identifies one of the values in options.
-15. Evaluation rules are outside the Expected Answer model.
+15. Every string in options and answer has no leading or trailing whitespace, uses exactly one ASCII space between words, and contains no tabs, line breaks, or other whitespace characters.
 16. Source information, when present, is metadata that supplements the ID.
 17. Learner/runtime data is outside the Challenge structure.
 18. Candidate and Official representations use the same Challenge ID.
