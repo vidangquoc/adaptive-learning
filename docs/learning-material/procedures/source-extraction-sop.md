@@ -217,7 +217,7 @@ Preserve, where available:
 
 - Segment ID/type;
 - exercise or test identifier;
-- question number;
+- item number;
 - original task type;
 - prompt;
 - options;
@@ -226,13 +226,13 @@ Preserve, where available:
 - provenance;
 - the instructional or knowledge target supported by the source.
 
-Do not transform source questions into generated questions during source extraction.
+Do not transform source Challenges into generated Challenges during source extraction.
 
-Assessment evidence can support atom discovery and validation, but a question does not automatically prove that every word or concept appearing in it is a tested knowledge target.
+Assessment evidence can support atom discovery and validation, but a Challenge does not automatically prove that every word or concept appearing in it is a tested knowledge target.
 
-## 10. Preserve question ↔ evidence / atom relationships
+## 10. Preserve Challenge ↔ evidence / atom relationships
 
-When source-derived questions are linked to knowledge findings, preserve the relationship explicitly.
+When source-derived Challenges are linked to knowledge findings, preserve the relationship explicitly.
 
 Use evidence such as:
 
@@ -245,7 +245,7 @@ Use evidence such as:
 
 Do not infer a relationship merely because a word or construction appears somewhere in the same Segment.
 
-Question-to-knowledge relationships must remain traceable back to the source evidence that justified the relationship.
+Challenge-to-knowledge relationships must remain traceable back to the source evidence that justified the relationship.
 
 ## 11. Create Candidate Atoms
 
