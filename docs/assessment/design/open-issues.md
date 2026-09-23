@@ -197,17 +197,9 @@ This issue is therefore resolved at the physical-storage/model level.
 
 The corresponding Candidate and Official JSON Schemas remain a separate concern covered by Issue 10.
 
-## 10. Define Challenge Candidate and Official schemas
+## 10. Define Challenge Candidate and Official schemas — Resolved
 
-After the canonical structure is settled, define corresponding schemas, analogous to:
-
-```text
-schemas/
-├── candidate-atom.schema.json
-└── official-atom.schema.json
-```
-
-The likely Challenge equivalents are:
+The Challenge Candidate and Official schemas have now been created:
 
 ```text
 schemas/
@@ -215,7 +207,18 @@ schemas/
 └── official-challenge.schema.json
 ```
 
-The exact names remain open until the schema design is finalized.
+The schemas are derived from the canonical Challenge structure and enforce the Candidate/Official lifecycle distinction:
+
+- both require exactly one scalar `target_atom_id`;
+- both require `id`, `instruction`, `prompt`, `answer`, and `extra`;
+- `options` is optional;
+- Candidate additionally requires `review_status` with values `pending`, `approved`, or `rejected`;
+- Official does not contain `review_status`;
+- Candidate and Official use the same Challenge ID model;
+- unknown top-level and nested properties are rejected with `unevaluatedProperties: false`;
+- the schemas use JSON Schema Draft 2020-12.
+
+The exact structural semantics of `prompt`, `options`, and `answer` remain defined by `challenge-structure.md`; the schemas validate their canonical representations without introducing a separate Challenge Form taxonomy.
 
 ## 11. Strengthen fail-closed and source-preservation rules
 
