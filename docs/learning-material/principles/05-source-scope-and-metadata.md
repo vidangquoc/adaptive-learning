@@ -36,4 +36,4 @@ Use copyrighted books as source material within applicable rights and project pe
 
 Preserve provenance, canonical source references, extraction metadata, and checksums where appropriate, but do not redistribute copyrighted source text wholesale unless permitted.
 
-Generated summaries, metadata, mappings, and original follow-up questions should not be treated as a substitute for source provenance.
+Generated summaries, metadata, mappings, and original follow-up Challenges should not be treated as a substitute for source provenance.
