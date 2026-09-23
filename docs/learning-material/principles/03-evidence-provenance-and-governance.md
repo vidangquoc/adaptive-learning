@@ -2,7 +2,7 @@
 
 ## Provenance Is Mandatory
 
-Every source-derived knowledge atom and question must retain enough provenance to answer:
+Every source-derived Knowledge Atom and Challenge must retain enough provenance to answer:
 
 > **Where did this come from, and what evidence supports it?**
 
@@ -93,7 +93,7 @@ If evidence is insufficient or competing interpretations remain unresolved:
 
 ## Pipeline Governance
 
-Evidence should be preserved before interpretation. Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting raw evidence.
+Evidence should be preserved before interpretation. Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, Challenges, or learner-state data without rewriting raw evidence.
 
 Transformations should be reproducible and idempotent where practical. Do not silently repair source evidence; record repairs or downstream normalization explicitly.
 
