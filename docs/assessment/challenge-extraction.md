@@ -11,6 +11,8 @@ This document collects unresolved design questions about Challenge Extraction.
 - Challenge Extraction produces Challenge Candidates rather than approved Challenges.
 - A later process may link a Challenge Candidate to a Knowledge Atom.
 - Source provenance should be preserved for extracted Challenges.
+- An Atom-level Challenge is a short assessment task focused on assessing one Knowledge Atom.
+- Long integrated or composite exercises, such as long Cloze passages used to assess multiple pieces of knowledge together, are not used to extract Atom-level Challenges.
 
 ## Questions
 
@@ -48,6 +50,22 @@ How should we distinguish:
 
 Which of these should be preserved in the Challenge Candidate?
 
+**Decision**
+
+An Atom-level Challenge should be a **short assessment task focused on assessing one Knowledge Atom**.
+
+The extracted Challenge should preserve the parts of the source task that are necessary for the learner to understand and perform that short task, such as:
+- the relevant instruction;
+- the prompt;
+- necessary context;
+- answer options or other response elements.
+
+The extraction should not include unrelated surrounding material merely because it belongs to the same exercise.
+
+Answer information may be preserved as assessment data, but it is distinct from the learner-facing task.
+
+Long integrated exercises, especially long Cloze passages used to assess multiple pieces of knowledge together, should **not** be split into Atom-level Challenges. Such an exercise may instead be retained separately as an integrated or composite Challenge when the system needs that kind of assessment.
+
 ### Q3. How should different exercise forms be recognized?
 
 How should extraction identify forms such as:
@@ -81,6 +99,18 @@ For example, should a task with several blanks become:
 - one Challenge Candidate;
 - several Challenge Candidates;
 - or a compound Challenge Candidate?
+
+**Decision**
+
+Challenge Extraction should focus on **short Atom-level Challenges**.
+
+A source exercise item should be extracted as an Atom-level Challenge only when it represents a short task focused on assessing one Knowledge Atom.
+
+A task containing multiple blanks or multiple interdependent parts should not be split into separate Atom-level Challenges merely because there are multiple answer spaces.
+
+In particular, long Cloze passages or similar integrated exercises that assess multiple pieces of knowledge together should not be decomposed into Atom-level Challenges.
+
+Such an exercise may be retained as an integrated or composite Challenge for holistic assessment, but it is outside the purpose of Atom-level Challenge extraction.
 
 ### Q5. How much should extraction normalize the source?
 
