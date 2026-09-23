@@ -286,6 +286,6 @@ If source structure, provenance, context, semantics, or atom identity cannot be 
 
 ## 12. Reproducibility and Preservation
 
-Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, questions, or learner-state data without rewriting raw evidence.
+Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, Challenges, or learner-state data without rewriting raw evidence.
 
 Transformations should be reproducible and idempotent where practical. Repairs must be explicit rather than silently altering source evidence.
