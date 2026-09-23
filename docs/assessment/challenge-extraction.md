@@ -173,6 +173,24 @@ Questions about the detailed answer/evaluation model are outside this decision.
 
 When an individual item depends on instructions, examples, a word bank, a passage, an image, or other shared context, how should that dependency be represented?
 
+**Decision**
+
+For the current extraction scope, Challenges that depend on **substantial shared context** should be skipped rather than extracted.
+
+Examples include exercises whose individual items depend on:
+- a long shared passage;
+- a substantial shared word bank;
+- a shared image or other material that is essential to interpreting the task;
+- extensive instructions or context that cannot be reduced to a short Atom-level Challenge without changing the assessment task.
+
+This is a deliberate scope limitation, not a claim that such exercises are invalid assessments.
+
+During extraction, skipped exercises of this kind must be **reported** so that the system records that an extractable-looking assessment task was encountered but intentionally not extracted.
+
+The same reporting principle applies to **Cloze exercises** that are excluded from Atom-level Challenge extraction.
+
+The detailed format and schema of the extraction report are handled separately.
+
 ### Q9. What counts as an extractable Challenge?
 
 How should we distinguish a genuine assessment task from:
