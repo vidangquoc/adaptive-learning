@@ -53,7 +53,7 @@ The total number of times the learner has reviewed the Atom, regardless of wheth
 
 ### 3.3 `effective_review_times`
 
-The number of times the learner answered the question correctly when the question was presented to test the Atom.
+The number of times the learner answered the Challenge correctly when the Challenge was presented to test the Atom.
 
 Therefore:
 
@@ -86,7 +86,7 @@ The integrity rule `effective_review_times ≤ total_review_times` remains a sem
 When an Atom is reviewed:
 
 1. `total_review_times` increases by one.
-2. `effective_review_times` increases by one if the learner answers the review question correctly; otherwise it does not increase.
+2. `effective_review_times` increases by one if the learner answers the review Challenge correctly; otherwise it does not increase.
 3. `last_review_date` is replaced with the current review datetime.
 4. `next_review_date` is replaced with the newly calculated next review date.
 
