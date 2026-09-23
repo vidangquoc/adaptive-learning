@@ -2,37 +2,35 @@
 
 The Challenge Extraction Pipeline describes the processing flow for extracting Atom-level Challenge Candidates from Source Segments.
 
-The pipeline applies the principles defined in [Challenge Extraction Principles](principles.md).
+The pipeline applies the principles defined in the Challenge Extraction Principles.
 
 ## Scope
 
 The pipeline operates on individual Source Segments and produces Challenge Candidates or explicit skipped/incomplete extraction reports.
 
-It does not approve Candidates, link Candidates to Knowledge Atoms, deduplicate Challenges, or handle integrated/composite Challenges.
+Challenge extraction and Knowledge Atom extraction share the same contextual analysis. The pipeline therefore identifies the Knowledge Atom being assessed while creating each Challenge Candidate.
+
+It does not approve Candidates, deduplicate Challenges, or handle integrated/composite Challenges.
 
 ## Pipeline
 
 ```
 Source Segment
       ↓
-Identify assessment occurrences
+Evidence Discovery
       ↓
-Determine extraction scope
+Contextual Analysis
+      ├── Knowledge Atom Candidates
+      └── Challenge Candidates
+                 │
+                 └── target Knowledge Atom
       ↓
-Determine Challenge boundary
+Validation
       ↓
-Extract task content
-      ↓
-Classify Challenge form
-      ↓
-Extract answer information
-      ↓
-Attach provenance and evidence
-      ↓
-Validate Candidate
-      ↓
-Challenge Candidate
+Candidates / Issues
 ```
+
+Knowledge Atom and Challenge Candidates are sibling outputs of the same contextual analysis. The target Knowledge Atom of each Challenge must be identified during that analysis.
 
 An occurrence that cannot be extracted within the current scope follows the reporting path:
 
@@ -44,114 +42,79 @@ Out of scope / incomplete / ambiguous
 Skipped extraction report
 ```
 
-## 1. Identify Assessment Occurrences
+## 1. Evidence Discovery
 
-Inspect the Source Segment and identify concrete assessment tasks that a learner is expected to perform and that produce a response or outcome that can be evaluated.
+Inspect the Source Segment and locate evidence relevant to both:
 
-Do not treat examples, demonstrations, explanations, headings, answer keys, or teacher notes as assessment occurrences.
+- Knowledge Atom discovery; and
+- concrete assessment occurrences.
 
-Instructions that belong to an actual task are part of that occurrence.
+Evidence discovery identifies where potentially relevant source material occurs. It does not by itself create canonical Knowledge Atoms or Challenge Candidates.
 
-## 2. Determine Extraction Scope
+## 2. Contextual Analysis
 
-Determine whether the occurrence is within the current Atom-level Challenge Extraction scope.
+Analyze each relevant occurrence together with the surrounding source context needed to understand it.
 
-Extract only short tasks focused on one Knowledge Atom.
+The analysis determines:
 
-Skip and report occurrences that depend on substantial shared context or are long integrated/composite exercises, including long Cloze exercises that assess multiple pieces of knowledge together.
+- what Knowledge Atoms are represented or revealed by the source;
+- what concrete assessment tasks are present;
+- the boundary of each assessment task;
+- what learner action is expected;
+- what Challenge form applies;
+- what answer information is available;
+- and which Knowledge Atom each Challenge assesses.
 
-Also skip and report an occurrence when it cannot be completely extracted from one Source Segment.
+A Challenge target may be an existing Knowledge Atom Candidate, an existing Official Knowledge Atom, or a Knowledge Atom identified during the same analysis.
 
-## 3. Determine Challenge Boundary
+Assessment evidence may reveal a Knowledge Atom that is not otherwise explicit in the source.
 
-Determine the smallest complete assessment task represented by the source occurrence.
+If a Challenge assesses a relationship between independent Knowledge Atoms, identify or create the corresponding relation Knowledge Atom during this analysis and target it from the Challenge.
 
-Do not define the boundary merely by numbered items, blanks, or other formatting units.
+## 3. Create Candidates
 
-If multiple actions or blanks form one independent task, keep them together.
+Create Knowledge Atom Candidates and Challenge Candidates from the results of contextual analysis.
 
-Do not split a task merely because it contains multiple response spaces.
+A Challenge Candidate must preserve enough task information to reconstruct the source assessment occurrence and must identify its target Knowledge Atom.
 
-## 4. Extract Task Content
+The Challenge boundary is determined by task independence, not by numbered items, blanks, options, or other formatting units.
 
-Preserve the source wording and assessment structure.
+Multiple actions or response spaces remain together when they form one independent task.
 
-Extract the information needed for the learner to understand and perform the task, such as:
+## 4. Validate Candidates
 
-- relevant instructions;
-- prompt;
-- necessary context;
-- options;
-- required response elements.
+Validate the extracted Candidates and their relationship.
 
-Exclude unrelated surrounding material.
+For Challenge Candidates, check at minimum:
 
-Remove only technical or presentational noise that does not affect meaning or task structure.
-
-Do not rewrite, correct, reinterpret, or invent source content.
-
-## 5. Classify Challenge Form
-
-Attempt to classify the extracted task using the defined Challenge-form taxonomy.
-
-If the task matches an existing form, record that form.
-
-If it does not match a supported form, preserve the Candidate with an unclassified or explicitly unresolved form rather than forcing an unsuitable classification.
-
-## 6. Extract Answer Information
-
-When answer information is present in the source, extract it together with the Candidate.
-
-Keep answer information distinct from learner-facing task content.
-
-If no answer information is available, the Candidate may still be emitted when the task is otherwise sufficiently reconstructable.
-
-Detailed answer and evaluation modeling is outside this pipeline.
-
-## 7. Attach Provenance and Evidence
-
-Attach enough provenance to trace the Candidate to the exact assessment occurrence in the source.
-
-Preserve extraction evidence sufficient to determine:
-
-- what source material was used;
-- where the occurrence came from;
-- what context was used;
-- and any relevant limitations or uncertainties.
-
-A Candidate must belong entirely to one Source Segment.
-
-## 8. Validate the Candidate
-
-Validate that the Candidate faithfully represents the concrete assessment occurrence.
-
-At minimum, check:
-
-- occurrence identity;
-- assessment boundary;
-- completeness;
+- concrete assessment occurrence;
+- correct assessment boundary;
+- sufficient task content;
+- target Knowledge Atom;
 - source-faithfulness;
 - absence of invented content;
 - preservation of assessment structure;
 - answer information when available;
 - provenance;
-- scope compliance.
+- scope compliance;
+- consistency between the Challenge and its target Atom.
 
-A Candidate that fails these checks should not be emitted as a normal valid Candidate. The extraction problem should instead be represented in the appropriate skipped/incomplete evidence.
+Knowledge Atom Candidates are validated according to the Atom Extraction process.
 
-## 9. Emit Candidate or Skip Report
+A Candidate that fails required checks should not be emitted as a normal valid Candidate. The issue should instead be represented in the appropriate extraction evidence or skipped/incomplete report.
 
-If the Candidate passes extraction and validation requirements, emit the Challenge Candidate.
+## 5. Emit Candidates or Issues
 
-If the occurrence is intentionally excluded or cannot be reliably reconstructed, do not emit a normal Candidate. Emit a skipped/incomplete extraction report with sufficient evidence to explain the reason.
+If extraction and validation succeed, emit the relevant Knowledge Atom Candidates and Challenge Candidates.
+
+If an assessment occurrence is intentionally excluded or cannot be reliably reconstructed, do not emit a normal Challenge Candidate. Emit a skipped/incomplete extraction report with sufficient evidence to explain the reason.
 
 ## Post-Extraction Concerns
 
-The following are separate processes and are not part of this pipeline:
+The following remain separate processes:
 
-- linking a Candidate to a Knowledge Atom;
 - Candidate review and approval;
-- converting a Candidate into an approved Challenge;
+- converting Candidates into approved Challenges;
 - Challenge deduplication;
 - Challenge reuse;
 - integrated/composite Challenge extraction;
