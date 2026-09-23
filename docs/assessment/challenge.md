@@ -107,7 +107,7 @@ answer:
   - home
 ```
 
-The answer represents expected outcomes, not learner responses or evaluation rules. Evaluation of a learner response is a separate assessment/runtime concern.
+The answer represents the expected outcome of the Challenge. Learner-response evaluation is outside the scope of the Challenge model and this document.
 
 ### Challenge references, rather than copies, its Knowledge Atom
 
@@ -213,8 +213,6 @@ human review
             officialize
                 ↓
        Official Challenge
-                ↓
-             retired
 ```
 
 Officialization is a storage transition from Candidate to Official Challenge.
