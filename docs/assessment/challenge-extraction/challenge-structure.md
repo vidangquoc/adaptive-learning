@@ -76,13 +76,13 @@ A Challenge may therefore be classified as a particular exercise style by a UI, 
 
 For source-derived Challenges, the canonical ID format is:
 
-```
+```text
 <source-id>_<segment-id>_<exercise>_<item-number>
 ```
 
 Example:
 
-```
+```text
 destination-c1-c2_unit-1_exercise-3_2
 ```
 
@@ -131,7 +131,7 @@ A Challenge must not contain a list of independent target Atom IDs. The followin
 
 ```yaml
 # Invalid: multiple target IDs
- target_atom_id:
+target_atom_id:
   - atom-a
   - atom-b
 ```
@@ -200,6 +200,44 @@ prompt:
 The prompt may contain blanks, supplied words, a source sentence, a base word, an erroneous sentence, or other concrete task material.
 
 The prompt is not the expected answer.
+
+## 6.1 Source preservation and fail-closed extraction
+
+Challenge extraction MUST be fail-closed.
+
+The extractor must not silently invent, repair, normalize, or infer away missing essential assessment content. In particular, it must not silently supply or modify:
+
+- instruction/task wording;
+- prompt content;
+- explicit options required by the source task;
+- learner response elements;
+- exercise/item boundaries;
+- target Atom;
+- expected answer.
+
+Source evidence is authoritative. Canonical Challenge fields may be derived from that evidence, but extraction must preserve the source assessment faithfully and must not silently change wording or structure in a way that changes what the learner is asked to do.
+
+A source occurrence may be emitted as a normal valid Challenge Candidate only when the contextual analysis establishes all essential structural information needed by the canonical model.
+
+If an essential element cannot be established sufficiently from the available source evidence, the extraction result MUST be represented as incomplete, unresolved, or skipped rather than silently converted into a normal valid Challenge Candidate.
+
+This rule applies even when the source contains a numbered item, blank, answer line, or other superficial exercise formatting. Such formatting alone is not sufficient evidence that a complete Challenge can be extracted.
+
+### Reproducibility
+
+Challenge extraction is reproducible under a fixed extraction context.
+
+Given the same:
+
+- source evidence;
+- contextual inputs;
+- extraction rules/version;
+
+the extraction process should produce the same Challenge structural result.
+
+An intentional change to extraction rules, contextual interpretation, or another extraction input is a process/model change. It must be treated as such rather than being presented as if it were the same extraction result.
+
+The reproducibility requirement does not prohibit later human review, correction, or officialization. It governs the extraction result produced from a fixed input and rule set.
 
 ## 7. options
 
@@ -408,6 +446,9 @@ A valid Challenge must satisfy these invariants:
 18. Candidate and Official representations use the same Challenge ID.
 19. No persisted form field is required by the canonical Challenge structure.
 20. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
+21. Extraction is fail-closed and does not silently invent or repair essential assessment content.
+22. Source evidence is preserved faithfully when deriving the Challenge.
+23. Under a fixed source, contextual input, and extraction-rule version, extraction is reproducible.
 
 ## 12. Source occurrence and Challenge identity
 
@@ -457,21 +498,7 @@ The same extraction analysis also determines the concrete instruction, prompt, o
 
 ## 14. Source preservation and fail-closed behavior
 
-Challenge structure must preserve source evidence faithfully.
-
-Extraction must not silently invent or repair:
-
-- missing instruction;
-- missing prompt;
-- missing options when the source requires explicit options;
-- missing response elements;
-- exercise/item boundaries;
-- target Atom;
-- expected answer.
-
-If an essential structural element cannot be established from the source, the extraction result must explicitly represent the uncertainty or omission rather than silently producing a normal valid Challenge.
-
-In particular, extraction must not create a Challenge merely because an exercise contains a blank or a numbered item. Contextual analysis must establish that the occurrence is an independent evaluable task and that its required structural information can be established.
+This section is retained as the canonical cross-reference for the extraction rules introduced in Section 6. The requirements apply to the entire Challenge extraction process, not only to schema validation.
 
 ## 15. Status of the structure
 
