@@ -69,7 +69,7 @@ Analyze the relevant source context to determine:
 - whether each item is an actual Challenge;
 - the boundary of each Challenge;
 - what Challenge form applies;
-- what answer information is available;
+- what specific expected answer is available;
 - and which Knowledge Atom each Challenge assesses.
 
 An exercise item is presumed to be a Challenge unless contextual analysis provides a reason not to emit it.
@@ -80,6 +80,8 @@ Assessment evidence may reveal a Knowledge Atom that is not otherwise explicit i
 
 If a Challenge assesses a relationship between independent Knowledge Atoms, identify or create the corresponding relation Knowledge Atom during this analysis and target it from the Challenge.
 
+The extraction process must not invent an expected answer. If the source does not provide enough evidence to establish the specific expected answer, the occurrence must be treated as incomplete or unresolved rather than silently assigned a new answer.
+
 ## 3. Create Candidates
 
 Create Knowledge Atom Candidates and Challenge Candidates from the results of contextual analysis.
@@ -88,7 +90,7 @@ For each exercise item:
 
 1. Treat the item as a Challenge candidate by default.
 2. Determine whether it is an independent, evaluable learner task and within the current extraction scope.
-3. If yes, create the Challenge Candidate and identify its target Knowledge Atom.
+3. If yes, create the Challenge Candidate, identify its target Knowledge Atom, and preserve the specific expected answer when supported by the source.
 4. If no, do not silently discard it; create a skipped extraction report stating the reason.
 
 The Challenge boundary normally follows the exercise item boundary. Multiple blanks, actions, or response spaces within one item remain part of the same Challenge unless contextual analysis establishes that the source actually contains multiple independent items.
@@ -107,7 +109,7 @@ For Challenge Candidates, check at minimum:
 - source-faithfulness;
 - absence of invented content;
 - preservation of assessment structure;
-- answer information when available;
+- specific expected answer when available or required;
 - provenance;
 - scope compliance;
 - consistency between the Challenge and its target Atom.
@@ -136,5 +138,6 @@ The following remain separate processes:
 - Challenge deduplication;
 - Challenge reuse;
 - integrated/composite Challenge extraction;
-- detailed answer/evaluation modeling;
+- learner-response evaluation;
+- learner performance recording;
 - adaptive Challenge selection.
