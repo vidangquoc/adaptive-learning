@@ -18,18 +18,6 @@ Need to define where a source-independent Challenge is stored and how its absenc
 
 Do not assume a `generated/` directory until this is explicitly decided.
 
-## 13. Clarify intrinsic difficulty versus operational estimates
-
-The Challenge model currently excludes `difficulty` as an intrinsic Challenge property.
-
-Need to document the distinction between:
-
-- intrinsic Challenge content;
-- a difficulty estimate derived from learner/system evidence;
-- adaptive selection priority.
-
-Only the first belongs to the canonical Challenge model. Difficulty estimates and selection priorities, if introduced, belong to operational/adaptive data.
-
 ## 14. Clarify source answer key versus learner-facing task
 
 A source exercise may contain both the learner-facing task and an answer key.
