@@ -18,7 +18,7 @@ A Challenge is the concrete task through which assessment evidence is obtained.
 
 One Challenge assesses exactly one Knowledge Atom. Multiple Challenges may assess the same Knowledge Atom in different ways.
 
-Challenge design is described separately in [Questions About Challenges](questions-about-challenge.md).
+Challenge design is described separately in [Questions About Challenges](design/questions-about-challenge.md).
 
 ## Assessment Evidence
 
