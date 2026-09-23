@@ -78,16 +78,36 @@ A supported Challenge contains the information needed to present the task and id
 
 The specific representation of the task, available alternatives, and expected answer is defined in `challenge-extraction/challenge-structure.md`.
 
-The `answer` is a specific expected answer. It may be represented as structured data when the concrete task requires it.
+The `answer` contains the expected answer for each input the Challenge requires the learner to provide.
 
-Examples include:
+An **input** is one distinct thing that the Challenge requires the learner to provide. Each thing the learner must provide counts as one input. The number of answer values therefore corresponds directly to the number of inputs:
 
-- a selected option for a multiple-choice task;
-- a specific word or form for a fill-in-the-blank task;
-- a specific sentence for a sentence transformation;
-- a specific arrangement for sentence reordering.
+- when the Challenge requires one input, `answer` is a string;
+- when the Challenge requires multiple inputs, `answer` is an array of strings, with elements corresponding to the inputs in order.
 
-Evaluation of a learner response is a separate assessment/runtime concern. The Challenge provides the expected answer; the assessment process determines the result of comparing a learner response with that answer.
+For example:
+
+- a multiple-choice task requiring one choice has one input and a string answer;
+- a fill-in-the-blank task with one blank has one input and a string answer;
+- a fill-in-the-blank task with two blanks has two inputs and an answer array containing the two expected values;
+- a sentence transformation requiring one complete transformed sentence has one input, even though the sentence contains multiple words;
+- a sentence reordering task requiring one complete reordered sentence has one input.
+
+Examples:
+
+```yaml
+# One input
+answer: got
+```
+
+```yaml
+# Two inputs
+answer:
+  - got
+  - home
+```
+
+The answer represents expected outcomes, not learner responses or evaluation rules. Evaluation of a learner response is a separate assessment/runtime concern.
 
 ### Challenge references, rather than copies, its Knowledge Atom
 
