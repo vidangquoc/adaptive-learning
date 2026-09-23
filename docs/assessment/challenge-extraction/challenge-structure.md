@@ -6,7 +6,7 @@ It complements [Challenge](../challenge.md), which defines the conceptual model.
 
 ## 1. Canonical structure
 
-A Challenge is a concrete assessment task that targets exactly one Knowledge Atom and has a specific expected answer.
+A Challenge is a concrete assessment task that targets exactly one Knowledge Atom and has a specific expected answer. The one-Challenge-to-one-Atom invariant is mandatory for both Candidate and Official Challenges.
 
 The current model does not require a Challenge Form taxonomy. The different exercise styles observed in learning material can be represented by the same small set of structural fields.
 
@@ -115,7 +115,7 @@ If the source occurrence itself changes in a way that changes the assessment tas
 
 `target_atom_id` identifies the single Knowledge Atom assessed by the Challenge.
 
-It is mandatory for a valid Challenge.
+It is mandatory for a valid Challenge and MUST contain exactly one Atom ID.
 
 ```text
 Challenge
@@ -127,7 +127,23 @@ Knowledge Atom
 
 The field contains an Atom ID, not a copy of Atom content.
 
-A Challenge must not contain a list of independent target Atom IDs.
+A Challenge must not contain a list of independent target Atom IDs. The following representations are invalid:
+
+```yaml
+# Invalid: multiple target IDs
+ target_atom_id:
+  - atom-a
+  - atom-b
+```
+
+```yaml
+# Invalid: plural target field
+target_atom_ids:
+  - atom-a
+  - atom-b
+```
+
+There is no multi-target form of Challenge in the canonical model.
 
 If the assessment concerns a relationship between independent Knowledge Atoms, the relationship itself must be represented as a relation Knowledge Atom, and target_atom_id points to that relation Atom.
 
@@ -375,22 +391,23 @@ A valid Challenge must satisfy these invariants:
 1. It has exactly one stable id.
 2. For a source-derived Challenge, the id follows the canonical source-occurrence format.
 3. It has exactly one target_atom_id.
-4. target_atom_id identifies a Knowledge Atom.
-5. It has a concrete instruction.
-6. It has a concrete prompt.
-7. options is optional and, when present, contains the finite semantic choices presented to the learner.
-8. A supported valid Challenge has a specific expected answer.
-9. An input is one distinct thing the Challenge requires the learner to provide.
-10. If the Challenge requires one input, answer is a string.
-11. If the Challenge requires multiple inputs, answer is an array of strings whose elements correspond to the inputs in order.
-12. The number of answer values MUST equal the number of inputs required by the Challenge.
-13. For a multiple-choice Challenge, answer identifies one of the values in options.
-14. Evaluation rules are outside the Expected Answer model.
-15. Source information, when present, is metadata that supplements the ID.
-16. Learner/runtime data is outside the Challenge structure.
-17. Candidate and Official representations use the same Challenge ID.
-18. No persisted form field is required by the canonical Challenge structure.
-19. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
+4. target_atom_id identifies exactly one Knowledge Atom.
+5. target_atom_id is a single scalar Atom ID; array-valued or plural target fields are invalid.
+6. It has a concrete instruction.
+7. It has a concrete prompt.
+8. options is optional and, when present, contains the finite semantic choices presented to the learner.
+9. A supported valid Challenge has a specific expected answer.
+10. An input is one distinct thing the Challenge requires the learner to provide.
+11. If the Challenge requires one input, answer is a string.
+12. If the Challenge requires multiple inputs, answer is an array of strings whose elements correspond to the inputs in order.
+13. The number of answer values MUST equal the number of inputs required by the Challenge.
+14. For a multiple-choice Challenge, answer identifies one of the values in options.
+15. Evaluation rules are outside the Expected Answer model.
+16. Source information, when present, is metadata that supplements the ID.
+17. Learner/runtime data is outside the Challenge structure.
+18. Candidate and Official representations use the same Challenge ID.
+19. No persisted form field is required by the canonical Challenge structure.
+20. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
 
 ## 12. Source occurrence and Challenge identity
 
@@ -434,7 +451,7 @@ The target Atom may be:
 - an existing Official Knowledge Atom;
 - a Knowledge Atom identified and created during the same contextual analysis.
 
-A later post-extraction step must not be required to guess which Atom a Challenge assesses.
+A later post-extraction step must not be required to guess which Atom a Challenge assesses. A Challenge Candidate is not valid until contextual analysis establishes exactly one target Atom. If the analysis identifies multiple independent knowledge points but cannot determine one assessed Atom, the occurrence is unresolved/incomplete rather than a multi-target Candidate.
 
 The same extraction analysis also determines the concrete instruction, prompt, optional options, and answer from the source evidence.
 
