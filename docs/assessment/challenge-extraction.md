@@ -216,6 +216,14 @@ What source location is necessary to identify exactly where a Challenge Candidat
 
 Is source + segment sufficient, or do we need exercise/item identifiers, page/paragraph coordinates, or other location information?
 
+**Decision**
+
+The provenance requirement is that an extracted Challenge Candidate **must be traceable to the exact assessment occurrence in the source**.
+
+The Candidate must preserve enough provenance to identify the specific occurrence of the assessment task from which it was extracted.
+
+The detailed structure of the source provenance and location data is **not decided here**. It will be designed later as part of the Challenge schema.
+
 ### Q11. How should duplicated or repeated tasks be handled?
 
 If the same assessment task appears multiple times in the source, should extraction create:
