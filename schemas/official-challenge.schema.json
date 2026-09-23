@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vidangquoc/adaptive-learning/schema/official-challenge",
+  "title": "Official Challenge",
+  "description": "Schema for an Official Challenge.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "id",
+    "target_atom_id",
+    "instruction",
+    "prompt",
+    "answer",
+    "extra"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_atom_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instruction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt": {
+      "type": [
+        "string",
+        "object",
+        "array"
+      ]
+    },
+    "options": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "answer": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "extra": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "source",
+        "notes"
+      ],
+      "properties": {
+        "source": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "required": [
+            "source_id",
+            "page_number",
+            "segment_id",
+            "exercise_name",
+            "item_number"
+          ],
+          "properties": {
+            "source_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "page_number": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1
+            },
+            "segment_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "exercise_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "item_number": {
+              "type": [
+                "string",
+                "integer"
+              ],
+              "minLength": 1
+            }
+          }
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
