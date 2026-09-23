@@ -230,44 +230,68 @@ If a Challenge does not require finite choices, options is omitted.
 
 The answer is intrinsic to the current Challenge model because a supported Challenge must have a specific expected answer.
 
-The answer may be a scalar value or structured data when the Challenge contains multiple response elements.
+The answer represents the expected value for each input the Challenge requires the learner to provide.
+
+An **input** is one distinct thing that the Challenge requires the learner to provide. Each thing the learner must provide counts as one input.
+
+The cardinality and representation of `answer` follow a simple rule:
+
+```text
+1 input
+    ↓
+answer: string
+
+N inputs (N > 1)
+    ↓
+answer:
+  - string
+  - string
+  - ...
+```
+
+When there is one input, `answer` is a string. When there are multiple inputs, `answer` is an array of strings. The array elements correspond to the inputs in their required order.
+
+The number of answer values MUST equal the number of inputs required by the Challenge.
 
 Examples:
 
 ```yaml
-# Multiple choice
+# Multiple choice: the learner provides one choice
+options:
+  - gets
+  - got
+  - has got
 answer: got
 ```
 
 ```yaml
-# Fill in the blank
+# One blank: the learner provides one word/form
+prompt: "Darren ___ home at eight yesterday."
 answer: got
 ```
 
 ```yaml
-# Sentence transformation
-answer: "I used to live in London when I was a child."
-```
-
-```yaml
-# Sentence reordering
-answer:
-  - I
-  - went
-  - home
-  - yesterday
-```
-
-```yaml
-# Multiple response elements
+# Two blanks: the learner provides two values
+prompt: "Darren ___ ___ yesterday."
 answer:
   - got
   - home
 ```
 
-The exact shape of answer is determined by the concrete task content rather than by a separate Challenge Form taxonomy.
+```yaml
+# Sentence transformation: the learner provides one complete sentence
+answer: "I used to live in London when I was a child."
+```
 
-For multiple-choice Challenges, the answer must identify one of the provided option values.
+A sentence containing many words is still one input if the learner is required to provide one complete sentence.
+
+The answer does not describe how the learner response is evaluated. Case, whitespace, punctuation, alternative valid responses, normalization, and other equivalence rules belong to evaluation and are outside the Expected Answer model.
+
+For multiple-choice Challenges, the answer must identify one of the provided option values by content, and therefore:
+
+```text
+answer ∈ options
+```
 
 The extractor must not invent an answer. If source evidence is insufficient to establish a specific expected answer, the occurrence is incomplete/unresolved and must not be treated as a fully valid Challenge Candidate.
 
@@ -355,13 +379,18 @@ A valid Challenge must satisfy these invariants:
 5. It has a concrete instruction.
 6. It has a concrete prompt.
 7. options is optional and, when present, contains the finite semantic choices presented to the learner.
-8. A supported valid Challenge has a specific answer.
-9. For a multiple-choice Challenge, answer identifies one of the values in options.
-10. Source information, when present, is metadata that supplements the ID.
-11. Learner/runtime data is outside the Challenge structure.
-12. Candidate and Official representations use the same Challenge ID.
-13. No persisted form field is required by the canonical Challenge structure.
-14. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
+8. A supported valid Challenge has a specific expected answer.
+9. An input is one distinct thing the Challenge requires the learner to provide.
+10. If the Challenge requires one input, answer is a string.
+11. If the Challenge requires multiple inputs, answer is an array of strings whose elements correspond to the inputs in order.
+12. The number of answer values MUST equal the number of inputs required by the Challenge.
+13. For a multiple-choice Challenge, answer identifies one of the values in options.
+14. Evaluation rules are outside the Expected Answer model.
+15. Source information, when present, is metadata that supplements the ID.
+16. Learner/runtime data is outside the Challenge structure.
+17. Candidate and Official representations use the same Challenge ID.
+18. No persisted form field is required by the canonical Challenge structure.
+19. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
 
 ## 12. Source occurrence and Challenge identity
 
