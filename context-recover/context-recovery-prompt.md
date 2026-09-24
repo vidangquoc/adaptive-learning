@@ -23,12 +23,7 @@ Hãy khôi phục context của project từ GitHub repository `vidangquoc/adapt
 Bắt đầu bằng cách đọc:
 `context-recover/context-recover.md`
 
-Sau đó thực hiện quy trình recovery được hướng dẫn trong các recovery files liên quan để khôi phục:
-
-1. context của cuộc hội thoại hiện tại;
-2. hiểu biết cần thiết về project;
-3. learning-material / knowledge data;
-4. learner / user learning data.
+Sau đó thực hiện quy trình recovery được hướng dẫn trong các recovery files liên quan để khôi phục đủ context cho task hiện tại.
 
 Hãy sử dụng repository và các nguồn authoritative được recovery instructions chỉ ra làm nguồn sự thật. Không đoán hoặc tự tạo thông tin khi repository chưa cung cấp đủ bằng chứng.
 
@@ -40,7 +35,7 @@ Sau khi hoàn tất recovery, hãy báo cáo ngắn gọn:
 - những điểm nào còn thiếu, chưa chắc chắn hoặc cần xác minh thêm;
 - task hiện tại đang dừng ở đâu và cần tiếp tục từ đâu.
 
-Không cần đọc `context-recovery-authoring-principles.md` trong quá trình recovery thông thường. File đó chỉ được sử dụng khi tạo, sửa, review hoặc thiết kế lại hệ thống recovery.
+Không cần đọc `context-recover/context-recovery-authoring-principles.md` trong quá trình recovery thông thường. File đó chỉ được sử dụng khi tạo, sửa, review hoặc thiết kế lại hệ thống recovery.
 ```
 
 ---
@@ -61,7 +56,7 @@ Câu trả lời phải thể hiện được hiểu biết nhất quán về pr
 
 ## 2.2. Kiểm tra hiểu biết về learning-material / knowledge data
 
-> Hãy mô tả dữ liệu knowledge hiện đang có trong repository. Knowledge được tổ chức như thế nào? Hiện có những loại knowledge atom nào? Nếu cần đưa ra số lượng cụ thể, hãy lấy số liệu trực tiếp từ dữ liệu authoritative trong repository và cho biết nguồn đã sử dụng.
+> Hãy mô tả dữ liệu learning-material và knowledge hiện đang có trong repository. Knowledge được tổ chức như thế nào? Hiện có những loại Knowledge Atom nào? Challenge/assessment được tổ chức như thế nào? Nếu cần đưa ra số lượng hoặc inventory cụ thể, hãy lấy trực tiếp từ dữ liệu authoritative trong repository và cho biết nguồn đã sử dụng.
 
 **Mục đích kiểm tra:**
 
@@ -71,30 +66,22 @@ AI phải phân biệt được:
 
 - source / evidence;
 - curated knowledge;
-- knowledge atoms;
-- relations;
-- assessments;
+- Knowledge Atoms;
+- relation Atoms;
+- Challenges / assessment;
 - learner data.
 
 Nếu repository không đủ thông tin để xác định chính xác một số liệu, AI phải nói rõ điều đó thay vì ước lượng hoặc tự tạo số liệu.
 
 ## 2.3. Kiểm tra hiểu biết về learner data
 
-> Hãy mô tả ngắn gọn learner data hiện đang được lưu trong repository. Có những loại thông tin nào về learner? Learning activity hoặc history nào được ghi nhận? Learner state được duy trì như thế nào? Learner state liên hệ với knowledge atoms ra sao?
+> Hãy mô tả ngắn gọn learner data hiện đang được lưu trong repository. Learner review state được lưu ở đâu? Có những trường nào? Learning activity hoặc history nào được ghi nhận và những gì không được lưu trong review-data hiện tại?
 
 **Mục đích kiểm tra:**
 
 Câu trả lời phải thể hiện rằng AI hiểu learner data là một domain riêng biệt với static knowledge.
 
-AI phải phân biệt được:
-
-- learner profile;
-- historical attempts;
-- sessions / learning activity;
-- current learner state;
-- review queue.
-
-Khi cần giải thích learner state, AI phải có thể liên hệ state với knowledge-atom IDs tương ứng.
+AI phải phân biệt được current review state với historical attempts/history. Khi cần giải thích review state, AI phải có thể liên hệ state với Knowledge Atom IDs tương ứng.
 
 ## 2.4. Kiểm tra khả năng phân biệt các domain
 
@@ -119,25 +106,25 @@ AI không được trộn lẫn kiến thức về project, dữ liệu về th�
 
 Kiểm tra khả năng truy nguyên nguồn và phát hiện những phần context mà AI đang giả định thay vì thực sự xác minh.
 
-## 2.6. Kiểm tra khả năng tiếp tục công việc đang review
+## 2.6. Kiểm tra khả năng tiếp tục công việc hiện tại
 
-> Hãy cho biết công việc hiện tại đang ở bước nào, những quyết định nào đã được thống nhất, những điểm nào vẫn chưa chốt, và tôi nên tiếp tục từ đâu.
+> Hãy cho biết công việc hiện tại đang tập trung vào phần nào của Adaptive Learning, những quyết định quan trọng nào đã được thống nhất, những điểm nào vẫn cần kiểm tra/thảo luận, và tôi nên tiếp tục từ file hoặc tài liệu nào.
 
 **Mục đích kiểm tra:**
 
-AI phải phân biệt được quyết định đã thống nhất trong conversation/review với proposal chưa chốt và canonical project decisions trong authoritative docs.
+AI phải nhận ra rằng công việc hiện tại tập trung vào **Challenge / assessment extraction**, không tự quay lại Step 3 chỉ vì recovery snapshot cũ có nhắc Step 3.
 
-AI không được tự đánh dấu Step 3 hoàn thành chỉ vì đã có một số quyết định trung gian.
+AI phải phân biệt quyết định đã được canonicalize trong repository với working discussion hoặc context-level decisions.
 
 ## 2.7. Kiểm tra nguồn của quyết định
 
-> Với từng quyết định quan trọng được nói là đã thống nhất, hãy cho biết quyết định đó đang nằm ở đâu: conversation/review state hay canonical project documentation. Nếu chỉ có trong review/conversation thì không được trình bày nó như một canonical rule của project.
+> Với từng quyết định quan trọng được nói là đã thống nhất, hãy cho biết quyết định đó đang nằm ở đâu: canonical project documentation/data hay conversation/review state. Nếu chỉ có trong review/conversation thì không được trình bày nó như một canonical rule của project.
 
 **Mục đích kiểm tra:**
 
 Đảm bảo recovery không biến working discussion thành authoritative project knowledge.
 
-## 2.6. Nguyên tắc đánh giá
+## 2.8. Nguyên tắc đánh giá
 
 Khi đánh giá câu trả lời của AI:
 
@@ -148,8 +135,7 @@ Khi đánh giá câu trả lời của AI:
 5. **Số liệu phải có nguồn.** Những con số hoặc inventory cụ thể phải được lấy từ nguồn dữ liệu authoritative khi có thể.
 6. **Phân biệt fact và inference.** AI phải phân biệt thông tin đã xác minh với thông tin suy luận.
 7. **Phát hiện thiếu context.** Nếu câu trả lời cho thấy một phần context chưa được recover đầy đủ, cần quay lại recovery procedure và đọc thêm authoritative sources trước khi tiếp tục công việc.
-
-8. **Không tự chốt Step 3.** Step 3 chỉ hoàn thành khi người dùng và AI đã thống nhất và người dùng quyết định chốt.
+8. **Không tự chốt một working review.** Một review/discussion chỉ được xem là hoàn tất khi người dùng và AI đã thống nhất và người dùng quyết định chốt.
 
 ### Điều kiện đạt
 
