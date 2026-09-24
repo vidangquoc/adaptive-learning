@@ -10,40 +10,16 @@ Các nguyên tắc trong file này được áp dụng khi AI được yêu cầ
 
 ## 2. Các file trong hệ thống Context Recovery
 
-Hệ thống context recovery gồm các file sau:
+Hệ thống context recovery gồm đúng bốn file:
 
-### `context-recover/context-recovery-prompt.md`
+- `context-recover/context-recover.md` — current conversation context recovery.
+- `context-recover/project-knowledge-recover.md` — navigation/recovery procedure for project, learning-material / knowledge, and learner data.
+- `context-recover/context-recovery-prompt.md` — user-facing recovery and verification prompts.
+- `context-recover/context-recovery-authoring-principles.md` — meta-level authoring and maintenance rules.
 
-Chứa **các prompt dành cho người dùng** khi làm việc với hệ thống context recovery, được chia thành hai nhóm:
+Không tạo thêm một file verification/recovery snapshot chỉ để chứa project knowledge hoặc review state nếu vai trò đó đã thuộc một trong bốn file trên.
 
-1. **Prompt khôi phục** — dùng để yêu cầu AI khôi phục context trong một hội thoại mới.
-2. **Prompt kiểm tra** — dùng để kiểm tra kết quả recovery sau khi AI đã khôi phục context.
-
-File này là điểm vào ở phía người dùng. Nó không phải recovery instruction mà AI phải tự đọc trong quá trình recovery.
-
-### `context-recover/context-recover.md`
-
-Là **điểm vào của quy trình khôi phục context hiện tại của cuộc hội thoại**.
-
-File này hướng dẫn AI xác định và khôi phục những thông tin cần thiết để tiếp tục công việc hiện tại. Nó không phải nơi lưu trữ toàn bộ project knowledge.
-
-### `context-recover/project-knowledge-recover.md`
-
-Chứa **instructions để AI khôi phục hiểu biết cần thiết về**:
-
-1. Adaptive Learning project;
-2. learning-material / knowledge data;
-3. learner / user learning data.
-
-Đây là navigation và recovery procedure, không phải cơ sở dữ liệu project knowledge. Documentation, data, source material, implementation và history authoritative trong repository vẫn là nguồn sự thật.
-
-### `context-recover/context-recovery-authoring-principles.md`
-
-Chứa **các nguyên tắc để AI tạo, sửa, review và duy trì các file của hệ thống context recovery**.
-
-File này thuộc tầng meta của hệ thống. Nó không phải nguồn project knowledge và không phải một bước trong normal context recovery.
-
-## 3. Nguyên tắc Authoring
+## 3. Authoring Principles
 
 ### CR-01 — Recovery Files Là Instructions, Không Phải Knowledge Stores
 
@@ -68,9 +44,9 @@ Quy trình recovery thông thường chỉ thực hiện các recovery instructi
 
 Mỗi file phải có một trách nhiệm rõ ràng:
 
-- `context-recovery-prompt.md` → cung cấp prompt khôi phục và prompt kiểm tra cho người dùng.
-- `context-recover.md` → hướng dẫn khôi phục current conversation context.
-- `project-knowledge-recover.md` → hướng dẫn khôi phục project, learning-material / knowledge và learner-data understanding.
+- `context-recovery-prompt.md` → prompt khôi phục và prompt kiểm tra cho người dùng.
+- `context-recover.md` → current conversation context và điểm vào recovery.
+- `project-knowledge-recover.md` → navigation/recovery procedure cho project knowledge, learning-material / knowledge data và learner data.
 - `context-recovery-authoring-principles.md` → quy định cách tạo và duy trì chính hệ thống recovery.
 
 Một file MUST NOT âm thầm tiếp nhận vai trò của file khác.
@@ -86,6 +62,8 @@ Conversation memory và inference là nguồn phụ trợ và MUST NOT override 
 Khi authoring recovery file, MUST NOT sao chép detailed project documentation, data inventories, learner state hoặc historical records chỉ để tiện sử dụng.
 
 Recovery files nên chỉ đến thông tin authoritative thay vì tái tạo thông tin đó.
+
+Context snapshot có thể chứa một lượng nhỏ thông tin cần thiết để nối tiếp conversation hiện tại, nhưng không được biến thành bản sao của project documentation.
 
 ### CR-06 — Giữ Domain Separation
 
