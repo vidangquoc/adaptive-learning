@@ -1,172 +1,98 @@
-# Docs Cleanup Workbench
+# Open Architectural Issues
 
-## Goal
+> This workbench file tracks the two architecture issues identified during the documentation consistency review.
+>
+> These issues require a design decision before the affected canonical specifications are changed.
 
-Reorganize the documentation structure so that each directory represents a clear system domain and each document has a clear responsibility, without creating unnecessary new files.
+## 1. Separate Challenge Extraction from Knowledge Atom Extraction
 
-## Steps
+### Problem
 
-### 1. Clean up Assessment structure
+The current Challenge Extraction documents still describe Challenge Extraction and Knowledge Atom extraction as sharing the same contextual analysis, and the Challenge Extraction Pipeline currently produces both Knowledge Atom Candidates and Challenge Candidates.
 
-- Rename `docs/assessment/assessment.md` → `docs/assessment/overall.md`.
-- Rename `docs/assessment/challenge-extraction/challenge-structure.md` → `docs/assessment/challenge-extraction/structure.md`.
-- Review `docs/assessment/challenge-extraction/challenge-form-examples.md`.
-  - The current Challenge model deliberately has no persisted Challenge Form taxonomy.
-  - Remove this file if its useful content is already covered by `structure.md` / `principles.md`.
-  - Preserve only examples that are still needed by the canonical model.
+That is inconsistent with the current architecture:
 
-### 2. Create a dedicated Source documentation domain
+> **Knowledge Atoms are not part of the Challenge Extraction Pipeline.**
 
-Move source-related documentation out of `docs/learning-material/` into:
+Challenge extraction must remain focused on extracting and validating Challenges and their single target_atom_id.
 
-```text
-docs/source/
-├── overall.md
-├── source-registry.md
-├── source-structure.md
-└── extraction.md
-```
+### Current inconsistency
 
-Use these responsibilities:
-
-- `overall.md`: conceptual role of sources in the system.
-- `source-registry.md`: Source Registry and its relationship to `sources/source-registry.yaml`.
-- `source-structure.md`: Source, Source Segment, IDs, and segment boundaries.
-- `extraction.md`: source-to-segment/evidence extraction model.
-
-If the extraction procedure becomes substantial, a separate `docs/source/procedures/extraction-sop.md` may be introduced later. Do not create it merely for symmetry.
-
-### 3. Clean up Learning Material documentation
-
-After source documentation has been separated, keep `docs/learning-material/` focused on learning-material-specific concepts.
-
-Review:
-
-- `principles/`
-- `rules/`
-- `overall.md`
-
-Do not use `learning-material/` as a general container for source management, assessment, or knowledge documentation.
-
-### 4. Review Learner documentation
-
-Current structure:
+docs/assessment/challenge-extraction/pipeline.md currently contains a flow in which contextual analysis produces:
 
 ```text
-docs/learner/
-└── learning-state.md
+Knowledge Atom Candidates
+Exercise Items
+      ↓
+Challenge Candidates
 ```
 
-Keep it for now.
+docs/assessment/challenge-extraction/principles.md likewise states that a Challenge may identify or create a Knowledge Atom during the same analysis.
 
-Later, if the learner model grows, consider:
+### What must be decided
+
+Define the boundary and coordination between the two pipelines, including:
+
+- how Challenge Extraction obtains target_atom_id;
+- whether the target Atom must already exist as Candidate or Official before a Challenge Candidate is emitted;
+- how a Challenge that reveals previously unidentified knowledge is handed to the Knowledge Atom pipeline;
+- how the two pipelines share contextual evidence without making Knowledge Atom creation an output of Challenge Extraction;
+- which document owns the coordination rule.
+
+### Acceptance condition
+
+The canonical Challenge Extraction documentation must no longer define Knowledge Atom Candidates as an output of Challenge Extraction or imply that Challenge Extraction creates Knowledge Atoms.
+
+The final design must preserve the one-Challenge-to-one-Atom invariant while keeping Knowledge Atom creation in the Knowledge pipeline.
+
+---
+
+## 2. Define Representation and Identity for AI-Created Challenges
+
+### Problem
+
+The current model says that source-derived Challenges must have source provenance and source-occurrence identity, while AI-created/source-independent Challenges may exist without a source.
+
+At the same time, the current Candidate and Official Challenge schemas require extra.source and all of its source-specific fields.
+
+Therefore the model does not yet provide a consistent physical representation for AI-created Challenges.
+
+### Current inconsistency
+
+Source-derived Challenge identity is currently:
 
 ```text
-docs/learner/
-├── overall.md
-├── learning-state.md
-└── review-data.md
+<source-id>_<segment-id>_<exercise>_<item-number>
 ```
 
-Do not create these files until there is sufficient canonical content.
+and the schemas require source-specific provenance under extra.source:
 
-### 5. Preserve the Knowledge documentation structure
-
-Keep the current structure unless review reveals a concrete problem:
-
-```text
-docs/knowledge/
-├── overall.md
-├── atom-types.md
-├── atom-structure.md
-├── atom-pipeline.md
-└── relation-examples.md
+```yaml
+extra:
+  source:
+    source_id:
+    page_number:
+    segment_id:
+    exercise_name:
+    item_number:
 ```
 
-Do not restructure merely for consistency with other domains.
+But AI-created Challenges may legitimately have no source occurrence and therefore cannot provide those fields.
 
-### 6. Keep schemas flat for now
+### What must be decided
 
-Keep `schemas/` flat:
+Define the canonical model for source-independent / AI-created Challenges, including:
 
-```text
-schemas/
-├── candidate-atom.schema.json
-├── official-atom.schema.json
-├── candidate-challenge.schema.json
-├── official-challenge.schema.json
-└── review-data.schema.json
-```
+- Challenge identity and ID format when there is no source occurrence;
+- whether source provenance is optional at the schema level or conditionally required only for source-derived Challenges;
+- what metadata distinguishes generated Challenges from source-derived Challenges;
+- whether the same Candidate/Official physical representation is retained for both kinds;
+- whether generated Challenges need a different identity component or generation metadata;
+- how officialization and later correction work for AI-created Challenges;
+- whether any source-independent Challenge may be persisted as Official without external/source provenance.
 
-Do not introduce `knowledge/`, `assessment/`, or `learner/` schema subdirectories unless the number of schemas later makes the flat structure impractical.
+### Acceptance condition
 
-### 7. Separate documentation from source data
+The Challenge conceptual documentation and Candidate/Official schemas must agree on one representation for both source-derived and AI-created Challenges, with source-specific provenance required exactly when a Challenge is derived from a source.
 
-Keep actual source artifacts and source registry data under `sources/`.
-
-Documentation about the source model belongs under `docs/source/`.
-
-Do not mix source artifacts into `docs/`.
-
-### 8. Reassess books.md
-
-Review `docs/learning-material/sources/books.md`.
-
-The current understanding is that it only stores book names and has no special semantic role.
-
-If it is merely a catalog/data list, remove it from `docs/` and decide whether it belongs under source data instead. Do not preserve it as documentation without a clear documentation responsibility.
-
-### 9. Keep process/recovery artifacts outside canonical docs
-
-Do not move `context-recover/` into `docs/`.
-
-Context-recovery files describe AI/recovery workflow rather than the Adaptive Learning system's canonical model.
-
-Likewise, `analysis/` and other temporary/process artifacts should not be treated as canonical documentation.
-
-### 10. Remove obsolete artifacts
-
-Review the repository for obsolete testing/review/WIP artifacts.
-
-Known candidate for removal:
-
-```text
-unit-1-sources/test-atoms.md
-```
-
-It is obsolete and must not be treated as a source of truth.
-
-Also verify that old review/WIP files are not being used to store canonical decisions. Decisions belong in the appropriate permanent documentation.
-
-## Target high-level structure
-
-The intended direction is:
-
-```text
-adaptive-learning/
-├── README.md
-├── docs/
-│   ├── foundation/
-│   ├── source/
-│   ├── knowledge/
-│   ├── assessment/
-│   ├── learner/
-│   └── learning-material/
-├── schemas/
-├── sources/
-├── data/
-├── scripts/
-├── analysis/
-└── context-recover/
-```
-
-## Execution rule
-
-Do this incrementally. After each structural move or rename:
-
-1. update internal links/references;
-2. verify no canonical content was lost;
-3. verify the new location matches the document's responsibility;
-4. remove obsolete duplicates only after the new location is confirmed.
-
-This file is a workbench/checklist, not canonical project documentation.
+The final identity and lifecycle rules must be explicit and must not force fabricated source metadata onto AI-created Challenges.
