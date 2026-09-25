@@ -19,7 +19,6 @@ The linkage must be evidence-based, not inferred merely because the same word ap
 Generate follow-up Challenges or explanations only for a concrete instructional reason, such as:
 
 - isolating a gap;
-- testing another mastery dimension;
 - distinguishing close alternatives;
 - increasing contextual complexity;
 - testing transfer;
@@ -28,23 +27,6 @@ Generate follow-up Challenges or explanations only for a concrete instructional 
 - providing a needed task format.
 
 Generated content must remain distinguishable from source-derived content.
-
-## Assessment Dimensions
-
-Where applicable, assessment should provide evidence about:
-
-- recognition;
-- recall;
-- meaning precision;
-- form/pattern;
-- collocation;
-- contextual usage;
-- discrimination;
-- transformation/production;
-- transfer;
-- delayed retention.
-
-These are evidence dimensions. Their accumulated interpretation belongs to learner state.
 
 ## Competency Mapping
 
