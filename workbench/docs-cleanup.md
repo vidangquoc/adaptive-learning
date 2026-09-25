@@ -4,46 +4,75 @@
 >
 > These issues require a design decision before the affected canonical specifications are changed.
 
-## 1. Separate Challenge Extraction from Knowledge Atom Extraction
+## 1. Define the boundary and coordination of simultaneous Knowledge Atom and Challenge extraction
 
 ### Problem
 
-The current Challenge Extraction documents still describe Challenge Extraction and Knowledge Atom extraction as sharing the same contextual analysis, and the Challenge Extraction Pipeline currently produces both Knowledge Atom Candidates and Challenge Candidates.
+Knowledge Atom extraction and Challenge extraction occur **simultaneously from the same contextual analysis of a Source Segment**. They are not two independent pipelines that must run sequentially or wait for one another to finish.
 
-That is inconsistent with the current architecture:
-
-> **Knowledge Atoms are not part of the Challenge Extraction Pipeline.**
-
-Challenge extraction must remain focused on extracting and validating Challenges and their single target_atom_id.
-
-### Current inconsistency
-
-docs/assessment/challenge-extraction/pipeline.md currently contains a flow in which contextual analysis produces:
+During analysis of a Segment, the process may identify both:
 
 ```text
-Knowledge Atom Candidates
-Exercise Items
-      ↓
-Challenge Candidates
+Knowledge findings
+Assessment occurrences
 ```
 
-docs/assessment/challenge-extraction/principles.md likewise states that a Challenge may identify or create a Knowledge Atom during the same analysis.
+and use the relationship between them to establish which Knowledge Atom a Challenge assesses.
+
+The current documents, however, blur this architecture by describing Knowledge Atom Candidates as an output of the Challenge Extraction Pipeline while also implying that Challenge Extraction should merely consume already-created Atoms.
+
+Neither extreme is the intended model.
+
+### Correct architectural principle
+
+The extraction process should be understood as **one contextual analysis process with two related outputs**:
+
+```text
+Source Segment
+      ↓
+Shared contextual analysis
+      ├── Knowledge Atom Candidates
+      └── Challenge Candidates
+                     │
+                     └── target_atom_id
+```
+
+The fact that a Knowledge Atom already exists before a Challenge is analyzed is not a prerequisite.
+
+When analysis identifies the knowledge assessed by a Challenge:
+
+```text
+existing Official Atom
+        or
+existing Candidate Atom
+        or
+new Knowledge Atom identified from the same context
+```
+
+the Challenge uses that Atom's semantic ID as `target_atom_id`.
+
+Creating a new Candidate Atom in this situation does **not** mean inventing an Atom to fill the target field. The Atom must be inferred from the source context and must satisfy the canonical Knowledge Atom ontology, structure, semantic identity, provenance, and governance rules.
+
+Challenge evidence may therefore reveal knowledge that is not yet represented elsewhere, and that knowledge can be created as a Candidate during the same contextual analysis.
 
 ### What must be decided
 
-Define the boundary and coordination between the two pipelines, including:
+Define the precise contract for this simultaneous process, including:
 
-- how Challenge Extraction obtains target_atom_id;
-- whether the target Atom must already exist as Candidate or Official before a Challenge Candidate is emitted;
-- how a Challenge that reveals previously unidentified knowledge is handed to the Knowledge Atom pipeline;
-- how the two pipelines share contextual evidence without making Knowledge Atom creation an output of Challenge Extraction;
-- which document owns the coordination rule.
+- how the shared contextual analysis identifies knowledge findings and assessment occurrences together;
+- how an identified knowledge finding becomes a Candidate Atom under the canonical Knowledge Atom rules;
+- how the Challenge obtains the semantic ID of an existing or newly created Atom;
+- what happens when the context is insufficient to determine the single target Atom reliably;
+- how evidence discovered through the Challenge contributes to the Atom Candidate without allowing the Challenge to fabricate the Atom;
+- where the coordination rule is canonically documented.
 
 ### Acceptance condition
 
-The canonical Challenge Extraction documentation must no longer define Knowledge Atom Candidates as an output of Challenge Extraction or imply that Challenge Extraction creates Knowledge Atoms.
+The canonical documentation must describe Knowledge Atom and Challenge extraction as simultaneous, context-sharing activities rather than independent sequential pipelines.
 
-The final design must preserve the one-Challenge-to-one-Atom invariant while keeping Knowledge Atom creation in the Knowledge pipeline.
+The one-Challenge-to-one-Atom invariant must remain mandatory. A Challenge may target an existing Atom or an Atom Candidate created from the same contextual analysis, but it must never invent a Knowledge Atom merely to satisfy `target_atom_id`.
+
+Knowledge Atom creation remains governed by the Knowledge Atom ontology, structure, identity, and review/officialization rules even when the Candidate is created during Challenge analysis.
 
 ---
 
@@ -53,7 +82,7 @@ The final design must preserve the one-Challenge-to-one-Atom invariant while kee
 
 The current model says that source-derived Challenges must have source provenance and source-occurrence identity, while AI-created/source-independent Challenges may exist without a source.
 
-At the same time, the current Candidate and Official Challenge schemas require extra.source and all of its source-specific fields.
+At the same time, the current Candidate and Official Challenge schemas require `extra.source` and all of its source-specific fields.
 
 Therefore the model does not yet provide a consistent physical representation for AI-created Challenges.
 
@@ -65,7 +94,7 @@ Source-derived Challenge identity is currently:
 <source-id>_<segment-id>_<exercise>_<item-number>
 ```
 
-and the schemas require source-specific provenance under extra.source:
+and the schemas require source-specific provenance under `extra.source`:
 
 ```yaml
 extra:
