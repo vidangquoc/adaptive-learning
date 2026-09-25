@@ -28,7 +28,7 @@ Owns provenance policy, candidate review and promotion, governance, quality gate
 
 `04-assessment-and-learning-material.md`
 
-Owns source-derived Challenges, Challenge-to-knowledge linkage, generated assessment material, assessment dimensions, and assessment validity.
+Owns source-derived Challenges, Challenge-to-knowledge linkage, generated assessment material, and assessment validity.
 
 ## Ownership Rule
 
