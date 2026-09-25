@@ -6,9 +6,7 @@ The pipeline applies the principles defined in the Challenge Extraction Principl
 
 ## Scope
 
-The pipeline operates on individual Source Segments and produces Challenge Candidates or explicit skipped/incomplete extraction reports.
-
-Challenge extraction and Knowledge Atom extraction share the same contextual analysis. The pipeline therefore identifies the Knowledge Atom being assessed while creating each Challenge Candidate.
+The process operates on individual Source Segments and performs a shared contextual analysis from which Knowledge findings and assessment findings are extracted simultaneously. The process may therefore create Knowledge Atom Candidates and Challenge Candidates during the same analysis session.
 
 It does not approve Candidates, deduplicate Challenges, or handle integrated/composite Challenges.
 
@@ -19,20 +17,25 @@ Source Segment
       ↓
 Evidence Discovery
       ↓
-Contextual Analysis
-      ├── Knowledge Atom Candidates
-      └── Exercise Items
-               ↓
+Shared Contextual Analysis
+      ├── Knowledge findings
+      │       ↓
+      │   Knowledge Atom Candidates
+      │
+      └── Assessment findings
+              ↓
         Item-level analysis
-               ↓
+              ↓
        Challenge Candidates
-               │
-               └── target Knowledge Atom
+              │
+              └── target Knowledge Atom
       ↓
 Validation
       ↓
 Candidates / Issues
 ```
+
+Knowledge Atom and Challenge extraction are simultaneous outputs of the same contextual analysis. Whether the target Knowledge Atom already exists as an Official Atom, already exists as a Candidate, or must be created as a new Candidate during the same analysis session does not change this process.
 
 The presence of an item within an exercise is the strongest evidence that the item is a Challenge. Therefore, exercise items should be considered Challenge candidates by default.
 
@@ -83,7 +86,7 @@ The extraction process must not invent an expected answer. If the source does no
 
 ## 3. Create Candidates
 
-Create Knowledge Atom Candidates and Challenge Candidates from the results of contextual analysis.
+Create the relevant Knowledge Atom Candidates and Challenge Candidates from the results of the shared contextual analysis.
 
 For each exercise item:
 
@@ -118,7 +121,7 @@ Also validate that every identifiable exercise item has either:
 - produced a Challenge Candidate; or
 - produced an explicit skipped extraction report with a reason.
 
-Knowledge Atom Candidates are validated according to the Atom Extraction process.
+Knowledge Atom Candidates follow the canonical Knowledge Atom ontology, structure, identity, provenance, and review rules defined by the Knowledge documentation.
 
 A Candidate that fails required checks should not be emitted as a normal valid Candidate. The issue should instead be represented in the appropriate extraction evidence or skipped/incomplete report.
 
