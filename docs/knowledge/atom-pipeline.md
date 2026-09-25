@@ -148,7 +148,7 @@ The Candidate must preserve, where applicable:
 - precise source location;
 - source evidence represented through the canonical provenance fields;
 - atom type and canonical knowledge fields;
-- source-stated versus inferred attributes;
+
 
 A Candidate does not use a separate `candidate_id`, temporary ID, or tracking ID. Its semantic ID is created correctly when the Candidate is created.
 
