@@ -89,7 +89,7 @@ Official learning material
 Adaptive learning
 ```
 
-Source-specific extraction rules, provenance requirements, and source boundaries are defined under `docs/learning-material/`.
+Source-specific extraction rules, provenance requirements, and source boundaries are defined under `docs/source/`.
 
 ## 8. Versioning
 
