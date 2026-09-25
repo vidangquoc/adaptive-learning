@@ -179,7 +179,6 @@ At minimum, extraction should preserve:
 - the target Knowledge Atom;
 - the specific expected answer when it is available from the source;
 - source provenance;
-- the Challenge form when identifiable.
 
 The exact Candidate schema is defined separately.
 
