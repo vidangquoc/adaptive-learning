@@ -40,9 +40,9 @@ The target Atom may be:
 - an existing Official Knowledge Atom; or
 - a Knowledge Atom identified or created during the same contextual analysis.
 
-A Challenge must not be emitted with an unresolved target Atom when the source provides enough evidence to identify the knowledge being assessed.
+A Challenge must not be emitted with an unresolved target Atom when the contextual analysis provides enough evidence to identify the knowledge being assessed.
 
-A Challenge may also provide evidence for discovering a Knowledge Atom. Assessment task wording, expected answers, or other assessment evidence may reveal a knowledge point that is not sufficiently explicit elsewhere in the source.
+A Challenge may provide evidence for discovering a Knowledge Atom. Assessment task wording, expected answers, and other assessment evidence may reveal a knowledge point that is not sufficiently explicit elsewhere in the source. When this happens, the knowledge point may be created as a Candidate during the same contextual analysis.
 
 If a Challenge assesses a relationship between independent Knowledge Atoms, that relationship must itself be represented as a relation Knowledge Atom, and the Challenge targets that relation Atom.
 
@@ -170,6 +170,8 @@ Extraction should prefer explicit uncertainty or omission over invention.
 ## Candidate Completeness
 
 A Candidate must contain enough information to reconstruct and understand the original assessment task, identify the Knowledge Atom being assessed, and support later review and conversion into a Challenge.
+
+When the target Atom does not yet exist, the contextual analysis may create a new Knowledge Atom Candidate. That Candidate must be grounded in the same source context and must satisfy the canonical Knowledge Atom ontology, structure, semantic identity, provenance, and governance rules.
 
 At minimum, extraction should preserve:
 
