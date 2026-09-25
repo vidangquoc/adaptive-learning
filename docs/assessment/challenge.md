@@ -4,7 +4,7 @@ A Challenge is a concrete task presented to a learner to assess one Knowledge At
 
 A Challenge is an assessment mechanism. It is not itself knowledge, and it is not limited to a linguistic question.
 
-The detailed internal structure of a Challenge is defined separately in `challenge-extraction/challenge-structure.md`. This document focuses on the conceptual model, boundaries, and lifecycle of Challenges.
+The detailed internal structure of a Challenge is defined separately in `challenge-extraction/structure.md`. This document focuses on the conceptual model, boundaries, and lifecycle of Challenges.
 
 ## Core principles
 
@@ -76,7 +76,7 @@ The model intentionally treats Challenge identity as source-occurrence identity 
 
 A supported Challenge contains the information needed to present the task and identify its expected answer.
 
-The specific representation of the task, available alternatives, and expected answer is defined in `challenge-extraction/challenge-structure.md`.
+The specific representation of the task, available alternatives, and expected answer is defined in `challenge-extraction/structure.md`.
 
 The `answer` contains the expected answer for each input the Challenge requires the learner to provide.
 
@@ -271,6 +271,6 @@ It does not define:
 
 The canonical Challenge structure and Candidate/Official schemas are defined in:
 
-- `challenge-extraction/challenge-structure.md`;
+- `challenge-extraction/structure.md`;
 - `schemas/candidate-challenge.schema.json`;
 - `schemas/official-challenge.schema.json`.
