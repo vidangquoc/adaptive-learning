@@ -8,7 +8,6 @@ The review model is intentionally simple:
 
 - A Knowledge Atom is reviewed as one unit.
 - A review checks one thing: whether the learner remembers the Atom.
-- The system does not maintain separate recognition, recall, usage, collocation, discrimination, transfer, or retention scores for an Atom.
 - The learner's review data stores only the latest state needed for future review.
 
 ## 2. Review data storage
