@@ -129,6 +129,8 @@ The semantic kind of relationship represented by a `relation` atom. For an Offic
 
 `relation_type` describes the relationship itself, not the participating atoms. It is not a subtype and must not be used for structural relationships between grammatical components inside a single Atom.
 
+A `relation` Atom is a knowledge statement about a relationship, not a generic graph edge. The canonical Atom structure does not persist a separate list of participant Atom IDs. The participating concepts are represented by the relation Atom's semantic content, including its `name`, `structure`, `meaning`, and `explanation` where applicable.
+
 There is no `subtype` field. A further distinction must be represented through the atom's content or, if it is independently meaningful knowledge, through a separate `type` approved by the taxonomy.
 
 ---
@@ -209,7 +211,7 @@ Examples that demonstrate the knowledge represented by the atom.
 
 The meaning of this field is intentionally simple: it contains concrete examples of the knowledge represented by the atom.
 
-Examples may be source-derived or generated, but their provenance must remain distinguishable.
+Examples may be source-derived or generated. The canonical `examples` field does not encode per-example provenance; source provenance is represented at the Atom level when applicable.
 
 Do not treat every example sentence as an independent atom. An example becomes an atom only when it expresses independently meaningful knowledge supported by the taxonomy.
 
@@ -358,7 +360,7 @@ This boundary prevents both atom inflation and the loss of independently useful 
 4. One lexical sense is one atom by default when the source supports that distinction.
 5. Independently useful grammar distinctions may be separate atoms according to the grammar taxonomy.
 6. Properties describe existing atoms; they are not Knowledge Atoms themselves. If descriptive information is directly taught and tested as an independent knowledge point, that knowledge point is represented as a separate Atom.
-7. Raw structural relationships between atoms are not persisted merely for graph purposes. Knowledge about a relationship between two or more independent Knowledge Atoms may be represented as a `relation` atom when the relationship itself is an independently learnable or testable target.
+7. Raw structural relationships between atoms are not persisted merely for graph purposes. Knowledge about a relationship between two or more independent Knowledge Atoms may be represented as a `relation` atom when the relationship itself is an independently learnable or testable target. A relation Atom is not a graph edge and does not require persisted participant Atom references; its semantic content represents the learned relationship.
 8. A `relation` atom has a non-null `relation_type`; all non-relation atoms have `relation_type: null`.
 9. Source provenance remains recoverable for every official atom.
 10. `extra.is_tested` and `extra.test_evidence` describe source-level practice/testing only.
