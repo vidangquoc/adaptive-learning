@@ -10,7 +10,7 @@ Preserve source identity, source boundary, precise location, relevant source con
 
 External evidence such as proficiency frameworks must remain distinguishable from source evidence and project status.
 
-The detailed Unit-boundary rules are owned by `06-source-unit-boundary.md`.
+The detailed source-boundary rules are owned by `docs/source/source-structure.md`.
 
 ## Candidate and Official Stores
 
