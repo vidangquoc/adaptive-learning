@@ -135,32 +135,6 @@ Examples:
 
 A collocation should become an atom only when the source supports it as meaningful knowledge rather than merely as an incidental phrase in an example.
 
-### 2.6. `word_formation`
-
-knowledge about a morphological relationship or formation pattern that is independently useful to learn.
-
-Examples:
-
-- `assume` → `assumption`
-- `infer` → `inference`
-- `accurate` → `accuracy`
-
-The related lexical forms remain lexical knowledge. A word-formation atom represents the formation knowledge itself when that knowledge is independently meaningful.
-
-### 2.7. `morphological_form`
-
-a grammatical or inflectional form of a lexical item that is independently useful to represent, especially an explicitly taught form.
-
-Examples:
-
-- `love` → `loved`, `loves`, `loving`
-- `think` → `thought`
-- `write` → `written`
-
-Do not create a separate atom for every ordinary inflection. Use this type when the form itself is a meaningful learning object supported by the source.
-
----
-
 ## 3. Grammar knowledge
 
 All grammar atoms use `domain: grammar`. The `type` identifies the kind of grammatical knowledge represented.
