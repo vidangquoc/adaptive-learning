@@ -61,9 +61,9 @@ True/False is likewise not a separate concept. It can be represented as:
 
 ```yaml
 options:
-  - true
-  - false
-answer: true
+  - "true"
+  - "false"
+answer: "true"
 ```
 
 The presentation labels A/B/C, radio buttons, numbering, or other UI details are not part of the semantic answer.
@@ -274,9 +274,9 @@ For True/False:
 
 ```yaml
 options:
-  - true
-  - false
-answer: true
+  - "true"
+  - "false"
+answer: "true"
 ```
 
 No separate true_false form is required.
