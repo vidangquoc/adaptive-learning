@@ -30,7 +30,7 @@ The pipeline does not treat parser output as knowledge.
 
 ## 2. Inputs and Preconditions
 
-The pipeline consumes validated source material and its provenance. Source-boundary validation is defined by the learning-material source-boundary document.
+The pipeline consumes validated source material and its provenance. Source-boundary validation is defined by `docs/source/source-structure.md`.
 
 Before discovery begins:
 
