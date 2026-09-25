@@ -104,16 +104,6 @@ Extraction must not silently:
 
 More substantial normalization is a separate concern.
 
-## Challenge Form
-
-Extracted tasks should be classified using the defined set of Challenge forms.
-
-The extractor should prefer an existing form rather than creating a new form for every source variation.
-
-If a task cannot yet be classified, preserve it as a Candidate with an unclassified or explicitly unresolved form. Do not force it into an unsuitable form.
-
-The Challenge-form taxonomy may evolve as new task types are encountered.
-
 ## Answer Information
 
 A supported Challenge has a specific expected answer.
@@ -122,7 +112,7 @@ When the source provides answer information, extract that answer together with t
 
 The answer is conceptually distinct from the learner-facing task content, but it is intrinsic to the supported Challenge model.
 
-The answer may be structured according to the Challenge form rather than represented as a single string.
+The answer may be a string or an array of strings according to the number of learner inputs required by the Challenge.
 
 A Candidate may still be reported as incomplete or unresolved when the source does not provide enough information to establish its specific expected answer. The extractor must not invent an answer.
 
