@@ -13,4 +13,4 @@ A source may have:
 - derived segment PDFs;
 - derived segment text.
 
-See `docs/learning-material/sources/source-registry.md` for the registry definition and `docs/learning-material/procedures/source-extraction-sop.md` for the extraction procedure.
+See `docs/source/source-registry.md` for the registry definition and `docs/source/extraction.md` for the extraction procedure.
