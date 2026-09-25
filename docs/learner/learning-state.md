@@ -26,7 +26,6 @@ It does not contain:
 - attempts;
 - review history;
 - historical states;
-- separate mastery dimensions or scores.
 
 Knowledge Atom content remains in the Official Knowledge Store. Review data references an Atom by `atom_id`.
 
