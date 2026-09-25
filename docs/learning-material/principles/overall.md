@@ -30,18 +30,6 @@ Owns provenance policy, candidate review and promotion, governance, quality gate
 
 Owns source-derived Challenges, Challenge-to-knowledge linkage, generated assessment material, assessment dimensions, and assessment validity.
 
-### 5. Source Scope and Metadata
-
-`05-source-scope-and-metadata.md`
-
-Owns source selection/scope, domain, proficiency metadata, priority boundaries, and copyright/source-boundary policy.
-
-### 6. Source Unit Boundary
-
-`06-source-unit-boundary.md`
-
-Owns the canonical source boundary and validation rules for Unit-based source extraction.
-
 ## Ownership Rule
 
 A principle is defined in the document that owns its conceptual role. Other documents may reference that rule but should not restate it in full.
@@ -53,9 +41,7 @@ learning-material principles
     ├── purpose / strategy
     ├── interpretation
     ├── provenance / governance
-    ├── assessment
-    ├── source scope / metadata
-    └── source boundary
+    └── assessment
 ```
 
 Knowledge ontology, atom structure, atom taxonomy, atom pipeline, data architecture, and learner-state rules are owned by their respective documents outside this rulebook.
