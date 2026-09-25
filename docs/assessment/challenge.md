@@ -143,7 +143,7 @@ extra:
 
 The provenance fields supplement the ID and do not replace it.
 
-Source-independent Challenges are outside the current source-derived extraction identity model and require a separate identity decision before they are persisted as official Challenges.
+AI-generated/source-independent Challenges are not part of the current extraction scope. Their identity and persistence model are intentionally left for future design when such Challenges are introduced.
 
 ## Source preservation and fail-closed extraction
 
