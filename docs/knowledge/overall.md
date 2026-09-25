@@ -124,7 +124,7 @@ One Knowledge Atom → zero or many Challenges
 
 If a Challenge tests knowledge about a relationship between independent Knowledge Atoms, that relationship is represented as a `relation` Atom and the Challenge targets that relation Atom. The Challenge does not directly target multiple independent Atoms.
 
-Assessment construction rules belong to `docs/assessment/assessment.md` and the Challenge documentation.
+Assessment construction rules belong to `docs/assessment/overall.md` and the Challenge documentation.
 
 ## 6. Knowledge versus Competency
 
@@ -144,7 +144,7 @@ An atom may support multiple competencies, and a competency may depend on multip
 
 Canonical knowledge must remain traceable to source evidence. Source interpretation may distinguish sense, usage, construction, or other properties, but unsupported claims must not be introduced merely to complete a record.
 
-Source-boundary and provenance rules belong to the learning-material principles; this document defines the conceptual role of provenance, not its extraction procedure.
+Source-boundary rules belong to `docs/source/source-structure.md`; source extraction and provenance procedures belong to `docs/source/extraction.md`. Broader learning-material governance remains in `docs/learning-material/principles/03-evidence-provenance-and-governance.md`. This document defines the conceptual role of provenance, not its extraction procedure.
 
 ## 8. Knowledge and Learner Independence
 
