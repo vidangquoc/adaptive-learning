@@ -68,7 +68,6 @@ Analyze the relevant source context to determine:
 - what learner action each item requires;
 - whether each item is an actual Challenge;
 - the boundary of each Challenge;
-- what Challenge form applies;
 - what specific expected answer is available;
 - and which Knowledge Atom each Challenge assesses.
 
