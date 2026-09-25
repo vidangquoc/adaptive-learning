@@ -150,7 +150,7 @@ Source-boundary rules belong to `docs/source/source-structure.md`; source extrac
 
 The same knowledge base should support multiple learners. Learner performance must not mutate the canonical meaning, source evidence, or ontology of an atom.
 
-Learner mastery dimensions and adaptive decisions belong to `docs/learner/learning-state.md`.
+Learner review state and adaptive decisions belong to `docs/learner/learning-state.md`.
 
 ## 9. Design Constraints
 
