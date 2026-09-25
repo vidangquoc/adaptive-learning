@@ -219,9 +219,7 @@
               "multiword_expression",
               "phrasal_verb",
               "idiom",
-              "collocation",
-              "word_formation",
-              "morphological_form"
+              "collocation"
             ]
           }
         }
