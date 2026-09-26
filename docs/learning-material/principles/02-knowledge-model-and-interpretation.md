@@ -26,11 +26,16 @@ The taxonomy document determines which categories are available; this document d
 
 ## Flat Knowledge-Atom Principle
 
-A knowledge atom is an independently useful, source-grounded unit of knowledge.
+A knowledge atom is a source-grounded unit of knowledge admitted under the domain-specific Knowledge Atom rules.
 
-Knowledge atoms are flat and independent by default. If several meanings, senses, constructions, patterns, or usages are directly tested or practised as distinct knowledge points in the source, they should be represented as separate atoms.
+Knowledge atoms are flat and independent by default. Admission differs by domain:
 
-One lexical sense is one atom by default. For other knowledge distinctions, direct source-level testing/practice is the trigger for separate atom representation.
+- For **Grammar**, a knowledge point may be represented as an Atom when the source directly teaches, explains, or clearly represents it. Direct testing is not required.
+- For **Vocabulary**, a vocabulary item must be directly tested or assessed by the source to become a Candidate. Every vocabulary item directly assessed by the source must be proposed as a Candidate.
+
+This applies across the vocabulary taxonomy, including `lexical_sense`, `multiword_expression`, `phrasal_verb`, `idiom`, and `collocation`.
+
+Direct testing is therefore not a general trigger for Atom admission. Where an Atom is tested, assessment evidence is recorded through the existing `extra.is_tested` and test-evidence mechanisms.
 
 Do not impose hierarchies such as:
 
@@ -104,7 +109,7 @@ multiple evidence spans → one atom
 one evidence span → no atom
 ```
 
-Split when the source supports a knowledge distinction and the corresponding knowledge point is directly tested or practised as a distinct target.
+Split when the source supports a distinct knowledge point and the resulting parts satisfy the applicable domain-specific Knowledge Atom admission rule.
 
 Merge evidence only when it supports the same underlying knowledge item and the same sense/use.
 
@@ -116,7 +121,7 @@ False deduplication is more damaging than controlled redundancy.
 
 For lexical knowledge, consider sense, lexicalization, idiomaticity, syntactic behavior, patterns, derivation, register, semantic contrasts, and restrictions where the source supports them.
 
-For grammar, consider form, meaning, function, discourse context, constraints, and contrasts. Do not create a grammar atom merely because a textbook heading exists. Represent a grammatical knowledge point as a separate atom when the source directly tests or practises that point as a distinct target.
+For grammar, consider form, meaning, function, discourse context, constraints, and contrasts. Do not create a grammar atom merely because a textbook heading exists. Represent a grammatical knowledge point as a separate atom when the source directly teaches, explains, or clearly represents that point.
 
 ## Accuracy over Completeness
 
