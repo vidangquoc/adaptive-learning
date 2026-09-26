@@ -8,20 +8,24 @@ Every source-derived Knowledge Atom and Challenge must retain enough provenance 
 
 Preserve source identity, source boundary, precise location, relevant source context, uncertainty, and licensing/usage information where applicable.
 
+The canonical source-boundary and provenance coordinates are defined by the Source documentation, especially `docs/source/source-structure.md`. Knowledge-specific provenance fields are defined by the canonical Knowledge Atom documentation, and Challenge provenance is defined by the canonical Assessment documentation.
+
 External evidence such as proficiency frameworks must remain distinguishable from source evidence and project status.
 
-The detailed source-boundary rules are owned by `docs/source/source-structure.md`.
+## Candidate and Official Governance
 
-## Candidate and Official Stores
+Discovery, review, and officialization are distinct stages.
 
-Discovery, review, and officialization are distinct stages of the knowledge pipeline.
+For Knowledge Atoms, the detailed Candidate/Official representation, review statuses, validation boundary, and officialization transition are owned by `docs/knowledge/atom-pipeline.md`.
 
-A **Candidate** is a complete Knowledge Atom stored in the Candidate Store. It is not official knowledge yet. Candidate and Official use the same semantic ID and the same canonical atom structure; Candidate additionally carries the lifecycle field `review_status`.
+For Challenges, the corresponding Candidate/Official structure and lifecycle are owned by `docs/assessment/challenge-extraction/pipeline.md` and `docs/assessment/challenge-extraction/structure.md`.
+
+The cross-domain governance principle is:
 
 ```text
 SOURCE EVIDENCE
       ↓
-CANDIDATE STORE
+CANDIDATE
       ↓
 HUMAN REVIEW
       ↓
@@ -29,47 +33,20 @@ approved Candidate
       ↓
 OFFICIALIZE
       ↓
-OFFICIAL STORE
+OFFICIAL
 ```
 
-Candidate and Official are stored separately. Officialization is a storage transition, not a new ontology type and not a reviewer decision.
-
-Automated discovery and analysis are advisory. They may locate evidence and analyze linguistic/semantic properties, but any tool-generated confidence scores or warnings are advisory tooling output and are not persisted Atom fields. They do not independently officialize Candidates.
+Automated discovery and analysis are advisory. They do not independently officialize source-derived knowledge or assessment objects.
 
 ## Human Review Is the Officialization Gate
 
-Candidate review status has exactly three values:
+Human review is the semantic gate between extracted Candidates and Official representations.
 
-```text
-pending
-approved
-rejected
-```
+Structural validation does not replace human review. A schema can establish whether a representation is structurally valid, but it cannot by itself establish that the source was interpreted correctly.
 
-- `pending`: newly created Candidate or unchanged by reviewer;
-- `approved`: accepted for officialization, but still a Candidate;
-- `rejected`: rejected by reviewer and still reviewable later.
+Detailed review statuses and transition rules belong to the canonical Knowledge and Assessment lifecycle documents.
 
-The reviewer may leave `pending`, set `approved`, or set `rejected`. There is no `hold` state.
-
-> **Machine proposes. Human decides.**
-
-## Officialization
-
-Officialization processes only Candidates whose current status is `approved`.
-
-For each approved Candidate:
-
-1. write the Official Atom to the separate Official Store;
-2. keep the same semantic ID;
-3. preserve the canonical atom content and provenance;
-4. delete the Candidate from the Candidate Store.
-
-Therefore the Candidate Store has no `officialized` status. Candidates that are `pending` or `rejected` are not affected.
-
-A rejected Candidate may be reviewed again. An Official Atom does not return to Candidate/rejected lifecycle states.
-
-## Knowledge Admission Is Independent of Learner State
+## Knowledge Admission and Learner State
 
 Static learning-material admission must not be controlled by learner mastery, review urgency, opportunity cost, or other learner-specific signals.
 
@@ -89,7 +66,7 @@ Gates should cover applicable structural validity, provenance, semantic plausibi
 
 If evidence is insufficient or competing interpretations remain unresolved:
 
-> **Do not officialize. Preserve the Candidate and mark it for review.**
+> **Do not officialize. Preserve the Candidate and require review or an explicit extraction report according to the owning pipeline.**
 
 ## Pipeline Governance
 
@@ -101,11 +78,11 @@ Keep these concerns separable:
 
 ```text
 source evidence
-candidate knowledge
+candidate knowledge / assessment
 human review decision
-official knowledge
+official representation
 learning design
 learner state
 ```
 
-Implementation details for discovering, validating, reviewing, and officializing atoms belong in `docs/knowledge/atom-pipeline.md`.
+Detailed implementation rules belong to the canonical documentation for each concern rather than being copied into this cross-domain principle document.
