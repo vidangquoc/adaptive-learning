@@ -46,19 +46,9 @@ The analysis may determine or propose:
 - word-formation relationship;
 - lexical or grammatical contrast.
 
-Use the Knowledge-specific evidence hierarchy:
+Use source evidence and contextual analysis to determine Knowledge Atom fields. AI inference is currently permitted only for `meaning`, `part_of_speech`, and `mother_says`. All other knowledge attributes must be grounded in explicit source evidence and must not be inferred by AI.
 
-~~~
-explicit source statement
-        ↓
-strong contextual inference
-        ↓
-weak / ambiguous inference
-        ↓
-null / pending / review-needed
-~~~
-
-When the shared analysis does not provide sufficient support for a Knowledge decision, preserve the uncertainty rather than inventing missing information.
+For the attributes that may be inferred, stronger or weaker contextual support determines whether the inferred value is sufficiently reviewable. If the available evidence or context is insufficient, preserve the uncertainty rather than inventing missing information.
 
 ## 3. Vocabulary Meaning Extraction
 
