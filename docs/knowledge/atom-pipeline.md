@@ -228,6 +228,28 @@ Rules:
 - When a structurally required collection has no applicable evidence, use an empty array `[]`; do not omit the field.
 - `notes` may be `null` when there is no note.
 
+### Extraction Reports
+
+When Knowledge Atom extraction encounters an occurrence that cannot be emitted as a normal Candidate, the extractor must create an explicit extraction report rather than silently discard the occurrence.
+
+Reports are stored alongside the Knowledge Atom Candidate Store:
+
+~~~
+data/knowledge/<source-id>/<segment-id>/<domain>/extraction_reports.md
+~~~
+
+`extraction_reports.md` is a process/extraction artifact, not a Knowledge Atom collection and not part of the Candidate lifecycle. A report records skipped, incomplete, unresolved, or otherwise non-emitted extraction occurrences.
+
+Each report entry must identify the source occurrence and explain why a normal Candidate was not emitted. The report may use fenced YAML blocks, with one report entry per block. At minimum, an entry records:
+
+- a stable report/occurrence identifier;
+- `status`, such as `skipped` or `incomplete`;
+- source identity and precise source location sufficient to identify the occurrence;
+- a reason explaining why extraction did not produce a Candidate;
+- an optional note with additional extraction context.
+
+A rejected Candidate is not an extraction report. Rejection occurs during human review and remains represented by `review_status` in the Candidate Store.
+
 ## 6. Validation and Review
 
 Candidate quality is controlled through contextual AI interpretation followed by human review. The JSON Schema remains the canonical structural contract for Candidate Atoms, but no separate Candidate-validation script is required at this stage.
