@@ -251,7 +251,7 @@ Properties describe existing atoms; they are not Knowledge Atoms themselves. If 
 
 ## 6. Taxonomy constraints
 
-1. **Source evidence comes first.** Do not invent definitions, patterns, collocations, restrictions, distinctions, or exceptions from intuition.
+1. **Source evidence comes first.** Do not invent definitions, patterns, collocations, restrictions, distinctions, or exceptions from intuition. If an independently useful knowledge point is not represented by an existing canonical type, leave it outside the current taxonomy rather than silently creating a new type.
 2. **One lexical sense = one atom by default.** Split distinct senses when the source supports them.
 3. **Do not turn every example sentence into an atom.** An example is evidence unless it teaches an independently reusable pattern or knowledge object.
 4. **Do not turn every descriptive detail into an atom.** A knowledge point becomes a separate atom when the learning material directly teaches or assesses it as an independent target. Direct testing is not required when the source explicitly teaches the knowledge point as an independently useful target.
