@@ -84,7 +84,29 @@ For each exercise item:
 
 The Challenge boundary normally follows the exercise item boundary. Multiple blanks, actions, or response spaces within one item remain part of the same Challenge unless contextual analysis establishes that the source actually contains multiple independent items.
 
-## 3. Validate Candidates
+## 3. Extraction Reports
+
+When a Challenge occurrence cannot be emitted as a normal Challenge Candidate, the extractor must create an explicit extraction report rather than silently discard the occurrence.
+
+Reports are stored alongside the Challenge Candidate Store:
+
+~~~
+data/assessment/<source-id>/<segment-id>/extraction_reports.md
+~~~
+
+`extraction_reports.md` is a process/extraction artifact, not a Challenge collection and not part of the Candidate lifecycle. A report records skipped, incomplete, unresolved, or otherwise non-emitted extraction occurrences.
+
+Each report entry must identify the source occurrence and explain why a normal Challenge Candidate was not emitted. The entry should record, at minimum:
+
+- a stable report/occurrence identifier;
+- `status`, such as `skipped` or `incomplete`;
+- source identity and precise source location sufficient to identify the occurrence;
+- a reason explaining why extraction did not produce a Candidate;
+- an optional note with additional extraction context.
+
+A rejected Challenge Candidate is not an extraction report. Rejection occurs during Candidate review and remains represented by the Candidate lifecycle.
+
+## 4. Validate Candidates
 
 Validate Challenge Candidates and their relationship to their target Knowledge Atoms.
 
