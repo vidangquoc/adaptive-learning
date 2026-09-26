@@ -135,6 +135,19 @@ Examples:
 
 A collocation should become an atom only when the source supports it as meaningful knowledge rather than merely as an incidental phrase in an example.
 
+## 2.6. Register, restrictions, and pragmatic/discourse knowledge
+
+Register, usage restrictions, pragmatic function, discourse function, semantic contrasts, and similar descriptive information do not currently have dedicated vocabulary or grammar atom types.
+
+Use the following rule:
+
+- If the information describes an existing Atom and is not independently useful as a learning target, keep it as a property or supporting explanation of that Atom.
+- If the source directly teaches or assesses the information as an independently useful knowledge point, represent it as an Atom only when an existing canonical type can represent it appropriately.
+- Do not introduce a new type merely to cover a category such as register, restriction, pragmatic function, or discourse function.
+- If no existing canonical type represents the knowledge adequately, keep it outside the current taxonomy until source-grounded modeling work demonstrates a need for a new type.
+
+This keeps the current taxonomy explicit about what it supports without silently promising representation for every possible linguistic knowledge category.
+
 ## 3. Grammar knowledge
 
 All grammar atoms use `domain: grammar`. The `type` identifies the kind of grammatical knowledge represented.
