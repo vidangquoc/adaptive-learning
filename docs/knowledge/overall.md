@@ -66,15 +66,16 @@ bank — side of a river
 
 There is no requirement to create a parent atom for the shared form `bank`.
 
-The practical question for deciding whether something should be an atom is:
+Atom admission is domain-specific:
 
-> **Is this an independently useful learning target that the source teaches or assesses as a separate knowledge point?**
+- **Grammar:** a knowledge point may become a Knowledge Atom when the source directly teaches, explains, or clearly represents it. Direct testing is not required.
+- **Vocabulary:** a vocabulary item must be directly tested or assessed by the source to become a Knowledge Atom Candidate. If the source directly tests a vocabulary item, it must be proposed as a Candidate.
 
-A knowledge point does **not** need to be directly tested to become an Atom. Explicit source teaching or explanation can establish an Atom when the knowledge point is independently useful as a learning target. Assessment evidence strengthens or confirms the representation and may establish that `is_tested` is `true`, but direct testing is not an admission requirement.
+This admission rule applies to the vocabulary taxonomy, including `lexical_sense`, `multiword_expression`, `phrasal_verb`, `idiom`, and `collocation`.
 
-Examples and incidental mentions do not create Atoms by themselves; they are evidence unless the source uses them to teach or assess an independently useful knowledge point.
+Source grounding is a separate requirement: an admitted Atom must remain traceable to concrete source evidence. Direct testing is assessment evidence and, where applicable, establishes `extra.is_tested: true`; it is not a general admission requirement for Grammar.
 
-If yes, it can be a separate atom even when another atom is closely related to it.
+Examples and incidental mentions do not create Atoms by themselves. For Grammar, they may support an Atom when the source directly teaches, explains, or clearly represents the corresponding knowledge point. For Vocabulary, mere appearance or contextual mention is insufficient without direct assessment.
 
 ## 4. Atom versus Property versus Metadata
 
@@ -88,7 +89,7 @@ metadata
 
 A **property** is information that describes an existing atom. By itself, a property does not create another atom.
 
-If a knowledge point represented by a property is **directly tested or practised in the learning material**, that knowledge point is represented as a separate Knowledge Atom. Otherwise, it remains descriptive information about the existing atom.
+Whether a property becomes a separate Knowledge Atom follows the domain-specific admission rules in Section 3. It is not promoted merely because the property can be observed in an example.
 
 **Metadata** describes source, provenance, system, or other contextual information. It is not part of the knowledge itself.
 
@@ -98,7 +99,7 @@ The important distinction is therefore:
 Describes an existing atom
     → Property
 
-Directly taught/tested as an independent knowledge point
+Meets the domain-specific admission rule
     → Knowledge Atom
 
 Describes source/system context
