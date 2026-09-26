@@ -1,0 +1,160 @@
+# Extraction Context Map for Destination C1 & C2.
+# Segment IDs referenced here are defined by source-segments.yaml.
+# This map defines contextual relationships only; it does not change
+# canonical Segment boundaries.
+
+source_id: destination-c1-c2
+
+global_supporting_segments:
+  - database-topic-vocabulary
+  - database-phrasal-verbs
+  - database-phrases-patterns-collocations
+  - database-idioms
+  - database-word-formation
+  - answer-key
+
+extraction_contexts:
+  review-01:
+    supporting_segments:
+      - unit-01
+      - unit-02
+
+  review-02:
+    supporting_segments:
+      - unit-03
+      - unit-04
+
+  review-03:
+    supporting_segments:
+      - unit-05
+      - unit-06
+
+  review-04:
+    supporting_segments:
+      - unit-07
+      - unit-08
+
+  review-05:
+    supporting_segments:
+      - unit-09
+      - unit-10
+
+  review-06:
+    supporting_segments:
+      - unit-11
+      - unit-12
+
+  progress-test-01:
+    supporting_segments:
+      - unit-01
+      - unit-02
+      - unit-03
+      - unit-04
+      - unit-05
+      - unit-06
+      - unit-07
+      - unit-08
+      - unit-09
+      - unit-10
+      - unit-11
+      - unit-12
+
+  review-07:
+    supporting_segments:
+      - unit-13
+      - unit-14
+
+  review-08:
+    supporting_segments:
+      - unit-15
+      - unit-16
+
+  review-09:
+    supporting_segments:
+      - unit-17
+      - unit-18
+
+  review-10:
+    supporting_segments:
+      - unit-19
+      - unit-20
+
+  review-11:
+    supporting_segments:
+      - unit-21
+      - unit-22
+
+  review-12:
+    supporting_segments:
+      - unit-23
+      - unit-24
+
+  review-13:
+    supporting_segments:
+      - unit-25
+      - unit-26
+
+  progress-test-02:
+    supporting_segments:
+      - unit-13
+      - unit-14
+      - unit-15
+      - unit-16
+      - unit-17
+      - unit-18
+      - unit-19
+      - unit-20
+      - unit-21
+      - unit-22
+      - unit-23
+      - unit-24
+      - unit-25
+      - unit-26
+
+  revision-test-01:
+    supporting_segments:
+      - unit-01
+      - unit-02
+      - unit-03
+      - unit-04
+      - revision-answer-key
+
+  revision-test-02:
+    supporting_segments:
+      - unit-05
+      - unit-06
+      - unit-07
+      - unit-08
+      - revision-answer-key
+
+  revision-test-03:
+    supporting_segments:
+      - unit-09
+      - unit-10
+      - unit-11
+      - unit-12
+      - revision-answer-key
+
+  revision-test-04:
+    supporting_segments:
+      - unit-13
+      - unit-14
+      - unit-15
+      - unit-16
+      - revision-answer-key
+
+  revision-test-05:
+    supporting_segments:
+      - unit-17
+      - unit-18
+      - unit-19
+      - unit-20
+      - revision-answer-key
+
+  revision-test-06:
+    supporting_segments:
+      - unit-21
+      - unit-22
+      - unit-23
+      - unit-24
+      - revision-answer-key
