@@ -211,7 +211,7 @@ Examples that demonstrate the knowledge represented by the atom.
 
 The meaning of this field is intentionally simple: it contains concrete examples of the knowledge represented by the atom.
 
-Examples may be source-derived or generated. The canonical `examples` field does not encode per-example provenance; source provenance is represented at the Atom level when applicable.
+Examples must be grounded in source evidence. The canonical `examples` field does not encode per-example provenance; source provenance is represented at the Atom level when applicable. AI must not invent examples as part of Atom extraction.
 
 Do not treat every example sentence as an independent atom. An example becomes an atom only when it expresses independently meaningful knowledge supported by the taxonomy.
 
