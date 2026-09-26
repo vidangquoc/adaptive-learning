@@ -91,7 +91,7 @@ When a Challenge occurrence cannot be emitted as a normal Challenge Candidate, t
 Reports are stored alongside the Challenge Candidate Store:
 
 ~~~
-data/assessment/<source-id>/<segment-id>/extraction_reports.md
+data/challenges/<source-id>/<segment-id>/extraction_reports.md
 ~~~
 
 `extraction_reports.md` is a process/extraction artifact, not a Challenge collection and not part of the Candidate lifecycle. A report records skipped, incomplete, unresolved, or otherwise non-emitted extraction occurrences.
