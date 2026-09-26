@@ -60,6 +60,26 @@ null / pending / review-needed
 
 When the shared analysis does not provide sufficient support for a Knowledge decision, preserve the uncertainty rather than inventing missing information.
 
+## 3. Vocabulary Meaning Extraction
+
+For every Knowledge Atom whose `domain` is `vocabulary`, the `meaning` must be explicitly provided by the source whenever possible.
+
+Use the following priority when determining the meaning:
+
+1. an explicit meaning provided in the Extraction Segment;
+2. if the Extraction Segment does not provide it, an explicit meaning provided in the Global Supporting Segments;
+3. if no explicit source meaning is available, AI may infer the meaning from the available source context.
+
+When the meaning is inferred by AI rather than explicitly provided by the source, append `(ai-generated)` to the end of the `meaning` value. For example:
+
+~~~yaml
+meaning: something very big (ai-generated)
+~~~
+
+Do not add a separate `meaning_origin` field. The `(ai-generated)` marker in the `meaning` value is the canonical way to record that the meaning was inferred by AI.
+
+An AI-generated meaning must still be grounded in the available source context. If the context is insufficient to support a reasonable meaning, preserve the uncertainty rather than inventing one.
+
 ## 3. Atom Splitting, Merging, and Deduplication
 
 One source span does not necessarily equal one atom:
