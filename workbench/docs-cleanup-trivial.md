@@ -26,6 +26,10 @@ The rule should distinguish:
 
 ---
 
+### Status
+
+**Resolved.** `docs/knowledge/overall.md` now defines the admission criterion: an independently useful knowledge point directly taught or assessed by the source can become an Atom; direct testing is not required. Examples and incidental mentions do not create Atoms by themselves.
+
 ## 2. Clarify Taxonomy Coverage for Register, Restrictions, and Pragmatic/Discourse Knowledge
 
 The interpretation principles explicitly ask the extraction process to consider:
@@ -51,6 +55,10 @@ The decision should prevent the taxonomy from silently promising support for kno
 
 ---
 
+### Status
+
+**Resolved.** `docs/knowledge/atom-types.md` now explicitly covers register, restrictions, pragmatic/discourse knowledge, and semantic contrasts: keep them as properties unless independently taught/assessed and representable by an existing type; do not add a new type without source-grounded modeling evidence.
+
 ## 3. Standardize Page-Number Semantics Across Source and Challenge/Atom Provenance
 
 The source segmentation manifest currently defines page numbering as PDF-viewer-based 1-based numbering, while Challenge provenance defines `page_number` as the original/printed source page number. Atom provenance does not specify the convention precisely enough.
@@ -72,6 +80,10 @@ At minimum, the documentation should make it impossible to confuse:
 
 ---
 
+### Status
+
+**Resolved.** Page provenance is now standardized to global PDF-viewer 1-based page numbering across source segmentation, Atom provenance, and Challenge provenance. Printed/book and segment-relative page numbers are not canonical coordinates.
+
 ## 4. Align the Source Extraction SOP With Simultaneous Knowledge + Challenge Analysis
 
 The Challenge extraction pipeline explicitly defines Knowledge and Challenge extraction as simultaneous outputs of one shared contextual analysis.
@@ -90,6 +102,10 @@ Update the operational description so it clearly distinguishes:
 The goal is not to merge ownership of Knowledge and Challenge objects, but to represent their shared analytical boundary consistently across docs.
 
 ---
+
+### Status
+
+**Resolved.** `docs/source/extraction.md` now models shared contextual analysis as producing Knowledge findings and Assessment findings simultaneously, with separate Candidate branches and lifecycles.
 
 ## 5. Define the Physical Representation of Skipped / Incomplete Extraction Reports
 
@@ -112,6 +128,10 @@ If the project intentionally keeps these reports as process artifacts outside ca
 
 ---
 
+### Status
+
+**Open.** The canonical physical representation and storage location for skipped/incomplete extraction reports still requires an explicit design decision.
+
 ## 6. Define Provenance for Answers Located Outside the Challenge Segment
 
 A Challenge must belong entirely to one Source Segment, but answer information may come from a separate source segment such as an answer-key Segment.
@@ -129,6 +149,10 @@ The decision should cover cases where:
 - multiple source locations contribute to establishing the expected answer.
 
 ---
+
+### Status
+
+**Open.** The provenance representation for an expected answer located in a different Segment still requires an explicit design decision.
 
 ## 7. Repair Ownership Wording in `lexical-definition-rules.md`
 
@@ -153,6 +177,10 @@ Narrow the ownership statement and replace the stale umbrella reference with pre
 
 ---
 
+### Status
+
+**Blocked / stale path.** The file path named by this issue, `docs/learning-material/principles/lexical-definition-rules.md`, is not present in the current repository, and repository search did not locate it. No ownership wording was changed by assumption.
+
 ## 8. Clarify the Current Meaning of "Mastery" in Methodology
 
 `docs/foundation/methodology.md` says learner state is used to determine mastery, while the current learner-state model defines only latest review state with a remembered/not-remembered review outcome and five persisted fields.
@@ -168,3 +196,6 @@ Either:
 
 The wording should remain compatible with the current learner-state scope.
 
+### Status
+
+**Resolved.** `docs/foundation/methodology.md` now describes learner state in terms of current review evidence and review needs, and explicitly states that no persisted/formal mastery model is currently defined.
