@@ -27,13 +27,20 @@ segment text
     ↓
 segment validation
     ↓
-evidence discovery
+Extraction Context
     ↓
-candidate atoms
+Evidence Discovery
     ↓
-human review / officialization
+Shared Contextual Analysis
+    ├── Knowledge findings
+    │       ↓
+    │   Knowledge Atom Candidates
+    │
+    └── Assessment findings
+            ↓
+        Challenge Candidates
     ↓
-official atoms
+Candidate validation / review / officialization
 ```
 
 The key boundary is **Segment**. A Segment is a canonical structural source boundary defined by `source-segments.yaml` and represented by a segment PDF. A Unit is one Segment with `type: unit`; it is not a separate repository layer.
@@ -190,7 +197,32 @@ What does the source actually say or show?
 
 Evidence discovery is not yet official atom creation. Do not silently convert an interpretation into a source fact.
 
-## 8. Extract instructional knowledge evidence
+## 8. Shared contextual analysis and extraction outputs
+
+The validated Extraction Segment and its Extraction Context are analyzed together. Evidence discovery may locate both instructional/knowledge evidence and assessment evidence, but discovery is not itself the extraction result.
+
+The shared contextual analysis produces two kinds of findings simultaneously:
+
+```text
+Extraction Segment
+      +
+Extraction Context
+      ↓
+Evidence Discovery
+      ↓
+Shared Contextual Analysis
+      ├── Knowledge findings
+      │       ↓
+      │   Knowledge Atom Candidates
+      │
+      └── Assessment findings
+              ↓
+        Challenge Candidates
+```
+
+The two outputs remain governed by separate canonical models and lifecycles. Knowledge Atom rules belong to `docs/knowledge/`; Challenge rules belong to `docs/assessment/`.
+
+### Knowledge findings
 
 From instructional content, identify evidence relevant to knowledge extraction, including where applicable:
 
@@ -205,13 +237,13 @@ From instructional content, identify evidence relevant to knowledge extraction, 
 - examples and contextual evidence;
 - contrasts and boundaries explicitly supported by the source.
 
-Preserve the source span and Segment provenance for every candidate finding.
+Preserve the source span and Segment provenance for every finding.
 
-The detailed schema and field semantics for knowledge atoms are defined in `docs/knowledge/atom-structure.md`; this SOP does not redefine that schema.
+The detailed schema and field semantics for Knowledge Atoms are defined in `docs/knowledge/atom-structure.md`; this SOP does not redefine that schema.
 
-## 9. Extract assessment evidence separately
+### Assessment findings
 
-Extract exercises, tests, reviews, and answer material as source-derived assessment evidence.
+Identify exercises, tests, reviews, and answer material as source-derived assessment findings.
 
 Preserve, where available:
 
@@ -226,9 +258,23 @@ Preserve, where available:
 - provenance;
 - the instructional or knowledge target supported by the source.
 
-Do not transform source Challenges into generated Challenges during source extraction.
+Assessment findings are analyzed in the same contextual session as Knowledge findings. They are not a later, independent extraction pass.
 
-Assessment evidence can support atom discovery and validation, but a Challenge does not automatically prove that every word or concept appearing in it is a tested knowledge target.
+## 9. Candidate creation
+
+Knowledge findings may produce Knowledge Atom Candidates according to the Knowledge Atom pipeline. Assessment findings may produce Challenge Candidates according to the Challenge extraction pipeline.
+
+A Challenge may target:
+
+- an existing Official Knowledge Atom;
+- an existing Knowledge Atom Candidate; or
+- a Knowledge Atom identified or created during the same shared contextual analysis.
+
+If assessment evidence reveals a knowledge point that is not otherwise explicit, the corresponding Knowledge Atom Candidate may be created as part of that same analysis session.
+
+Candidate creation remains an interpretation step. It must preserve supporting evidence and provenance and must not invent unsupported information.
+
+The detailed Candidate structures and lifecycle rules remain in the specialized Knowledge and Assessment documentation.
 
 ## 10. Preserve Challenge ↔ evidence / atom relationships
 
@@ -247,7 +293,7 @@ Do not infer a relationship merely because a word or construction appears somewh
 
 Challenge-to-knowledge relationships must remain traceable back to the source evidence that justified the relationship.
 
-## 11. Create Candidate Atoms
+## 11. Validation and review
 
 Validated evidence may be synthesized into complete Candidate Atoms.
 
