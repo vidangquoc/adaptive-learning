@@ -1,6 +1,6 @@
 # Knowledge Model and Interpretation
 
-> This document defines how source evidence is interpreted into useful knowledge distinctions. The formal atom structure is owned by `docs/knowledge/atom-structure.md`; the taxonomy is owned by `docs/knowledge/atom-types.md`; discovery and promotion are owned by `docs/knowledge/atom-pipeline.md`.
+> This document defines cross-domain principles for interpreting source evidence into useful knowledge distinctions. The canonical Knowledge Atom model is owned by `docs/knowledge/`: `overall.md` defines the conceptual model, `atom-structure.md` defines the formal structure, `atom-types.md` defines the taxonomy, and `atom-pipeline.md` defines discovery and officialization.
 
 ## Preserve Knowledge Distinctions
 
@@ -14,7 +14,6 @@ multiword expression
 idiom
 phrasal verb
 collocation
-fixed expression
 grammatical construction / rule
 lexical or grammatical contrast
 word formation
@@ -22,31 +21,9 @@ usage restriction
 discourse / pragmatic function
 ```
 
-The taxonomy document determines which categories are available; this document determines how to reason about whether source evidence represents a meaningful distinction.
+The canonical Knowledge Atom taxonomy determines which categories can be represented as Atom types. This document focuses on the reasoning process, not on redefining that taxonomy.
 
-## Flat Knowledge-Atom Principle
-
-A knowledge atom is a source-grounded unit of knowledge admitted under the domain-specific Knowledge Atom rules.
-
-Knowledge atoms are flat and independent by default. Admission differs by domain:
-
-- For **Grammar**, a knowledge point may be represented as an Atom when the source directly teaches, explains, or clearly represents it. Direct testing is not required.
-- For **Vocabulary**, a vocabulary item must be directly tested or assessed by the source to become a Candidate. Every vocabulary item directly assessed by the source must be proposed as a Candidate.
-
-This applies across the vocabulary taxonomy, including `lexical_sense`, `multiword_expression`, `phrasal_verb`, `idiom`, and `collocation`.
-
-Direct testing is therefore not a general trigger for Atom admission. Where an Atom is tested, assessment evidence is recorded through the existing `extra.is_tested` and test-evidence mechanisms.
-
-Do not impose hierarchies such as:
-
-```text
-word → sense → pattern → expression
-grammar heading → grammar use → example
-```
-
-Raw Atom-to-Atom relationships are not persisted merely as graph edges. When knowledge about a relationship between independent Knowledge Atoms is itself an independently learnable or testable target, that knowledge is represented as a `relation` Atom.
-
-## Evidence versus Interpretation
+## Interpretation versus Representation
 
 Extraction, contextual interpretation, normalization, and learning design are separate operations.
 
@@ -93,18 +70,6 @@ All other knowledge attributes must be grounded in explicit source evidence and 
 
 For attributes that may be inferred, the inference must remain grounded in the available source context and reviewable through the existing evidence/provenance model. The special `(ai-generated)` convention remains applicable to inferred vocabulary `meaning` where defined by the canonical Knowledge Atom model. No equivalent marker is added for `part_of_speech` or `mother_says`.
 
-Use this hierarchy for attributes that are allowed to be inferred:
-
-```text
-explicit source statement
-        ↓
-strong contextual inference
-        ↓
-weak / ambiguous inference
-        ↓
-null / pending / review-needed
-```
-
 ## Atom Boundaries
 
 One source span does not necessarily equal one atom:
@@ -115,25 +80,17 @@ multiple evidence spans → one atom
 one evidence span → no atom
 ```
 
-Split when the source supports a distinct knowledge point and the resulting parts satisfy the applicable domain-specific Knowledge Atom admission rule.
+Use the canonical Knowledge Atom admission and splitting rules rather than redefining them here. In particular, admission criteria and vocabulary/grammar-specific rules belong to the Knowledge documentation.
 
-Merge evidence only when it supports the same underlying knowledge item and the same sense/use.
-
-Do not merge merely because forms are identical or similar, meanings overlap, items share a word family, or one expression contains another.
-
-False deduplication is more damaging than controlled redundancy.
-
-## Linguistic and Semantic Reasoning
-
-For lexical knowledge, consider sense, lexicalization, idiomaticity, syntactic behavior, patterns, derivation, register, semantic contrasts, and restrictions where the source supports them.
-
-For grammar, consider form, meaning, function, discourse context, constraints, and contrasts. Do not create a grammar atom merely because a textbook heading exists. Represent a grammatical knowledge point as a separate atom when the source directly teaches, explains, or clearly represents that point.
+When splitting or merging evidence, preserve independently meaningful knowledge distinctions and avoid false deduplication. Do not merge merely because forms are similar, meanings overlap, items share a word family, or one expression contains another.
 
 ## Accuracy over Completeness
 
 Never fill a field merely because a representation allows it. Unsupported definitions, pronunciation, examples, patterns, proficiency labels, domains, or relationships remain unresolved.
 
 > **Do not optimize for filled records. Optimize for trustworthy knowledge.**
+
+The formal Atom structure, field semantics, taxonomy, provenance representation, and Candidate/Official lifecycle are canonical elsewhere and should not be redefined in this document.
 
 ## Learning-State Boundary
 
