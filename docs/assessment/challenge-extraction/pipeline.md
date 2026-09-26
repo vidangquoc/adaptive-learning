@@ -2,7 +2,7 @@
 
 The Challenge Extraction Pipeline describes the processing flow for extracting Atom-level Challenge Candidates from Source Segments.
 
-The pipeline applies the principles defined in the Challenge Extraction Principles.
+The pipeline applies the shared extraction principles defined in [`docs/extraction/principles.md`](../../extraction/principles.md) and the Challenge-specific extraction rules defined here.
 
 ## Scope
 
@@ -13,7 +13,9 @@ It does not approve Candidates, deduplicate Challenges, or handle integrated/com
 ## Pipeline
 
 ```
-Source Segment
+Extraction Segment
+      ↓
+Build Extraction Context
       ↓
 Evidence Discovery
       ↓
@@ -51,9 +53,22 @@ Not a Challenge / out of scope / incomplete / ambiguous
 Skipped extraction report + reason
 ```
 
+## Extraction Context
+
+Before evidence discovery and contextual analysis, construct the Extraction Context according to the shared extraction principles.
+
+The context includes:
+
+- the Extraction Segment;
+- all Global Supporting Segments for the source, included in their entirety;
+- all Specific Supporting Segments mapped to the Extraction Segment; and
+- existing Knowledge Atoms relevant to the supporting context.
+
+The exact source-specific mapping of Global and Specific Supporting Segments is intentionally defined outside this Challenge pipeline.
+
 ## 1. Evidence Discovery
 
-Inspect the Source Segment and locate evidence relevant to both:
+Inspect the Extraction Segment and its Extraction Context and locate evidence relevant to both:
 
 - Knowledge Atom discovery; and
 - exercises and their assessment items.
@@ -64,7 +79,7 @@ Evidence discovery identifies where potentially relevant source material occurs.
 
 ## 2. Contextual Analysis
 
-Analyze the relevant source context to determine:
+Analyze the Extraction Segment together with its Extraction Context to determine:
 
 - what Knowledge Atoms are represented or revealed by the source;
 - what exercises and assessment items are present;
