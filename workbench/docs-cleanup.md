@@ -4,18 +4,19 @@
 
 ### 1. Align Knowledge Atom admission and splitting rules
 
-**Status:** Open
+**Status:** Resolved
 
 `docs/knowledge/overall.md` defines the finalized admission criterion: an independently useful, source-grounded knowledge point that is directly taught, explained, or explicitly represented by the source can become a Knowledge Atom. Direct testing is not required for Atom admission.
 
 However, `docs/learning-material/principles/02-knowledge-model-and-interpretation.md` still states that direct source-level testing/practice is the trigger for separate atom representation and uses direct testing/practice as a splitting condition.
 
-**Required resolution:**
-- Align the learning-material principle with the canonical Knowledge Atom admission rule.
-- Distinguish Atom admission from assessment metadata:
-  - independently useful + source-grounded + taught/explained/explicitly represented → Knowledge Atom
-  - direct testing/practice → `extra.is_tested = true`
-- Ensure the splitting guidance does not reintroduce direct testing as a mandatory admission condition.
+**Resolution:**
+- Knowledge Atom admission is domain-specific:
+  - Grammar: source directly teaches, explains, or clearly represents the knowledge point.
+  - Vocabulary: the item is directly tested or assessed by the source; every directly assessed vocabulary item must be proposed as a Candidate.
+- Source grounding remains mandatory for admitted Atoms.
+- Direct testing is not a general admission condition; where applicable it is reflected in `extra.is_tested`.
+- Splitting follows the applicable domain-specific admission rule and does not require direct testing for Grammar.
 
 ### 2. Clarify handling of inferred attributes
 
