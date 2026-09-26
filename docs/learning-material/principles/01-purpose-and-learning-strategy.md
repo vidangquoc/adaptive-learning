@@ -46,7 +46,7 @@ Instruction is evidence-driven, not page-driven.
 
 ## Whole Knowledge Universe
 
-Do not extract only words that appear in exercises. Capture relevant knowledge explicitly taught, explained, modeled, or exemplified, including:
+Do not limit evidence discovery to words that appear in exercises. Capture relevant instructional and assessment evidence, including:
 
 - words and multiword vocabulary;
 - idioms;
@@ -60,4 +60,6 @@ Do not extract only words that appear in exercises. Capture relevant knowledge e
 - examples and contextual evidence;
 - exercises and assessment tasks.
 
-Instructional content forms the knowledge base; exercises provide evidence about how that knowledge is tested.
+This section defines the **discovery scope**, not the Knowledge Atom admission rule. Whether discovered evidence becomes a Knowledge Atom follows the canonical domain-specific admission rules in `docs/knowledge/overall.md`: Grammar knowledge may be admitted when directly taught, explained, or clearly represented; Vocabulary requires direct testing or assessment.
+
+Instructional content forms the knowledge evidence base; exercises also provide evidence about how that knowledge is tested.
