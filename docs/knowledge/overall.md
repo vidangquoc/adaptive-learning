@@ -68,7 +68,11 @@ There is no requirement to create a parent atom for the shared form `bank`.
 
 The practical question for deciding whether something should be an atom is:
 
-> **Is this a learning target that we want to identify, learn, and assess separately?**
+> **Is this an independently useful learning target that the source teaches or assesses as a separate knowledge point?**
+
+A knowledge point does **not** need to be directly tested to become an Atom. Explicit source teaching or explanation can establish an Atom when the knowledge point is independently useful as a learning target. Assessment evidence strengthens or confirms the representation and may establish that `is_tested` is `true`, but direct testing is not an admission requirement.
+
+Examples and incidental mentions do not create Atoms by themselves; they are evidence unless the source uses them to teach or assess an independently useful knowledge point.
 
 If yes, it can be a separate atom even when another atom is closely related to it.
 
