@@ -152,7 +152,7 @@ The decision should cover cases where:
 
 ### Status
 
-**Open.** The provenance representation for an expected answer located in a different Segment still requires an explicit design decision.
+**Resolved.** The answer does not require separate provenance. For extracted Challenges, the extractor must take the expected answer from the source evidence and must not invent, infer, or fabricate it. If the answer cannot be established reliably from the source, the occurrence is treated as incomplete or unresolved and reported rather than emitted with an invented answer.
 
 ## 7. Repair Ownership Wording in `lexical-definition-rules.md`
 
