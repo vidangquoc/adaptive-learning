@@ -293,7 +293,7 @@ Do not infer a relationship merely because a word or construction appears somewh
 
 Challenge-to-knowledge relationships must remain traceable back to the source evidence that justified the relationship.
 
-## 11. Validation and review
+## 11. Create Candidate Atoms
 
 Validated evidence may be synthesized into complete Candidate Atoms.
 
