@@ -20,16 +20,16 @@ However, `docs/learning-material/principles/02-knowledge-model-and-interpretatio
 
 ### 2. Clarify handling of inferred attributes
 
-**Status:** Open
+**Status:** Resolved
 
-`docs/learning-material/principles/02-knowledge-model-and-interpretation.md` says that inferred attributes must remain distinguishable from source-stated attributes.
+`docs/learning-material/principles/02-knowledge-model-and-interpretation.md` needed to define which knowledge attributes AI may infer and how those inferences are handled.
 
-The current atom model does not define a generic `inference_origin` or equivalent field. Vocabulary `meaning` has its own explicit `(ai-generated)` convention, but this is not a general mechanism for all inferred attributes.
-
-**Required resolution:**
-- Revise the principle wording so it does not imply that a generic source-vs-inferred marker exists.
-- Require inferred attributes to remain grounded in source context and reviewable through the existing evidence/provenance model.
-- Preserve the existing special `(ai-generated)` convention for inferred vocabulary meanings where it is already defined canonically.
+**Resolution:**
+- AI inference is currently permitted only for `meaning`, `part_of_speech`, and `mother_says`.
+- All other knowledge attributes must be grounded in explicit source evidence and must not be inferred by AI.
+- Allowed inferences must remain grounded in source context and reviewable through the existing evidence/provenance model.
+- Preserve the existing special `(ai-generated)` convention for inferred vocabulary `meaning`; do not extend it to `part_of_speech` or `mother_says`.
+- No generic `inference_origin` field is introduced.
 
 ### 3. Reduce duplicated ownership of canonical rules
 
