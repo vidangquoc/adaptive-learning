@@ -254,7 +254,7 @@ Properties describe existing atoms; they are not Knowledge Atoms themselves. If 
 1. **Source evidence comes first.** Do not invent definitions, patterns, collocations, restrictions, distinctions, or exceptions from intuition.
 2. **One lexical sense = one atom by default.** Split distinct senses when the source supports them.
 3. **Do not turn every example sentence into an atom.** An example is evidence unless it teaches an independently reusable pattern or knowledge object.
-4. **Do not turn every descriptive detail into an atom.** A knowledge point becomes a separate atom when the learning material directly teaches and tests it as an independent target.
+4. **Do not turn every descriptive detail into an atom.** A knowledge point becomes a separate atom when the learning material directly teaches or assesses it as an independent target. Direct testing is not required when the source explicitly teaches the knowledge point as an independently useful target.
 5. **Do not infer unsupported grammar.** A generated Challenge or model intuition is not evidence for a grammatical pattern.
 6. **Do not encode learner state in taxonomy.** Mastery, attempts, confidence, retention, review status, and learning progress belong to the learner layer.
 7. **Do not encode source structure in taxonomy.** Segment, Unit, exercise, page, and source identifiers belong to provenance and assessment structures.
