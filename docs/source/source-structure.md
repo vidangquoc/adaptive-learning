@@ -67,6 +67,14 @@ Segment
 
 The manifest is the authority for segmentation boundaries. Directory names and filenames alone do not define source boundaries.
 
+### Page-number semantics
+
+The `start_page` and other page references in `source-segments.yaml` use **PDF viewer 1-based page numbering**, as declared by `source.page_numbering: pdf_viewer_1_based` in the manifest.
+
+This convention is the canonical page coordinate used by source segmentation and downstream source provenance. It is distinct from any printed/book page number that may appear on the source page.
+
+A segment-relative page number is not a canonical provenance coordinate. When a location is recorded in segment text, `line` is segment-local, while `page` continues to refer to the global PDF viewer 1-based page number.
+
 ## Segment PDF Layer
 
 `segments/` contains the PDF representation of each segment defined by `source-segments.yaml`.
