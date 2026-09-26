@@ -4,15 +4,17 @@
 
 Exercises contained in a selected source may form the initial canonical seed Challenge collection for that source.
 
-Extract them faithfully and retain source boundary, precise location, exercise/task identifier, item identifier, and task structure. Internal headings may be retained as descriptive metadata but are not separate source layers.
+Extract source-derived Challenges faithfully and retain the source information required by the canonical Challenge model. The detailed Challenge structure, source-occurrence identity, extraction scope, fail-closed rules, and Candidate/Official lifecycle are owned by `docs/assessment/challenge.md` and `docs/assessment/challenge-extraction/`.
 
 Generated Challenges are a separate layer for targeted practice, discrimination, transfer, retention, and retesting.
 
 ## Challenge ↔ Knowledge Linkage
 
-Each source-derived Challenge must be linked to exactly one Knowledge Atom when it is emitted as a valid Challenge, and that linkage must be defensible from the source and contextual analysis.
+A source-derived Challenge must have a defensible relationship to the knowledge it assesses.
 
-The linkage must be evidence-based, not inferred merely because the same word appears nearby. One Challenge targets exactly one Knowledge Atom, while one Knowledge Atom may be targeted by multiple Challenges.
+The canonical invariant is that one Challenge assesses exactly one Knowledge Atom. The detailed target-Atom rule and extraction handling for unresolved or multi-target occurrences are owned by the Assessment documentation.
+
+If a Challenge assesses knowledge about a relationship between independent Knowledge Atoms, that relationship is represented according to the canonical Knowledge model rather than by adding multiple targets to the Challenge.
 
 ## Generated Material Must Add Instructional Value
 
@@ -26,7 +28,7 @@ Generate follow-up Challenges or explanations only for a concrete instructional 
 - preventing memorization;
 - providing a needed task format.
 
-Generated content must remain distinguishable from source-derived content.
+Generated content must remain distinguishable from source-derived content. The detailed representation and lifecycle of generated Challenges are defined by the canonical Assessment documentation.
 
 ## Competency Mapping
 
@@ -34,24 +36,12 @@ Challenges may be linked to competencies and target-domain task types when the r
 
 Do not force a competency label when evidence is insufficient.
 
-## Grammar Assessment
+## Assessment Validity
 
-Grammar assessment should distinguish:
+Assessment validity is a cross-domain learning-material concern, but the detailed rules for Challenge extraction and structure belong to `docs/assessment/`.
 
-```text
-grammaticality
-contextual appropriateness
-intended meaning
-```
-
-A grammar Challenge should be evaluated for grammaticality, interpretation, contextual licensing, and answer uniqueness before entering the canonical Challenge collection.
-
-If two or more candidates are grammatical and contextually compatible, reject or rewrite the item.
-
-A source answer key is evidence of the author's intended answer, not proof that the item is objectively valid.
-
-When close constructions compete, prefer context-conditioned or otherwise objectively constrained assessment over artificially forcing a distinction into an ambiguous single-answer MCQ.
+In particular, source-derived Challenges must preserve their source task faithfully, and extraction must fail closed when essential assessment information cannot be established. Grammar-specific validity rules, expected-answer handling, and source-answer-key interpretation are defined by the canonical Assessment documentation rather than repeated here.
 
 ## Relationship to Knowledge Construction
 
-This document defines how source material is converted into assessment Challenges. It does not define the atom ontology or atom schema. Those are owned by `docs/knowledge/`.
+This document defines how source material participates in assessment-oriented learning-material construction. It does not define the atom ontology or atom schema. Those are owned by `docs/knowledge/`.
