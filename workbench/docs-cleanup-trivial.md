@@ -130,7 +130,7 @@ If the project intentionally keeps these reports as process artifacts outside ca
 
 ### Status
 
-**Resolved.** Extraction reports are persisted as `extraction_reports.md` alongside the Candidate Store. Knowledge reports use `data/knowledge/<source-id>/<segment-id>/<domain>/extraction_reports.md`; Challenge reports use `data/assessment/<source-id>/<segment-id>/extraction_reports.md`. Reports are process artifacts for skipped/incomplete/unresolved/non-emitted occurrences and are separate from Candidate review status.
+**Resolved.** Extraction reports are persisted as `extraction_reports.md` alongside the Candidate Store. Knowledge reports use `data/knowledge/<source-id>/<segment-id>/<domain>/extraction_reports.md`; Challenge reports use `data/challenges/<source-id>/<segment-id>/extraction_reports.md`. Reports are process artifacts for skipped/incomplete/unresolved/non-emitted occurrences and are separate from Candidate review status.
 
 ## 6. Define Provenance for Answers Located Outside the Challenge Segment
 
