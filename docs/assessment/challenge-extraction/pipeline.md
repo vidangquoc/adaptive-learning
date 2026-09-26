@@ -69,7 +69,7 @@ Assessment evidence may reveal a Knowledge Atom that is not otherwise explicit i
 
 If a Challenge assesses a relationship between independent Knowledge Atoms, identify or create the corresponding relation Knowledge Atom during the shared analysis and target it from the Challenge.
 
-The extraction process must not invent an expected answer. If the source does not provide enough evidence to establish the specific expected answer, the occurrence must be treated as incomplete or unresolved rather than silently assigned a new answer.
+The extractor must take the expected answer from the source evidence and must not invent, infer, or fabricate it. No separate provenance is required for the answer itself; the Challenge's existing source provenance identifies the assessment occurrence. If the source does not provide enough evidence to establish the specific expected answer, the occurrence must be treated as incomplete or unresolved rather than silently assigned a new answer.
 
 ## 2. Create Candidates
 
