@@ -238,7 +238,7 @@ Does it describe an existing atom?
         ↓
     property
 
-Is it independently meaningful knowledge that the source directly teaches/tests?
+Is it an independently useful knowledge point that the source directly teaches or assesses?
         │
        yes
         ↓
