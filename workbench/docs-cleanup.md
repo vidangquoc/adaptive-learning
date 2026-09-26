@@ -33,14 +33,13 @@ However, `docs/learning-material/principles/02-knowledge-model-and-interpretatio
 
 ### 3. Reduce duplicated ownership of canonical rules
 
-**Status:** Open
+**Status:** Resolved
 
-Several files under `docs/learning-material/principles/` restate detailed rules whose canonical ownership belongs to the Knowledge, Assessment, or Source documentation.
+The learning-material principle documents were reviewed and their duplicated detailed rules were reduced to concise cross-domain guidance and references to the canonical Knowledge, Assessment, and Source documentation.
 
-This is not necessarily a direct contradiction, but duplicated detailed rules create a risk of future drift between multiple sources of truth.
-
-**Required resolution:**
-- Review the learning-material principle documents for duplicated canonical rules.
-- Keep high-level principles and cross-domain guidance there.
-- Where a detailed rule already has a canonical owner under `docs/knowledge/`, `docs/assessment/`, or `docs/source/`, prefer a concise reference to that canonical documentation instead of restating the full rule.
-- Do not remove useful cross-domain principles merely because they overlap conceptually; the goal is to clarify ownership and avoid conflicting copies.
+**Resolution:**
+- `docs/learning-material/principles/02-knowledge-model-and-interpretation.md` now focuses on cross-domain interpretation, contextual analysis, inference boundaries, and evidence-grounded reasoning; detailed Knowledge Atom ownership is referenced rather than redefined.
+- `docs/learning-material/principles/03-evidence-provenance-and-governance.md` now keeps only cross-domain provenance and governance principles; Candidate/Official lifecycle and source-boundary details are delegated to their canonical documents.
+- `docs/learning-material/principles/04-assessment-and-learning-material.md` now keeps cross-domain assessment/learning-material guidance while delegating detailed Challenge structure, extraction, validity, and lifecycle rules to `docs/assessment/`.
+- Useful cross-domain principles were retained rather than removed merely because they overlap conceptually.
+- No canonical Knowledge, Assessment, or Source rule was moved into the learning-material rulebook.
