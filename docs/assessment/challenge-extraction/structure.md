@@ -387,12 +387,12 @@ The source fields duplicate information encoded in the ID for explicit machine-r
 The canonical source fields are:
 
 - `source_id`: the source registered in the source registry.
-- `page_number`: the page number in the original source artifact, not a page number relative to the Source Segment or a PDF viewer's zero/one-based page index.
+- `page_number`: the global PDF viewer 1-based page number declared by the source segmentation manifest; it is not a page number relative to the Source Segment or a printed/book page number.
 - `segment_id`: the Source Segment containing the Challenge occurrence.
 - `exercise_name`: the name or label of the exercise as it appears in the source material.
 - `item_number`: the item number or label within the exercise.
 
-`page_number` refers to the page numbering of the original source itself. If the source artifact is a scanned or paginated book, this means the printed/book page number when one exists, rather than the technical page index of the digital artifact.
+`page_number` uses the same global PDF viewer 1-based page convention as `source-segments.yaml`. Printed/book page numbers, when visible in the source, are separate descriptive information and do not change the canonical provenance coordinate.
 
 `exercise_name` preserves the source exercise's name or label rather than introducing a system-generated exercise identity.
 
