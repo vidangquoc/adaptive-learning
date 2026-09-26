@@ -83,9 +83,17 @@ These are source-content features, not separate repository source layers.
 
 ## Context-Grounded Inference
 
-Context may support inference of attributes such as part of speech, intended sense, usage, or meaning.
+AI inference is currently permitted only for the following knowledge attributes:
 
-Use this hierarchy:
+- `meaning`;
+- `part_of_speech`;
+- `mother_says`.
+
+All other knowledge attributes must be grounded in explicit source evidence and must not be inferred by AI. If a required non-inferable attribute is not supported by the source, do not invent it; preserve the uncertainty or leave the extraction unresolved as appropriate.
+
+For attributes that may be inferred, the inference must remain grounded in the available source context and reviewable through the existing evidence/provenance model. The special `(ai-generated)` convention remains applicable to inferred vocabulary `meaning` where defined by the canonical Knowledge Atom model. No equivalent marker is added for `part_of_speech` or `mother_says`.
+
+Use this hierarchy for attributes that are allowed to be inferred:
 
 ```text
 explicit source statement
@@ -96,8 +104,6 @@ weak / ambiguous inference
         ↓
 null / pending / review-needed
 ```
-
-Inferred attributes must remain distinguishable from source-stated attributes and retain appropriate evidence/provenance. A sentence can identify an intended sense without being sufficient authority for inventing a dictionary definition.
 
 ## Atom Boundaries
 
