@@ -157,7 +157,8 @@ data/
         └── <segment-id>/
             └── <domain>/
                 ├── knowledge_atoms.md
-                └── knowledge_atom_candidates.md
+                ├── knowledge_atom_candidates.md
+                └── extraction_reports.md
 ~~~
 
 The stores are:
