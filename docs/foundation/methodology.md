@@ -67,7 +67,7 @@ Static knowledge must remain independent of learner-specific mastery.
 
 ## 6. Learning State
 
-Learner state is an interpretation of accumulated learner evidence. It belongs to the learner layer and is used to determine mastery, review needs, and next activities.
+Learner state is an interpretation of the learner's current review evidence. It belongs to the learner layer and is used to determine review needs and next activities. The current project does not define a persisted or formal mastery model; any future mastery model must be specified separately from the current five-field review-state representation.
 
 The detailed state model belongs to `docs/learner/learning-state.md`.
 
