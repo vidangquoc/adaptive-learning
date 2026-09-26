@@ -4,7 +4,19 @@ This document defines the principles shared by extraction processes that derive 
 
 Extraction-specific models and rules remain in their respective Knowledge and Assessment documentation.
 
-## 1. Extraction Segment
+## 1. Validated Source Input
+
+Extraction operates only on source material whose structure and provenance have been sufficiently validated for the extraction task.
+
+Before extraction begins:
+
+- source and Segment boundaries must be established;
+- source evidence must be preserved;
+- provenance must be sufficient to identify and review the source occurrence.
+
+Extraction must not silently repair invalid source structure or replace missing source evidence with invented information.
+
+## 2. Extraction Segment
 
 An extraction session operates on a canonical Source Segment.
 
@@ -12,7 +24,7 @@ The **Extraction Segment** is the Segment currently being analyzed. It remains t
 
 Supporting context does not change the ownership or source boundary of an extracted Knowledge Atom or Challenge.
 
-## 2. Extraction Context
+## 3. Extraction Context
 
 Extraction context is broader than the Extraction Segment.
 
@@ -25,7 +37,7 @@ The AI must receive the source context required to understand the Extraction Seg
 
 The exact mapping of these context inputs is source-specific and is defined separately from the canonical Segment structure.
 
-## 3. Global Supporting Segments
+## 4. Global Supporting Segments
 
 A **Global Supporting Segment** is a Segment designated as supporting context for every extraction session within a Learning Material Source.
 
@@ -35,7 +47,7 @@ A Global Supporting Segment is included in its entirety. The extraction process 
 
 Typical examples may include source-wide Answer Keys, glossaries, or vocabulary resources, but the global role is determined by the source's extraction-context configuration rather than by the Segment's source type or location alone.
 
-## 4. Specific Supporting Segments
+## 5. Specific Supporting Segments
 
 A **Specific Supporting Segment** is a Segment designated as supporting context for a particular Extraction Segment.
 
@@ -45,7 +57,7 @@ Specific Supporting Segments are included in the extraction context in addition 
 
 A Specific Supporting Segment may itself require contextual information to be interpreted correctly. The extraction context must therefore include the context necessary to understand that supporting material.
 
-## 5. Knowledge Context
+## 6. Knowledge Context
 
 Extraction context may contain existing Knowledge Atoms associated with relevant supporting context.
 
@@ -57,7 +69,74 @@ For example, a review Segment covering Units 1 and 2 may use the Knowledge Atoms
 
 The Extraction Segment may also reveal a new knowledge point during the same analysis. Existing Knowledge Context must not force a new finding to match an existing Atom when the source evidence supports a genuinely new Atom.
 
-## 6. Shared Contextual Analysis
+## 7. Evidence Discovery
+
+Evidence discovery locates source material that may be relevant to extraction.
+
+Depending on the extraction task, discovery may locate knowledge evidence, exercises, assessment items, examples, explanations, patterns, or other source structures.
+
+Discovery output is **evidence location**, not the extracted result itself.
+
+Evidence discovery must not by itself create a canonical Knowledge Atom or Challenge. The located evidence must be interpreted through contextual semantic analysis before an extraction result is produced.
+
+## 8. Contextual Semantic Analysis
+
+Extraction requires semantic and contextual analysis of the discovered evidence together with the relevant Extraction Context.
+
+The analysis determines what the source evidence means and whether it supports an extracted object under the applicable model.
+
+Extraction is therefore not a mechanical conversion of parser output into Knowledge Atoms or Challenges. Automated discovery tools may locate evidence, but they do not by themselves determine the semantic extraction result.
+
+The same contextual analysis may produce different kinds of findings, including Knowledge findings and Assessment findings, while each resulting Candidate remains governed by its own model.
+
+## 9. Extraction Boundaries
+
+Source evidence boundaries and extracted-object boundaries are related but are not inherently identical.
+
+A single source occurrence may support:
+
+- multiple extracted Knowledge Atoms;
+- a single extracted Knowledge Atom;
+- no Knowledge Atom;
+
+and an identifiable assessment item may likewise be determined, after contextual analysis, to be:
+
+- one Challenge;
+- not an independent Challenge;
+- or outside the current extraction scope.
+
+Extraction must therefore determine the appropriate semantic boundary rather than assume that every source span or source structure maps one-to-one to one extracted object.
+
+The detailed boundary rules for Knowledge Atoms and Challenges remain in their respective documents.
+
+## 10. Evidence, Context, and Provenance
+
+Information supplied as extraction context helps the AI interpret the Extraction Segment. Its presence in context does not automatically make it provenance or source evidence for the extracted result.
+
+In particular:
+
+- a Supporting Segment does not become the source location of a Challenge merely because it was supplied as context;
+- an existing Knowledge Atom supplied as Knowledge Context does not become provenance of a newly created Atom merely because it informed the analysis;
+- source provenance must identify the actual source occurrence and evidence supporting the extracted object.
+
+Context and provenance therefore serve different purposes:
+
+```
+Context    → information available for interpretation
+Provenance → evidence supporting the extracted result
+```
+
+## 11. Uncertainty and Fail-Closed Behavior
+
+Extraction must preserve uncertainty when the available evidence or context is insufficient.
+
+If required evidence or context cannot establish the extracted object's essential information with sufficient support, the result must remain unresolved, incomplete, skipped, or otherwise subject to review according to the applicable extraction rules.
+
+The extractor must not invent missing source information merely to produce a complete Candidate.
+
+A failed extraction must not be silently converted into a valid-looking result.
+
+## 12. Shared Analysis and Multiple Extraction Outputs
 
 Knowledge Atom extraction and Challenge extraction are simultaneous outputs of the same shared contextual analysis.
 
@@ -67,6 +146,8 @@ The common flow is:
 Extraction Segment
       +
 Extraction Context
+      ↓
+Evidence Discovery
       ↓
 Shared Contextual Analysis
       ├── Knowledge findings
@@ -80,24 +161,21 @@ Shared Contextual Analysis
 
 The two outputs are related but do not have shared ownership. Knowledge Atoms remain governed by the Knowledge Atom ontology and lifecycle; Challenges remain governed by the Challenge model and extraction rules.
 
-## 7. Context Is for Interpretation, Not Automatic Provenance
+A Challenge may target an existing Knowledge Atom or a Knowledge Atom identified during the same analysis session. The existence of one output does not make the other output authoritative over its own model.
 
-Information supplied as extraction context helps the AI interpret the Extraction Segment. Its presence in context does not automatically make it provenance or source evidence for the extracted result.
+## 13. Extraction Output and Lifecycle Boundary
 
-In particular:
+Extraction produces Candidates or explicit extraction issues; it does not by itself constitute approval, officialization, deduplication, or other downstream governance decisions.
 
-- a Supporting Segment does not become the source location of a Challenge merely because it was supplied as context;
-- an existing Knowledge Atom supplied as Knowledge Context does not become provenance of a newly created Atom merely because it informed the analysis;
-- source provenance must continue to identify the actual source occurrence and evidence supporting the extracted object.
+After extraction:
 
-Context and provenance therefore serve different purposes:
+- Knowledge Atom Candidates follow the Knowledge Atom validation, review, and officialization rules;
+- Challenge Candidates follow the Challenge validation and lifecycle rules;
+- skipped, incomplete, ambiguous, or unresolved occurrences remain explicitly represented according to the applicable pipeline.
 
-```
-Context    → information available for interpretation
-Provenance → evidence supporting the extracted result
-```
+Extraction and downstream governance are therefore separate stages.
 
-## 8. Source-Specific Context Configuration
+## 14. Source-Specific Context Configuration
 
 The set of Global and Specific Supporting Segments is specific to each Learning Material Source.
 
@@ -105,7 +183,7 @@ The source may therefore define different extraction-context relationships witho
 
 A separate Extraction Context Map will define these relationships for each source. Its exact structure and resolution rules are intentionally outside this document.
 
-## 9. Context Boundary
+## 15. Context Boundary
 
 Supporting context may cross ordinary Segment boundaries when the source configuration establishes that the additional Segment is relevant.
 
@@ -113,23 +191,15 @@ However, the Extraction Segment itself remains the canonical boundary of the ext
 
 Extraction context must not be used to silently merge independent source occurrences into one occurrence or to move the ownership of extracted objects from the Extraction Segment to a Supporting Segment.
 
-## 10. Uncertainty and Fail-Closed Behavior
-
-Extraction must preserve uncertainty when the available context is insufficient.
-
-If the required context cannot establish the meaning, structure, target Atom, expected answer, or other essential information with sufficient confidence, the relevant extraction result must remain unresolved, incomplete, skipped, or otherwise subject to review according to the applicable extraction rules.
-
-The extractor must not invent missing source information merely to produce a complete Candidate.
-
-## 11. Relationship to Extraction Pipelines
+## 16. Relationship to Extraction Pipelines
 
 The shared principles in this document apply to both:
 
 - Knowledge Atom extraction; and
 - Challenge extraction.
 
-The detailed Knowledge Atom pipeline defines how Knowledge findings become Candidates and later Official Atoms.
+The detailed Knowledge Atom pipeline defines the Knowledge-specific interpretation, Candidate structure, validation, review, and officialization rules.
 
-The detailed Challenge extraction pipeline defines how assessment findings become Challenge Candidates.
+The detailed Challenge extraction pipeline defines the Challenge-specific interpretation, Candidate structure, validation, and extraction-scope rules.
 
-Neither pipeline should redefine the shared meaning of Extraction Segment, Extraction Context, Global Supporting Segment, Specific Supporting Segment, or Knowledge Context.
+Neither pipeline should redefine the shared meaning of Extraction Segment, Extraction Context, Global Supporting Segment, Specific Supporting Segment, Knowledge Context, evidence discovery, contextual analysis, or fail-closed extraction behavior.
