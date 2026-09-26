@@ -33,7 +33,7 @@ The AI must receive the source context required to understand the Extraction Seg
 - the Extraction Segment;
 - Global Supporting Segments;
 - Specific Supporting Segments;
-- existing Knowledge Atoms relevant to the supporting context.
+- Supporting Knowledge Atoms derived from the relevant Supporting Segments.
 
 The exact mapping of these context inputs is source-specific and is defined separately from the canonical Segment structure.
 
@@ -57,17 +57,19 @@ Specific Supporting Segments are included in the extraction context in addition 
 
 A Specific Supporting Segment may itself require contextual information to be interpreted correctly. The extraction context must therefore include the context necessary to understand that supporting material.
 
-## 6. Knowledge Context
+## 6. Supporting Knowledge Atoms
 
-Extraction context may contain existing Knowledge Atoms associated with relevant supporting context.
+Extraction context includes **Supporting Knowledge Atoms** derived from the Supporting Segments available in that context.
 
-Knowledge Context is not source text and must not be treated as new source evidence merely because the Atoms are available to the analysis.
+Supporting Knowledge Atoms are all Knowledge Atoms associated with the relevant Supporting Segments. They are derived context and are **not declared separately** in the Extraction Context Map.
 
-Existing Knowledge Atoms can provide the knowledge state needed to interpret assessment evidence and, in particular, to identify which Knowledge Atom a Challenge assesses.
+Supporting Knowledge Atoms are not source text and must not be treated as new source evidence merely because the Atoms are available to the analysis.
 
-For example, a review Segment covering Units 1 and 2 may use the Knowledge Atoms established for Units 1 and 2 as Knowledge Context when identifying the target Atom of its Challenges.
+They provide the knowledge state needed to interpret assessment evidence and, in particular, to identify which Knowledge Atom a Challenge assesses.
 
-The Extraction Segment may also reveal a new knowledge point during the same analysis. Existing Knowledge Context must not force a new finding to match an existing Atom when the source evidence supports a genuinely new Atom.
+For example, a review Segment covering Units 1 and 2 may use all Knowledge Atoms associated with Units 1 and 2 as Supporting Knowledge Atoms when identifying the target Atom of its Challenges.
+
+The Extraction Segment may also reveal a new knowledge point during the same analysis. Existing Supporting Knowledge Atoms must not force a new finding to match an existing Atom when the source evidence supports a genuinely new Atom.
 
 ## 7. Evidence Discovery
 
@@ -181,7 +183,55 @@ The set of Global and Specific Supporting Segments is specific to each Learning 
 
 The source may therefore define different extraction-context relationships without changing the canonical Source Segment model.
 
-A separate Extraction Context Map will define these relationships for each source. Its exact structure and resolution rules are intentionally outside this document.
+Each source defines these relationships in an **Extraction Context Map** located alongside `source-segments.yaml` in the source-specific directory:
+
+```
+sources/<source-id>/
+├── source-segments.yaml
+├── extraction-context-map.yaml
+├── segments/
+└── segment-text/
+```
+
+The map uses Segment IDs defined by `source-segments.yaml`; Segment filenames do not define the identity referenced by the map.
+
+The map has the following structure:
+
+```yaml
+source_id: destination-c1-c2
+
+global_supporting_segments:
+  - appendix-answer-key
+  - appendix-vocabulary
+
+extraction_contexts:
+  unit-1:
+    supporting_segments:
+      - appendix-unit-1-review
+
+  unit-2:
+    supporting_segments:
+      - appendix-unit-2-review
+
+  unit-3:
+    supporting_segments:
+      - unit-1
+      - unit-2
+```
+
+Its semantics are:
+
+- `source_id` identifies the Learning Material Source to which the map applies.
+- `global_supporting_segments` lists Segments included in the Extraction Context of every Extraction Segment for that source, in their entirety.
+- `extraction_contexts` defines context specific to individual Extraction Segments.
+- Each key under `extraction_contexts` is an Extraction Segment ID.
+- `supporting_segments` lists one or more Specific Supporting Segments for that Extraction Segment.
+- The distinction between Global and Specific Supporting Segments is defined by their location in the map; no per-entry `type` field is required.
+- Supporting Knowledge Atoms are derived automatically from the Knowledge Atoms associated with the relevant Supporting Segments and are not declared in the map.
+
+The map defines contextual relationships only. It does not change canonical Segment boundaries, and Supporting Segments do not become the provenance location of extracted objects merely because they are supplied as context.
+
+The exact recursive-resolution rules for Supporting Segments, including whether Supporting Segments themselves inherit additional mapped context, remain open until explicitly decided.
 
 ## 15. Context Boundary
 
@@ -202,4 +252,4 @@ The detailed Knowledge Atom pipeline defines the Knowledge-specific interpretati
 
 The detailed Challenge extraction pipeline defines the Challenge-specific interpretation, Candidate structure, validation, and extraction-scope rules.
 
-Neither pipeline should redefine the shared meaning of Extraction Segment, Extraction Context, Global Supporting Segment, Specific Supporting Segment, Knowledge Context, evidence discovery, contextual analysis, or fail-closed extraction behavior.
+Neither pipeline should redefine the shared meaning of Extraction Segment, Extraction Context, Global Supporting Segment, Specific Supporting Segment, Supporting Knowledge Atoms, evidence discovery, contextual analysis, or fail-closed extraction behavior.
