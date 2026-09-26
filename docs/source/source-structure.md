@@ -194,9 +194,9 @@ Shared extraction principles define three relevant context inputs:
 - Global Supporting Segments, which are included in every extraction context for the source and included in their entirety; and
 - Specific Supporting Segments, which are mapped to particular Extraction Segments.
 
-Extraction context may also include existing Knowledge Atoms associated with relevant supporting context. These Atoms provide Knowledge Context for semantic analysis but do not replace source provenance.
+Supporting Knowledge Atoms are derived from the Knowledge Atoms associated with the relevant Supporting Segments. They provide semantic context but do not replace source provenance. They are not declared separately in the Extraction Context Map.
 
-The relationships that determine Global and Specific Supporting Segments are source-specific and are defined by a separate Extraction Context Map. That map does not change the canonical Segment boundaries defined by `source-segments.yaml`.
+The relationships that determine Global and Specific Supporting Segments are source-specific and are defined by `extraction-context-map.yaml`. The map is stored alongside `source-segments.yaml` and references Segment IDs defined by that manifest. It does not change the canonical Segment boundaries defined by `source-segments.yaml`.
 
 ## Downstream Discovery
 
