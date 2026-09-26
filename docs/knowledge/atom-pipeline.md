@@ -2,6 +2,10 @@
 
 > Implementation specification for converting validated source evidence into Candidates and then Official Atoms. Conceptual ontology belongs to `overall.md`; formal structure belongs to `atom-structure.md`; taxonomy belongs to `atom-types.md`; governance policy belongs to `docs/learning-material/principles/03-evidence-provenance-and-governance.md`.
 
+## Shared Extraction Principles
+
+This pipeline follows the shared extraction principles defined in [`docs/extraction/principles.md`](../extraction/principles.md). In particular, Knowledge Atom extraction uses an Extraction Segment together with its Extraction Context. The context may include Global Supporting Segments, Specific Supporting Segments, and existing Knowledge Atoms relevant to the supporting context.
+
 ## 1. Purpose
 
 The pipeline locates source evidence, analyzes it in context, creates complete Candidate Atoms, validates and reviews them, and officializes approved Candidates into the separate Official Store.
