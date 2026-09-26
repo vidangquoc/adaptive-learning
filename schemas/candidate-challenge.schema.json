@@ -65,8 +65,7 @@
       "type": "object",
       "unevaluatedProperties": false,
       "required": [
-        "source",
-        "notes"
+        "source"
       ],
       "properties": {
         "source": {
@@ -85,10 +84,7 @@
               "minLength": 1
             },
             "page_number": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "minimum": 1
             },
             "segment_id": {
@@ -135,23 +131,13 @@
       "then": {
         "properties": {
           "answer": {
-            "oneOf": [
-              {
-                "type": "string",
-                "minLength": 1
-              },
-              {
-                "type": "array",
-                "minItems": 2,
-                "items": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            ]
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!.*[^\\\\S ])(?!.*  )(?! )(?!.* $).+$"
           }
         }
       }
+    }
     }
   ]
 }
