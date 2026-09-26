@@ -184,6 +184,20 @@ official atom
 
 A textbook heading, topic label, grammar label, exercise label, or similar internal marker may be recorded as descriptive context, but it does not replace segment provenance or become a separate source layer.
 
+## Extraction Context
+
+The canonical Segment structure defines source boundaries, but an Extraction Context may include information from other Segments.
+
+Shared extraction principles define three relevant context inputs:
+
+- the Extraction Segment;
+- Global Supporting Segments, which are included in every extraction context for the source and included in their entirety; and
+- Specific Supporting Segments, which are mapped to particular Extraction Segments.
+
+Extraction context may also include existing Knowledge Atoms associated with relevant supporting context. These Atoms provide Knowledge Context for semantic analysis but do not replace source provenance.
+
+The relationships that determine Global and Specific Supporting Segments are source-specific and are defined by a separate Extraction Context Map. That map does not change the canonical Segment boundaries defined by `source-segments.yaml`.
+
 ## Downstream Discovery
 
 Evidence discovery operates on `segment-text/`, using the segment identity and provenance defined by `source-segments.yaml`.
