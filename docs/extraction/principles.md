@@ -171,7 +171,7 @@ Extraction produces Candidates or explicit extraction reports; it does not silen
 
 An extraction report is a process artifact recording a skipped, incomplete, unresolved, or otherwise non-emitted occurrence. It is separate from Candidate data and from downstream review status.
 
-Each extraction pipeline defines the physical location of its reports alongside its Candidate Store. For Knowledge Atom extraction, reports are stored in `data/knowledge/<source-id>/<segment-id>/<domain>/extraction_reports.md`. For Challenge extraction, reports are stored in `data/assessment/<source-id>/<segment-id>/extraction_reports.md`.
+Each extraction pipeline defines the physical location of its reports alongside its Candidate Store. For Knowledge Atom extraction, reports are stored in `data/knowledge/<source-id>/<segment-id>/<domain>/extraction_reports.md`. For Challenge extraction, reports are stored in `data/challenges/<source-id>/<segment-id>/extraction_reports.md`.
 
 The report identifies the source occurrence and records the reason the occurrence was not emitted as a normal Candidate. A rejected Candidate is not an extraction report; rejection belongs to the Candidate review lifecycle.
 
