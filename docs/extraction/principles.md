@@ -165,7 +165,17 @@ The two outputs are related but do not have shared ownership. Knowledge Atoms re
 
 A Challenge may target an existing Knowledge Atom or a Knowledge Atom identified during the same analysis session. The existence of one output does not make the other output authoritative over its own model.
 
-## 13. Extraction Output and Lifecycle Boundary
+## 13. Extraction Reports
+
+Extraction produces Candidates or explicit extraction reports; it does not silently discard source occurrences that were considered but could not be emitted as valid Candidates.
+
+An extraction report is a process artifact recording a skipped, incomplete, unresolved, or otherwise non-emitted occurrence. It is separate from Candidate data and from downstream review status.
+
+Each extraction pipeline defines the physical location of its reports alongside its Candidate Store. For Knowledge Atom extraction, reports are stored in `data/knowledge/<source-id>/<segment-id>/<domain>/extraction_reports.md`. For Challenge extraction, reports are stored in `data/assessment/<source-id>/<segment-id>/extraction_reports.md`.
+
+The report identifies the source occurrence and records the reason the occurrence was not emitted as a normal Candidate. A rejected Candidate is not an extraction report; rejection belongs to the Candidate review lifecycle.
+
+## 14. Extraction Output and Lifecycle Boundary
 
 Extraction produces Candidates or explicit extraction issues; it does not by itself constitute approval, officialization, deduplication, or other downstream governance decisions.
 
