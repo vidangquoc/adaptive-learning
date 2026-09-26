@@ -121,7 +121,7 @@ Examples:
 - `spill the beans`
 - `hit the nail on the head`
 
-Fixedness, variation, register, and usage constraints are descriptive properties by default. If the learning material directly teaches and tests one of these as an independent knowledge point, represent that knowledge point as a separate atom using the applicable type; do not create a dedicated property-based subtype.
+Fixedness, variation, register, and usage constraints are descriptive properties by default. If the learning material directly teaches or assesses one of these as an independent knowledge point, represent that knowledge point as a separate atom when an existing canonical type can represent it; do not create a dedicated property-based subtype merely to accommodate it.
 
 ### 2.5. `collocation`
 
