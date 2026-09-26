@@ -63,8 +63,7 @@
       "type": "object",
       "unevaluatedProperties": false,
       "required": [
-        "source",
-        "notes"
+        "source"
       ],
       "properties": {
         "source": {
@@ -83,10 +82,7 @@
               "minLength": 1
             },
             "page_number": {
-              "type": [
-                "integer",
-                "null"
-              ],
+              "type": "integer",
               "minimum": 1
             },
             "segment_id": {
