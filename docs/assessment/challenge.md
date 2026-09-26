@@ -129,6 +129,8 @@ A source-derived Challenge is traceable to a specific source occurrence.
 
 The source occurrence is encoded in the Challenge ID, while explicit machine-readable provenance is preserved in `extra.source`.
 
+`extra.source.page_number` uses the global **PDF viewer 1-based page number** declared by the source segmentation manifest. It is not the printed/book page number and not a segment-relative page number. The same page convention is used by Atom provenance.
+
 For example:
 
 ```yaml
