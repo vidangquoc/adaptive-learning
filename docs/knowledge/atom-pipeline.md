@@ -2,20 +2,18 @@
 
 > Implementation specification for converting validated source evidence into Candidates and then Official Atoms. Conceptual ontology belongs to `overall.md`; formal structure belongs to `atom-structure.md`; taxonomy belongs to `atom-types.md`; governance policy belongs to `docs/learning-material/principles/03-evidence-provenance-and-governance.md`.
 
-## Shared Extraction Principles
-
-This pipeline follows the shared extraction principles defined in [`docs/extraction/principles.md`](../extraction/principles.md). In particular, Knowledge Atom extraction uses an Extraction Segment together with its Extraction Context. The context may include Global Supporting Segments, Specific Supporting Segments, and existing Knowledge Atoms relevant to the supporting context.
+This pipeline follows the shared extraction principles defined in [`docs/extraction/principles.md`](../extraction/principles.md). The rules below are specific to Knowledge Atom discovery, Candidate creation, validation, review, and officialization.
 
 ## 1. Purpose
 
-The pipeline locates source evidence, analyzes it in context, creates complete Candidate Atoms, validates and reviews them, and officializes approved Candidates into the separate Official Store.
+The pipeline takes the Knowledge findings produced by shared contextual analysis, creates complete Candidate Atoms, validates and reviews them, and officializes approved Candidates into the separate Official Store.
 
-```text
-validated source
+~~~
+Shared Contextual Analysis
       ↓
-evidence discovery
+Knowledge findings
       ↓
-contextual analysis
+Knowledge Atom identification and splitting
       ↓
 Candidate Store
       ↓
@@ -28,31 +26,13 @@ approved Candidate
 officialize
       ↓
 Official Store
-```
+~~~
 
 The pipeline does not treat parser output as knowledge.
 
-## 2. Inputs and Preconditions
+## 2. Knowledge-Specific Analysis
 
-The pipeline consumes validated source material and its provenance. Source-boundary validation is defined by `docs/source/source-structure.md`.
-
-Before discovery begins:
-
-- the source input must be structurally valid;
-- source evidence must be preserved immutably;
-- provenance must be sufficient for later review.
-
-## 3. Evidence Discovery
-
-Parsers, layout detectors, regular expressions, table detectors, or similar tools may locate likely evidence.
-
-Discovery may identify lexical entries, phrases, patterns, collocations, idioms, phrasal verbs, word formation, grammar, contrasts, examples, explanations, and assessment evidence.
-
-Discovery output is **evidence location**, not canonical knowledge.
-
-## 4. Contextual Analysis
-
-After evidence is located, analyze the relevant source context before proposing knowledge.
+After the shared evidence discovery and contextual semantic analysis defined by the extraction principles, determine which Knowledge findings should become Knowledge Atoms.
 
 The analysis may determine or propose:
 
@@ -64,11 +44,11 @@ The analysis may determine or propose:
 - lexicalization or idiomaticity;
 - syntactic or usage pattern;
 - word-formation relationship;
-- lexical or grammatical contrast;
+- lexical or grammatical contrast.
 
-Use the evidence hierarchy:
+Use the Knowledge-specific evidence hierarchy:
 
-```text
+~~~
 explicit source statement
         ↓
 strong contextual inference
@@ -76,19 +56,19 @@ strong contextual inference
 weak / ambiguous inference
         ↓
 null / pending / review-needed
-```
+~~~
 
-When context is insufficient, preserve uncertainty rather than inventing missing information.
+When the shared analysis does not provide sufficient support for a Knowledge decision, preserve the uncertainty rather than inventing missing information.
 
-## 5. Atom Splitting, Merging, and Deduplication
+## 3. Atom Splitting, Merging, and Deduplication
 
 One source span does not necessarily equal one atom:
 
-```text
+~~~
 one evidence span → multiple atoms
 multiple evidence spans → one atom
 one evidence span → no atom
-```
+~~~
 
 Split when independently useful knowledge distinctions are supported by evidence. Merge evidence only when it supports the same underlying knowledge item and sense/use.
 
@@ -96,22 +76,18 @@ Do not merge merely because forms are similar, meanings overlap, items share a w
 
 False deduplication is more damaging than controlled redundancy.
 
-## 6. Candidate Output
+## 4. Candidate Output
 
 A Candidate is a complete Knowledge Atom, not a partial proposal schema.
 
 ### Candidate creation is semantic, not scripted extraction
 
-There is no extraction script that creates Candidate Knowledge Atoms. Candidate creation requires understanding the source in context. The AI reads each Segment with sufficient surrounding context, identifies the knowledge points that should become Atoms, and creates the Candidate Atoms from that interpretation.
+There is no extraction script that creates Candidate Knowledge Atoms. Candidate creation requires understanding the source in context. The AI identifies the knowledge points that should become Atoms from the Knowledge findings produced by the shared analysis and creates the Candidate Atoms from that interpretation.
 
-The extraction/creation flow is:
+The Knowledge-specific creation flow is:
 
-```text
-Source
-  ↓
-Segment
-  ↓
-AI reads and understands context
+~~~
+Knowledge findings
   ↓
 Knowledge Atom identification and splitting
   ↓
@@ -122,18 +98,11 @@ YAML blocks
 knowledge_atom_candidates.md
   ↓
 validation
-```
+~~~
 
 Automated scripts do not decide which knowledge points exist as Atoms. No dedicated Candidate-validation script is required at Candidate creation. No intermediate extraction file or second Candidate representation is required.
 
 A newly created Candidate starts with `review_status: pending`.
-
-
-Candidate output uses the canonical atom structure defined in `atom-structure.md`, with the additional lifecycle field:
-
-```yaml
-review_status: pending
-```
 
 ### Candidate physical representation
 
@@ -153,16 +122,15 @@ The Candidate must preserve, where applicable:
 - source evidence represented through the canonical provenance fields;
 - atom type and canonical knowledge fields;
 
-
 A Candidate does not use a separate `candidate_id`, temporary ID, or tracking ID. Its semantic ID is created correctly when the Candidate is created.
 
 No field should be populated solely because the schema permits it.
 
-## 7. Physical Store Layout
+## 5. Physical Store Layout
 
 Candidate and Official Atoms are stored under the same source/segment/domain hierarchy, while lifecycle is represented by the file name:
 
-```text
+~~~
 data/
 └── knowledge/
     └── <source-id>/
@@ -170,7 +138,7 @@ data/
             └── <domain>/
                 ├── knowledge_atoms.md
                 └── knowledge_atom_candidates.md
-```
+~~~
 
 The stores are:
 
@@ -195,7 +163,7 @@ There is no collection-level YAML wrapper such as `atoms:` and no second present
 
 Markdown headings may be used to make human review easier, but headings are organizational presentation and are not part of the Official Atom data.
 
-Persisted Official Atom data uses YAML. Each fenced YAML block is validated independently against `schemas/official-atom.schema.json`.
+Persisted Official Atom data uses YAML. Each fenced YAML block is one complete Official Atom and must independently validate against `schemas/official-atom.schema.json`.
 
 Candidate and Official stores therefore use the same physical atom representation, with the Candidate representation additionally carrying the top-level `review_status` field.
 
@@ -203,7 +171,7 @@ Candidate and Official stores therefore use the same physical atom representatio
 
 Every stored Atom persists the canonical provenance and assessment fields directly in its `extra` object:
 
-```yaml
+~~~
 extra:
   source:
     origin:
@@ -224,7 +192,7 @@ extra:
   test_evidence:
     - "Exercise A, item 5, line 100"
   notes: null
-```
+~~~
 
 Rules:
 
@@ -239,11 +207,9 @@ Rules:
 - When a structurally required collection has no applicable evidence, use an empty array `[]`; do not omit the field.
 - `notes` may be `null` when there is no note.
 
-## 8. Validation and review
+## 6. Validation and Review
 
-Source extraction and structural validation remain automated where appropriate, but Candidate creation does not require a dedicated validation script.
-
-Candidate quality is primarily controlled through contextual AI interpretation followed by human review. The JSON Schema remains the canonical structural contract for Candidate Atoms, but no separate Candidate-validation script is required at this stage.
+Candidate quality is controlled through contextual AI interpretation followed by human review. The JSON Schema remains the canonical structural contract for Candidate Atoms, but no separate Candidate-validation script is required at this stage.
 
 Human review is not replaced by structural validation. Schema correctness cannot determine whether the AI identified the right knowledge points, split or merged them correctly, or interpreted the source context correctly.
 
@@ -251,15 +217,15 @@ Human review is not replaced by structural validation. Schema correctness cannot
 
 Knowledge Atom collection files are Markdown documents containing fenced YAML blocks. Each fenced YAML block is one complete Atom and is defined by the schema corresponding to its store. The collection Markdown file is not itself an Atom/YAML document.
 
-## 9. Human Review and Officialization
+## 7. Human Review and Officialization
 
 After validation, Candidates enter human review. Review status has exactly three values:
 
-```text
+~~~
 pending
 approved
 rejected
-```
+~~~
 
 - A newly created Candidate starts as `pending`.
 - The reviewer may leave it `pending`, change it to `approved`, or change it to `rejected`.
@@ -274,22 +240,12 @@ Officialization is a storage transition:
 
 There is no `officialized` review status. Pending and rejected Candidates are not affected by officialization. An Official Atom does not return to the Candidate/rejected lifecycle.
 
-## 10. Official Atom Correction
+## 8. Official Atom Correction
 
 An Official Atom may be corrected or refined while retaining the same semantic ID when the knowledge identity remains unchanged. A change that creates a genuinely different knowledge identity must be handled as a semantic-identity change rather than as ordinary correction.
 
-## 11. Fail-Closed Behavior
+## 9. Extraction-to-Officialization Boundary
 
-```text
-PASS → continue
-WARN → continue only when explicitly acceptable
-FAIL → stop / preserve evidence / require review
-```
+Extraction produces Candidate Atoms; officialization is a separate governance transition.
 
-If source structure, provenance, context, semantics, or atom identity cannot be established sufficiently, do not officialize.
-
-## 12. Reproducibility and Preservation
-
-Raw source evidence is immutable once captured. Later stages may add interpretation, validation, enrichment, competency mappings, Challenges, or learner-state data without rewriting raw evidence.
-
-Transformations should be reproducible and idempotent where practical. Repairs must be explicit rather than silently altering source evidence.
+If a Candidate cannot be validated sufficiently, it must not proceed to officialization. Human review remains the semantic gate between Candidate and Official Atom.
