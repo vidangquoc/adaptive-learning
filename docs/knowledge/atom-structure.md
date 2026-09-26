@@ -255,7 +255,7 @@ Both `origin` and `atom_decision` are arrays because an atom may have multiple s
 - `source_id` identifies the source artifact.
 - `segment_id` identifies the canonical Segment containing the evidence.
 - `location` identifies where the evidence occurs within that Segment.
-- `location.page` identifies the source page when available.
+- `location.page` identifies the global PDF viewer 1-based page number when available. It uses the same page convention declared by `source-segments.yaml` and is not a printed/book page number or a segment-relative page number.
 - `location.section` identifies the relevant source section when available.
 - `location.line` identifies the starting line of the evidence in the segment text when available. It is not a line range.
 
