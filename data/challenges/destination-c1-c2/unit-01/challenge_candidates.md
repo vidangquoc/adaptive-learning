@@ -4,7 +4,7 @@
 id: destination-c1-c2_unit-01_exercise-a_2
 target_atom_id: grammar.usage.present_simple.current_habit
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "Darren ______ usually ______ home until about eight o'clock."
+prompt: "Darren ______ usually ______ (get) home until about eight o'clock."
 answer:
   - "doesn't"
   - "get"
