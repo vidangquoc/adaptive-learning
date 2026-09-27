@@ -31,3 +31,10 @@ status: skipped
 source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 12, exercise_name: "Exercise J", item_number: null}
 reason: "Long integrated cloze passage; current extraction scope skips long Cloze/integrated exercises as atom-level Challenges."
 ```
+## Exercise G, item 8
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-g_8
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 11, exercise_name: "Exercise G", item_number: 8}
+reason: "The source explicitly permits both answer alternatives (worked and been working), but the canonical Challenge answer field represents one expected value per learner input and cannot represent multiple correct alternatives without redefining the model. The occurrence is therefore not emitted as a normal Candidate."
+```
