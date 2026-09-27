@@ -175,7 +175,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_1
 target_atom_id: vocabulary.lexical_sense.always.adverb
 instruction: "Write one word in each gap."
-prompt: "Why do you ______ leave the light on when you go out of the room?"
+prompt: "Why do you ______ leave the light on when you go out of the room? You wait till you start paying the electricity bill!"
 answer: "always"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 1}
@@ -223,7 +223,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_5
 target_atom_id: vocabulary.lexical_sense.rarely.adverb
 instruction: "Write one word in each gap."
-prompt: "Ralph calls us quite ______, but most students only call their parents when they need something."
+prompt: "Ralph calls us quite ______, but most students only call their parents when they need something, don\u0027t they?"
 answer: "rarely"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 5}
@@ -243,17 +243,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-b_7
-target_atom_id: vocabulary.multiword_expression.most_of_the_time
-instruction: "Write one word in each gap."
-prompt: "I'm alone in my study bedroom reading ______ of the time."
-answer: "most"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 7}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-b_8
@@ -315,17 +304,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-b_13
-target_atom_id: vocabulary.lexical_sense.whenever.conjunction
-instruction: "Write one word in each gap."
-prompt: "My mum fills up with petrol ______ she goes to the supermarket."
-answer: "whenever"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 13}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-b_14
@@ -581,22 +559,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-e_2
-target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
-prompt: |
-  A How ______ (do) you ______ (feel) about inviting Jackie to come with us on Saturday?
-  B Britney ______ (feel) very well, so I've told her she can go home.
-answer:
-  - "do"
-  - "feel"
-  - "doesn't feel"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 2}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_3
@@ -681,21 +643,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-e_8
-target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
-prompt: |
-  A Julian ______ (be) a bit busy at the moment, actually.
-  B Guys, you ______ (be) too noisy! Can't you keep it down, please?
-answer:
-  - "is"
-  - "are being"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 8}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_9
@@ -1088,17 +1035,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-i_7
-target_atom_id: vocabulary.lexical_sense.already.adverb
-instruction: "Write a word from the box in each gap."
-prompt: "I've ______ invited everyone!"
-answer: "already"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise I", item_number: 7}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-i_8
