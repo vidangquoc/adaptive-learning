@@ -24,9 +24,12 @@ To understand the project:
    - `docs/knowledge/atom-structure.md`
    - `docs/knowledge/atom-pipeline.md`
 4. When the task involves Assessment or Challenge, read:
-   - `docs/assessment/assessment.md`
+   - `docs/assessment/overall.md`
    - `docs/assessment/challenge.md`
-   - `docs/assessment/challenge-extraction/challenge-structure.md`
+   - `docs/assessment/challenge-extraction/principles.md`
+   - `docs/assessment/challenge-extraction/pipeline.md`
+   - `docs/assessment/challenge-extraction/structure.md`
+   - the relevant Candidate/Official Challenge schemas under `schemas/`
 5. When the task involves learner state, read `docs/learner/learning-state.md`.
 6. Read relevant learning-material principles, procedures, rules, and source documentation under `docs/learning-material/` as needed.
 7. Read relevant implementation files for behavior currently implemented.
@@ -40,53 +43,51 @@ Do not reconstruct detailed project knowledge from this file. Use it only to loc
 To understand what learning materials and knowledge data currently exist:
 
 1. Inspect the current `data/` and `sources/` locations relevant to the task.
-2. For source identity and catalog information, read:
-   - `docs/learning-material/sources/source-registry.md`
-   - `docs/learning-material/sources/books.md`
-3. Read `docs/learning-material/principles/overall.md` for the overall learning-material rulebook.
-4. Read the relevant focused principle under `docs/learning-material/principles/`.
-5. Read `docs/learning-material/procedures/source-extraction-sop.md` when the task involves source extraction.
-6. Read `docs/learning-material/rules/lexical-definition-rules.md` when the task involves lexical-definition rules.
-7. Read the canonical Knowledge Atom documents when interpreting knowledge representation.
-8. Read the canonical Challenge documents when interpreting assessment extraction.
-9. Use actual repository data for current inventories, counts, structures, and values.
+2. For source identity and catalog information, read the current source-registry and book documentation under `docs/learning-material/sources/`.
+3. Read the relevant learning-material principles under `docs/learning-material/principles/`.
+4. Read `docs/learning-material/procedures/source-extraction-sop.md` when the task involves source extraction.
+5. Read `docs/learning-material/rules/lexical-definition-rules.md` when the task involves lexical-definition rules.
+6. Read the canonical Knowledge Atom documents when interpreting knowledge representation.
+7. Read the canonical Challenge documents when interpreting assessment extraction.
+8. Use actual repository data for current inventories, counts, structures, and values.
+9. When working on a specific source, inspect its segmentation manifest and extraction-context map before relying on segment boundaries or contextual support.
 
-### Knowledge-data locations
+### Current storage model
 
-Do not assume a generic `data/atoms/` layout.
-
-The current Atom storage model uses:
+Verify actual files before making claims about what data exists. The current model is:
 
 ```text
-data/knowledge/
-└── <source-id>/
-    └── <segment-id>/
-        └── <domain>/
-            ├── knowledge_atoms.md
-            └── knowledge_atom_candidates.md
+data/
+├── knowledge/
+│   └── <source-id>/
+│       └── <segment-id>/
+│           └── <domain>/
+│               ├── knowledge_atoms.md
+│               ├── knowledge_atom_candidates.md
+│               └── extraction_reports.md
+├── challenges/
+│   └── <source-id>/
+│       └── <segment-id>/
+│           ├── challenges.md
+│           ├── challenge_candidates.md
+│           └── extraction_reports.md
+└── learners/
+    └── <learner-id>/
+        └── review-data.yaml
 ```
 
-Official and Candidate Atom collections are separated by file name within the source/segment/domain structure.
+These paths describe the current storage model; actual repository contents remain authoritative.
 
-Challenge storage uses:
+### Source recovery
 
-```text
-data/challenges/
-└── <source-id>/
-    └── <segment-id>/
-        ├── challenges.md
-        └── challenge_candidates.md
-```
+For a source-extraction task:
 
-Learner review data uses:
-
-```text
-data/learners/
-└── <learner-id>/
-    └── review-data.yaml
-```
-
-These paths describe the current storage model. Verify actual files before making claims about what data exists.
+1. Identify the source from the current source registry.
+2. Read its `source-segments.yaml`.
+3. Read its `extraction-context-map.yaml` when contextual supporting material matters.
+4. Inspect the relevant segment PDF/text/source evidence.
+5. Preserve the repository's canonical page and segment conventions.
+6. Use current source data rather than remembered page mappings.
 
 ## 3. Learner / User Learning-Data Recovery
 
@@ -104,23 +105,26 @@ The current review model stores the latest state only. It does not store attempt
 
 When the task involves Challenge extraction:
 
-1. Read the canonical Challenge overview and structure first.
+1. Read the canonical Challenge overview, conceptual model, extraction principles/pipeline, structure, and schemas first.
 2. Determine the relevant source segment and inspect the actual source evidence.
-3. Treat the source exercise/item as evidence; do not infer missing instruction, prompt, options, learner response elements, target Atom, or expected answer.
-4. Determine the target Atom during contextual analysis rather than in a later guess-based step.
-5. Preserve one-to-one Challenge-to-target-Atom linkage.
-6. Skip or mark unresolved occurrences when essential information cannot be established.
-7. Preserve source traceability and use the canonical source-occurrence ID format.
-8. Keep source-derived Challenges distinct from generated Challenges when provenance requires it.
+3. Use the shared contextual analysis model for Knowledge and Assessment findings.
+4. Treat the source exercise/item as evidence; do not infer missing instruction, prompt, options, learner response elements, target Atom, or expected answer.
+5. Determine the target Atom during contextual analysis rather than in a later guess-based step.
+6. Preserve the one-Challenge-to-one-Atom invariant.
+7. Skip or mark unresolved occurrences when essential information cannot be established.
+8. Preserve source traceability and use the canonical source-occurrence ID format.
+9. Keep source-derived Challenges distinct from generated Challenges; generated/source-independent Challenges are outside the current extraction scope.
+10. When modifying existing extracted Challenges, verify the current file SHA immediately before the write and verify the resulting repository state after the write.
 
 Current extraction boundaries include:
 
-- long integrated/composite exercises and long Cloze passages are outside current atom-level extraction;
+- long integrated/composite exercises and long Cloze passages are outside current Atom-level extraction;
 - shared-context exercises are currently skipped rather than artificially decomposed;
 - a Challenge cannot cross Source Segment boundaries;
 - a source exercise item normally defines the Challenge boundary when it is an independent evaluable learner task;
 - multiple blanks/actions may still form one Challenge;
-- every supported extracted Challenge needs a specific expected answer supported by evidence.
+- every supported extracted Challenge needs a specific expected answer supported by source evidence;
+- extraction reports are process artifacts for skipped, incomplete, unresolved, or otherwise non-emitted occurrences and are not a replacement for Candidate/Official Challenge collections.
 
 Do not treat these bullets as a substitute for the canonical Challenge docs; they are recovery navigation cues.
 
@@ -179,6 +183,7 @@ Do not treat user-facing verification prompts as an automatic recovery procedure
 - Preserve the distinction between historical learner evidence and current learner-state interpretation.
 - If sources conflict or information is ambiguous, inspect the relevant authoritative source before inferring.
 - Treat working discussion/review files as context, not as canonical project rules, unless the canonical documentation has been updated accordingly.
+- When a recovery snapshot records a concrete current work state, use it only to locate the work; verify the underlying repository state before treating that state as current fact.
 
 ## 8. Recovery Boundary
 
