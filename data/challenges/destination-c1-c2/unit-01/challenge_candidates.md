@@ -170,19 +170,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-a_16
-target_atom_id: grammar.usage.present_simple.current_habit
-instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "'Phil ______ (wear) ties, does he?' 'Actually, he ______ (wear) a tie to work most days.'"
-answer:
-  - "doesn't wear"
-  - "does wear"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 16}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-b_1
@@ -352,17 +339,6 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-b_15
-target_atom_id: grammar.usage.present_simple.last_time_emphasis
-instruction: "Write one word in each gap."
-prompt: "______ is the last time I ever order from that pizzeria."
-answer: "It/That"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 15}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-d_1
