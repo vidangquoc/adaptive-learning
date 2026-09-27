@@ -18,7 +18,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_3
 target_atom_id: grammar.usage.present_continuous.changing
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "I'm sorry to hear that your parents ______ divorced."
+prompt: "I'm sorry to hear that your parents ______ (get) divorced."
 answer: "are getting"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 3}
@@ -30,7 +30,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_4
 target_atom_id: grammar.usage.present_simple.instructions
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "You ______ to the end of the street and ______ right."
+prompt: "You ______ (go) to the end of the street and ______ (turn) right."
 answer:
   - "go"
   - "turn"
@@ -44,7 +44,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_5
 target_atom_id: grammar.usage.present_simple.general_truth
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "Why ______ ice ______?"
+prompt: "Why ______ (do) ice ______ (float)?"
 answer:
   - "does"
   - "float"
@@ -58,7 +58,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_6
 target_atom_id: grammar.usage.present_continuous.changing
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "It's lovely now the evenings ______ longer, isn't it?"
+prompt: "It's lovely now the evenings ______ (get) longer, isn't it?"
 answer: "are getting"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 6}
@@ -70,7 +70,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_7
 target_atom_id: grammar.usage.present_simple.permanent_situation
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "My dad ______ meat at all - he's a vegetarian."
+prompt: "My dad ______ (eat) meat at all - he's a vegetarian."
 answer: "doesn't eat"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 7}
@@ -82,7 +82,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_8
 target_atom_id: grammar.usage.present_continuous.now
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "Actually, we ______ to The Libertines at all - this is Pete Docherty's second band, Babyshambles."
+prompt: "Actually, we ______ (listen) to The Libertines at all - this is Pete Docherty's second band, Babyshambles."
 answer: "aren't listening"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 8}
@@ -94,7 +94,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_9
 target_atom_id: grammar.usage.present_simple.informal_story
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "A man ______ into a bar. Ouch! Not a good idea to walk into an iron bar!"
+prompt: "A man ______ (walk) into a bar. Ouch! Not a good idea to walk into an iron bar!"
 answer: "walks"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 9}
@@ -106,7 +106,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_10
 target_atom_id: grammar.usage.present_continuous.now
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "______ you ______ me from your mobile? The line's not very good."
+prompt: "______ (Are) you ______ (phone) me from your mobile? The line's not very good."
 answer:
   - "are"
   - "phoning"
@@ -120,7 +120,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_11
 target_atom_id: grammar.usage.present_simple.current_habit
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "______ you often ______ things online?"
+prompt: "______ (Do) you often ______ (order) things online?"
 answer:
   - "Do"
   - "order"
@@ -134,7 +134,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_13
 target_atom_id: grammar.usage.present_simple.live_commentary
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "Beckham ______ control of the ball ... It's Beckham ... And he ______!"
+prompt: "Beckham ______ (have) control of the ball ... It's Beckham ... And he ______ (score)!"
 answer:
   - "has"
   - "scores"
@@ -148,7 +148,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_14
 target_atom_id: grammar.usage.present_simple.headline
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "WOMAN ______ €500 MILLION LOTTERY WIN TO CHARITY"
+prompt: "WOMAN ______ (give) €500 MILLION LOTTERY WIN TO CHARITY"
 answer: "gives"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 14}
@@ -160,7 +160,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_15
 target_atom_id: grammar.usage.present_continuous.annoying_habit
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "My dad ______ jokes! They're usually rubbish, though."
+prompt: "My dad ______ (always/tell) jokes! They're usually rubbish, though."
 answer:
   - "is"
   - "always telling"
@@ -174,7 +174,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_16
 target_atom_id: grammar.usage.present_simple.current_habit
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "'Phil ______ ties, does he?' 'Actually, he ______ a tie to work most days.'"
+prompt: "'Phil ______ (wear) ties, does he?' 'Actually, he ______ (wear) a tie to work most days.'"
 answer:
   - "doesn't wear"
   - "does wear"
@@ -398,7 +398,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_3
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "It ______ / ______ which book you do your essay on."
+prompt: "It ______ / ______ which of the books we've studied this term you do your essay on."
 options:
   - "doesn't matter"
   - "isn't mattering"
@@ -488,7 +488,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_9
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "It ______ / ______ you at all."
+prompt: "Stay out of this, Simon, it ______ / ______ you at all."
 options:
   - "doesn't concern"
   - "isn't concerning"
@@ -503,7 +503,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_10
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "You really ______ / ______ your father when you frown."
+prompt: "You really ______ / ______ your father when you frown like that."
 options:
   - "resemble"
   - "are resembling"
@@ -548,7 +548,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_13
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "That ______ you too, Anne!"
+prompt: "I want everyone to do exercise H, and that ______ / ______ you too, Anne!"
 options:
   - "includes"
   - "is including"
@@ -757,8 +757,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_1
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "Tammy ______ able to swim since she was one year old."
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "Tammy been able to swim since she was one year old."
 answer: "has been"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 1}
@@ -781,8 +781,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_3
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "Tina and Phil ______ to sell their flat."
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "Tina and Phil still not managed to sell their flat."
 answer: "still haven't managed"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 3}
