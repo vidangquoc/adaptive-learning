@@ -36,6 +36,39 @@ When the source representation creates an ambiguous boundary between fixed sourc
 
 The number of answer values must equal the number of learner inputs represented by the Challenge.
 
+
+
+### Learner-input boundary and answer-key interpretation
+
+The answer key is evidence for the expected learner response, but it does not by itself determine which part of that response is represented by the blank or response area in the source.
+
+The extractor MUST first establish the boundary between:
+
+- fixed source text supplied to the learner; and
+- learner input that the learner must provide.
+
+Only the latter contributes to the Challenge's answer value and answer cardinality.
+
+A keyed answer may therefore need to be split when part of it is already present in the source. This is especially important when the source supplies an auxiliary through a contraction. For example:
+
+```text
+Have you heard? Carol's ______ her leg again.
+```
+
+If authoritative source evidence establishes that `Carol's` is the supplied contraction of `Carol has`, the learner input is `broken`. The extractor MUST NOT change the prompt to `Carol ______ her leg again.` merely so that the answer-key phrase `has broken` fits the blank.
+
+The opposite case is an unresolved boundary. If the source is:
+
+```text
+I'm ______ to China - what's it like?
+```
+
+and neither the source representation nor authoritative supporting evidence establishes a valid learner input that reconstructs the intended task, the extractor MUST NOT silently change `I'm` to `I've`, nor otherwise rewrite the source. The occurrence is incomplete/unresolved or skipped.
+
+The reconstruction test is mandatory: after the learner-input boundary and answer have been determined, inserting the learner answer into the represented input position(s) must reproduce a valid task without duplicated fixed text, missing source content, or extraction-introduced grammatical/morphological corruption.
+
+When answer-key content and source text appear inconsistent, preserve the source evidence and fail closed rather than forcing them to agree.
+
 ## Shared Contextual Analysis
 
 Challenge Extraction and Knowledge Atom Extraction are not independent processes.
