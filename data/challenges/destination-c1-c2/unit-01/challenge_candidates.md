@@ -3,9 +3,11 @@
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_2
 target_atom_id: grammar.usage.present_simple.current_habit
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "Darren ______ usually ______ home until about eight o'clock."
-answer: "doesn't get"
+answer:
+  - "doesn't"
+  - "get"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 2}
   notes: null
@@ -15,7 +17,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_3
 target_atom_id: grammar.usage.present_continuous.changing
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "I'm sorry to hear that your parents ______ divorced."
 answer: "are getting"
 extra:
@@ -27,7 +29,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_4
 target_atom_id: grammar.usage.present_simple.instructions
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "You ______ to the end of the street and ______ right."
 answer:
   - "go"
@@ -41,7 +43,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_5
 target_atom_id: grammar.usage.present_simple.general_truth
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "Why ______ ice ______?"
 answer:
   - "does"
@@ -55,7 +57,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_6
 target_atom_id: grammar.usage.present_continuous.changing
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "It's lovely now the evenings ______ longer, isn't it?"
 answer: "are getting"
 extra:
@@ -67,7 +69,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_7
 target_atom_id: grammar.usage.present_simple.permanent_situation
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "My dad ______ meat at all - he's a vegetarian."
 answer: "doesn't eat"
 extra:
@@ -79,8 +81,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_8
 target_atom_id: grammar.usage.present_continuous.now
-instruction: "Complete each gap with the correct present simple or present continuous form."
-prompt: "Actually, we ______ to The Libertines at all."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
+prompt: "Actually, we ______ to The Libertines at all - this is Pete Docherty's second band, Babyshambles."
 answer: "aren't listening"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 8}
@@ -91,8 +93,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_9
 target_atom_id: grammar.usage.present_simple.informal_story
-instruction: "Complete each gap with the correct present simple or present continuous form."
-prompt: "A man ______ into a bar. Ouch!"
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
+prompt: "A man ______ into a bar. Ouch! Not a good idea to walk into an iron bar!"
 answer: "walks"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 9}
@@ -103,7 +105,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_10
 target_atom_id: grammar.usage.present_continuous.now
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "______ you ______ me from your mobile? The line's not very good."
 answer:
   - "are"
@@ -117,7 +119,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_11
 target_atom_id: grammar.usage.present_simple.current_habit
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "______ you often ______ things online?"
 answer:
   - "Do"
@@ -131,8 +133,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_13
 target_atom_id: grammar.usage.present_simple.live_commentary
-instruction: "Complete each gap with the correct present simple or present continuous form."
-prompt: "Beckham ______ control of the ball ... And he ______!"
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
+prompt: "Beckham ______ control of the ball ... It's Beckham ... And he ______!"
 answer:
   - "has"
   - "scores"
@@ -145,7 +147,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_14
 target_atom_id: grammar.usage.present_simple.headline
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "WOMAN ______ €500 MILLION LOTTERY WIN TO CHARITY"
 answer: "gives"
 extra:
@@ -157,11 +159,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_15
 target_atom_id: grammar.usage.present_continuous.annoying_habit
-instruction: "Complete each gap with the correct present simple or present continuous form."
-prompt: "My dad ______ always ______ jokes!"
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
+prompt: "My dad ______ jokes! They're usually rubbish, though."
 answer:
   - "is"
-  - "telling"
+  - "always telling"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise A", item_number: 15}
   notes: null
@@ -171,7 +173,7 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-a_16
 target_atom_id: grammar.usage.present_simple.current_habit
-instruction: "Complete each gap with the correct present simple or present continuous form."
+instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
 prompt: "'Phil ______ ties, does he?' 'Actually, he ______ a tie to work most days.'"
 answer:
   - "doesn't wear"
@@ -198,8 +200,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_2
 target_atom_id: vocabulary.multiword_expression.at_present
 instruction: "Write one word in each gap."
-prompt: "Fifteen teachers are teaching here full-time ______."
-answer: "at present"
+prompt: "Fifteen teachers are teaching here full-time at ______."
+answer: "present"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 2}
   notes: null
@@ -210,8 +212,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_3
 target_atom_id: vocabulary.multiword_expression.at_the_moment
 instruction: "Write one word in each gap."
-prompt: "My sister's revising for her GCSEs ______."
-answer: "at the moment"
+prompt: "My sister's revising for her GCSEs at the ______."
+answer: "moment"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 3}
   notes: null
@@ -222,8 +224,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_4
 target_atom_id: vocabulary.multiword_expression.for_the_time_being
 instruction: "Write one word in each gap."
-prompt: "I'm quite happy living at home ______, but I guess I'll have to get my own place eventually."
-answer: "for the time being"
+prompt: "I'm quite happy living at home for the time ______, but I guess I'll have to get my own place eventually."
+answer: "being"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 4}
   notes: null
@@ -246,8 +248,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_6
 target_atom_id: vocabulary.multiword_expression.every_now_and_then
 instruction: "Write one word in each gap."
-prompt: "We go to the cinema ______, but only if there's something good on."
-answer: "every now and then"
+prompt: "We go to the cinema ______ now and then, but only if there's something good on."
+answer: "every"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 6}
   notes: null
@@ -258,8 +260,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_7
 target_atom_id: vocabulary.multiword_expression.most_of_the_time
 instruction: "Write one word in each gap."
-prompt: "I'm alone in my study bedroom reading ______."
-answer: "most of the time"
+prompt: "I'm alone in my study bedroom reading ______ of the time."
+answer: "most"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 7}
   notes: null
@@ -282,8 +284,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_9
 target_atom_id: vocabulary.multiword_expression.from_time_to_time
 instruction: "Write one word in each gap."
-prompt: "I see Lucinda ______, but not on a regular basis."
-answer: "from time to time"
+prompt: "I see Lucinda from ______ to time, but not on a regular basis."
+answer: "time"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 9}
   notes: null
@@ -318,8 +320,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_12
 target_atom_id: vocabulary.multiword_expression.these_days
 instruction: "Write one word in each gap."
-prompt: "Do young people ______ have more free time than they did in the past?"
-answer: "these days"
+prompt: "Do young people these ______ have more free time than they did in the past?"
+answer: "days"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 12}
   notes: null
@@ -381,11 +383,11 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_2
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "Each song only ______ / ______ 50 cents at the moment."
+prompt: "Each song ______ 50 cents at the moment because they're on special offer."
 options:
-  - "costs"
+  - "only costs"
   - "is only costing"
-answer: "costs"
+answer: "only costs"
 extra:
   source: {source_id: destination-c1-c2, page_number: 10, segment_id: unit-01, exercise_name: "Exercise D", item_number: 2}
   notes: null
@@ -426,11 +428,11 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_5
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "I think I ______ / ______ that woman over there."
+prompt: "______ that woman over there. Wasn't she on that quiz show last night?"
 options:
-  - "I recognise"
+  - "I think I recognise"
   - "I'm recognising"
-answer: "I recognise"
+answer: "I think I recognise"
 extra:
   source: {source_id: destination-c1-c2, page_number: 10, segment_id: unit-01, exercise_name: "Exercise D", item_number: 5}
   notes: null
@@ -456,7 +458,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_7
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "I really ______ / ______ that capital punishment deters people from committing murder."
+prompt: "______ that capital punishment deters people from committing murder."
 options:
   - "I really don't agree"
   - "I'm really not agreeing"
@@ -546,7 +548,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-d_13
 target_atom_id: grammar.rule.stative_verbs
 instruction: "Circle the correct word or phrase."
-prompt: "That includes / is including you too, Anne!"
+prompt: "That ______ you too, Anne!"
 options:
   - "includes"
   - "is including"
@@ -590,8 +592,10 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_1
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "I ______ for a book on fly fishing. Stan ______ like he's in a bad mood."
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A I ______ for a book on fly fishing. Do you have any in stock?
+  B Stan ______ like he's in a bad mood this morning.
 answer:
   - "am looking"
   - "looks"
@@ -604,11 +608,14 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_2
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "How ______ you ______ about inviting Jackie? Britney ______ very well."
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A How ______ you ______ about inviting Jackie to come with us on Saturday?
+  B Britney ______ very well, so I've told her she can go home.
 answer:
-  - "do you feel"
-  - "feels"
+  - "do"
+  - "feel"
+  - "doesn't feel"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 2}
   notes: null
@@ -618,11 +625,14 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_3
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "Jan and I ______ buying a new flat. Why ______ you ______ Ray Davis to be a better songwriter?"
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A Jan and I ______ buying a new flat.
+  B Why ______ you ______ Ray Davis to be a better songwriter than Paul McCartney?
 answer:
   - "are considering"
-  - "do you consider"
+  - "do"
+  - "consider"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 3}
   notes: null
@@ -632,11 +642,14 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_4
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "We ______ a barbecue right now. ______ the Deacons ______ a swimming pool?"
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A We ______ a barbecue right now, so can I call you back this evening?
+  B ______ the Deacons ______ a swimming pool?
 answer:
   - "are having"
-  - "Do the Deacons have"
+  - "Do"
+  - "have"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 4}
   notes: null
@@ -646,8 +659,10 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_5
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "The idea of going to a Greek island ______ to me. Police ______ for witnesses."
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A The idea of going to a Greek island really ______ to me.
+  B Police ______ for witnesses to the attack.
 answer:
   - "appeals"
   - "are appealing"
@@ -660,11 +675,14 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_6
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "This chicken ______ very fresh. Why ______ you ______ that chicken?"
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A This chicken ______ very fresh. I think I'll throw it away just to be on the safe side.
+  B Why ______ you ______ that chicken, Mum?
 answer:
   - "doesn't smell"
-  - "are you smelling"
+  - "are"
+  - "smelling"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 6}
   notes: null
@@ -674,8 +692,10 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_7
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "I ______ on you, James. Whether we get there by six ______ on the traffic."
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A I ______ on you, James. Don't let me down!
+  B Whether we get there by six ______ on the traffic.
 answer:
   - "am depending"
   - "depends"
@@ -688,8 +708,10 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_8
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "Julian ______ a bit busy. Guys, you ______ too noisy!"
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A Julian ______ a bit busy at the moment, actually.
+  B Guys, you ______ too noisy! Can't you keep it down, please?
 answer:
   - "is"
   - "are being"
@@ -702,10 +724,13 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_9
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "______ you ______ Bob would like a CD? Oliver said he ______ about moving out."
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A ______ you ______ Bob would like a CD for his birthday?
+  B Oliver said he ______ about moving out of the city.
 answer:
-  - "do you think"
+  - "do"
+  - "think"
   - "is thinking"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise E", item_number: 9}
@@ -716,8 +741,10 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-e_10
 target_atom_id: grammar.usage.stative_action_contrast
-instruction: "Complete each pair with the correct present simple or present continuous form."
-prompt: "Doug ______ quite a lot of Katy these days. I ______ Manchester United lost again."
+instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
+prompt: |
+  A I hear that Doug ______ quite a lot of Katy these days. Is that true?
+  B I ______ Manchester United lost again.
 answer:
   - "is seeing"
   - "see"
@@ -742,9 +769,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_2
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "How many articles ______ Greg ______ for Newsweek?"
-answer: "has written"
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "How many articles has Greg wrote for Newsweek?"
+answer: "written"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 2}
   notes: null
@@ -766,9 +793,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_4
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "I'm ______ to China - what's it like?"
-answer: "I've never been"
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "I'm never been to China - what's it like?"
+answer: "I've"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 4}
   notes: null
@@ -778,9 +805,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_5
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "Have you heard? Carol's ______ her leg again."
-answer: "has broken"
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "Have you heard? Carol's breaking her leg again."
+answer: "broken"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 5}
   notes: null
@@ -790,9 +817,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_6
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "I've ______ through the front door."
-answer: "have just come"
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "You're lucky you caught me - I've just came through the front door."
+answer: "come"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 6}
   notes: null
@@ -802,8 +829,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-f_7
 target_atom_id: grammar.usage.present_perfect_simple
-instruction: "Rewrite the incorrect word or phrase correctly."
-prompt: "Why ______ Sue yet?"
+instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
+prompt: "Why you haven't tell Sue yet that you're thinking of dropping out of the course?"
 answer: "haven't you told"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 7}
@@ -814,8 +841,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_1
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
 prompt: "They've ______ over six bags with rubbish from the beach already."
+options:
+  - "filled"
+  - "been filling"
 answer: "filled"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 1}
@@ -826,11 +856,16 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_2
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
-prompt: "Have you ______ that story? Apparently, they've ______ it."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
+prompt: "Have you ______ that story in the papers about the elephant that escaped from the zoo? Apparently, they've just ______ it."
+options:
+  - "followed"
+  - "been following"
+  - "caught"
+  - "been catching"
 answer:
   - "been following"
-  - "just caught"
+  - "caught"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 2}
   notes: null
@@ -840,8 +875,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_3
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
-prompt: "We've ______ the Tower of London, Buckingham Palace and Oxford Street."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
+prompt: "We've ______ the Tower of London, Buckingham Palace and Oxford Street, and we've only been in London for three hours!"
+options:
+  - "seen"
+  - "been seeing"
 answer: "seen"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 3}
@@ -852,8 +890,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_4
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
 prompt: "It's the first time I've ______ The Editors play live."
+options:
+  - "heard"
+  - "been hearing"
 answer: "heard"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 4}
@@ -864,8 +905,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_5
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
-prompt: "Jake and I have ______ about where to go on holiday for weeks."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
+prompt: "Jake and I have ______ about where to go on holiday for weeks but we just can't decide."
+options:
+  - "thought"
+  - "been thinking"
 answer: "been thinking"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 5}
@@ -876,8 +920,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_6
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
-prompt: "We've only ______ for about ten minutes so far."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
+prompt: "You can't want to go to the toilet already - we've only ______ for about ten minutes so far!"
+options:
+  - "driven"
+  - "been driving"
 answer: "been driving"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 6}
@@ -888,8 +935,11 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-g_7
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
+instruction: "Circle the correct word or phrase. If both are correct, circle both."
 prompt: "I've ______ up all day and my feet are killing me!"
+options:
+  - "stood"
+  - "been standing"
 answer: "been standing"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 7}
@@ -897,25 +947,12 @@ extra:
 review_status: pending
 ```
 
-```yaml
-id: destination-c1-c2_unit-01_exercise-g_8
-target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Circle the correct word or phrase; if both are correct, circle both."
-prompt: "Has Jan ______ for the company since it started?"
-answer:
-  - "worked"
-  - "been working"
-extra:
-  source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise G", item_number: 8}
-  notes: null
-review_status: pending
-```
 
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_1
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "______ over 18 press releases this morning so far."
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "______ over 18 press releases this morning so far. (I / send off)"
 answer: "I've sent off"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise H", item_number: 1}
@@ -926,9 +963,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_2
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "Is it the first time ______ squid?"
-answer: "you have ever eaten"
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "Is it the first time ______ squid? (you / ever / eat)"
+answer: "you've ever eaten"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise H", item_number: 2}
   notes: null
@@ -938,8 +975,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_3
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "______ for you for the past two hours. Where ______?"
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "______ for you for the past two hours. Where ______? (we / wait) (you / be)"
 answer:
   - "We've been waiting"
   - "have you been"
@@ -952,8 +989,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_4
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "______ an e-mail from Ruth?"
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "______ an e-mail from Ruth? (you / just / receive)"
 answer: "Have you just received"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise H", item_number: 4}
@@ -964,8 +1001,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_5
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "I'm afraid ______ any milk. ______ a delivery for the past four hours but ______ yet."
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "I'm afraid ______ any milk. ______ a delivery for the past four hours but ______ yet. (we / get) (we / expect) (they / show up)"
 answer:
   - "we haven't got"
   - "We've been expecting"
@@ -979,8 +1016,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_6
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "______ a list of people to invite to the wedding but ______ very far so far. ______ any thoughts about it?"
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "______ a list of people to invite to the wedding but ______ very far so far. ______ any thoughts about it? (I / draw up) (I / get) (you / have)"
 answer:
   - "I've been drawing up"
   - "I haven't got"
@@ -994,8 +1031,8 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-h_7
 target_atom_id: grammar.usage.present_perfect_simple_vs_continuous
-instruction: "Complete the verb(s) in the correct present perfect simple or present perfect continuous form."
-prompt: "My mum's ______ to ask you for a while."
+instruction: "Write the verb in brackets in the correct form, present perfect simple or present perfect continuous. Use contractions where possible."
+prompt: "Oh, Clair, my ______ to ask you for a while. Would you like to come with us to Wimbledon? (mum / mean)"
 answer: "mum's been meaning"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise H", item_number: 7}
@@ -1054,9 +1091,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-i_5
 target_atom_id: vocabulary.multiword_expression.so_far
-instruction: "Write a word from the box in each gap."
-prompt: "We've won every match we've played ______ this season."
-answer: "so far"
+instruction: "Write a word from the box in each gap. You can use each word more than once."
+prompt: "We've won every match we've played ______ far this season."
+answer: "so"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise I", item_number: 5}
   notes: null
@@ -1066,9 +1103,9 @@ review_status: pending
 ```yaml
 id: destination-c1-c2_unit-01_exercise-i_6
 target_atom_id: vocabulary.multiword_expression.until_now
-instruction: "Write a word from the box in each gap."
-prompt: "I've always lived in a big house ______."
-answer: "until now"
+instruction: "Write a word from the box in each gap. You can use each word more than once."
+prompt: "I've always lived in a big house ______ now, so it's taking some time to get used to being in a small flat."
+answer: "until"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise I", item_number: 6}
   notes: null
@@ -1206,4 +1243,3 @@ extra:
   notes: null
 review_status: pending
 ```
-
