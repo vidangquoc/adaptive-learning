@@ -63,3 +63,44 @@ status: unresolved
 source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 11, exercise_name: "Exercise F", item_number: 8}
 reason: "The source answer key permits both 'has lived' and 'has been living' for the correction, but the canonical Challenge answer field cannot represent multiple acceptable answers for one learner input without redefining the model."
 ```
+
+
+## Exercise B, item 7
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-b_7
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 9, exercise_name: "Exercise B", item_number: 7}
+reason: "The source answer key permits multiple acceptable answers ('most', 'much', or 'some') for one learner input, but the canonical Challenge answer field cannot represent multiple alternatives for one learner input without redefining the model."
+```
+
+## Exercise B, item 13
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-b_13
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 9, exercise_name: "Exercise B", item_number: 13}
+reason: "The source answer key permits multiple acceptable answers ('whenever', 'when', or 'if') for one learner input, but the canonical Challenge answer field cannot represent multiple alternatives for one learner input without redefining the model."
+```
+
+## Exercise E, item 2
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-e_2
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 11, exercise_name: "Exercise E", item_number: 2}
+reason: "The source answer key permits both 'doesn't feel' and 'isn't feeling' for one learner input, but the canonical Challenge answer field cannot represent multiple alternatives for one learner input without redefining the model."
+```
+
+## Exercise E, item 8
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-e_8
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 11, exercise_name: "Exercise E", item_number: 8}
+reason: "The source answer key permits both 'are being' and 'are' for one learner input, but the canonical Challenge answer field cannot represent multiple alternatives for one learner input without redefining the model."
+```
+
+## Exercise I, item 7
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-i_7
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 12, exercise_name: "Exercise I", item_number: 7}
+reason: "The source answer key permits both 'already' and 'just' for one learner input, but the canonical Challenge answer field cannot represent multiple alternatives for one learner input without redefining the model."
+```
