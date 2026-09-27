@@ -150,6 +150,46 @@ The extractor must not invent missing source information merely to produce a com
 
 A failed extraction must not be silently converted into a valid-looking result.
 
+
+
+## 12. Learner-Input Boundary and Reconstruction
+
+For source-derived assessment extraction, the boundary between source-provided fixed text and learner input must be established from the authoritative source representation before the answer is derived.
+
+The answer key provides expected answer content, but it does not by itself define the learner-input boundary. A keyed answer may contain text that is already supplied by the source, including an auxiliary represented as a contraction. In that case, the answer must be reduced to the portion the learner actually supplies.
+
+For example, if the source presents:
+
+```text
+Carol's ______ her leg again.
+```
+
+and the source context establishes that `Carol's` represents the supplied `Carol has`, the learner input is `broken`, not `has broken`. The extractor must preserve `Carol's` and must not modify the source to make the full answer-key phrase fit the blank.
+
+Conversely, if the fixed source text and the answer key cannot be combined into a valid reconstructed task without changing the source, the occurrence must not be repaired by inference. For example, if the authoritative source is:
+
+```text
+I'm ______ to China - what's it like?
+```
+
+and the candidate answer would require changing `I'm` to `I've` to produce a grammatical present-perfect task, that change is not permitted merely to accommodate an answer such as `never been`. The occurrence must remain unresolved, incomplete, or skipped unless authoritative source evidence establishes the intended source representation.
+
+The required order is therefore:
+
+```
+Authoritative source representation
+        ↓
+Fixed source text + learner-input boundary
+        ↓
+Expected learner input
+        ↓
+Task reconstruction
+        ↓
+Validity check
+```
+
+The reverse process—taking the answer key first and modifying or reinterpreting source text until the answer fits—is not valid extraction.
+
 ## 13. Shared Analysis and Multiple Extraction Outputs
 
 Knowledge Atom extraction and Challenge extraction are simultaneous outputs of the same shared contextual analysis.
