@@ -26,6 +26,16 @@ When an exercise item is not emitted as a Challenge, the extraction process must
 
 This makes omission explicit rather than silently losing source assessment evidence.
 
+### Input/answer boundary
+
+The answer must correspond to the actual learner inputs represented by the extracted task.
+
+The extractor must not choose an answer string merely because it appears in the answer key if inserting it into the extracted prompt produces an ungrammatical, duplicated, malformed, or otherwise invalid task.
+
+When the source representation creates an ambiguous boundary between fixed source text and learner input, resolve it from authoritative source evidence. If it cannot be resolved without inventing or rewriting source content, the occurrence is incomplete/unresolved or skipped.
+
+The number of answer values must equal the number of learner inputs represented by the Challenge.
+
 ## Shared Contextual Analysis
 
 Challenge Extraction and Knowledge Atom Extraction are not independent processes.
@@ -88,6 +98,31 @@ Preserve the source information necessary to understand and perform the short as
 
 Do not include unrelated surrounding material merely because it belongs to the same source exercise.
 
+## Complete Task Package
+
+For a source-derived Challenge, preserve the complete source task package needed to understand and perform the original assessment occurrence.
+
+This includes, when present:
+- the original exercise instruction;
+- the complete item/prompt text;
+- source-provided cues embedded in or adjacent to the item, including cues that are not learner inputs;
+- explicit options or alternatives;
+- other source material required to perform the item and within the current extraction scope.
+
+A source cue remains part of the Challenge even when the learner does not enter it as an answer.
+
+For example, in a gap-fill item such as:
+
+```
+Darren .................................... usually .................................... (get) home until about eight o'clock.
+```
+
+`(get)` is part of the source task package and must not be omitted from the extracted prompt.
+
+Likewise, the original exercise instruction must be preserved rather than replaced by a generic instruction invented by the extractor.
+
+The goal is not to copy arbitrary surrounding page content. It is to preserve every source element that affects what the learner is asked to do or how the learner can perform the task.
+
 ## Source Preservation
 
 Preserve the source wording and assessment structure.
@@ -99,8 +134,11 @@ Extraction must not silently:
 - rewrite wording;
 - correct the source;
 - change the intended task;
+- omit source cues or required instructions;
 - invent missing information;
 - or otherwise alter assessment content.
+
+The extractor must distinguish learner input from source task content. Only learner inputs determine answer cardinality; source task content must still be preserved.
 
 More substantial normalization is a separate concern.
 
@@ -175,8 +213,8 @@ When the target Atom does not yet exist, the contextual analysis may create a ne
 
 At minimum, extraction should preserve:
 
-- the task or prompt;
-- information required to perform the task;
+- the complete source task package;
+- learner input boundaries;
 - applicable instructions or context;
 - the target Knowledge Atom;
 - the specific expected answer when it is available from the source;
@@ -205,10 +243,14 @@ Validation should check:
 
 - assessment occurrence;
 - assessment boundary;
-- completeness;
+- completeness of the source task package;
+- preservation of the original instruction;
+- preservation of complete prompt/item text and required source cues;
+- learner input boundaries;
 - target Knowledge Atom;
 - absence of invented source content;
 - preservation of assessment structure;
+- reconstruction of the intended task without duplicated fixed text or missing source cues;
 - specific expected answer when available or required by the extraction result;
 - provenance;
 - compliance with extraction scope;
