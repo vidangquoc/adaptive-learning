@@ -128,7 +128,19 @@ Context    → information available for interpretation
 Provenance → evidence supporting the extracted result
 ```
 
-## 11. Uncertainty and Fail-Closed Behavior
+## 11. Source-Faithful Content Preservation
+
+When an extracted object is derived from source material, preserve the source content necessary to understand, interpret, perform, or review the extracted occurrence.
+
+For source-derived assessment tasks, this includes the complete task package, not only the learner's response area. The package may include the original instruction, complete prompt/item text, source-provided cues such as bracketed verbs, explicit options, and other task elements that affect how the learner performs the task.
+
+A source element does not become disposable merely because the learner does not type or select it.
+
+Extraction may remove purely presentational or technical noise that does not affect meaning, task structure, or provenance. It must not silently omit essential source content, rewrite or correct source wording, replace source cues with inferred information, change the intended task, or normalize the source in a way that changes the task or evidence.
+
+If the canonical representation cannot faithfully preserve an essential source element, the occurrence must remain unresolved, incomplete, or skipped according to the applicable pipeline.
+
+## 12. Uncertainty and Fail-Closed Behavior
 
 Extraction must preserve uncertainty when the available evidence or context is insufficient.
 
@@ -138,7 +150,7 @@ The extractor must not invent missing source information merely to produce a com
 
 A failed extraction must not be silently converted into a valid-looking result.
 
-## 12. Shared Analysis and Multiple Extraction Outputs
+## 13. Shared Analysis and Multiple Extraction Outputs
 
 Knowledge Atom extraction and Challenge extraction are simultaneous outputs of the same shared contextual analysis.
 
@@ -165,7 +177,7 @@ The two outputs are related but do not have shared ownership. Knowledge Atoms re
 
 A Challenge may target an existing Knowledge Atom or a Knowledge Atom identified during the same analysis session. The existence of one output does not make the other output authoritative over its own model.
 
-## 13. Extraction Reports
+## 14. Extraction Reports
 
 Extraction produces Candidates or explicit extraction reports; it does not silently discard source occurrences that were considered but could not be emitted as valid Candidates.
 
@@ -175,7 +187,7 @@ Each extraction pipeline defines the physical location of its reports alongside 
 
 The report identifies the source occurrence and records the reason the occurrence was not emitted as a normal Candidate. A rejected Candidate is not an extraction report; rejection belongs to the Candidate review lifecycle.
 
-## 14. Extraction Output and Lifecycle Boundary
+## 15. Extraction Output and Lifecycle Boundary
 
 Extraction produces Candidates or explicit extraction issues; it does not by itself constitute approval, officialization, deduplication, or other downstream governance decisions.
 
