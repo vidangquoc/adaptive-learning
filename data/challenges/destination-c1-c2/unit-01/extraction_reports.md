@@ -38,3 +38,28 @@ status: unresolved
 source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 11, exercise_name: "Exercise G", item_number: 8}
 reason: "The source explicitly permits both answer alternatives (worked and been working), but the canonical Challenge answer field represents one expected value per learner input and cannot represent multiple correct alternatives without redefining the model. The occurrence is therefore not emitted as a normal Candidate."
 ```
+
+
+## Exercise A, item 16
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-a_16
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 9, exercise_name: "Exercise A", item_number: 16}
+reason: "The source answer key permits both 'does wear' and 'wears' for the second learner input, but the canonical Challenge answer field cannot represent multiple acceptable answers for one learner input without redefining the model."
+```
+
+## Exercise B, item 15
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-b_15
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 9, exercise_name: "Exercise B", item_number: 15}
+reason: "The source answer key permits both 'It' and 'That' for the learner input, but the canonical Challenge answer field cannot represent multiple acceptable answers for one learner input without redefining the model."
+```
+
+## Exercise F, item 8
+```yaml
+report_id: destination-c1-c2_unit-01_exercise-f_8
+status: unresolved
+source: {source_id: destination-c1-c2, segment_id: unit-01, page_number: 11, exercise_name: "Exercise F", item_number: 8}
+reason: "The source answer key permits both 'has lived' and 'has been living' for the correction, but the canonical Challenge answer field cannot represent multiple acceptable answers for one learner input without redefining the model."
+```
