@@ -29,6 +29,10 @@ Hãy sử dụng repository và các nguồn authoritative được recovery ins
 
 Chỉ đọc thêm các tài liệu, data, source hoặc implementation liên quan đến context và task cần khôi phục; không cần đọc toàn bộ repository một cách không cần thiết.
 
+Nếu task liên quan đến Challenge/Assessment, hãy xác minh các canonical docs hiện tại dưới `docs/assessment/` và kiểm tra source/data thực tế liên quan trước khi đưa ra kết luận hoặc sửa dữ liệu.
+
+Nếu task liên quan đến extraction, hãy xác minh Source Segment, source evidence, provenance convention và extraction-context map khi có liên quan.
+
 Sau khi hoàn tất recovery, hãy báo cáo ngắn gọn:
 - context nào đã được khôi phục;
 - những nguồn chính đã được sử dụng;
@@ -112,7 +116,7 @@ Kiểm tra khả năng truy nguyên nguồn và phát hiện những phần cont
 
 **Mục đích kiểm tra:**
 
-AI phải nhận ra rằng công việc hiện tại tập trung vào **Challenge / assessment extraction**, không tự quay lại Step 3 chỉ vì recovery snapshot cũ có nhắc Step 3.
+AI phải nhận ra rằng công việc hiện tại tập trung vào **Challenge / assessment extraction** và việc áp dụng/kiểm tra nó trên source thật, không tự quay lại Step 3 chỉ vì recovery snapshot cũ có nhắc Step 3.
 
 AI phải phân biệt quyết định đã được canonicalize trong repository với working discussion hoặc context-level decisions.
 
@@ -124,7 +128,15 @@ AI phải phân biệt quyết định đã được canonicalize trong reposito
 
 Đảm bảo recovery không biến working discussion thành authoritative project knowledge.
 
-## 2.8. Nguyên tắc đánh giá
+## 2.8. Kiểm tra extraction thực tế
+
+> Hãy kiểm tra trạng thái Challenge/Knowledge extraction hiện tại trong repository. Đặc biệt, nếu Unit 1 đã được extract, hãy xác định các Candidate và extraction report hiện có, sau đó đối chiếu với canonical extraction rules trước khi nhận xét chất lượng hoặc tiếp tục extraction.
+
+**Mục đích kiểm tra:**
+
+Đảm bảo AI không chỉ nhớ design mà còn biết kiểm tra dữ liệu extraction thực tế, source evidence và các occurrence đã được report.
+
+## 2.9. Nguyên tắc đánh giá
 
 Khi đánh giá câu trả lời của AI:
 
