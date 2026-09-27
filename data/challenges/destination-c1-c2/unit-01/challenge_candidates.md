@@ -272,8 +272,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_10
 target_atom_id: vocabulary.multiword_expression.right_now
 instruction: "Write one word in each gap."
-prompt: "I'm sitting in the garden ______ talking to you on my mobile."
-answer: "right now"
+prompt: "I'm sitting in the garden ______ now talking to you on my mobile."
+answer: "right"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 10}
   notes: null
@@ -309,8 +309,8 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-b_14
 target_atom_id: vocabulary.multiword_expression.for_now
 instruction: "Write one word in each gap."
-prompt: "I'm staying in ______, but I might go out a bit later on."
-answer: "for now"
+prompt: "I'm staying in ______ now, but I might go out a bit later on."
+answer: "for"
 extra:
   source: {source_id: destination-c1-c2, page_number: 9, segment_id: unit-01, exercise_name: "Exercise B", item_number: 14}
   notes: null
@@ -706,7 +706,7 @@ id: destination-c1-c2_unit-01_exercise-f_3
 target_atom_id: grammar.usage.present_perfect_simple
 instruction: "Each of the words or phrases in bold is incorrect. Rewrite them correctly."
 prompt: "Tina and Phil still not managed to sell their flat."
-answer: "still haven't managed"
+answer: "haven't"
 extra:
   source: {source_id: destination-c1-c2, page_number: 11, segment_id: unit-01, exercise_name: "Exercise F", item_number: 3}
   notes: null
@@ -1004,7 +1004,7 @@ id: destination-c1-c2_unit-01_exercise-i_4
 target_atom_id: vocabulary.lexical_sense.yet.adverb
 instruction: "Write a word from the box in each gap."
 prompt: "Have you really finished your homework ______?"
-answer: "yet"
+answer: "already"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise I", item_number: 4}
   notes: null
@@ -1053,7 +1053,7 @@ id: destination-c1-c2_unit-01_exercise-i_9
 target_atom_id: vocabulary.lexical_sense.before.adverb
 instruction: "Write a word from the box in each gap."
 prompt: "I'm pretty sure he's got it ______."
-answer: "before"
+answer: "already"
 extra:
   source: {source_id: destination-c1-c2, page_number: 12, segment_id: unit-01, exercise_name: "Exercise I", item_number: 9}
   notes: null
