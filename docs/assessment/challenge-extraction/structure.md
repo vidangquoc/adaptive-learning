@@ -318,7 +318,7 @@ The number of answer values MUST equal the number of inputs represented by the e
 
 Only learner inputs count toward answer cardinality. Source-provided cues, instructions, fixed text, and other supplied task content do not count as inputs and must not be absorbed into the answer merely to make the prompt grammatical.
 
-The extracted prompt and answer must form a reconstructable task. If inserting the answer into the represented learner input positions produces duplicated fixed text, ungrammatical text, or another malformed task, the extraction must be re-evaluated against the authoritative source evidence rather than silently accepting the malformed representation.
+The extracted prompt and answer must form a reconstructable task. If inserting the answer into the represented learner input positions produces duplicated fixed text, ungrammatical text, or another malformed task, the extraction must be re-evaluated against the authoritative source evidence. The answer key must not be used as the sole basis for changing the fixed source text or learner-input boundary. If authoritative evidence cannot resolve the conflict, the occurrence is incomplete, unresolved, or skipped.
 
 Examples:
 
@@ -368,6 +368,29 @@ answer ∈ options
 ```
 
 The extractor must not invent an answer. If source evidence is insufficient to establish a specific expected answer, the occurrence is incomplete/unresolved and must not be treated as a fully valid Challenge Candidate.
+
+
+
+### Learner-input boundary and reconstruction
+
+For source-derived Challenges, the boundary between fixed source text and learner input is part of the extraction result. It must be established from the source representation and authoritative context, not inferred solely from the answer key.
+
+The answer key may contain material that is already supplied by the source. When this happens, only the learner-supplied portion belongs in `answer`. For example:
+
+```text
+Have you heard? Carol's ______ her leg again.
+```
+
+If `Carol's` is authoritative source text representing `Carol has`, the answer is `broken`, not `has broken`.
+
+If no source-faithful learner input can be established, the extractor must not modify fixed source text to make the answer fit. For example, `I'm ______ to China - what's it like?` must not be silently changed to `I've ______ to China - what's it like?` merely because `never been` produces a grammatical sentence with `I've`. The occurrence is unresolved/incomplete or skipped unless authoritative evidence resolves the source representation.
+
+Therefore, a valid source-derived Challenge must pass both tests:
+
+1. **Boundary test:** fixed source text and learner input are identified from authoritative evidence.
+2. **Reconstruction test:** inserting the extracted answer into the learner-input position(s) reproduces the source task as a valid, faithful task.
+
+The answer key is supporting evidence for the expected response; it is not permission to rewrite, repair, or redefine the source task.
 
 ## 9. extra
 
