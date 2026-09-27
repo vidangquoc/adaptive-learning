@@ -24,75 +24,101 @@ That file contains prompts for the user; it is not an automatic recovery step.
 
 ### Current task
 
-The current work is focused on the **Challenge / assessment extraction design** of Adaptive Learning.
+The current work is focused on the **Challenge / assessment extraction** part of Adaptive Learning.
 
-The Knowledge Atom framework has already been substantially defined. The current discussion has moved from Atom taxonomy review to Challenge extraction. The recovery system itself is also being updated because the previous recovery snapshot had become stale.
+The Knowledge Atom framework is substantially defined and the work has moved into applying and validating the Challenge Extraction model against real source material.
 
 ### Current objective
 
 Keep these layers distinct:
 
 1. **Project knowledge** — stable knowledge required to understand the project and its architecture.
-2. **Conversation context** — temporary decisions and work position needed to continue the current task.
+2. **Conversation context** — temporary decisions and current work position needed to continue the task.
 3. **Recovery instructions** — procedures telling AI where and how to recover context.
 4. **User prompts** — prompts used to start recovery and verify the result.
 
 ### Current Challenge work
 
-The canonical Challenge model is already documented under `docs/assessment/`.
+The canonical Challenge model is documented under `docs/assessment/`.
 
 Current settled points relevant to continuing the work:
 
-- Challenge is the concrete assessment task used to assess a Knowledge Atom.
-- One Challenge targets exactly one Knowledge Atom.
-- A Challenge that assesses knowledge about a relationship targets a `relation` Knowledge Atom; it does not directly target multiple independent Atoms.
+- Assessment uses a Challenge to obtain evidence about exactly one Knowledge Atom.
+- One Challenge has exactly one `target_atom_id`.
+- If the assessed knowledge is a relationship between independent Atoms, the relationship itself is represented by a `relation` Atom and is the Challenge target.
 - Challenge extraction is based on actual source assessment/exercise material.
-- Long integrated/composite exercises, including long Cloze passages, are currently outside atom-level Challenge extraction.
-- Shared-context exercises are currently skipped rather than split into artificial atom-level Challenges.
-- A Challenge cannot belong to two Source Segments; such occurrences are skipped/reported.
-- A source exercise item normally provides the default Challenge boundary when contextual analysis shows that it is an independent evaluable learner task.
-- Multiple blanks or actions inside one independent item can still belong to one Challenge.
-- A supported extracted Challenge requires a specific expected answer supported by source evidence; the extractor must not invent an answer.
-- Essential missing information causes an occurrence to be incomplete/unresolved/skipped rather than silently repaired.
-- Challenge identity for source-derived Challenges is the source occurrence, encoded in the Challenge ID.
-- Candidate and Official Challenges use the same ID; officialization is a storage transition.
-- There is no `difficulty` concept in the Challenge model.
-- There is no `retired` lifecycle state.
-- There is no persisted Challenge Form field.
-- `options` are semantic option values, not A/B/C presentation labels.
-- Whitespace constraints apply to every option and answer string: no leading/trailing whitespace, exactly one ASCII space between words, and no tabs or line breaks.
+- The current extraction scope is Atom-level Challenges.
+- An exercise item is the default Challenge candidate boundary when contextual analysis shows that it is an independent, evaluable learner task.
+- Multiple blanks/actions inside one independent item can still form one Challenge.
+- Shared-context exercises are currently skipped and reported rather than artificially decomposed.
+- Long integrated/composite exercises and long Cloze passages are currently outside Atom-level extraction and are skipped/reported.
+- A Challenge cannot cross Source Segment boundaries.
+- Source-derived Challenge identity is the source occurrence, encoded in the Challenge ID.
+- Extracted Challenges require source traceability and a specific expected answer supported by source evidence.
+- Extraction is fail-closed: do not invent or silently repair essential instruction, prompt, options, learner response elements, target Atom, boundaries, source information, or expected answer.
+- Candidate and Official Challenges use the same Challenge ID; officialization is a storage transition.
+- There is no `difficulty` concept and no persisted Challenge Form field.
 
-These are context-level summaries of the current work. For exact canonical definitions, always verify the authoritative Challenge documentation.
+For exact definitions, always verify the authoritative Challenge documentation rather than treating this summary as canonical.
+
+### Recent extraction state
+
+Unit 1 has been extracted from the current source material into Candidate stores:
+
+- Grammar Knowledge Atom Candidates: 22
+- Vocabulary Knowledge Atom Candidates: 25
+- Challenge Candidates: 93
+- Challenge extraction reports: 4 occurrences
+
+The Unit 1 extraction currently reports/skips:
+
+- A1 — source item contains two independently assessed tense choices; one Challenge cannot target both and the source occurrence cannot be safely split without changing its boundary.
+- A12 — same one-Challenge/one-Atom boundary problem with two independently assessed tense choices.
+- Exercise C — shared-context exercise, skipped under the current extraction scope.
+- Exercise J — long integrated Cloze exercise, skipped under the current extraction scope.
+
+The extracted Unit 1 files are current working data, not a substitute for rechecking the source when extraction quality is under review.
+
+When reviewing or changing this extraction, verify the actual source evidence, answer key, canonical Segment IDs, source page convention, target Atom, prompt/options, and answer values against the repository.
 
 ### Current Atom work relevant to Challenge extraction
 
 The Knowledge Atom model currently has:
 
-- flat atoms; no parent/child atom hierarchy;
+- flat atoms; no parent/child hierarchy;
 - `domain + type` taxonomy with no subtype layer;
 - `vocabulary` and `grammar` domains;
-- relation knowledge represented as `type: relation` with a relation-specific `relation_type`;
-- grammar structural relationships inside one construction represented as rules, not relation atoms;
-- Candidate and Official atom stores kept separate;
+- vocabulary types including `lexical_sense`, `multiword_expression`, `phrasal_verb`, `idiom`, and `collocation`;
+- grammar types including `rule`, `usage`, `exception`, `word_formation`, `morphological_form`, and `relation`;
+- relation knowledge represented by `type: relation` with a relation-specific `relation_type`;
+- Candidate and Official Atom stores kept separate;
 - Candidate and Official use the same Atom ID;
 - Candidate review status is `pending | approved | rejected`;
 - officialization is a storage transition, not a review status.
+
+Atom admission remains domain-specific: Grammar knowledge can be admitted when directly taught, explained, or clearly represented; Vocabulary knowledge must be directly tested/assessed by the source. Source grounding remains mandatory.
 
 Do not use this summary instead of the canonical Atom docs when exact field semantics or taxonomy details matter.
 
 ### Current work position
 
-The previous Step 3 taxonomy review should **not** be treated as the current active task. Its historical discussion may still be relevant when Challenge extraction needs Atom context, but it must not be revived as the current task merely because an older recovery file mentioned it.
+The previous Step 3 taxonomy review is historical context, not the current active task.
 
-There is no current `open-issues.md` file for assessment. Do not recreate one merely to hold temporary discussion.
+Recent assessment design cleanup has also resolved several earlier open design points. Do not recreate an assessment `open-issues.md` file merely to hold temporary discussion.
+
+The immediate working direction is **Challenge Extraction implementation/review against real source material**, including verifying the Unit 1 extraction and then continuing extraction work only when the current rules are satisfied.
 
 ### Authoritative current documentation
 
 For the current Challenge work, start with:
 
-- `docs/assessment/assessment.md`
+- `docs/assessment/overall.md`
 - `docs/assessment/challenge.md`
-- `docs/assessment/challenge-extraction/challenge-structure.md`
+- `docs/assessment/challenge-extraction/principles.md`
+- `docs/assessment/challenge-extraction/pipeline.md`
+- `docs/assessment/challenge-extraction/structure.md`
+- `schemas/candidate-challenge.schema.json`
+- `schemas/official-challenge.schema.json`
 
 For Knowledge Atom context, use:
 
@@ -125,9 +151,9 @@ For learner state, use:
 
 ```text
 context-recover/
-├── context-recovery-prompt.md
 ├── context-recover.md
 ├── project-knowledge-recover.md
+├── context-recovery-prompt.md
 └── context-recovery-authoring-principles.md
 ```
 
@@ -140,9 +166,10 @@ For a new conversation or lost context:
 1. Read this file to recover the current conversation context.
 2. Read `context-recover/project-knowledge-recover.md` to determine the authoritative project/data sources relevant to the task.
 3. Read only the authoritative documentation, data, source material, and implementation relevant to the current task.
-4. Recover missing context progressively.
-5. Verify important facts against repository evidence.
-6. Continue the task only after sufficient context has been recovered.
+4. For current extraction work, inspect the actual source material and current extracted data before modifying it.
+5. Recover missing context progressively.
+6. Verify important facts against repository evidence.
+7. Continue the task only after sufficient context has been recovered.
 
 Do not read `context-recover/context-recovery-authoring-principles.md` as a normal recovery step.
 
