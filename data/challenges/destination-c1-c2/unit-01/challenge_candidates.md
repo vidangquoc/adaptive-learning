@@ -106,7 +106,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_10
 target_atom_id: grammar.usage.present_continuous.now
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "______ (Are) you ______ (phone) me from your mobile? The line's not very good."
+prompt: "______ you ______ (phone) me from your mobile? The line's not very good."
 answer:
   - "are"
   - "phoning"
@@ -120,7 +120,7 @@ review_status: pending
 id: destination-c1-c2_unit-01_exercise-a_11
 target_atom_id: grammar.usage.present_simple.current_habit
 instruction: "Write the verb in brackets in the correct form, present simple or present continuous, in each gap."
-prompt: "______ (Do) you often ______ (order) things online?"
+prompt: "______ you often ______ (order) things online?"
 answer:
   - "Do"
   - "order"
@@ -594,8 +594,8 @@ id: destination-c1-c2_unit-01_exercise-e_1
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A I ______ for a book on fly fishing. Do you have any in stock?
-  B Stan ______ like he's in a bad mood this morning.
+  A I ______ (look) for a book on fly fishing. Do you have any in stock?
+  B Stan ______ (look) like he's in a bad mood this morning.
 answer:
   - "am looking"
   - "looks"
@@ -610,8 +610,8 @@ id: destination-c1-c2_unit-01_exercise-e_2
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A How ______ you ______ about inviting Jackie to come with us on Saturday?
-  B Britney ______ very well, so I've told her she can go home.
+  A How ______ (do) you ______ (feel) about inviting Jackie to come with us on Saturday?
+  B Britney ______ (feel) very well, so I've told her she can go home.
 answer:
   - "do"
   - "feel"
@@ -627,8 +627,8 @@ id: destination-c1-c2_unit-01_exercise-e_3
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A Jan and I ______ buying a new flat.
-  B Why ______ you ______ Ray Davis to be a better songwriter than Paul McCartney?
+  A Jan and I ______ (consider) buying a new flat.
+  B Why ______ (do) you ______ (consider) Ray Davis to be a better songwriter than Paul McCartney?
 answer:
   - "are considering"
   - "do"
@@ -644,8 +644,8 @@ id: destination-c1-c2_unit-01_exercise-e_4
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A We ______ a barbecue right now, so can I call you back this evening?
-  B ______ the Deacons ______ a swimming pool?
+  A We ______ (have) a barbecue right now, so can I call you back this evening?
+  B ______ (do) the Deacons ______ (have) a swimming pool?
 answer:
   - "are having"
   - "Do"
@@ -661,8 +661,8 @@ id: destination-c1-c2_unit-01_exercise-e_5
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A The idea of going to a Greek island really ______ to me.
-  B Police ______ for witnesses to the attack.
+  A The idea of going to a Greek island really ______ (appeal) to me.
+  B Police ______ (appeal) for witnesses to the attack.
 answer:
   - "appeals"
   - "are appealing"
@@ -677,8 +677,8 @@ id: destination-c1-c2_unit-01_exercise-e_6
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A This chicken ______ very fresh. I think I'll throw it away just to be on the safe side.
-  B Why ______ you ______ that chicken, Mum?
+  A This chicken ______ (smell) very fresh. I think I'll throw it away just to be on the safe side.
+  B Why ______ (do) you ______ (smell) that chicken, Mum?
 answer:
   - "doesn't smell"
   - "are"
@@ -694,8 +694,8 @@ id: destination-c1-c2_unit-01_exercise-e_7
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A I ______ on you, James. Don't let me down!
-  B Whether we get there by six ______ on the traffic.
+  A I ______ (depend) on you, James. Don't let me down!
+  B Whether we get there by six ______ (depend) on the traffic.
 answer:
   - "am depending"
   - "depends"
@@ -710,8 +710,8 @@ id: destination-c1-c2_unit-01_exercise-e_8
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A Julian ______ a bit busy at the moment, actually.
-  B Guys, you ______ too noisy! Can't you keep it down, please?
+  A Julian ______ (be) a bit busy at the moment, actually.
+  B Guys, you ______ (be) too noisy! Can't you keep it down, please?
 answer:
   - "is"
   - "are being"
@@ -726,8 +726,8 @@ id: destination-c1-c2_unit-01_exercise-e_9
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A ______ you ______ Bob would like a CD for his birthday?
-  B Oliver said he ______ about moving out of the city.
+  A ______ (do) you ______ (think) Bob would like a CD for his birthday?
+  B Oliver said he ______ (think) about moving out of the city.
 answer:
   - "do"
   - "think"
@@ -743,8 +743,8 @@ id: destination-c1-c2_unit-01_exercise-e_10
 target_atom_id: grammar.usage.stative_action_contrast
 instruction: "Write a verb from the box in the correct form, present simple or present continuous, in each pair of sentences.\nUse the words in brackets with the verb.\nUse contractions where possible.\nYou can use the verbs more than once."
 prompt: |
-  A I hear that Doug ______ quite a lot of Katy these days. Is that true?
-  B I ______ Manchester United lost again.
+  A I hear that Doug ______ (see) quite a lot of Katy these days. Is that true?
+  B I ______ (see) Manchester United lost again.
 answer:
   - "is seeing"
   - "see"
