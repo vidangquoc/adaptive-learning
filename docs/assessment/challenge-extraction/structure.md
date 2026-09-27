@@ -169,6 +169,8 @@ instruction: "Rewrite the sentence using 'used to'."
 
 The instruction is part of the concrete Challenge because changing it can change what the learner is being asked to demonstrate.
 
+For source-derived Challenges, preserve the original source instruction. Do not replace a source instruction with a shorter or more generic instruction merely because the latter has the same approximate meaning.
+
 It should contain only the learner-facing task direction. Source information, answer-key information, and learner/runtime state do not belong here.
 
 ## 6. prompt
@@ -197,7 +199,9 @@ prompt:
     - I
 ```
 
-The prompt may contain blanks, supplied words, a source sentence, a base word, an erroneous sentence, or other concrete task material.
+The prompt may contain blanks, supplied words, a source sentence, a base word, an erroneous sentence, source cues, or other concrete task material.
+
+For source-derived Challenges, the prompt must preserve all source content necessary to understand and perform the item, including cues that are not learner inputs. For example, a bracketed verb such as `(get)` in a gap-fill item remains in the prompt even though the learner supplies its inflected form.
 
 The prompt is not the expected answer.
 
@@ -310,7 +314,11 @@ answer:
 
 When there is one input, `answer` is a string. When there are multiple inputs, `answer` is an array of strings. The array elements correspond to the inputs in their required order.
 
-The number of answer values MUST equal the number of inputs required by the Challenge.
+The number of answer values MUST equal the number of inputs represented by the extracted Challenge.
+
+Only learner inputs count toward answer cardinality. Source-provided cues, instructions, fixed text, and other supplied task content do not count as inputs and must not be absorbed into the answer merely to make the prompt grammatical.
+
+The extracted prompt and answer must form a reconstructable task. If inserting the answer into the represented learner input positions produces duplicated fixed text, ungrammatical text, or another malformed task, the extraction must be re-evaluated against the authoritative source evidence rather than silently accepting the malformed representation.
 
 Examples:
 
@@ -443,7 +451,7 @@ A valid Challenge must satisfy these invariants:
 3. It has exactly one target_atom_id.
 4. target_atom_id identifies exactly one Knowledge Atom.
 5. target_atom_id is a single scalar Atom ID; array-valued or plural target fields are invalid.
-6. It has a concrete instruction.
+6. It has the source-derived instruction when the occurrence comes from source material.
 7. It has a concrete prompt.
 8. options is optional and, when present, contains the finite semantic choices presented to the learner.
 9. A supported valid Challenge has a specific expected answer.
@@ -460,7 +468,10 @@ A valid Challenge must satisfy these invariants:
 20. Rare duplicate/special source cases are handled through human review rather than by automatic ID-level deduplication.
 21. Extraction is fail-closed and does not silently invent or repair essential assessment content.
 22. Source evidence is preserved faithfully when deriving the Challenge.
-23. Under a fixed source, contextual input, and extraction-rule version, extraction is reproducible.
+23. Source-derived instructions, complete prompt/item text, and required source cues are preserved.
+24. Learner input boundaries are explicit and answer cardinality matches those inputs.
+25. The extracted task is reconstructable without duplicated fixed text, missing source cues, or other extraction-introduced malformed content.
+26. Under a fixed source, contextual input, and extraction-rule version, extraction is reproducible.
 
 ## 12. Source occurrence and Challenge identity
 
